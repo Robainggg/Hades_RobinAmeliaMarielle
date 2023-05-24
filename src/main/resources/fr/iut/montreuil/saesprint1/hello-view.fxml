@@ -9,7 +9,7 @@
 
 
 <?import javafx.geometry.Insets?>
-<BorderPane styleClass="background" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane styleClass="background" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <center>
         <Pane fx:id="panePrincipal" prefHeight="640" prefWidth="960" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -87,5 +87,5 @@
             </padding>
         </VBox>
     </right>
-    <GridPane fx:id="tPaneInvRapide"  prefHeight="30.0" prefWidth="174.0">
+    <GridPane fx:id="tPaneInvRapide"  prefHeight="30.0" prefWidth="174.0"/>
 </BorderPane>
