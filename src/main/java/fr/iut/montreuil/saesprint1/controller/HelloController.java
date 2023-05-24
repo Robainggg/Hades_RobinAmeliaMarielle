@@ -35,15 +35,15 @@ public class HelloController implements Initializable {
 
     private int temps;
 
-    private Ennemi ennemiTesté;
+    private Ennemi ennemi;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain=new Terrain();
         this.vueTerrain = new VueTerrain(tilePane, terrain);
-        ennemiTesté = new Ennemi(terrain);
-        testCercleEnnemi.translateXProperty().bind(ennemiTesté.coordXProperty());
-        testCercleEnnemi.translateYProperty().bind(ennemiTesté.coordYProperty());
+        ennemi = new Ennemi(terrain);
+        testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
+        testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
         initAnimation();
         gameLoop.play();
 
@@ -62,31 +62,31 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(ennemiTesté.estArriveAuBout()){
+                    if(ennemi.estArriveAuBout()){
                         System.out.println("fini");
                         gameLoop.stop();
                     }
                     else{
-                        if(ennemiTesté.estArrivé()) {
-                            if(ennemiTesté.getBfs().getParcours().size()==0)
+                        if(ennemi.estArrivé()) {
+                            if(ennemi.getBfs().getParcours().size()==0)
                                 gameLoop.stop();
-                            ennemiTesté.changeProchaineCase();
-                            System.out.println(ennemiTesté.getProchaineCase());
-                            if(ennemiTesté.getProchaineCase() != null)
-                                ennemiTesté.definirDirection();
-                            System.out.println(ennemiTesté.getDirection());
+                            ennemi.changeProchaineCase();
+                            System.out.println(ennemi.getProchaineCase());
+                            if(ennemi.getProchaineCase() != null)
+                                ennemi.definirDirection();
+                            System.out.println(ennemi.getDirection());
                         }
-                        if(ennemiTesté.getDirection() == 'd'){
-                            ennemiTesté.setCoordX(ennemiTesté.getCoordX()+2);
+                        if(ennemi.getDirection() == 'd'){
+                            ennemi.setCoordX(ennemi.getCoordX()+2);
                         }
-                        else if (ennemiTesté.getDirection() == 'g'){
-                            ennemiTesté.setCoordX(ennemiTesté.getCoordX()-2);
+                        else if (ennemi.getDirection() == 'g'){
+                            ennemi.setCoordX(ennemi.getCoordX()-2);
                         }
-                        else if (ennemiTesté.getDirection() == 'h'){
-                            ennemiTesté.setCoordY(ennemiTesté.getCoordY()-2);
+                        else if (ennemi.getDirection() == 'h'){
+                            ennemi.setCoordY(ennemi.getCoordY()-2);
                         }
-                        else if (ennemiTesté.getDirection() == 'b'){
-                            ennemiTesté.setCoordY(ennemiTesté.getCoordY()+2);
+                        else if (ennemi.getDirection() == 'b'){
+                            ennemi.setCoordY(ennemi.getCoordY()+2);
                         }
                         //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
