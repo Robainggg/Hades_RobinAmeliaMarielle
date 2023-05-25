@@ -115,14 +115,22 @@ public class HelloController implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
+    @FXML
+    private void poserTour (ActionEvent event){
+
+        //Récupérer le typer de la tour en fonction du ToggleButton ou autre
+        //Récupérer l'emplacement de la tour
+        //creerUneTour();
+
+    }
+
     void creerUneTour(Tour tour){
 
         Rectangle t = new Rectangle(32,32);
 
-        if(tour instanceof Artémis){
-            Artémis artémis = (Artémis) tour;
+        if(tour instanceof TourAvecPortée){
 
-            Circle c = new Circle(((Artémis) tour).getPortée()*32);
+            Circle c = new Circle(((TourAvecPortée) tour).getPortée()*32);
             c.setOpacity(0.2);
             c.setFill(Color.PINK);
             c.translateXProperty().bind(tour.centreTourX());
@@ -138,7 +146,7 @@ public class HelloController implements Initializable {
         }
 
         else{
-            t.setFill(Color.PINK);
+            t.setFill(Color.ORANGE);
             t.translateXProperty().bind(tour.getXProperty());
             t.translateYProperty().bind(tour.getYProperty());
             panePrincipal.getChildren().add(t);
