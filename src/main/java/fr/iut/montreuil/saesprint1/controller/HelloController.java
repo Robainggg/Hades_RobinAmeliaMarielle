@@ -1,14 +1,17 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
-import fr.iut.montreuil.saesprint1.modele.Terrain;
+import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
@@ -20,12 +23,17 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+
+    @FXML
+    private Pane panePrincipal;
+
     @FXML
     private TilePane tilePane;
 
-
     @FXML
     private Circle testCercleEnnemi;
+
+    private int temps;
 
     private Terrain terrain;
 
@@ -33,7 +41,7 @@ public class HelloController implements Initializable {
 
     private Timeline gameLoop;
 
-    private int temps;
+    private Environnement environnement;
 
     private Ennemi ennemi;
 
@@ -44,6 +52,16 @@ public class HelloController implements Initializable {
         ennemi = new Ennemi(terrain);
         testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
         testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
+
+        //position sur le terrain * 32 pour la vue
+        this.environnement = new Environnement(this.terrain);
+        Tour tour = new Artémis(12*32,2*32,environnement);
+
+        environnement.ajouterTour(tour);
+        creerUneTour(tour);
+        environnement.ajouterEnnemi(ennemi);
+
+
         initAnimation();
         gameLoop.play();
 
@@ -53,7 +71,7 @@ public class HelloController implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps=0;
+        temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -96,6 +114,40 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
+    void creerUneTour(Tour tour){
+
+        Rectangle t = new Rectangle(32,32);
+
+        if(tour instanceof Artémis){
+            Artémis artémis = (Artémis) tour;
+
+            Circle c = new Circle(((Artémis) tour).getPortée()*32);
+            c.setOpacity(0.2);
+            c.setFill(Color.PINK);
+            c.translateXProperty().bind(tour.centreTourX());
+            c.translateYProperty().bind(tour.centreTourY());
+            panePrincipal.getChildren().add(c);
+
+            t.setFill(Color.PINK);
+            t.translateXProperty().bind(tour.getXProperty());
+            t.translateYProperty().bind(tour.getYProperty());
+            panePrincipal.getChildren().add(t);
+            t.setId(tour.getId());
+
+        }
+
+        else{
+            t.setFill(Color.PINK);
+            t.translateXProperty().bind(tour.getXProperty());
+            t.translateYProperty().bind(tour.getYProperty());
+            panePrincipal.getChildren().add(t);
+            t.setId(tour.getId());
+        }
+
+    }
+
+
 
 
 }
