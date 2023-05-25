@@ -58,7 +58,7 @@ public class Ennemi {
 //            directionProchaineCase = new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32).position(bfs.prochaineCase(new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32)));
 //            this.direction = directionProchaineCase;
 //        }
-   // }
+    // }
 
     public char getDirection() {
         return direction;
