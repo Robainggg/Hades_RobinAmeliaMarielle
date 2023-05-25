@@ -7,11 +7,13 @@ public class Environnement {
     private ArrayList<Ennemi> ennemis;
     private ArrayList<Tour> tours;
     private Terrain terrain;
+    private int temps;
 
     public Environnement(Terrain terrain) {
         this.ennemis = new ArrayList<>();
         this.tours = new ArrayList<>();
         this.terrain = terrain;
+        this.temps = 0;
     }
 
     public ArrayList<Ennemi> getEnnemis() {
@@ -32,5 +34,12 @@ public class Environnement {
 
     public ArrayList<Tour> getTours() {
         return tours;
+    }
+
+    public void augmenteTemps(){
+        this.temps++;
+    }
+    public int getTemps() {
+        return temps;
     }
 }

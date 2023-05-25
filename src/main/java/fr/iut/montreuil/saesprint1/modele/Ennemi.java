@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Ennemi {
     private int pv;
-    private double vélocité;
+    private int vitesse;
     private IntegerProperty coordX;
     private IntegerProperty coordY;
-    private Terrain terrain;
+    private Environnement environnement;
     private char direction;
     private ParcoursBFS bfs;
     private Case prochaineCase;
@@ -16,11 +16,12 @@ public class Ennemi {
     public Ennemi(Terrain terrain){
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
-        coordX.setValue(0*32+16);
-        coordY.setValue(2*32+16);
+        coordX.setValue(0*32);
+        coordY.setValue(2*32);
         terrain = terrain;
         bfs = new ParcoursBFS(terrain);
         prochaineCase = new Case(0,2);
+        vitesse = 1;
 
     }
 
@@ -65,8 +66,8 @@ public class Ennemi {
     }
 
     public boolean estArrivé(){
-        System.out.println("est en " + coordX.getValue() + " , " + coordY.getValue() +  " et a pour cible " + (prochaineCase.getI()*32+16) + " , " + (prochaineCase.getJ()*32+16));
-        return this.coordX.getValue()==this.prochaineCase.getI()*32+16 && this.coordY.getValue()==this.prochaineCase.getJ()*32+16;
+        System.out.println("est en " + coordX.getValue() + " , " + coordY.getValue() +  " et a pour cible " + (prochaineCase.getI()*32) + " , " + (prochaineCase.getJ()*32));
+        return this.coordX.getValue()==this.prochaineCase.getI()*32 && this.coordY.getValue()==this.prochaineCase.getJ()*32;
     }
 
     public void changeProchaineCase(){
@@ -78,11 +79,11 @@ public class Ennemi {
     }
 
     public void definirDirection() {
-        if(this.coordX.getValue() < prochaineCase.getI()*32+16)
+        if(this.coordX.getValue() < prochaineCase.getI()*32)
             direction = 'd';
-        else if (this.coordX.getValue() > prochaineCase.getI()*32+16)
+        else if (this.coordX.getValue() > prochaineCase.getI()*32)
             direction = 'g';
-        else if (this.coordY.getValue()< prochaineCase.getJ()*32+16)
+        else if (this.coordY.getValue()< prochaineCase.getJ()*32)
             direction = 'b';
         else
             direction = 'h';
@@ -93,7 +94,41 @@ public class Ennemi {
     }
 
     public boolean estArriveAuBout(){
-        return this.coordX.getValue() == 30*32-16 && this.coordY.getValue() == 14*32-16;
+        return this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32;
+    }
+
+    public void seDeplace() {
+        if(this.estArrivé()) {
+            this.changeProchaineCase();
+            System.out.println(this.getProchaineCase());
+            if(this.getProchaineCase() != null)
+                this.definirDirection();
+            System.out.println(this.getDirection());
+        }
+        if(this.getDirection() == 'd'){
+            if(this.getCoordX()+ vitesse > prochaineCase.getI()*32)
+                this.setCoordX(prochaineCase.getI()*32);
+            else
+                this.setCoordX(this.getCoordX()+ vitesse);
+        }
+        else if (this.getDirection() == 'g'){
+            if(this.getCoordX()- vitesse < prochaineCase.getI()*32)
+                this.setCoordX(prochaineCase.getI()*32);
+            else
+                this.setCoordX(this.getCoordX()- vitesse);
+        }
+        else if (this.getDirection() == 'h'){
+            if(this.getCoordY() - vitesse < prochaineCase.getJ()*32)
+                this.setCoordY(prochaineCase.getJ()*32);
+            else
+                this.setCoordY(this.getCoordY()-vitesse);
+        }
+        else if (this.getDirection() == 'b'){
+            if(this.getCoordY() + vitesse > prochaineCase.getJ()*32)
+                this.setCoordY(prochaineCase.getJ()*32);
+            else
+                this.setCoordY(this.getCoordY()+ vitesse);
+        }
     }
 }
 

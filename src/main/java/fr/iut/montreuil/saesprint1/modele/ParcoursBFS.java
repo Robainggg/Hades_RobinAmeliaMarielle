@@ -160,14 +160,9 @@ public class ParcoursBFS {
 
 
             if (terrain.caseEstDansTerrain(caseRegardée)) {
-                System.out.println("coucou ! , la caseMin a pour valeur " + valeurCaseMin);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()] <= valeurCaseMin);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()]!=-1);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()]);
                 if (BFS[caseRegardée.getJ()][caseRegardée.getI()] <= valeurCaseMin && BFS[caseRegardée.getJ()][caseRegardée.getI()] !=-1) {
                     caseMin = new Case(caseRegardée.getI(), caseRegardée.getJ());
                     valeurCaseMin = BFS[caseMin.getJ()][caseMin.getI()];
-                    System.out.println("caseMin = " + caseMin + " a pour valeur " + valeurCaseMin);
                 }
             }
         }
