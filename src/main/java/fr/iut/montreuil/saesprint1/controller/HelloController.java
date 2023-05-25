@@ -56,12 +56,6 @@ public class HelloController implements Initializable {
         this.environnement = new Environnement(this.terrain);
         Tour tour = new Artémis(12*32,2*32,environnement);
 
-//        Circle c = new Circle(4*32);
-//        c.setFill(Color.PINK);
-//        c.translateXProperty().bind(tour.getXProperty());
-//        c.translateYProperty().bind(tour.getYProperty());
-//        panePrincipal.getChildren().add(c);
-
         environnement.ajouterTour(tour);
         creerUneTour(tour);
         environnement.ajouterEnnemi(ennemiTesté);
@@ -83,11 +77,11 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(temps==928){
+                    if(temps==1000){
                         System.out.println("fini");
                         gameLoop.stop();
                     }
-                    else if(temps%2 == 0){
+                    else {
                         System.out.println("un tour");
                         System.out.println(this.environnement.getEnnemis().size());
                         ennemiTesté.setCoordX(ennemiTesté.getCoordX()+1);
@@ -106,11 +100,8 @@ public class HelloController implements Initializable {
         Rectangle t = new Rectangle(32,32);
 
         if(tour instanceof Artémis){}
-
-
-
-
-        Circle c = new Circle(4*32);
+        Artémis artémis = (Artémis) tour;
+        Circle c = new Circle(artémis.getPortée()*32);
         c.setOpacity(0.2);
         c.setFill(Color.PINK);
         c.translateXProperty().bind(tour.centreTourX());

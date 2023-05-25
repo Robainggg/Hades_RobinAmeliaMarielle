@@ -26,6 +26,7 @@ public class Artémis extends Tour {
 
         for (Ennemi e : this.env.getEnnemis()) {
             //Formule de Manhattan
+            //Portée +16 pour qu'il commence à la moitié de la case de 32 pixels
             if ((Math.abs(super.centreTourX().get() - e.getCoordX()) + Math.abs(super.centreTourY().get() - e.getCoordY()) <= portée*tailleCase+16)) {
                 System.out.println("Trouve l'ennemi ");
                 return e;
@@ -48,4 +49,7 @@ public class Artémis extends Tour {
         }
     }
 
+    public int getPortée() {
+        return portée;
+    }
 }
