@@ -95,6 +95,10 @@ public class Ennemi {
     public boolean estArriveAuBout(){
         return this.coordX.getValue() == 30*32-16 && this.coordY.getValue() == 14*32-16;
     }
+
+    public void perdrePv(int dégâts){
+        this.pv -= dégâts;
+    }
 }
 
 
