@@ -65,7 +65,7 @@ public class Ennemi {
     }
 
     public boolean estArrivé(){
-        System.out.println("est en " + coordX.getValue() + " , " + coordY.getValue() +  " et a pour cible " + (prochaineCase.getI()*32+16) + " , " + (prochaineCase.getJ()*32+16));
+        //System.out.println("est en " + coordX.getValue() + " , " + coordY.getValue() +  " et a pour cible " + (prochaineCase.getI()*32+16) + " , " + (prochaineCase.getJ()*32+16));
         return this.coordX.getValue()==this.prochaineCase.getI()*32+16 && this.coordY.getValue()==this.prochaineCase.getJ()*32+16;
     }
 
@@ -96,7 +96,7 @@ public class Ennemi {
         return this.coordX.getValue() == 30*32-16 && this.coordY.getValue() == 14*32-16;
     }
 
-    public void perdrePv(int dégâts){
+    public void pertPv(int dégâts){
         this.pv -= dégâts;
     }
 }

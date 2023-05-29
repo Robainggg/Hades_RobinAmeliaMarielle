@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tour {
 
+    public final static int tailleCase = 32;
+
     private String nomTour;
     private int cout;
     private Environnement env;
@@ -41,12 +43,12 @@ public abstract class Tour {
     }
 
     public final IntegerProperty centreTourX(){
-        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+(tailleCase/2));
         return a;
     }
 
     public final IntegerProperty centreTourY(){
-        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+(tailleCase/2));
         return a;
     }
 

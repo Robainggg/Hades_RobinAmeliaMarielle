@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Artémis extends TourAvecPortée {
 
     private final static int dégâts = 4;
-    private final static int tailleCase = 32;
-
+    
     private Ennemi ennemiAttaqué;
     private int nbAttaques;
     private Environnement env;
@@ -23,8 +22,8 @@ public class Artémis extends TourAvecPortée {
         for (Ennemi e : this.env.getEnnemis()) {
             //Formule de Manhattan
             //Portée +16 pour qu'il commence à la moitié de la case de 32 pixels
-            if ((Math.abs(super.centreTourX().get() - e.getCoordX()) + Math.abs(super.centreTourY().get() - e.getCoordY()) <= super.getPortée()*tailleCase+16)) {
-                System.out.println("Trouve l'ennemi ");
+            if ((Math.abs(super.centreTourX().get() - e.getCoordX()) + Math.abs(super.centreTourY().get() - e.getCoordY()) <= super.getPortée()*tailleCase+(tailleCase/2))) {
+                //System.out.println("Trouve l'ennemi ");
                 return e;
             }
 
@@ -33,17 +32,35 @@ public class Artémis extends TourAvecPortée {
         return null;
     }
 
+    private void envoitProjectile(Ennemi e){
 
+        //Savoir dans quelle direction X doit évoluer
+        int indicateurDirectionX;
+        if(super.getX()+e.getCoordX() < super.getX()){indicateurDirectionX=-1;}
+        else if(super.getX()+e.getCoordX() > super.getX()){indicateurDirectionX=1;}
+        else{
+            indicateurDirectionX=0;
+            System.out.println("Cas particulier ennemi en dessous/ au dessus de la tour");
+        }
+
+        //Calcul de la droite
+        double a = (e.getCoordY() - super.getY()) / (e.getCoordX() - super.getX());  // Coefficient directeur
+        double b = super.getY() - a * super.getX();  // Ordonnée à l'origine
+        Projectile projectile = new Projectile(this.getX(),this.getY(),a,b,1,this, indicateurDirectionX);
+    }
+    
     @Override
     public void attaque () {
         //System.out.println("attaque");
         Ennemi cible = this.ennemiZone();
         if (cible != null) {
-            for (int i = 0; i < this.nbAttaques; i++) {
-                System.out.println("envoit un projectile");
-            }
+            //Trouver un moyen pour envoi projectile
+            System.out.println("envoit un projectile");
         }
     }
 
 
+    public int getNbAttaques() {
+        return nbAttaques;
+    }
 }

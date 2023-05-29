@@ -6,11 +6,13 @@ public class Environnement {
 
     private ArrayList<Ennemi> ennemis;
     private ArrayList<Tour> tours;
+    private ArrayList<Projectile> projectiles;
     private Terrain terrain;
 
     public Environnement(Terrain terrain) {
         this.ennemis = new ArrayList<>();
         this.tours = new ArrayList<>();
+        this.projectiles = new ArrayList<>();
         this.terrain = terrain;
     }
 

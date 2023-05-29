@@ -55,10 +55,13 @@ public class HelloController implements Initializable {
 
         //position sur le terrain * 32 pour la vue
         this.environnement = new Environnement(this.terrain);
-        Tour tour = new Artémis(12*32,2*32,environnement);
+        Tour tour = new Artémis(9*32,10*32,environnement);
+        Tour tour1 = new Artémis(17*32,8*32,environnement);
 
         environnement.ajouterTour(tour);
         creerUneTour(tour);
+        environnement.ajouterTour(tour1);
+        creerUneTour(tour1);
         environnement.ajouterEnnemi(ennemi);
 
 
@@ -84,7 +87,7 @@ public class HelloController implements Initializable {
                         System.out.println("fini");
                         gameLoop.stop();
                     }
-                    else{
+                    else if (temps%4 == 0){
                         if(ennemi.estArrivé()) {
                             if(ennemi.getBfs().getParcours().size()==0)
                                 gameLoop.stop();
@@ -109,6 +112,16 @@ public class HelloController implements Initializable {
                         //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
                     }
+
+                    for (Tour tour: this.environnement.getTours()) {
+                        if(tour instanceof Artémis){
+                            if(temps%(((Artémis) tour).getNbAttaques()*Tour.tailleCase) == 0){
+                               tour.attaque();
+                            }
+                        }
+                        //tour.attaque();
+                    }
+                    
                     temps++;
                 })
         );
