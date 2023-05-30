@@ -35,8 +35,10 @@ public class Artémis extends TourAvecPortée {
 
         //Savoir dans quelle direction X doit évoluer
         int indicateurDirectionX;
-        if(super.getX()+e.getCoordX() < super.getX()){indicateurDirectionX=-1;}
-        else if(super.getX()+e.getCoordX() > super.getX()){indicateurDirectionX=1;}
+
+        //Si la tour doit tirer en avant ou en arrière
+        if(super.getX()-e.getCoordX() > 0){indicateurDirectionX=-1;}
+        else if(super.getX()-e.getCoordX() < 0){indicateurDirectionX=1;}
         else{
             indicateurDirectionX=0;
             System.out.println("Cas particulier ennemi en dessous/ au dessus de la tour");

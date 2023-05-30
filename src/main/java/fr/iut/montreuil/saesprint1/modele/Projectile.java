@@ -55,7 +55,7 @@ public class Projectile {
             this.setY((int)(this.getY()+b+Tour.tailleCase/2));
         }
 
-        this.disparait();
+        //this.disparait();
 
     }
 
