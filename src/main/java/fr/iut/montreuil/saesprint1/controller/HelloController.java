@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,12 +25,16 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+    @FXML
+    private TilePane tilePane;
 
     @FXML
     private Pane panePrincipal;
 
-    @FXML
-    private TilePane tilePane;
+
+     @FXML
+    private Image spriteennemi;
+
 
     @FXML
     private Circle testCercleEnnemi;
@@ -36,30 +42,34 @@ public class HelloController implements Initializable {
     private int temps;
 
     private Terrain terrain;
+    private Environnement evt;
 
     private VueTerrain vueTerrain;
 
     private Timeline gameLoop;
 
-    private Environnement environnement;
+    private int temps;
+
+    private ListObsEnnemis listenerEnnemis;
 
     private Ennemi ennemi;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.terrain=new Terrain();
-        this.vueTerrain = new VueTerrain(tilePane, terrain);
-        ennemi = new Ennemi(terrain);
-        testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
-        testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
+        this.evt = new Environnement();
+        this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
+        listenerEnnemis = new ListObsEnnemis(panePrincipal);
+        this.evt.getEnnemis().addListener(listenerEnnemis);
+        ennemi = new Ennemi(evt);
+        evt.ajouterEnnemi(ennemi);
+
 
         //position sur le terrain * 32 pour la vue
-        this.environnement = new Environnement(this.terrain);
-        Tour tour = new Artémis(12*32,2*32,environnement);
+        Tour tour = new Artémis(12*32,2*32,evt);
 
-        environnement.ajouterTour(tour);
+        evt.ajouterTour(tour);
         creerUneTour(tour);
-        environnement.ajouterEnnemi(ennemi);
+        evt.ajouterEnnemi(ennemi);
 
 
         initAnimation();
@@ -71,7 +81,7 @@ public class HelloController implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps = 0;
+        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(

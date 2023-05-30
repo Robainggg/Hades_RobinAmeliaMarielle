@@ -151,27 +151,19 @@ public class ParcoursBFS {
         int valeurCaseMin = 99999;
         Case caseMin = null;
 
-        System.out.println("Cible est sur la case " + caseActuelle);
 
         for (int[] direction : voisins) {
 
             caseRegardée = new Case(cI + direction[0], cJ + direction[1]);
-            System.out.println("la case regardée est " + caseRegardée);
 
 
             if (terrain.caseEstDansTerrain(caseRegardée)) {
-                System.out.println("coucou ! , la caseMin a pour valeur " + valeurCaseMin);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()] <= valeurCaseMin);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()]!=-1);
-                System.out.println(BFS[caseRegardée.getJ()][caseRegardée.getI()]);
                 if (BFS[caseRegardée.getJ()][caseRegardée.getI()] <= valeurCaseMin && BFS[caseRegardée.getJ()][caseRegardée.getI()] !=-1) {
                     caseMin = new Case(caseRegardée.getI(), caseRegardée.getJ());
                     valeurCaseMin = BFS[caseMin.getJ()][caseMin.getI()];
-                    System.out.println("caseMin = " + caseMin + " a pour valeur " + valeurCaseMin);
                 }
             }
         }
-        System.out.println(caseMin);
         return caseMin;
     }
 
