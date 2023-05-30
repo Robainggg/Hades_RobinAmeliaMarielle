@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -31,6 +32,12 @@ public class HelloController implements Initializable {
     @FXML
     private Pane panePrincipal;
 
+    @FXML
+    private ImageView boutonPause;
+
+    @FXML
+    private ImageView boutonDepause;
+
 
      @FXML
     private Image spriteennemi;
@@ -54,6 +61,8 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        boutonPause.setOnMouseClicked(e -> gameLoop.stop());
+        boutonDepause.setOnMouseClicked(e -> gameLoop.play());
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
@@ -63,7 +72,7 @@ public class HelloController implements Initializable {
 
 
         //position sur le terrain * 32 pour la vue
-        Tour tour = new Artémis(12*32,2*32,evt);
+        Tour tour = new Artémis(12*32,10*32,evt);
 
         evt.ajouterTour(tour);
         creerUneTour(tour);
@@ -94,6 +103,8 @@ public class HelloController implements Initializable {
                         }
 
                     }
+                    for(int i = 0 ; i< this.evt.getTours().size();i++)
+                        evt.getTours().get(i).attaque();
 
                     //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
