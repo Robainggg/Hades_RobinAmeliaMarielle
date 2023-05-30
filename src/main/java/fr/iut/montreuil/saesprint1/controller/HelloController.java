@@ -87,7 +87,7 @@ public class HelloController implements Initializable {
                         System.out.println("fini");
                         gameLoop.stop();
                     }
-                    else if (temps%4 == 0){
+                    else if (temps%6 == 0){
                         if(ennemi.estArrivé()) {
                             if(ennemi.getBfs().getParcours().size()==0)
                                 gameLoop.stop();
@@ -117,10 +117,22 @@ public class HelloController implements Initializable {
                         if(tour instanceof Artémis){
                             if(temps%(((Artémis) tour).getNbAttaques()*Tour.tailleCase) == 0){
                                tour.attaque();
+
                             }
                         }
                         //tour.attaque();
                     }
+
+                    for (Projectile projectile : this.environnement.getProjectiles()) {
+                        //A sa création, un projectile se situe dans sa tour
+                        //Pour le moment avance à chaque tour de jeu
+                        if(projectile.getY() == projectile.getTour().getY() && projectile.getX() == projectile.getTour().getX()){
+                           creerProjectile(projectile);
+                        }
+                        projectile.avance();
+                    }
+
+                    for(Projectile projectile : this.environnement.getàSupprimer()){}
                     
                     temps++;
                 })
@@ -131,8 +143,9 @@ public class HelloController implements Initializable {
     @FXML
     private void poserTour (ActionEvent event){
 
-        //Récupérer le typer de la tour en fonction du ToggleButton ou autre
+        //Récupérer le type de la tour en fonction du ToggleButton ou autre
         //Récupérer l'emplacement de la tour
+        //Créer la tour et la mettre dans l'environnement
         //creerUneTour();
 
     }
@@ -144,11 +157,12 @@ public class HelloController implements Initializable {
         if(tour instanceof TourAvecPortée){
 
             Circle c = new Circle(((TourAvecPortée) tour).getPortée()*32);
-            c.setOpacity(0.2);
+            c.setOpacity(0.1);
             c.setFill(Color.PINK);
             c.translateXProperty().bind(tour.centreTourX());
             c.translateYProperty().bind(tour.centreTourY());
             panePrincipal.getChildren().add(c);
+            c.setId("rangeOf"+tour.getId());
 
             t.setFill(Color.PINK);
             t.translateXProperty().bind(tour.getXProperty());
@@ -166,6 +180,15 @@ public class HelloController implements Initializable {
             t.setId(tour.getId());
         }
 
+    }
+
+    void creerProjectile(Projectile projectile){
+        Circle c = new Circle(8);
+        c.setFill(Color.SILVER);
+        c.translateXProperty().bind(projectile.xProperty());
+        c.translateYProperty().bind(projectile.yProperty());
+        panePrincipal.getChildren().add(c);
+        c.setId(projectile.getId());
     }
 
 

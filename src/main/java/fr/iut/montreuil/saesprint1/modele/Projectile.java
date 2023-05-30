@@ -5,10 +5,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Projectile {
 
+    public static int idProjectile = 0 ;
     private IntegerProperty x;
     private IntegerProperty y;
-    private int dirX;
-    private int dirY;
     //y = ax+b
     private double a;
     private double b;
@@ -21,51 +20,55 @@ public class Projectile {
 
     final private TourAvecPortée tour;
 
-
-
-
     public Projectile(int x, int y, double a, double b, int degats, TourAvecPortée tour, int indicateurDirectionX) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.dirX = 0;
-        this.dirY = 0;
         this.a = a;
         this.b = b;
         this.degats = degats;
         this.tour = tour;
         this.indicateurDirectionX = indicateurDirectionX;
+        this.tour.getEnv().ajouterProjectile(this);
+        this.idProjectile = idProjectile;
+        idProjectile++;
     }
 
-    private void calculerY(){
+    public void avance(){
+
+        //Calcule d'abord X puisque Y peut en dépendre
+        System.out.print("X: "+this.getX()+" vers ");
+        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
+        System.out.println(this.getX());
 
         if(this.indicateurDirectionX != 0){
             // y = ax+b
+            System.out.print("Y: "+this.getY()+" vers ");
             double y = this.getA()*this.getX()+this.getB();
-            int dirY = (int)(y-(Tour.tailleCase/2));
-            this.setDirX(dirY);
+            //On veut qu'elle se retrouve au milieu de la case ???
+            int dirY = (int)(y+Tour.tailleCase/2);
+            this.setY(dirY);
+            System.out.println(this.getY());
         }
         else{
             System.out.println("cas particulier direction au dessus/en dessous de la tour");
             // y = y+b
-            this.setDirY((int)(this.getY()+b-Tour.tailleCase/2));
+            this.setY((int)(this.getY()+b+Tour.tailleCase/2));
         }
 
+        this.disparait();
+
     }
 
-    private void avance(){
-//        //Calculer les prochaines directions
-//        calculerY();
-//        this.setDirX(this.getX()+this.indicateurDirectionX*vitesse);
-//
-//        //Remplacer les directions par
-//        this.setX(this.getDirX());
-//        this.setY(this.getDirY());
+    //Méthode disparait : sortie de portée de la Tour || toucheEnnemi
+    public void disparait(){
+        //Si en dehors de la zone de manhattan : doit disparaitre
+        if ((Math.abs(this.getTour().centreTourX().get() - this.getX()) + Math.abs(this.getTour().centreTourY().get() - this.getY()) > this.getTour().getPortée()*Tour.tailleCase+(Tour.tailleCase/2))){
+             this.getTour().getEnv().supprimerProjectile(this);
+        }
     }
 
 
 
-
-    
     //Setters & Getters
     public final int getX() {
         return x.get();
@@ -83,14 +86,6 @@ public class Projectile {
         return y;
     }
 
-    public int getDirX() {
-        return dirX;
-    }
-
-    public int getDirY() {
-        return dirY;
-    }
-
     public double getA() {
         return a;
     }
@@ -102,19 +97,20 @@ public class Projectile {
     public int getDegats() {
         return degats;
     }
-
-    public void setDirX(int dirX) {
-        this.dirX = dirX;
-    }
-
-    public void setDirY(int dirY) {
-        this.dirY = dirY;
-    }
-
+    
     public void setX(int x) {
         this.x.set(x);
     }
     public void setY(int y) {
         this.y.set(y);
     }
+
+    public TourAvecPortée getTour() {
+        return tour;
+    }
+
+    public String getId(){
+        return "Projectile"+this.idProjectile;
+    }
+
 }

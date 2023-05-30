@@ -56,8 +56,12 @@ public abstract class Tour {
         return this.y;
     }
 
+    public Environnement getEnv() {
+        return env;
+    }
+
     public String getId(){
-        return this.idTour + "";
+        return "Tour"+this.idTour;
     }
 
     @Override
