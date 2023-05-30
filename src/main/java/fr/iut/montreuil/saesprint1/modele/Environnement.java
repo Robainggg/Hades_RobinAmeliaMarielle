@@ -1,22 +1,27 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Environnement {
 
-    private ArrayList<Ennemi> ennemis;
-    private ArrayList<Tour> tours;
+    private ObservableList<Ennemi> ennemis;
+    private ObservableList<Tour> tours;
     private Terrain terrain;
     private int temps;
+    private ParcoursBFS bfs;
 
-    public Environnement(Terrain terrain) {
-        this.ennemis = new ArrayList<>();
-        this.tours = new ArrayList<>();
-        this.terrain = terrain;
+    public Environnement() {
+        this.ennemis = FXCollections.observableArrayList();
+        this.tours = FXCollections.observableArrayList();
+        this.terrain = new Terrain();
         this.temps = 0;
+        this.bfs = new ParcoursBFS(terrain);
     }
 
-    public ArrayList<Ennemi> getEnnemis() {
+    public ObservableList<Ennemi> getEnnemis() {
         return ennemis;
     }
 
@@ -32,7 +37,7 @@ public class Environnement {
         return terrain;
     }
 
-    public ArrayList<Tour> getTours() {
+    public ObservableList<Tour> getTours() {
         return tours;
     }
 
@@ -41,5 +46,9 @@ public class Environnement {
     }
     public int getTemps() {
         return temps;
+    }
+
+    public ParcoursBFS getBfs() {
+        return bfs;
     }
 }

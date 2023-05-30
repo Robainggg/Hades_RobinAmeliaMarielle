@@ -20,12 +20,7 @@
             </BorderPane.margin>
             <TilePane fx:id="tilePane" prefHeight="640" prefWidth="960">
             </TilePane>
-            <Circle fx:id="testCercleEnnemi" fill="DODGERBLUE" radius="8" />
-         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" fx:id="ennemiTest">
-            <image>
-               <Image url="@../../../../images/ennemi.png" />
-            </image>
-         </ImageView>
+
         </Pane>
     </center>
 
@@ -34,44 +29,44 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°1" />
+                        <Label text="PV" />
                         <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="17.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°2" />
+                        <Label text="Argent" />
                         <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°3" />
-                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+<!--                        <Label text="info n°3" />-->
+<!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="617.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°4" />
-                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+<!--                        <Label text="info n°4" />-->
+<!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°5" />
-                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+<!--                        <Label text="info n°5" />-->
+<!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°6" />
-                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+<!--                        <Label text="info n°6" />-->
+<!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="info n°7" />
-                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+<!--                        <Label text="info n°7" />-->
+<!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
 

@@ -151,12 +151,10 @@ public class ParcoursBFS {
         int valeurCaseMin = 99999;
         Case caseMin = null;
 
-        System.out.println("Cible est sur la case " + caseActuelle);
 
         for (int[] direction : voisins) {
 
             caseRegardée = new Case(cI + direction[0], cJ + direction[1]);
-            System.out.println("la case regardée est " + caseRegardée);
 
 
             if (terrain.caseEstDansTerrain(caseRegardée)) {
@@ -166,7 +164,6 @@ public class ParcoursBFS {
                 }
             }
         }
-        System.out.println(caseMin);
         return caseMin;
     }
 
