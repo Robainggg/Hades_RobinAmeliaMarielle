@@ -30,6 +30,13 @@ public class HelloController implements Initializable {
     private Pane panePrincipal;
 
 
+     @FXML
+    private Image spriteennemi;
+
+
+    @FXML
+    private Circle testCercleEnnemi;
+
     private Environnement evt;
 
     private VueTerrain vueTerrain;
