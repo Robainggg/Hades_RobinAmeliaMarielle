@@ -122,12 +122,9 @@ public class HelloController implements Initializable {
                     }
 
                     for (Tour tour: this.environnement.getTours()) {
-                        if(tour instanceof Artémis){
-                            if(temps%(((Artémis) tour).getNbAttaques()*Tour.tailleCase) == 0){
-                               tour.attaque();
+                            if(temps% (tour.getNbAttaques()*Tour.tailleCase) == 0) {
+                                tour.attaque();
                             }
-                        }
-                        else{tour.attaque();}
                     }
 
                     for (Projectile projectile : this.environnement.getProjectiles()) {

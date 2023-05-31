@@ -6,13 +6,12 @@ public class Artémis extends TourAvecPortée {
     
     private Ennemi ennemiAttaqué;
     //Attention : pour le moment contre-intuitif. Il faut augmenter le nombre d'attaque pour qu'il y en ait moins
-    private double nbAttaques;
+
     private Environnement env;
 
     public Artémis(int x, int y, Environnement env) {
-        super("Artémis", 10, x, y, env,4);
+        super("Artémis", 10, x, y, env,4,5);
         this.ennemiAttaqué = null;
-        this.nbAttaques = 5;
         this.env = env;
     }
 
@@ -40,8 +39,5 @@ public class Artémis extends TourAvecPortée {
             System.out.println("envoit un projectile");
         }
     }
-
-    public double getNbAttaques() {
-        return nbAttaques;
-    }
+    
 }

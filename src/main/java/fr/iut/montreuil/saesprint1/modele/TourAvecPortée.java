@@ -4,8 +4,8 @@ public abstract class TourAvecPortée extends Tour {
 
     private int portée;
 
-    public TourAvecPortée(String nomTour, int cout, int x, int y, Environnement env, int portée) {
-        super(nomTour, cout, x, y, env);
+    public TourAvecPortée(String nomTour, int cout, int x, int y, Environnement env, int portée, int nbAttaques) {
+        super(nomTour, cout, x, y, env, nbAttaques);
         this.portée = portée;
     }
 
