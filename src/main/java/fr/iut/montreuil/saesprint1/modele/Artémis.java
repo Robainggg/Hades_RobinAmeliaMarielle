@@ -30,14 +30,6 @@ public class Artémis extends TourAvecPortée {
 
         return null;
     }
-
-    private void envoitProjectile(Ennemi e){
-
-
-
-
-
-    }
     
     @Override
     public void attaque () {
@@ -45,10 +37,9 @@ public class Artémis extends TourAvecPortée {
         Ennemi cible = this.ennemiZone();
         if (cible != null) {
             Projectile projectile = new Projectile(this,1, cible.getCoordX(),cible.getCoordY());
-            //System.out.println("envoit un projectile");
+            System.out.println("envoit un projectile");
         }
     }
-
 
     public double getNbAttaques() {
         return nbAttaques;

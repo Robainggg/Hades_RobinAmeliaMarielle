@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import fr.iut.montreuil.saesprint1.vue.SpriteProjectile;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -28,7 +29,6 @@ public class Projectile {
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
         this.degats = degats;
         this.tour = tour;
-        this.tour.getEnv().ajouterProjectile(this);
         this.x = new SimpleIntegerProperty(tour.centreTourX().get());
         this.y = new SimpleIntegerProperty(tour.centreTourY().get());
         this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
@@ -38,9 +38,10 @@ public class Projectile {
         //Calcul du coefficient directeur et ordonnée
         this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
         this.b = this.y.get() - (a * this.x.get());
-
         this.idProjectile = idProjectile;
         idProjectile++;
+
+        this.tour.getEnv().ajouterProjectile(this);
     }
 
     public int indicateurDirectionX (){
@@ -56,8 +57,7 @@ public class Projectile {
             return 0;
         }
     }
-
-
+    
     public void avance(){
         
         this.setX(this.getX()+this.indicateurDirectionX*vitesse);

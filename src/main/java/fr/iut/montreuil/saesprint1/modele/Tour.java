@@ -22,6 +22,7 @@ public abstract class Tour {
         this.env = env;
         this.idTour = idTour;
         idTour++;
+        this.env.ajouterTour(this);
     }
 
     public abstract void attaque();

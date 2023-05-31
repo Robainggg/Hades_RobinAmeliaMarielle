@@ -46,27 +46,31 @@ public class HelloController implements Initializable {
 
     private Ennemi ennemi;
 
-    private ListObsProjectile listenerspProjectiles;
+    private ListObsProjectile listenersProjectiles;
+    private ListObsTours listenersTours;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain=new Terrain();
         this.vueTerrain = new VueTerrain(tilePane, terrain);
-        listenerspProjectiles = new ListObsProjectile(panePrincipal);
+        this.environnement = new Environnement(this.terrain);
+        this.listenersProjectiles = new ListObsProjectile(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
+        this.environnement.getProjectiles().addListener(listenersProjectiles);
+        this.environnement.getTours().addListener(listenersTours);
+
+        //Pour le test
         ennemi = new Ennemi(terrain);
         testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
         testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
-        
-        this.environnement = new Environnement(this.terrain);
         Tour tour = new Artémis(12,10,environnement);
         Tour tour1 = new Artémis(17,8,environnement);
 
-        environnement.ajouterTour(tour);
-        creerUneTour(tour);
-        environnement.ajouterTour(tour1);
-        creerUneTour(tour1);
-        environnement.ajouterEnnemi(ennemi);
-        this.environnement.getProjectiles().addListener(listenerspProjectiles);
+        this.environnement.ajouterTour(tour);
+        this.environnement.ajouterTour(tour1);
+        this.environnement.ajouterEnnemi(ennemi);
+
+
         
         
         initAnimation();
@@ -123,25 +127,12 @@ public class HelloController implements Initializable {
                                tour.attaque();
                             }
                         }
-                        //tour.attaque();
+                        else{tour.attaque();}
                     }
 
                     for (Projectile projectile : this.environnement.getProjectiles()) {
-                        //A sa création, un projectile se situe dans sa tour
-                        //Pour le moment avance à chaque tour de jeu
-                        if(projectile.getY() == projectile.getTour().centreTourY().get() && projectile.getX() == projectile.getTour().centreTourX().get()){
-                           creerProjectile(projectile);
-                        }
                         projectile.avance();
                     }
-
-//                    for(Projectile projectile : this.environnement.getàSupprimer()){
-//                        for(Node node : panePrincipal.getChildren() ){
-//                            if (node.getId() != null && node.getId().equals(projectile.getId())) {
-//                                panePrincipal.getChildren().remove(node);
-//                            }
-//                        }
-//                    }
                     
                     temps++;
                 })
@@ -155,52 +146,7 @@ public class HelloController implements Initializable {
         //Récupérer le type de la tour en fonction du ToggleButton ou autre
         //Récupérer l'emplacement de la tour
         //Créer la tour et la mettre dans l'environnement
-        //creerUneTour();
 
     }
-
-    void creerUneTour(Tour tour){
-
-        Rectangle t = new Rectangle(32,32);
-
-        if(tour instanceof TourAvecPortée){
-
-            Circle c = new Circle(((TourAvecPortée) tour).getPortée()*32);
-            c.setOpacity(0.1);
-            c.setFill(Color.PINK);
-            c.translateXProperty().bind(tour.centreTourX());
-            c.translateYProperty().bind(tour.centreTourY());
-            panePrincipal.getChildren().add(c);
-            c.setId("rangeOf"+tour.getId());
-
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-
-        }
-
-        else{
-            t.setFill(Color.ORANGE);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-        }
-
-    }
-
-    void creerProjectile(Projectile projectile){
-        Circle c = new Circle(8);
-        c.setFill(Color.SILVER);
-        c.translateXProperty().bind(projectile.xProperty());
-        c.translateYProperty().bind(projectile.yProperty());
-        panePrincipal.getChildren().add(c);
-        c.setId(projectile.getId());
-    }
-
-
-
 
 }
