@@ -103,8 +103,9 @@ public class HelloController implements Initializable {
                         }
 
                     }
-                    for(int i = 0 ; i< this.evt.getTours().size();i++)
+                    for(int i = 0 ; i< this.evt.getTours().size();i++) {
                         evt.getTours().get(i).attaque();
+                    }
 
                     //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
