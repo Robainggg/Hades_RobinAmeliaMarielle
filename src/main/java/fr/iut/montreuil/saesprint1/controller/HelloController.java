@@ -46,24 +46,28 @@ public class HelloController implements Initializable {
 
     private Ennemi ennemi;
 
+    private ListObsProjectile listenerspProjectiles;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain=new Terrain();
         this.vueTerrain = new VueTerrain(tilePane, terrain);
+        listenerspProjectiles = new ListObsProjectile(panePrincipal);
         ennemi = new Ennemi(terrain);
         testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
         testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
-
-        //position sur le terrain * 32 pour la vue
+        
         this.environnement = new Environnement(this.terrain);
-        Tour tour = new Artémis(5*32,1*32,environnement);
-        Tour tour1 = new Artémis(17*32,8*32,environnement);
+        Tour tour = new Artémis(12,10,environnement);
+        Tour tour1 = new Artémis(17,8,environnement);
 
         environnement.ajouterTour(tour);
         creerUneTour(tour);
-//        environnement.ajouterTour(tour1);
-//        creerUneTour(tour1);
+        environnement.ajouterTour(tour1);
+        creerUneTour(tour1);
         environnement.ajouterEnnemi(ennemi);
+        this.environnement.getProjectiles().addListener(listenerspProjectiles);
+        
         
         initAnimation();
         gameLoop.play();
@@ -117,7 +121,6 @@ public class HelloController implements Initializable {
                         if(tour instanceof Artémis){
                             if(temps%(((Artémis) tour).getNbAttaques()*Tour.tailleCase) == 0){
                                tour.attaque();
-
                             }
                         }
                         //tour.attaque();
@@ -126,7 +129,7 @@ public class HelloController implements Initializable {
                     for (Projectile projectile : this.environnement.getProjectiles()) {
                         //A sa création, un projectile se situe dans sa tour
                         //Pour le moment avance à chaque tour de jeu
-                        if(projectile.getY() == projectile.getTour().getY() && projectile.getX() == projectile.getTour().getX()){
+                        if(projectile.getY() == projectile.getTour().centreTourY().get() && projectile.getX() == projectile.getTour().centreTourX().get()){
                            creerProjectile(projectile);
                         }
                         projectile.avance();

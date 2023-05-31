@@ -3,69 +3,85 @@ package fr.iut.montreuil.saesprint1.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import static java.lang.Math.ceil;
+import static java.lang.Math.round;
+
 public class Projectile {
 
     public static int idProjectile = 0 ;
     private IntegerProperty x;
     private IntegerProperty y;
     //y = ax+b
-    private double a;
-    private double b;
-
     private int vitesse = 1;
 
+    private TourAvecPortée tour;
+
     private int degats;
+    private int a;
+    private int b;
 
     private int indicateurDirectionX;
 
-    final private TourAvecPortée tour;
+    private IntegerProperty coordXEnnemi;
+    private IntegerProperty coordYEnnemi;
 
-    public Projectile(int x, int y, double a, double b, int degats, TourAvecPortée tour, int indicateurDirectionX) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
-        this.a = a;
-        this.b = b;
+    public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
         this.degats = degats;
         this.tour = tour;
-        this.indicateurDirectionX = indicateurDirectionX;
         this.tour.getEnv().ajouterProjectile(this);
+        this.x = new SimpleIntegerProperty(tour.centreTourX().get());
+        this.y = new SimpleIntegerProperty(tour.centreTourY().get());
+        this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
+        this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
+        this.indicateurDirectionX = indicateurDirectionX();
+
+        //Calcul du coefficient directeur et ordonnée
+        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
+        this.b = this.y.get() - (a * this.x.get());
+
         this.idProjectile = idProjectile;
         idProjectile++;
     }
 
-    public void avance(){
+    public int indicateurDirectionX (){
 
-        //Calcule d'abord X puisque Y peut en dépendre
-        System.out.print("X: "+this.getX()+" vers ");
-        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
-        System.out.println(this.getX());
+        //Savoir dans quelle direction X doit évoluer
+        int indicateurDirectionX;
 
-        if(this.indicateurDirectionX != 0){
-            // y = ax+b
-            System.out.print("Y: "+this.getY()+" vers ");
-            double y = this.getA()*this.getX()+this.getB();
-            //On veut qu'elle se retrouve au milieu de la case ???
-            int dirY = (int)(y+Tour.tailleCase/2);
-            this.setY(dirY);
-            System.out.println(this.getY());
-        }
+        //Si la tour doit tirer en avant ou en arrière
+        if(this.getX()-coordXEnnemi.get() > 0){return -1;}
+        else if(this.getX()-coordXEnnemi.get() < 0){return 1;}
         else{
-            System.out.println("cas particulier direction au dessus/en dessous de la tour");
-            // y = y+b
-            this.setY((int)(this.getY()+b+Tour.tailleCase/2));
+            System.out.println("Cas particulier");
+            return 0;
         }
+    }
+
+
+    public void avance(){
+        
+        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
+
+        // y = ax+b
+        this.setY((int)(this.getA()*this.getX()+this.getB()));
+
+//        else{
+//            System.out.println("cas particulier direction au dessus/en dessous de la tour");
+//            // y = y+b
+//            this.setY((int)(this.getY()+b+Tour.tailleCase/2));
+//        }
 
         //this.disparait();
 
     }
 
     //Méthode disparait : sortie de portée de la Tour || toucheEnnemi
-    public void disparait(){
-        //Si en dehors de la zone de manhattan : doit disparaitre
-        if ((Math.abs(this.getTour().centreTourX().get() - this.getX()) + Math.abs(this.getTour().centreTourY().get() - this.getY()) > this.getTour().getPortée()*Tour.tailleCase+(Tour.tailleCase/2))){
-             this.getTour().getEnv().supprimerProjectile(this);
-        }
-    }
+//    public void disparait(){
+//        //Si en dehors de la zone de manhattan : doit disparaitre
+//        if ((Math.abs(this.getTour().centreTourX().get() - this.getX()) + Math.abs(this.getTour().centreTourY().get() - this.getY()) > this.getTour().getPortée()*Tour.tailleCase+(Tour.tailleCase/2))){
+//             this.getTour().getEnv().supprimerProjectile(this);
+//        }
+//    }
 
 
 
@@ -105,12 +121,11 @@ public class Projectile {
         this.y.set(y);
     }
 
-    public TourAvecPortée getTour() {
-        return tour;
-    }
-
     public String getId(){
         return "Projectile"+this.idProjectile;
     }
 
+    public TourAvecPortée getTour() {
+        return tour;
+    }
 }

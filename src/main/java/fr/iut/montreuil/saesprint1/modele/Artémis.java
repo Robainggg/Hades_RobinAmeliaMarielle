@@ -33,21 +33,10 @@ public class Artémis extends TourAvecPortée {
 
     private void envoitProjectile(Ennemi e){
 
-        //Savoir dans quelle direction X doit évoluer
-        int indicateurDirectionX;
 
-        //Si la tour doit tirer en avant ou en arrière
-        if(super.getX()-e.getCoordX() > 0){indicateurDirectionX=-1;}
-        else if(super.getX()-e.getCoordX() < 0){indicateurDirectionX=1;}
-        else{
-            indicateurDirectionX=0;
-            System.out.println("Cas particulier ennemi en dessous/ au dessus de la tour");
-        }
 
-        //Calcul de la droite
-        double a = (e.getCoordY() - super.getY()) / (e.getCoordX() - super.getX());  // Coefficient directeur
-        double b = super.getY() - a * super.getX();  // Ordonnée à l'origine
-        Projectile projectile = new Projectile(this.getX(),this.getY(),a,b,1,this, indicateurDirectionX);
+
+
     }
     
     @Override
@@ -55,8 +44,8 @@ public class Artémis extends TourAvecPortée {
         //System.out.println("attaque");
         Ennemi cible = this.ennemiZone();
         if (cible != null) {
-            this.envoitProjectile(cible);
-            System.out.println("envoit un projectile");
+            Projectile projectile = new Projectile(this,1, cible.getCoordX(),cible.getCoordY());
+            //System.out.println("envoit un projectile");
         }
     }
 
