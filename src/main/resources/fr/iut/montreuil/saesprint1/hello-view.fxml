@@ -14,7 +14,6 @@
             </BorderPane.margin>
             <TilePane fx:id="tilePane" prefHeight="640" prefWidth="960">
             </TilePane>
-            <Circle fx:id="testCercleEnnemi" fill="DODGERBLUE" radius="16" />
         </Pane>
     </center>
 
