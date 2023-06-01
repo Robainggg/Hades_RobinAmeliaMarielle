@@ -15,20 +15,7 @@ public class Ennemi {
     private StringProperty direction;
     private Case prochaineCase;
 
-    @Override
-    public String toString() {
-        return "Ennemi{" +
-                "pv=" + pv +
-                ", vitesse=" + vitesse +
-                ", coordX=" + coordX +
-                ", coordY=" + coordY +
-                ", environnement=" + environnement +
-                ", direction=" + direction +
-                ", prochaineCase=" + prochaineCase +
-                '}';
-    }
-
-    public Ennemi(Environnement environnement){
+    public Ennemi(Terrain terrain){
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
@@ -38,7 +25,6 @@ public class Ennemi {
         prochaineCase = new Case(0,2);
         vitesse = 1;
         this.definirDirection();
-        //sprite = new SpriteEnnemi()
     }
 
     public int getCoordX() {
@@ -151,6 +137,10 @@ public class Ennemi {
 
     public Environnement getEnvironnement() {
         return environnement;
+    }
+
+    public void pertPv(int dégâts){
+        this.pv -= dégâts;
     }
 }
 

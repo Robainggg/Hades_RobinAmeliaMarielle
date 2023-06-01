@@ -5,12 +5,15 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
@@ -23,11 +26,16 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class HelloController implements Initializable {
 
-    @FXML
-    private TilePane tilePane;
 
     @FXML
     private Pane panePrincipal;
+
+    @FXML
+    private TilePane tilePane;
+
+
+    @FXML
+    private Circle testCercleEnnemi;
 
 
     private Environnement evt;
@@ -42,15 +50,28 @@ public class HelloController implements Initializable {
 
     private Ennemi ennemi;
 
+    private ListObsProjectile listenersProjectiles;
+    private ListObsTours listenersTours;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
+        this.listenersProjectiles = new ListObsProjectile(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
+
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
+        this.evt.getProjectiles().addListener(listenersProjectiles);
+        this.evt.getTours().addListener(listenersTours);
+
+        Tour tour = new Artémis(12,10,evt);
+        Tour tour1 = new Artémis(17,8,evt);
+
+        this.evt.ajouterTour(tour);
+        this.evt.ajouterTour(tour1);
 
         initAnimation();
         gameLoop.play();
@@ -61,6 +82,7 @@ public class HelloController implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
+        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -83,7 +105,14 @@ public class HelloController implements Initializable {
                             evt.getEnnemis().get(i).seDeplace();
                             //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
+                    for (Tour tour: this.evt.getTours()) {
+                        if(temps%tour.getNbAttaques() == 0){
+                            tour.attaque();
                         }
+                    }
+
+                    for (Projectile projectile : this.evt.getProjectiles()) {
+                        projectile.avance();
                     }
 
                     temps++;

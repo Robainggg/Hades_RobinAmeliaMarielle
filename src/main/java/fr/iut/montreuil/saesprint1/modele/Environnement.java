@@ -9,6 +9,9 @@ public class Environnement {
 
     private ObservableList<Ennemi> ennemis;
     private ObservableList<Tour> tours;
+    private ObservableList<Ennemi> ennemis;
+    private ObservableList<Tour> tours;
+    private ObservableList<Projectile> projectiles;
     private Terrain terrain;
     private int temps;
     private ParcoursBFS bfs;
@@ -16,6 +19,7 @@ public class Environnement {
     public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
+        this.projectiles = FXCollections.observableArrayList();
         this.terrain = new Terrain();
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
@@ -31,6 +35,12 @@ public class Environnement {
 
     public void ajouterEnnemi(Ennemi ennemi){
         this.ennemis.add(ennemi);
+    }
+
+    public void ajouterProjectile(Projectile projectile){this.projectiles.add(projectile);}
+
+    public void supprimerProjectile(Projectile projectile){
+        this.projectiles.remove(projectile);
     }
 
     public Terrain getTerrain() {
@@ -51,4 +61,9 @@ public class Environnement {
     public ParcoursBFS getBfs() {
         return bfs;
     }
+
+    public ObservableList<Projectile> getProjectiles() {
+        return projectiles;
+    }
+
 }

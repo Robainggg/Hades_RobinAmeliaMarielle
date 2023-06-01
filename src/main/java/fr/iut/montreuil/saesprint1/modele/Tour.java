@@ -5,21 +5,28 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tour {
 
+    public final static int tailleCase = 32;
+
     private String nomTour;
     private int cout;
     private Environnement env;
     private IntegerProperty x;
     private IntegerProperty y;
+
+    //Attention : pour le moment contre-intuitif. Il faut augmenter le nombre d'attaque pour qu'il y en ait moins
+    private int nbAttaques;
     public static int idTour = 0 ;
 
-    public Tour(String nomTour, int cout, int x, int y, Environnement env) {
+    public Tour(String nomTour, int cout, int x, int y, Environnement env, int nbAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
+        this.x = new SimpleIntegerProperty(x*32);
+        this.y = new SimpleIntegerProperty(y*32);
         this.env = env;
+        this.nbAttaques = nbAttaques;
         this.idTour = idTour;
         idTour++;
+        this.env.ajouterTour(this);
     }
 
     public abstract void attaque();
@@ -41,12 +48,12 @@ public abstract class Tour {
     }
 
     public final IntegerProperty centreTourX(){
-        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+(tailleCase/2));
         return a;
     }
 
     public final IntegerProperty centreTourY(){
-        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+(tailleCase/2));
         return a;
     }
 
@@ -54,8 +61,12 @@ public abstract class Tour {
         return this.y;
     }
 
+    public Environnement getEnv() {
+        return env;
+    }
+
     public String getId(){
-        return this.idTour + "";
+        return "Tour"+this.idTour;
     }
 
     @Override
@@ -68,4 +79,7 @@ public abstract class Tour {
                 '}';
     }
 
+    public int getNbAttaques() {
+        return nbAttaques;
+    }
 }
