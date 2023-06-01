@@ -1,9 +1,6 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
-import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Projectile;
-import fr.iut.montreuil.saesprint1.modele.Tour;
+import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -102,11 +99,11 @@ public class HelloController implements Initializable {
                         if (evt.getEnnemis().get(i).estArriveAuBout()) {
                             System.out.println("fini");
                             gameLoop.stop();
-                        }
-                        else{
+                        } else {
                             evt.getEnnemis().get(i).seDeplace();
                             //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
-
+                        }
+                    }
                     for (Tour tour: this.evt.getTours()) {
                         if(temps%tour.getNbAttaques() == 0){
                             tour.attaque();

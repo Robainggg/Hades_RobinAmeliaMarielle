@@ -15,7 +15,7 @@ public class Ennemi {
     private StringProperty direction;
     private Case prochaineCase;
 
-    public Ennemi(Terrain terrain){
+    public Ennemi(Environnement environnement){
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();

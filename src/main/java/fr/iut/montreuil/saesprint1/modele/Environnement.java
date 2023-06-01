@@ -9,8 +9,6 @@ public class Environnement {
 
     private ObservableList<Ennemi> ennemis;
     private ObservableList<Tour> tours;
-    private ObservableList<Ennemi> ennemis;
-    private ObservableList<Tour> tours;
     private ObservableList<Projectile> projectiles;
     private Terrain terrain;
     private int temps;
