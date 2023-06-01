@@ -33,4 +33,14 @@ public class Environnement {
     public ArrayList<Tour> getTours() {
         return tours;
     }
+
+    public boolean isTourPresent(int x, int y) {
+        for (Tour tour : tours) {
+            if (tour.getX() == x && tour.getY() == y) {
+                return true; // Une tour est déjà présente à cet emplacement
+            }
+        }
+        return false; // Aucune tour n'est présente à cet emplacement
+    }
+
 }

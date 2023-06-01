@@ -90,41 +90,20 @@ public class HelloController implements Initializable {
         environnement.ajouterEnnemi(ennemi);
         //ajouter les images dans la boutique;
 
-
-
-
         initAnimation();
         gameLoop.play();
 
         this.terrain.afficheTableau();
 
-        //Placer des tours
+
+        //Bouton selection des tours
         boutonArthemis.setOnAction(event -> {
             if (boutonArthemis.isSelected()) {
                 typeTourSelectionne = "Arthémis";
             }
         });
 
-
-        /*imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip();
-                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });
-        imageTourArthemis.setOnMouseReleased(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });*/
-
-
+        // afficher les caractéristiques d'une tour
         Tooltip tooltip = new Tooltip();
         tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
         final boolean[] tooltipVisible = {false};
@@ -147,26 +126,13 @@ public class HelloController implements Initializable {
                 event.consume();
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //ajouter une tour (après selection)
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
 
         });
-
-        tilePane.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
+        panePrincipal.setOnMouseClicked(event -> {
+            if (ajoutTourEnCours && boutonArthemis.isSelected()) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
 
@@ -179,7 +145,7 @@ public class HelloController implements Initializable {
                 double tileY = tourY * tilePane.getTileHeight();
 
                 // Créer la tour à l'emplacement du clic
-                if (environnement.getTerrain().get(tourY * 30 + tourX) == 114) {
+                if (environnement.getTerrain().get(tourY * 30 + tourX) == 114 && !environnement.isTourPresent((int) tileX, (int) tileY)) {
                     Tour t;
 
                     if (typeTourSelectionne.equals("Arthémis")) {
@@ -196,14 +162,6 @@ public class HelloController implements Initializable {
                 ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
             }
         });
-
-
-
-
-
-
-
-
     }
 
     private void initAnimation() {
