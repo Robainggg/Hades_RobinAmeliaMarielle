@@ -97,10 +97,8 @@ public class HelloController implements Initializable {
                             if(ennemi.getBfs().getParcours().size()==0)
                                 gameLoop.stop();
                             ennemi.changeProchaineCase();
-                            //System.out.println(ennemi.getProchaineCase());
                             if(ennemi.getProchaineCase() != null)
                                 ennemi.definirDirection();
-                            //System.out.println(ennemi.getDirection());
                         }
                         if(ennemi.getDirection() == 'd'){
                             ennemi.setCoordX(ennemi.getCoordX()+2);
@@ -114,14 +112,12 @@ public class HelloController implements Initializable {
                         else if (ennemi.getDirection() == 'b'){
                             ennemi.setCoordY(ennemi.getCoordY()+2);
                         }
-                        //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
-
                     }
 
                     for (Tour tour: this.environnement.getTours()) {
-                            if(temps% (tour.getNbAttaques()*Tour.tailleCase) == 0) {
-                                tour.attaque();
-                            }
+                        if(temps%tour.getNbAttaques() == 0){
+                            tour.attaque();
+                        }
                     }
 
                     for (Projectile projectile : this.environnement.getProjectiles()) {
