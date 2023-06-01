@@ -21,6 +21,8 @@ public class Artémis extends Tour {
         this.env = env;
     }
 
+
+
     private Ennemi ennemiZone() {
 
         for (Ennemi e : this.env.getEnnemis()) {

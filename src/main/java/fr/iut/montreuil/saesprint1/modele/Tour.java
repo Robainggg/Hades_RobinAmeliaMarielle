@@ -36,6 +36,14 @@ public abstract class Tour {
         return this.x.get();
     }
 
+    public void setX(int x) {
+        this.x.set(x);
+    }
+
+    public void setY(int y) {
+        this.y.set(y);
+    }
+
     public final IntegerProperty getXProperty(){
         return this.x;
     }

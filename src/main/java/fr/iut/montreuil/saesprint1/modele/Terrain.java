@@ -116,6 +116,10 @@ public class Terrain {
     public int getFinY() {
         return finY;
     }
+
+    public int get(int i){
+      return l.get(i);
+    }
 }
 
 

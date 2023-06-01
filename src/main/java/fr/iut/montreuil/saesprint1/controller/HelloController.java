@@ -1,12 +1,15 @@
 package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.*;
+import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -16,9 +19,14 @@ import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javafx.scene.control.Tooltip;
+
+
+
 
 
 public class HelloController implements Initializable {
@@ -33,22 +41,42 @@ public class HelloController implements Initializable {
     @FXML
     private Circle testCercleEnnemi;
 
+    @FXML
+    private ImageView imageTourArthemis;
+
+    @FXML
+    private RadioButton boutonArthemis;
+
+    @FXML
+    private Button boutonAjouterTour;
+
+
     private int temps;
 
     private Terrain terrain;
 
     private VueTerrain vueTerrain;
 
+    private VueInventaire vueInventaire;
     private Timeline gameLoop;
 
     private Environnement environnement;
 
     private Ennemi ennemi;
 
+    private Tour tourEnCoursAjout ;
+    private boolean ajoutTourEnCours = false;
+    private String typeTourSelectionne;
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.terrain=new Terrain();
         this.vueTerrain = new VueTerrain(tilePane, terrain);
+        this.vueInventaire = new VueInventaire(imageTourArthemis);
         ennemi = new Ennemi(terrain);
         testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
         testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
@@ -60,12 +88,121 @@ public class HelloController implements Initializable {
         environnement.ajouterTour(tour);
         creerUneTour(tour);
         environnement.ajouterEnnemi(ennemi);
+        //ajouter les images dans la boutique;
+
+
 
 
         initAnimation();
         gameLoop.play();
 
         this.terrain.afficheTableau();
+
+        //Placer des tours
+        boutonArthemis.setOnAction(event -> {
+            if (boutonArthemis.isSelected()) {
+                typeTourSelectionne = "Arthémis";
+            }
+        });
+
+
+        /*imageTourArthemis.setOnMousePressed(event -> {
+            if (event.isSecondaryButtonDown()) {
+                Tooltip tooltip = new Tooltip();
+                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
+                Tooltip.install(imageTourArthemis, tooltip);
+                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
+                event.consume();
+            }
+        });
+        imageTourArthemis.setOnMouseReleased(event -> {
+            if (event.isSecondaryButtonDown()) {
+                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
+                Tooltip.install(imageTourArthemis, tooltip);
+                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
+                event.consume();
+            }
+        });*/
+
+
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
+        final boolean[] tooltipVisible = {false};
+
+        imageTourArthemis.setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown()) {
+                if (!tooltipVisible[0]) {
+                    Tooltip.install(imageTourArthemis, tooltip);
+                    tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
+                    tooltipVisible[0] = true;
+
+                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                    pause.setOnFinished(e -> {
+                        tooltip.hide();
+                        Tooltip.uninstall(imageTourArthemis, tooltip);
+                        tooltipVisible[0] = false;
+                    });
+                    pause.play();
+                }
+                event.consume();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+        boutonAjouterTour.setOnAction(event -> {
+            ajoutTourEnCours = true;
+
+        });
+
+        tilePane.setOnMouseClicked(event -> {
+            if (ajoutTourEnCours) {
+                double mouseX = event.getX();
+                double mouseY = event.getY();
+
+                // Convertir les coordonnées du clic de souris en position sur le TilePane
+                int tourX = (int) (mouseX / tilePane.getTileWidth());
+                int tourY = (int) (mouseY / tilePane.getTileHeight());
+
+                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
+                double tileX = tourX * tilePane.getTileWidth();
+                double tileY = tourY * tilePane.getTileHeight();
+
+                // Créer la tour à l'emplacement du clic
+                if (environnement.getTerrain().get(tourY * 30 + tourX) == 114) {
+                    Tour t;
+
+                    if (typeTourSelectionne.equals("Arthémis")) {
+                        t = new Artémis((int) tileX, (int) tileY, environnement);
+                        // Ajouter la tour au modèle
+                        environnement.ajouterTour(t);
+                        // Créer l'élément graphique de la tour
+                        creerUneTour(t);
+                    } else {
+                        System.out.println("les autres tours");
+                        // Créez d'autres types de tours en fonction de la sélection
+                    }
+                }
+                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
+            }
+        });
+
+
+
+
+
+
+
 
     }
 
@@ -115,6 +252,7 @@ public class HelloController implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
+
     void creerUneTour(Tour tour){
 
         Rectangle t = new Rectangle(32,32);
@@ -147,7 +285,11 @@ public class HelloController implements Initializable {
 
     }
 
-
-
+    private void afficherCaracteristiquesTour(double x, double y, String nom, int puissance, int portee) {
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(nom + "\nPuissance : " + puissance + "\nPortée : " + portee);
+        Tooltip.install(imageTourArthemis, tooltip);
+        tooltip.show(imageTourArthemis, x, y);
+    }
 
 }
