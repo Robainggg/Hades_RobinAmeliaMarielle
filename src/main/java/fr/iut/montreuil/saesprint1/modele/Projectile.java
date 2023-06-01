@@ -57,12 +57,7 @@ public class Projectile {
         this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         this.normalizeDeltaX = deltaX/magnitude;
         this.normalizeDeltaY = deltaY/magnitude;
-        
-        //Calcul du coefficient directeur et ordonnée
-//        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
-//        this.b = this.y.get() - (a * this.x.get());
 
-        this.tour.getEnv().ajouterProjectile(this);
     }
 
     public int indicateurDirectionX (){

@@ -86,26 +86,25 @@ public class HelloController implements Initializable {
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
         this.vueInventaire = new VueInventaire(imageTourArthemis);
+
+        //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal);
-
         this.evt.getEnnemis().addListener(listenerEnnemis);
-        ennemi = new Ennemi(evt);
-        evt.ajouterEnnemi(ennemi);
         this.evt.getProjectiles().addListener(listenersProjectiles);
         this.evt.getTours().addListener(listenersTours);
-
+        
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
-
-
+        //Test pour affichage de base
         Tour tour = new Artémis(12*32,13*32,evt);
-        Tour tour1 = new Artémis(17*32,8*32,evt);
-
+        //Tour tour1 = new Artémis(17*32,8*32,evt);
+        ennemi = new Ennemi(evt);
+        evt.ajouterEnnemi(ennemi);
         this.evt.ajouterTour(tour);
-        this.evt.ajouterTour(tour1);
+        //this.evt.ajouterTour(tour1);
 
 
         initAnimation();
@@ -119,27 +118,7 @@ public class HelloController implements Initializable {
                 typeTourSelectionne = "Arthémis";
             }
         });
-
-
-        /*imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip();
-                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });
-        imageTourArthemis.setOnMouseReleased(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });*/
-
-
+        
         Tooltip tooltip = new Tooltip();
         tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
         final boolean[] tooltipVisible = {false};
@@ -162,7 +141,6 @@ public class HelloController implements Initializable {
                 event.consume();
             }
         });
-
 
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
@@ -214,7 +192,7 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(this.temps % 100 == 0)
+                    if(this.temps % 1000 == 0)
                         if(this.evt.getEnnemis().size() < 10) {
                             System.out.println("taille liste ennemis : " + evt.getEnnemis().size());
                             this.evt.ajouterEnnemi(new Ennemi(evt));
@@ -226,11 +204,10 @@ public class HelloController implements Initializable {
                         }
                         else{
                             evt.getEnnemis().get(i).seDeplace();
-                            //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
                         }
                     }
                     for (Tour tour: this.evt.getTours()) {
-                        if(temps% 50 == 0)
+                        if(temps% 100 == 0)
                             tour.attaque();
                     }
 
