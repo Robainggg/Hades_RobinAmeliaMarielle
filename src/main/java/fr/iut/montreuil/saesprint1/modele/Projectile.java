@@ -1,7 +1,9 @@
 package fr.iut.montreuil.saesprint1.modele;
 
 import fr.iut.montreuil.saesprint1.vue.SpriteProjectile;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import static java.lang.Math.ceil;
@@ -10,13 +12,13 @@ import static java.lang.Math.round;
 public class Projectile {
 
     public static int idProjectile = 0 ;
-    private IntegerProperty x;
-    private IntegerProperty y;
+    private DoubleProperty x;
+    private DoubleProperty y;
 
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 1;
+    private int vitesse = 2;
 
     private double deltaX;
     private double deltaY;
@@ -39,8 +41,8 @@ public class Projectile {
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
         this.degats = degats;
         this.tour = tour;
-        this.x = new SimpleIntegerProperty(tour.centreTourX().get());
-        this.y = new SimpleIntegerProperty(tour.centreTourY().get());
+        this.x = new SimpleDoubleProperty((double)tour.centreTourX().getValue());
+        this.y = new SimpleDoubleProperty((double)tour.centreTourY().getValue());
         this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
         this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
         this.indicateurDirectionX = indicateurDirectionX();
@@ -77,8 +79,8 @@ public class Projectile {
     
     public void avance(){
 
-        this.setX((int)(this.x.get()+ normalizeDeltaX*vitesse));
-        this.setY((int)(this.y.get()+ normalizeDeltaY*vitesse));
+        this.setX((this.x.get()+ normalizeDeltaX*vitesse));
+        this.setY((this.y.get()+ normalizeDeltaY*vitesse));
         
 //        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
 //
@@ -88,19 +90,19 @@ public class Projectile {
     }
     
     //Setters & Getters
-    public final int getX() {
+    public final double getX() {
         return x.get();
     }
 
-    public final IntegerProperty xProperty() {
+    public final DoubleProperty xProperty() {
         return x;
     }
 
-    public final int getY() {
+    public final double getY() {
         return y.get();
     }
 
-    public final IntegerProperty yProperty() {
+    public final DoubleProperty yProperty() {
         return y;
     }
 
@@ -116,10 +118,10 @@ public class Projectile {
         return degats;
     }
     
-    public void setX(int x) {
+    public void setX(double x) {
         this.x.set(x);
     }
-    public void setY(int y) {
+    public void setY(double y) {
         this.y.set(y);
     }
 
