@@ -69,9 +69,6 @@ public class HelloController implements Initializable {
         this.environnement.ajouterTour(tour);
         this.environnement.ajouterTour(tour1);
         this.environnement.ajouterEnnemi(ennemi);
-
-
-        
         
         initAnimation();
         gameLoop.play();
@@ -100,10 +97,10 @@ public class HelloController implements Initializable {
                             if(ennemi.getBfs().getParcours().size()==0)
                                 gameLoop.stop();
                             ennemi.changeProchaineCase();
-                            System.out.println(ennemi.getProchaineCase());
+                            //System.out.println(ennemi.getProchaineCase());
                             if(ennemi.getProchaineCase() != null)
                                 ennemi.definirDirection();
-                            System.out.println(ennemi.getDirection());
+                            //System.out.println(ennemi.getDirection());
                         }
                         if(ennemi.getDirection() == 'd'){
                             ennemi.setCoordX(ennemi.getCoordX()+2);
@@ -136,14 +133,6 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-    @FXML
-    private void poserTour (ActionEvent event){
-
-        //Récupérer le type de la tour en fonction du ToggleButton ou autre
-        //Récupérer l'emplacement de la tour
-        //Créer la tour et la mettre dans l'environnement
-
-    }
+    
 
 }

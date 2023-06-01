@@ -12,8 +12,19 @@ public class Projectile {
     public static int idProjectile = 0 ;
     private IntegerProperty x;
     private IntegerProperty y;
+
+    private IntegerProperty coordXEnnemi;
+    private IntegerProperty coordYEnnemi;
     //y = ax+b
     private int vitesse = 1;
+
+    private double deltaX;
+    private double deltaY;
+
+    private double magnitude;
+
+    private double normalizeDeltaX;
+    private double normalizeDeltaY;
 
     private TourAvecPortée tour;
 
@@ -23,8 +34,7 @@ public class Projectile {
 
     private int indicateurDirectionX;
 
-    private IntegerProperty coordXEnnemi;
-    private IntegerProperty coordYEnnemi;
+
 
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
         this.degats = degats;
@@ -35,9 +45,16 @@ public class Projectile {
         this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
         this.indicateurDirectionX = indicateurDirectionX();
 
+        //Calcul du vecteur de déplacement
+        this.deltaX = this.coordXEnnemi.get() - this.x.get();
+        this.deltaY = this.coordYEnnemi.get() - this.y.get();
+        this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        this.normalizeDeltaX = deltaX/magnitude;
+        this.normalizeDeltaY = deltaY/magnitude;
+        
         //Calcul du coefficient directeur et ordonnée
-        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
-        this.b = this.y.get() - (a * this.x.get());
+//        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
+//        this.b = this.y.get() - (a * this.x.get());
         this.idProjectile = idProjectile;
         idProjectile++;
 
@@ -59,32 +76,17 @@ public class Projectile {
     }
     
     public void avance(){
+
+        this.setX((int)(this.x.get()+ normalizeDeltaX*vitesse));
+        this.setY((int)(this.y.get()+ normalizeDeltaY*vitesse));
         
-        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
-
-        // y = ax+b
-        this.setY((int)(this.getA()*this.getX()+this.getB()));
-
-//        else{
-//            System.out.println("cas particulier direction au dessus/en dessous de la tour");
-//            // y = y+b
-//            this.setY((int)(this.getY()+b+Tour.tailleCase/2));
-//        }
-
-        //this.disparait();
+//        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
+//
+//        // y = ax+b
+//        this.setY((int)(this.getA()*this.getX()+this.getB()));
 
     }
-
-    //Méthode disparait : sortie de portée de la Tour || toucheEnnemi
-//    public void disparait(){
-//        //Si en dehors de la zone de manhattan : doit disparaitre
-//        if ((Math.abs(this.getTour().centreTourX().get() - this.getX()) + Math.abs(this.getTour().centreTourY().get() - this.getY()) > this.getTour().getPortée()*Tour.tailleCase+(Tour.tailleCase/2))){
-//             this.getTour().getEnv().supprimerProjectile(this);
-//        }
-//    }
-
-
-
+    
     //Setters & Getters
     public final int getX() {
         return x.get();
