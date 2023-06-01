@@ -2,14 +2,12 @@ package fr.iut.montreuil.saesprint1.modele;
 
 import java.util.ArrayList;
 
-public class Artémis extends Tour {
+public class Artémis extends TourAvecPortée {
 
     private final static int dégâts = 4;
     private final static int tailleCase = 32;
 
     private Ennemi ennemiAttaqué;
-    private int portée;
-    private int nbAttaques;
     private Environnement env;
 
 

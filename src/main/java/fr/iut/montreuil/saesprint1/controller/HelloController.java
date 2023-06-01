@@ -65,8 +65,7 @@ public class HelloController implements Initializable {
 
     private VueInventaire vueInventaire;
     private Timeline gameLoop;
-
-    private int temps;
+    
 
     private ListObsEnnemis listenerEnnemis;
 
@@ -159,18 +158,6 @@ public class HelloController implements Initializable {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
 
@@ -190,15 +177,14 @@ public class HelloController implements Initializable {
                 double tileY = tourY * tilePane.getTileHeight();
 
                 // Créer la tour à l'emplacement du clic
-                if (environnement.getTerrain().get(tourY * 30 + tourX) == 114) {
+                if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
                     Tour t;
 
                     if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, environnement);
+                        t = new Artémis((int) tileX, (int) tileY, evt);
                         // Ajouter la tour au modèle
-                        environnement.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        creerUneTour(t);
+                        evt.ajouterTour(t);
+
                     } else {
                         System.out.println("les autres tours");
                         // Créez d'autres types de tours en fonction de la sélection
@@ -207,12 +193,6 @@ public class HelloController implements Initializable {
                 ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
             }
         });
-
-
-
-
-
-
 
 
     }
