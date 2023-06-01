@@ -4,8 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<BorderPane styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
+<BorderPane styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
     <center>
         <Pane fx:id="panePrincipal" prefHeight="640" prefWidth="960" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
             <BorderPane.margin>

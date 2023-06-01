@@ -88,7 +88,7 @@ public class HelloController implements Initializable {
         this.vueInventaire = new VueInventaire(imageTourArthemis);
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
-        this.listenersTours = new ListObsTours(panePrincipal);
+        //this.listenersTours = new ListObsTours(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);
@@ -169,7 +169,7 @@ public class HelloController implements Initializable {
 
         });
 
-        tilePane.setOnMouseClicked(event -> {
+        panePrincipal.setOnMouseClicked(event -> {
             if (ajoutTourEnCours) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
@@ -189,9 +189,9 @@ public class HelloController implements Initializable {
                     if (typeTourSelectionne.equals("Arthémis")) {
                         t = new Artémis((int) tileX, (int) tileY, evt);
                         // Ajouter la tour au modèle
-                        evt.ajouterTour(t);
+                        this.evt.ajouterTour(t);
                         // Créer l'élément graphique de la tour
-                        creerUneTour(t);
+                        //creerUneTour(t);
                     } else {
                         System.out.println("les autres tours");
                         // Créez d'autres types de tours en fonction de la sélection
@@ -230,7 +230,7 @@ public class HelloController implements Initializable {
                         }
                     }
                     for (Tour tour: this.evt.getTours()) {
-                        if(temps% 30 == 0)
+                        if(temps% 50 == 0)
                             tour.attaque();
                     }
 
@@ -243,38 +243,5 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-    void creerUneTour(Tour tour){
-
-        Rectangle t = new Rectangle(32,32);
-
-        if(tour instanceof Artémis){
-            Artémis artémis = (Artémis) tour;
-
-            Circle c = new Circle(((Artémis) tour).getPortée()*32);
-            c.setOpacity(0.2);
-            c.setFill(Color.PINK);
-            c.translateXProperty().bind(tour.centreTourX());
-            c.translateYProperty().bind(tour.centreTourY());
-            panePrincipal.getChildren().add(c);
-
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-
-        }
-
-        else{
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-        }
-
-    }
-
 
 }
