@@ -75,7 +75,7 @@ public class HelloController implements Initializable {
         Tour tour = new Artémis(12*32,10*32,evt);
 
         evt.ajouterTour(tour);
-        creerUneTour(tour);
+        //creerUneTour(tour);
 
 
         initAnimation();
@@ -94,6 +94,8 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
+                    if(temps%100 == 0)
+                        evt.ajouterEnnemi(new Ennemi(evt));
                     for(int i = 0; i<this.evt.getEnnemis().size();i++){
                         if (evt.getEnnemis().get(i).estArriveAuBout()) {
                             System.out.println("fini");
@@ -115,39 +117,39 @@ public class HelloController implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
-    void creerUneTour(Tour tour){
-
-        Rectangle t = new Rectangle(32,32);
-
-        if(tour instanceof Artémis){
-            Artémis artémis = (Artémis) tour;
-
-            Circle c = new Circle(((Artémis) tour).getPortée()*32);
-            c.setOpacity(0.2);
-            c.setFill(Color.PINK);
-            c.translateXProperty().bind(tour.centreTourX());
-            c.translateYProperty().bind(tour.centreTourY());
-            panePrincipal.getChildren().add(c);
-
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-
-        }
-
-        else{
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-        }
+//    void creerUneTour(Tour tour){
+//
+//        Rectangle t = new Rectangle(32,32);
+//
+//        if(tour instanceof Artémis){
+//            Artémis artémis = (Artémis) tour;
+//
+//            Circle c = new Circle(((Artémis) tour).getPortée()*32);
+//            c.setOpacity(0.2);
+//            c.setFill(Color.PINK);
+//            c.translateXProperty().bind(tour.centreTourX());
+//            c.translateYProperty().bind(tour.centreTourY());
+//            panePrincipal.getChildren().add(c);
+//
+//            t.setFill(Color.PINK);
+//            t.translateXProperty().bind(tour.getXProperty());
+//            t.translateYProperty().bind(tour.getYProperty());
+//            panePrincipal.getChildren().add(t);
+//            t.setId(tour.getId());
+//
+//        }
+//
+//        else{
+//            t.setFill(Color.PINK);
+//            t.translateXProperty().bind(tour.getXProperty());
+//            t.translateYProperty().bind(tour.getYProperty());
+//            panePrincipal.getChildren().add(t);
+//            t.setId(tour.getId());
+//        }
 
     }
 
 
 
 
-}
+    

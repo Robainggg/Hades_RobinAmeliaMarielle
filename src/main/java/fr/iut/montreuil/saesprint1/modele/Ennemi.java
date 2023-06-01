@@ -34,7 +34,7 @@ public class Ennemi {
         direction = new SimpleStringProperty();
         coordX.setValue(0*32);
         coordY.setValue(2*32);
-        this.environnement = new Environnement();
+        this.environnement = environnement;
         prochaineCase = new Case(0,2);
         vitesse = 1;
         this.definirDirection();

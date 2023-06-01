@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
+<BorderPane styleClass="background" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
     <center>
         <Pane fx:id="panePrincipal" prefHeight="640" prefWidth="960" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -18,7 +19,7 @@
     </center>
 
     <bottom>
-        <HBox styleClass="encadre" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER_RIGHT" styleClass="encadre" BorderPane.alignment="CENTER_RIGHT">
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
                     <children>
@@ -56,29 +57,32 @@
 <!--                        <Label prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />-->
                     </children>
                 </VBox>
-                <VBox alignment="CENTER_RIGHT" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0" />
-            <ImageView fx:id="boutonPause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/pauseOptions/pause.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="boutonDepause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/pauseOptions/depause.png" />
-               </image>
-            </ImageView>
+                <VBox alignment="CENTER_RIGHT" layoutX="317.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
+               <children>
+                  <ImageView fx:id="boutonPause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/pause.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="boutonDepause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/depause.png" />
+                     </image>
+                  </ImageView>
+               </children></VBox>
 
             </children>
         </HBox>
     </bottom>
     <right>
-        <VBox prefHeight="500.0" prefWidth="150.0" style="-fx-background-color: yellow;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="500.0" prefWidth="150.0" style="-fx-background-image: ;" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" prefHeight="36.0" prefWidth="155.0" text="Inventaire" BorderPane.alignment="CENTER">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
                 </Label>
+            <ImageView fitHeight="500.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
             </children>
             <BorderPane.margin>
                 <Insets />
