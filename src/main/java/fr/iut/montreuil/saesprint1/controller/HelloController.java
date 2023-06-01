@@ -88,7 +88,7 @@ public class HelloController implements Initializable {
         this.vueInventaire = new VueInventaire(imageTourArthemis);
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
-        //this.listenersTours = new ListObsTours(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);

@@ -12,7 +12,7 @@ public class Artémis extends TourAvecPortée {
 
 
     public Artémis(int x, int y, Environnement env) {
-        super("Artémis", 10, x, y, env,4,30);
+        super("Artémis", 10, x, y, env,3,30);
         this.ennemiAttaqué = null;
         this.env = env;
     }

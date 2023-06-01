@@ -9,8 +9,6 @@ public abstract class TourAvecPortée extends Tour {
         this.portée = portée;
     }
 
-    @Override
-    public abstract void attaque();
 
     public int getPortée() {
         return portée;
