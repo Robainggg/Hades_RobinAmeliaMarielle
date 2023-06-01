@@ -1,21 +1,25 @@
 package fr.iut.montreuil.saesprint1.modele;
 
-public class Artémis extends TourAvecPortée {
+import java.util.ArrayList;
+
+public class Artémis extends Tour {
 
     private final static int dégâts = 4;
+    private final static int tailleCase = 32;
 
-    private int temps = 0;
-    
     private Ennemi ennemiAttaqué;
-    //Attention : pour le moment contre-intuitif. Il faut augmenter le nombre d'attaque pour qu'il y en ait moins
-
+    private int portée;
+    private int nbAttaques;
     private Environnement env;
+
 
     public Artémis(int x, int y, Environnement env) {
         super("Artémis", 10, x, y, env,4,5);
         this.ennemiAttaqué = null;
         this.env = env;
     }
+
+
 
     private Ennemi ennemiZone() {
 
@@ -35,16 +39,16 @@ public class Artémis extends TourAvecPortée {
 
         return null;
     }
-    
+
     @Override
     public void attaque () {
         //System.out.println("attaque");
         Ennemi cible = this.ennemiZone();
         if (cible != null) {
-            
+
             Projectile projectile = new Projectile(this,1, cible.getCoordX(),cible.getCoordY());
             System.out.println("envoit un projectile");
         }
     }
-    
+
 }
