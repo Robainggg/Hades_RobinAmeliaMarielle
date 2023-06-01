@@ -41,7 +41,6 @@ public class HelloController implements Initializable {
     @FXML
     private TilePane tilePane;
 
-
     @FXML
     private Circle testCercleEnnemi;
 
@@ -54,7 +53,6 @@ public class HelloController implements Initializable {
     @FXML
     private Button boutonAjouterTour;
 
-
     private int temps;
 
     private Terrain terrain;
@@ -66,7 +64,6 @@ public class HelloController implements Initializable {
     private VueInventaire vueInventaire;
     private Timeline gameLoop;
     
-
     private ListObsEnnemis listenerEnnemis;
 
     private Ennemi ennemi;
@@ -77,11 +74,7 @@ public class HelloController implements Initializable {
     private Tour tourEnCoursAjout ;
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
-
-
-
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.evt = new Environnement();
@@ -89,19 +82,20 @@ public class HelloController implements Initializable {
         this.vueInventaire = new VueInventaire(imageTourArthemis);
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
-        this.listenersTours = new ListObsTours(panePrincipal);
+        //this.listenersTours = new ListObsTours(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
         this.evt.getProjectiles().addListener(listenersProjectiles);
-        this.evt.getTours().addListener(listenersTours);
+        //this.evt.getTours().addListener(listenersTours);
 
         Tour tour = new Artémis(12,10,evt);
         Tour tour1 = new Artémis(17,8,evt);
 
         this.evt.ajouterTour(tour);
         this.evt.ajouterTour(tour1);
+
 
         initAnimation();
         gameLoop.play();
@@ -158,6 +152,7 @@ public class HelloController implements Initializable {
             }
         });
 
+
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
 
@@ -184,7 +179,8 @@ public class HelloController implements Initializable {
                         t = new Artémis((int) tileX, (int) tileY, evt);
                         // Ajouter la tour au modèle
                         evt.ajouterTour(t);
-
+                        // Créer l'élément graphique de la tour
+                        creerUneTour(t);
                     } else {
                         System.out.println("les autres tours");
                         // Créez d'autres types de tours en fonction de la sélection
@@ -193,7 +189,6 @@ public class HelloController implements Initializable {
                 ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
             }
         });
-
 
     }
 
@@ -224,6 +219,7 @@ public class HelloController implements Initializable {
                         }
                     }
                     for (Tour tour: this.evt.getTours()) {
+                        if(temps% 50 == 0)
                             tour.attaque();
                     }
 
@@ -235,6 +231,38 @@ public class HelloController implements Initializable {
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+
+    void creerUneTour(Tour tour){
+
+        Rectangle t = new Rectangle(32,32);
+
+        if(tour instanceof Artémis){
+            Artémis artémis = (Artémis) tour;
+
+            Circle c = new Circle(((Artémis) tour).getPortée()*32);
+            c.setOpacity(0.2);
+            c.setFill(Color.PINK);
+            c.translateXProperty().bind(tour.centreTourX());
+            c.translateYProperty().bind(tour.centreTourY());
+            panePrincipal.getChildren().add(c);
+
+            t.setFill(Color.PINK);
+            t.translateXProperty().bind(tour.getXProperty());
+            t.translateYProperty().bind(tour.getYProperty());
+            panePrincipal.getChildren().add(t);
+            t.setId(tour.getId());
+
+        }
+
+        else{
+            t.setFill(Color.PINK);
+            t.translateXProperty().bind(tour.getXProperty());
+            t.translateYProperty().bind(tour.getYProperty());
+            panePrincipal.getChildren().add(t);
+            t.setId(tour.getId());
+        }
+
     }
 
 
