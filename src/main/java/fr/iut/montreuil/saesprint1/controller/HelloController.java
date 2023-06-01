@@ -42,9 +42,6 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Circle testCercleEnnemi;
-
-    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -82,13 +79,13 @@ public class HelloController implements Initializable {
         this.vueInventaire = new VueInventaire(imageTourArthemis);
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
-        //this.listenersTours = new ListObsTours(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
         this.evt.getProjectiles().addListener(listenersProjectiles);
-        //this.evt.getTours().addListener(listenersTours);
+        this.evt.getTours().addListener(listenersTours);
 
         Tour tour = new Artémis(12,10,evt);
         Tour tour1 = new Artémis(17,8,evt);
@@ -158,7 +155,7 @@ public class HelloController implements Initializable {
 
         });
 
-        tilePane.setOnMouseClicked(event -> {
+        panePrincipal.setOnMouseClicked(event -> {
             if (ajoutTourEnCours) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
@@ -172,15 +169,15 @@ public class HelloController implements Initializable {
                 double tileY = tourY * tilePane.getTileHeight();
 
                 // Créer la tour à l'emplacement du clic
-                if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
+                if (this.evt.getTerrain().get(tourY * 30 + tourX) == 114) {
                     Tour t;
 
                     if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, evt);
+                        t = new Artémis((int) tileX, (int) tileY, this.evt);
                         // Ajouter la tour au modèle
-                        evt.ajouterTour(t);
+                        this.evt.ajouterTour(t);
                         // Créer l'élément graphique de la tour
-                        creerUneTour(t);
+                        //creerUneTour(t);
                     } else {
                         System.out.println("les autres tours");
                         // Créez d'autres types de tours en fonction de la sélection
