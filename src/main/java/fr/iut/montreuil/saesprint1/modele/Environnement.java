@@ -13,6 +13,7 @@ public class Environnement {
     private Terrain terrain;
     private int temps;
     private ParcoursBFS bfs;
+    private Joueur joueur;
 
     public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
@@ -21,6 +22,7 @@ public class Environnement {
         this.terrain = new Terrain();
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
+        this.joueur = new Joueur();
     }
 
     public ObservableList<Ennemi> getEnnemis() {
@@ -64,4 +66,8 @@ public class Environnement {
         return projectiles;
     }
 
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
 }

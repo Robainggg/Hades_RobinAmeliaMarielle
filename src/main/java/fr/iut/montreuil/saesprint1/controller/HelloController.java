@@ -53,6 +53,12 @@ public class HelloController implements Initializable {
     @FXML
     private Button boutonAjouterTour;
 
+    @FXML
+    private Label argent;
+
+    @FXML
+    private Label pv;
+
     private int temps;
 
     private Terrain terrain;
@@ -82,16 +88,21 @@ public class HelloController implements Initializable {
         this.vueInventaire = new VueInventaire(imageTourArthemis);
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
-        //this.listenersTours = new ListObsTours(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
         this.evt.getProjectiles().addListener(listenersProjectiles);
-        //this.evt.getTours().addListener(listenersTours);
+        this.evt.getTours().addListener(listenersTours);
 
-        Tour tour = new Artémis(12,10,evt);
-        Tour tour1 = new Artémis(17,8,evt);
+        this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
+        this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
+
+
+        Tour tour = new Artémis(12*32,13*32,evt);
+        Tour tour1 = new Artémis(17*32,8*32,evt);
 
         this.evt.ajouterTour(tour);
         this.evt.ajouterTour(tour1);
@@ -219,7 +230,7 @@ public class HelloController implements Initializable {
                         }
                     }
                     for (Tour tour: this.evt.getTours()) {
-                        if(temps% 50 == 0)
+                        if(temps% 30 == 0)
                             tour.attaque();
                     }
 

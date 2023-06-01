@@ -20,8 +20,8 @@ public abstract class Tour {
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int nbAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
-        this.x = new SimpleIntegerProperty(x*32);
-        this.y = new SimpleIntegerProperty(y*32);
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
         this.env = env;
         this.nbAttaques = nbAttaques;
         this.idTour = idTour;

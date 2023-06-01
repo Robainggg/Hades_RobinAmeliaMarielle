@@ -7,6 +7,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Ennemi {
+    private static int compteur = 0;
+    private String idEnnemi;
     private int pv;
     private int vitesse;
     private IntegerProperty coordX;
@@ -16,6 +18,10 @@ public class Ennemi {
     private Case prochaineCase;
 
     public Ennemi(Environnement environnement){
+
+        this.idEnnemi = "E" + compteur;
+
+
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
@@ -25,6 +31,11 @@ public class Ennemi {
         prochaineCase = new Case(0,2);
         vitesse = 1;
         this.definirDirection();
+        incrementeCompteur();
+    }
+
+    private static void incrementeCompteur(){
+        compteur++;
     }
 
     public int getCoordX() {

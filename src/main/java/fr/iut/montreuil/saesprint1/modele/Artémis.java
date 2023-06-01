@@ -22,15 +22,22 @@ public class Artémis extends TourAvecPortée {
     private Ennemi ennemiZone() {
 
         for (Ennemi e : this.env.getEnnemis()) {
-            //Formule de Manhattan
-            //Portée +16 pour qu'il commence à la moitié de la case de 32 pixels
+
+            if(e.getCoordX() >= this.centreTourX().getValue()-(getPortée()*32+16) && e.getCoordX() <= this.centreTourX().getValue()+(getPortée()*32+16)
+            && e.getCoordY() >= this.centreTourY().getValue()-(getPortée()*32+16) && e.getCoordY() <= this.centreTourY().getValue()+(getPortée()*32+16))
+                return e;
+//            Formule de Manhattan
+//            Portée +16 pour qu'il commence à la moitié de la case de 32 pixels
 //            if (((Math.abs(super.centreTourX().get() - e.getCoordX())) + (Math.abs(super.centreTourY().get() - e.getCoordY()))) <= super.getPortée()*tailleCase+(tailleCase/2)) {
 //                System.out.println("Trouve l'ennemi ");
 //                return e;
 //            }
-            if((Math.sqrt(Math.pow(e.getCoordX() - super.centreTourX().get(),2)) + Math.pow(e.getCoordY() - super.centreTourY().get(),2)) <= super.getPortée()*tailleCase+(tailleCase/2)){
-                return e;
-            }
+//            System.out.println((Math.sqrt(Math.pow(e.getCoordX() - super.centreTourX().get(),2) + Math.pow(e.getCoordY() - super.centreTourY().get(),2))));
+//            System.out.println(super.getPortée()*tailleCase+tailleCase/2);
+//            System.out.println("------------------------------------------------");
+//            if((Math.sqrt(Math.pow(e.getCoordX() - super.centreTourX().get(),2)) + (Math.pow(e.getCoordY() - super.centreTourY().get(),2))) <= super.getPortée()*tailleCase+(tailleCase/2)){
+//                return e;
+//            }
 
 
         }
