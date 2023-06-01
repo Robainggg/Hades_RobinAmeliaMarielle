@@ -88,6 +88,9 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
+                    if(temps%100 == 0)
+                        if(environnement.getEnnemis().size()<10)
+                            this.environnement.ajouterEnnemi(new Ennemi(terrain));
                     if(ennemi.estArriveAuBout()){
                         System.out.println("fini");
                         gameLoop.stop();
