@@ -62,8 +62,6 @@ public class Projectile {
         }
 
         //S'il touche un ennemi
-
-
         
     }
     
