@@ -7,6 +7,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Ennemi {
+    private static int compteur = 0;
+    private String idEnnemi;
     private int pv;
     private int vitesse;
     private IntegerProperty coordX;
@@ -15,30 +17,25 @@ public class Ennemi {
     private StringProperty direction;
     private Case prochaineCase;
 
-    @Override
-    public String toString() {
-        return "Ennemi{" +
-                "pv=" + pv +
-                ", vitesse=" + vitesse +
-                ", coordX=" + coordX +
-                ", coordY=" + coordY +
-                ", environnement=" + environnement +
-                ", direction=" + direction +
-                ", prochaineCase=" + prochaineCase +
-                '}';
-    }
-
     public Ennemi(Environnement environnement){
+
+        this.idEnnemi = "E" + compteur;
+
+
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
         coordX.setValue(0*32);
         coordY.setValue(2*32);
-        this.environnement = new Environnement();
+        this.environnement = environnement;
         prochaineCase = new Case(0,2);
         vitesse = 1;
         this.definirDirection();
-        //sprite = new SpriteEnnemi()
+        incrementeCompteur();
+    }
+
+    private static void incrementeCompteur(){
+        compteur++;
     }
 
     public int getCoordX() {
@@ -151,6 +148,10 @@ public class Ennemi {
 
     public Environnement getEnvironnement() {
         return environnement;
+    }
+
+    public void pertPv(int dégâts){
+        this.pv -= dégâts;
     }
 }
 
