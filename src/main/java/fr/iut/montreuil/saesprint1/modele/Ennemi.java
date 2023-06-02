@@ -16,17 +16,18 @@ public class Ennemi {
     private Environnement environnement;
     private StringProperty direction;
     private Case prochaineCase;
+    private boolean estMort;
 
     public Ennemi(Environnement environnement){
 
         this.idEnnemi = "E" + compteur;
-        
+        this.estMort = false;
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
         coordX.setValue(0*32);
         coordY.setValue(2*32);
-        this.environnement = new Environnement();
+        this.environnement = environnement;
         prochaineCase = new Case(0,2);
         vitesse = 1;
         this.definirDirection();
@@ -97,6 +98,10 @@ public class Ennemi {
     }
 
     public void seDeplace() {
+
+        if(this.estArriveAuBout())
+            this.meurt();
+
         if(this.estArrivé()) {
             this.changeProchaineCase();
             if(this.getProchaineCase() != null)
@@ -128,6 +133,12 @@ public class Ennemi {
         }
     }
 
+    public void meurt(){
+        this.environnement.getEnnemis().remove(this);
+    }
+
+
+
     public StringProperty directionProperty() {
         return direction;
     }
@@ -138,6 +149,11 @@ public class Ennemi {
 
     public void pertPv(int dégâts){
         this.pv -= dégâts;
+    }
+
+
+    public String getIdEnnemi() {
+        return idEnnemi;
     }
 }
 
