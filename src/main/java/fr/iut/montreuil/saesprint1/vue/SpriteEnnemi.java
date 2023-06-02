@@ -18,15 +18,10 @@ public class SpriteEnnemi {
 
 
     public SpriteEnnemi(Ennemi ennemi, Pane pane){
-
-
-
+        
         this.ennemi = ennemi;
         this.pane = pane;
         this.image = new ImageView();
-
-
-
 
         if(this.ennemi.getDirection().equals("d")) {
             System.out.println("début chargement");

@@ -12,11 +12,10 @@ import static java.lang.Math.round;
 public class Projectile {
 
     private static int compteur = 0 ;
-    private String idProjectile;
+    private int idProjectile;
 
     private DoubleProperty x;
     private DoubleProperty y;
-
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
@@ -24,9 +23,7 @@ public class Projectile {
 
     private double deltaX;
     private double deltaY;
-
     private double magnitude;
-
     private double normalizeDeltaX;
     private double normalizeDeltaY;
 
@@ -36,7 +33,7 @@ public class Projectile {
 
 
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
-        this.idProjectile = "P" + compteur;
+        this.idProjectile = compteur;
         compteur++;
         this.degats = degats;
         this.tour = tour;
@@ -58,6 +55,15 @@ public class Projectile {
 
         this.setX((this.x.get()+ normalizeDeltaX*vitesse));
         this.setY((this.y.get()+ normalizeDeltaY*vitesse));
+
+        //S'il sort de la portée de sa tour
+        if(!this.tour.estDansLaZone(this.getX(),this.getY())){
+            this.tour.getEnv().supprimerProjectile(this);
+        }
+
+        //S'il touche un ennemi
+
+
         
     }
     
@@ -92,8 +98,5 @@ public class Projectile {
     public String getId(){
         return "Projectile"+this.idProjectile;
     }
-
-    public TourAvecPortée getTour() {
-        return tour;
-    }
+    
 }

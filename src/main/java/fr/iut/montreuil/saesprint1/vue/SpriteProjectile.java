@@ -27,6 +27,5 @@ public class SpriteProjectile {
         this.pane.getChildren().add(c);
 
         c.setId(projectile.getId());
-        
     }
 }

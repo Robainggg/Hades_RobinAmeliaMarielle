@@ -20,8 +20,9 @@ public class ListObsProjectile implements ListChangeListener<Projectile> {
                 Projectile projectile = c.getAddedSubList().get(0);
                 SpriteProjectile sprite = new SpriteProjectile(projectile, pane);
             }
-            if(c.wasRemoved()){
-
+           if(c.wasRemoved()){
+                Projectile projectileRetiré = c.getRemoved().get(0);
+                this.pane.getChildren().remove(this.pane.lookup("#"+projectileRetiré.getId()));
             }
         }
         

@@ -65,8 +65,7 @@ public class Environnement {
     public ObservableList<Projectile> getProjectiles() {
         return projectiles;
     }
-
-
+    
     public Joueur getJoueur() {
         return joueur;
     }

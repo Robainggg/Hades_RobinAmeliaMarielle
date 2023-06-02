@@ -142,6 +142,9 @@ public class HelloController implements Initializable {
             }
         });
 
+
+        //Petite Erreur à corriger : quand on clique sur ajouterTour même si aucune tour sélectionnée -> passe à true
+        //Donc entre dans la boucle en dessous
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
 
@@ -149,6 +152,7 @@ public class HelloController implements Initializable {
 
         panePrincipal.setOnMouseClicked(event -> {
             if (ajoutTourEnCours) {
+                System.out.println("est entré dans ajoutTourEnCours");
                 double mouseX = event.getX();
                 double mouseY = event.getY();
 
@@ -211,8 +215,8 @@ public class HelloController implements Initializable {
                             tour.attaque();
                     }
 
-                    for (Projectile projectile : this.evt.getProjectiles()) {
-                        projectile.avance();
+                    for (int i = this.evt.getProjectiles().size()-1; i >= 0 ;  i--) {
+                       this.evt.getProjectiles().get(i).avance();
                     }
 
                     temps++;

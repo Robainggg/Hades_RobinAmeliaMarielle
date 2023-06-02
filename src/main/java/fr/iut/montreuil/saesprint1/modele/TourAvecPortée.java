@@ -1,5 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class TourAvecPortée extends Tour {
 
     private int portée;
@@ -9,11 +11,17 @@ public abstract class TourAvecPortée extends Tour {
         this.portée = portée;
     }
 
-    //Vérifie que l'ennemi est dans la zone
+    public boolean estDansLaZone(double x, double y){
+        if(x >= this.centreTourX().getValue()-(getPortée()*32+16) && x <= this.centreTourX().getValue()+(getPortée()*32+16)
+                && y >= this.centreTourY().getValue()-(getPortée()*32+16) && y <= this.centreTourY().getValue()+(getPortée()*32+16))
+            return true;
+        return false;
+    }
+
+    //Vérifie que l'ennemi est bien dans la zone
     public Ennemi ennemiZone(Ennemi e){
-        if(e.getCoordX() >= this.centreTourX().getValue()-(getPortée()*32+16) && e.getCoordX() <= this.centreTourX().getValue()+(getPortée()*32+16)
-                && e.getCoordY() >= this.centreTourY().getValue()-(getPortée()*32+16) && e.getCoordY() <= this.centreTourY().getValue()+(getPortée()*32+16))
-                return e;
+        if(estDansLaZone(e.getCoordX(),e.getCoordY()))
+            return e;
         return null;
     }
     

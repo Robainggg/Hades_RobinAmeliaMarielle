@@ -20,8 +20,7 @@ public class Ennemi {
     public Ennemi(Environnement environnement){
 
         this.idEnnemi = "E" + compteur;
-
-
+        
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
@@ -61,19 +60,6 @@ public class Ennemi {
     public void setCoordY(int coordY) {
         this.coordY.setValue(coordY);
     }
-
-//    public void changeDirection(){
-//        char directionProchaineCase;
-//        if((direction == 'd' || direction == 'g') && (this.coordX.getValue()-16)%32 == 0){
-//            directionProchaineCase = new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32).position(bfs.prochaineCase(new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32)));
-//            this.direction = directionProchaineCase;
-//            }
-//        else if ((direction == 'b' || direction == 'h') && (this.coordY.getValue()-16)%32 == 0){
-//            directionProchaineCase = new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32).position(bfs.prochaineCase(new Case((this.coordX.getValue()-16)/32,(this.coordY.getValue()-16)/32)));
-//            this.direction = directionProchaineCase;
-//        }
-   // }
-
 
     public String getDirection() {
         return direction.getValue();
