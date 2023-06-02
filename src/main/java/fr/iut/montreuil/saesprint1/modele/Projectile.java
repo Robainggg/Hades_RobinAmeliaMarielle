@@ -33,11 +33,6 @@ public class Projectile {
     private TourAvecPortée tour;
 
     private int degats;
-    private int a;
-    private int b;
-
-    private int indicateurDirectionX;
-
 
 
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
@@ -49,7 +44,6 @@ public class Projectile {
         this.y = new SimpleDoubleProperty((double)tour.centreTourY().getValue());
         this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
         this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
-        this.indicateurDirectionX = indicateurDirectionX();
 
         //Calcul du vecteur de déplacement
         this.deltaX = this.coordXEnnemi.get() - this.x.get();
@@ -57,26 +51,7 @@ public class Projectile {
         this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         this.normalizeDeltaX = deltaX/magnitude;
         this.normalizeDeltaY = deltaY/magnitude;
-        
-        //Calcul du coefficient directeur et ordonnée
-//        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
-//        this.b = this.y.get() - (a * this.x.get());
 
-        this.tour.getEnv().ajouterProjectile(this);
-    }
-
-    public int indicateurDirectionX (){
-
-        //Savoir dans quelle direction X doit évoluer
-        int indicateurDirectionX;
-
-        //Si la tour doit tirer en avant ou en arrière
-        if(this.getX()-coordXEnnemi.get() > 0){return -1;}
-        else if(this.getX()-coordXEnnemi.get() < 0){return 1;}
-        else{
-            System.out.println("Cas particulier");
-            return 0;
-        }
     }
     
     public void avance(){
@@ -84,11 +59,6 @@ public class Projectile {
         this.setX((this.x.get()+ normalizeDeltaX*vitesse));
         this.setY((this.y.get()+ normalizeDeltaY*vitesse));
         
-//        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
-//
-//        // y = ax+b
-//        this.setY((int)(this.getA()*this.getX()+this.getB()));
-
     }
     
     //Setters & Getters
@@ -106,14 +76,6 @@ public class Projectile {
 
     public final DoubleProperty yProperty() {
         return y;
-    }
-
-    public double getA() {
-        return a;
-    }
-
-    public double getB() {
-        return b;
     }
 
     public int getDegats() {

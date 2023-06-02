@@ -9,7 +9,14 @@ public abstract class TourAvecPortée extends Tour {
         this.portée = portée;
     }
 
-
+    //Vérifie que l'ennemi est dans la zone
+    public Ennemi ennemiZone(Ennemi e){
+        if(e.getCoordX() >= this.centreTourX().getValue()-(getPortée()*32+16) && e.getCoordX() <= this.centreTourX().getValue()+(getPortée()*32+16)
+                && e.getCoordY() >= this.centreTourY().getValue()-(getPortée()*32+16) && e.getCoordY() <= this.centreTourY().getValue()+(getPortée()*32+16))
+                return e;
+        return null;
+    }
+    
     public int getPortée() {
         return portée;
     }
