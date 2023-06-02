@@ -16,9 +16,7 @@ public abstract class TourAvecPortée extends Tour {
                 return e;
         return null;
     }
-
-
-
+    
     public int getPortée() {
         return portée;
     }
