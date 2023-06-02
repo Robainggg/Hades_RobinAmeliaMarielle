@@ -10,6 +10,7 @@ public class SpriteEnnemi {
     private Ennemi ennemi;
     private ImageView image;
     private Pane pane;
+    private String idSpriteEnnemi;
 
     final Image diableGauche = new Image(getClass().getResource("/images/diable/devilLeft.png").toExternalForm());
     final Image diableDroit = new Image(getClass().getResource("/images/diable/devilRight.png").toExternalForm());
@@ -24,6 +25,7 @@ public class SpriteEnnemi {
         this.ennemi = ennemi;
         this.pane = pane;
         this.image = new ImageView();
+        image.setId(ennemi.getIdEnnemi());
 
 
 
