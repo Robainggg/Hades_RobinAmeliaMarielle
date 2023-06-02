@@ -90,7 +90,7 @@
                         <RadioButton fx:id="boutonArthemis" mnemonicParsing="false" prefHeight="17.0" prefWidth="98.0" text="Arthémis" />
 
 
-                        <ImageView fx:id="imageTourArthemis" fitHeight="150.0" fitWidth="101.0" layoutX="-2.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageTourArthemis" fitHeight="150.0" fitWidth="101.0" layoutX="-2.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true"  />
                      </children></Pane>
                </children>
             </GridPane>
