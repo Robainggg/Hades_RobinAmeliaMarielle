@@ -10,12 +10,11 @@ public class SpriteEnnemi {
     private Ennemi ennemi;
     private ImageView image;
     private Pane pane;
-    private String idSpriteEnnemi;
 
-    final Image diableGauche = new Image(getClass().getResource("/images/diable/devilLeft.png").toExternalForm());
-    final Image diableDroit = new Image(getClass().getResource("/images/diable/devilRight.png").toExternalForm());
-    final Image diableDos = new Image(getClass().getResource("/images/diable/devilBack.png").toExternalForm());
-    final Image diableFace = new Image(getClass().getResource("/images/diable/devilFront.png").toExternalForm());
+    final static Image diableGauche = new Image(SpriteEnnemi.class.getResource("/images/diable/devilLeft.png").toExternalForm());
+    final static Image diableDroit = new Image(SpriteEnnemi.class.getResource("/images/diable/devilRight.png").toExternalForm());
+    final static Image diableDos = new Image(SpriteEnnemi.class.getResource("/images/diable/devilBack.png").toExternalForm());
+    final static Image diableFace = new Image(SpriteEnnemi.class.getResource("/images/diable/devilFront.png").toExternalForm());
 
 
     public SpriteEnnemi(Ennemi ennemi, Pane pane){
@@ -46,9 +45,7 @@ public class SpriteEnnemi {
             System.out.println("image chargée");
         }
 
-        image.translateXProperty().bind(ennemi.coordXProperty());
-        image.translateYProperty().bind(ennemi.coordYProperty());
-        this.pane.getChildren().add(image);
+
 
         ChangeListener<String> listenerDirection = (((obs, old, nouv) -> {
             switch(nouv){
@@ -68,6 +65,11 @@ public class SpriteEnnemi {
         }));
 
         this.ennemi.directionProperty().addListener(listenerDirection);
+
+        image.translateXProperty().bind(ennemi.coordXProperty());
+        image.translateYProperty().bind(ennemi.coordYProperty());
+        this.pane.getChildren().add(image);
+
 
 
     }

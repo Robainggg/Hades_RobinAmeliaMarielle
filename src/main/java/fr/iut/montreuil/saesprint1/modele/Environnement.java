@@ -30,7 +30,8 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-        this.tours.add(tour);
+        if(!(this.joueur.getArgent()-tour.getCout() < 0))
+            this.tours.add(tour);
     }
 
     public void ajouterEnnemi(Ennemi ennemi){

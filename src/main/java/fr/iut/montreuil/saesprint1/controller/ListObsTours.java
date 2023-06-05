@@ -19,6 +19,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
             if(c.wasAdded()){
                Tour tour = c.getAddedSubList().get(0);
                SpriteTour spriteTour = new SpriteTour(tour,pane);
+               tour.getEnv().getJoueur().paie(tour.getCout());
             }
         }
     }

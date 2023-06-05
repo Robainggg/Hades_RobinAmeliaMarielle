@@ -19,7 +19,7 @@ public class Projectile {
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 3;
+    private int vitesse = 5;
 
     private double deltaX;
     private double deltaY;

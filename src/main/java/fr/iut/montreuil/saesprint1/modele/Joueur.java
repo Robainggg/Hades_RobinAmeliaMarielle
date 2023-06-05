@@ -24,7 +24,15 @@ public class Joueur {
         return argent.get();
     }
 
+    public void setArgent(int argent) {
+        this.argent.set(argent);
+    }
+
     public IntegerProperty argentProperty() {
         return argent;
+    }
+
+    public final void paie(int argent){
+        this.argent.setValue(this.getArgent()-argent);
     }
 }

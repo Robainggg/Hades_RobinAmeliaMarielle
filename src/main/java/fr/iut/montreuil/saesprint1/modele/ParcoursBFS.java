@@ -157,7 +157,7 @@ public class ParcoursBFS {
 
             caseRegardée = new Case(cI + direction[0], cJ + direction[1]);
             //System.out.println("la case regardée est " + caseRegardée);
-
+            System.out.println("gaspard est meilleur");
 
             if (terrain.caseEstDansTerrain(caseRegardée)) {
                 //System.out.println("coucou ! , la caseMin a pour valeur " + valeurCaseMin);
