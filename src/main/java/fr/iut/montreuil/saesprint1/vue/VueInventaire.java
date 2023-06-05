@@ -88,13 +88,12 @@ public class VueInventaire {
                 int tourX = (int) (mouseX / tilePane.getTileWidth());
                 int tourY = (int) (mouseY / tilePane.getTileHeight());
 
-                if (!tourExiste(tourX, tourY)) {
                     // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
                     double tileX = tourX * tilePane.getTileWidth();
                     double tileY = tourY * tilePane.getTileHeight();
 
                     // Créer la tour à l'emplacement du clic
-                    if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
+                    if (!existeTour((int)tileX, (int)tileY)  && evt.getTerrain().get(tourY * 30 + tourX) ==  114) {
                         Tour t;
 
                         if (typeTourSelectionne.equals("Arthémis")) {
@@ -110,7 +109,7 @@ public class VueInventaire {
                     }
                     ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
                 }
-            }
+
         });
     }
 
@@ -141,18 +140,14 @@ public class VueInventaire {
 
 
     }
-
-
-    public boolean tourExiste(int tourX, int tourY) {
-        for (Tour tour : evt.getTours()) {
-            int x = tour.getX() / Tour.tailleCase;
-            int y = tour.getY() / Tour.tailleCase;
-            if (x == tourX && y == tourY) {
-                return true;
-            }
-        }
-        return false;
+    public boolean existeTour(int x, int y) {
+        return true;
     }
+
+
+
+
+
 
 
 
