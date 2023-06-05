@@ -30,9 +30,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.scene.control.Tooltip;
 
 
-
-
-
 public class HelloController implements Initializable {
 
 
@@ -129,25 +126,6 @@ public class HelloController implements Initializable {
                 typeTourSelectionne = "Arthémis";
             }
         });
-
-
-        /*imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip();
-                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });
-        imageTourArthemis.setOnMouseReleased(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });*/
 
 
         Tooltip tooltip = new Tooltip();

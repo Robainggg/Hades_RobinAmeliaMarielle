@@ -104,10 +104,10 @@ public class Ennemi {
 
     public void seDeplace() {
 
-        if(this.estArriveAuBout())
+        if(this.estArriveAuBout()) {
             this.estSorti = true;
             this.meurt();
-
+        }
         if(this.estArrivé()) {
             this.changeProchaineCase();
             if(this.getProchaineCase() != null)
@@ -144,8 +144,7 @@ public class Ennemi {
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
         this.environnement.getEnnemis().remove(this);
     }
-
-
+    
 
     public StringProperty directionProperty() {
         return direction;
@@ -161,15 +160,11 @@ public class Ennemi {
             this.meurt();
         }
     }
-
-
+    
     public String getIdEnnemi() {
         return idEnnemi;
     }
 
-    public void perdVie(int pv){
-        this.pv -= pv;
-    }
 }
 
 
