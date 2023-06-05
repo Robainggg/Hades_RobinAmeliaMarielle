@@ -59,6 +59,12 @@ public class HelloController implements Initializable {
     @FXML
     private Label pv;
 
+    @FXML
+    private VBox vboutique;
+
+    @FXML
+    private ImageView boutique_bg;
+
     private int temps;
 
     private Terrain terrain;
@@ -83,14 +89,18 @@ public class HelloController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Chargement de l'environnement et du Terrain
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
-        this.vueInventaire = new VueInventaire(imageTourArthemis);
+
+        //Chargement de l'inventaire
+        this.vueInventaire = new VueInventaire(imageTourArthemis, boutonArthemis, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersProjectiles = new ListObsProjectile(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal);
+
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getProjectiles().addListener(listenersProjectiles);
         this.evt.getTours().addListener(listenersTours);
@@ -118,7 +128,27 @@ public class HelloController implements Initializable {
                 typeTourSelectionne = "Arthémis";
             }
         });
-        
+
+
+        /*imageTourArthemis.setOnMousePressed(event -> {
+            if (event.isSecondaryButtonDown()) {
+                Tooltip tooltip = new Tooltip();
+                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
+                Tooltip.install(imageTourArthemis, tooltip);
+                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
+                event.consume();
+            }
+        });
+        imageTourArthemis.setOnMouseReleased(event -> {
+            if (event.isSecondaryButtonDown()) {
+                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
+                Tooltip.install(imageTourArthemis, tooltip);
+                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
+                event.consume();
+            }
+        });*/
+
+
         Tooltip tooltip = new Tooltip();
         tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
         final boolean[] tooltipVisible = {false};
@@ -196,7 +226,7 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(this.temps % 100 == 0 && !(this.temps < 100))
+                    if(this.temps % 100 == 0)
                         if(this.evt.getEnnemis().size() < 10) {
                             System.out.println("taille liste ennemis : " + evt.getEnnemis().size());
                             this.evt.ajouterEnnemi(new Ennemi(evt));
