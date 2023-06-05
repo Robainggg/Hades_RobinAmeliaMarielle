@@ -26,7 +26,6 @@ public abstract class Tour {
         this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
-        this.env.ajouterTour(this);
     }
 
     public abstract void attaque();

@@ -7,10 +7,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Ennemi {
+    private int espaceEntreDéplacement = 0; //Peut être modifié par des actions des Tours (arrêt)
     private static int compteur = 0;
     private String idEnnemi;
-    private int pv;
+    private int pv = 1;
     private int vitesse;
+
+    private int stop = 0;
     private IntegerProperty coordX;
     private IntegerProperty coordY;
     private Environnement environnement;
@@ -104,40 +107,48 @@ public class Ennemi {
 
     public void seDeplace() {
 
-        if(this.estArriveAuBout()) {
-            this.estSorti = true;
-            this.meurt();
+            if (this.estArriveAuBout()) {
+                this.estSorti = true;
+                this.meurt();
+            }
+            if (this.estArrivé()) {
+                this.changeProchaineCase();
+                if (this.getProchaineCase() != null)
+                    this.definirDirection();
+            }
+            if (this.getDirection().equals("d")) {
+                if (this.getCoordX() + vitesse > prochaineCase.getI() * 32)
+                    this.setCoordX(prochaineCase.getI() * 32);
+                else
+                    this.setCoordX(this.getCoordX() + vitesse);
+            } else if (this.getDirection().equals("g")) {
+                if (this.getCoordX() - vitesse < prochaineCase.getI() * 32)
+                    this.setCoordX(prochaineCase.getI() * 32);
+                else
+                    this.setCoordX(this.getCoordX() - vitesse);
+            } else if (this.getDirection().equals("h")) {
+                if (this.getCoordY() - vitesse < prochaineCase.getJ() * 32)
+                    this.setCoordY(prochaineCase.getJ() * 32);
+                else
+                    this.setCoordY(this.getCoordY() - vitesse);
+            } else if (this.getDirection().equals("b")) {
+                if (this.getCoordY() + vitesse > prochaineCase.getJ() * 32)
+                    this.setCoordY(prochaineCase.getJ() * 32);
+                else
+                    this.setCoordY(this.getCoordY() + vitesse);
+            }
+    }
+
+    public void agit(){
+        if(espaceEntreDéplacement == 0) {
+            this.seDeplace();
         }
-        if(this.estArrivé()) {
-            this.changeProchaineCase();
-            if(this.getProchaineCase() != null)
-                this.definirDirection();
-        }
-        if(this.getDirection().equals("d")){
-            if(this.getCoordX()+ vitesse > prochaineCase.getI()*32)
-                this.setCoordX(prochaineCase.getI()*32);
-            else
-                this.setCoordX(this.getCoordX()+ vitesse);
-        }
-        else if (this.getDirection().equals("g")){
-            if(this.getCoordX()- vitesse < prochaineCase.getI()*32)
-                this.setCoordX(prochaineCase.getI()*32);
-            else
-                this.setCoordX(this.getCoordX()- vitesse);
-        }
-        else if (this.getDirection().equals("h")){
-            if(this.getCoordY() - vitesse < prochaineCase.getJ()*32)
-                this.setCoordY(prochaineCase.getJ()*32);
-            else
-                this.setCoordY(this.getCoordY()-vitesse);
-        }
-        else if (this.getDirection().equals("b")){
-            if(this.getCoordY() + vitesse > prochaineCase.getJ()*32)
-                this.setCoordY(prochaineCase.getJ()*32);
-            else
-                this.setCoordY(this.getCoordY()+ vitesse);
+
+        else{
+            this.espaceEntreDéplacement --;
         }
     }
+    
 
     public void meurt(){
         if(this.estSorti)
@@ -163,6 +174,15 @@ public class Ennemi {
     
     public String getIdEnnemi() {
         return idEnnemi;
+    }
+
+    public int getEspaceEntreDéplacement() {
+        return espaceEntreDéplacement;
+    }
+
+    public void arrêteEnnemi(int arrêt) {
+        this.espaceEntreDéplacement = arrêt;
+        this.stop = espaceEntreDéplacement;
     }
 
 }
