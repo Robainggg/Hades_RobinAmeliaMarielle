@@ -196,7 +196,7 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(this.temps % 1000 == 0)
+                    if(this.temps % 100 == 0)
                         if(this.evt.getEnnemis().size() < 10) {
                             System.out.println("taille liste ennemis : " + evt.getEnnemis().size());
                             this.evt.ajouterEnnemi(new Ennemi(evt));

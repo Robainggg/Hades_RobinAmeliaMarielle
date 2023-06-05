@@ -19,7 +19,7 @@ public class Projectile {
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 3;
+    private int vitesse = 4;
 
     private double deltaX;
     private double deltaY;
@@ -62,6 +62,17 @@ public class Projectile {
         }
 
         //S'il touche un ennemi
+        for (int i = this.tour.getEnv().getEnnemis().size()-1; i > 0; i--){
+            Ennemi ennemi = this.tour.getEnv().getEnnemis().get(i);
+            if(this.tour.ennemiZone(ennemi)!=null){
+                if(ennemi.getCoordX() <= this.getX() && ennemi.getCoordX()+32 >= this.getX() &&
+                        ennemi.getCoordY() <= this.getY() && ennemi.getCoordY()+32 >= this.getY()) {
+                    ennemi.pertPv(this.degats);
+                    this.tour.getEnv().supprimerProjectile(this);
+                    System.out.println(ennemi.getIdEnnemi() + " perd des PV");
+                }
+            }
+        }
         
     }
     

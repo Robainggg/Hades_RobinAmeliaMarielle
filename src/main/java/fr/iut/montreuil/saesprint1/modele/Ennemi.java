@@ -149,6 +149,9 @@ public class Ennemi {
 
     public void pertPv(int dégâts){
         this.pv -= dégâts;
+        if(this.pv <= 0){
+            this.meurt();
+        }
     }
 
 

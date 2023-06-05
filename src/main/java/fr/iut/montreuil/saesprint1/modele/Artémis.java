@@ -21,8 +21,8 @@ public class Artémis extends TourAvecPortée {
         int i=0;
         if(this.ennemiAttaqué != null) {
             if (super.ennemiZone(ennemiAttaqué) != null) {
-//                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-//                this.env.ajouterProjectile(projectile);
+                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+                this.env.ajouterProjectile(projectile);
             }
             else {this.ennemiAttaqué = null;}
         }
@@ -30,8 +30,8 @@ public class Artémis extends TourAvecPortée {
         while(this.ennemiAttaqué == null && i < this.env.getEnnemis().size() ){
             ennemiAttaqué = super.ennemiZone(this.env.getEnnemis().get(i));
             if(ennemiAttaqué!=null){
-//                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-//                this.env.ajouterProjectile(projectile);
+                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+                this.env.ajouterProjectile(projectile);
             }
             i++;
         }
