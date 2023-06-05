@@ -1,6 +1,8 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Tours;
 
-import javafx.beans.property.SimpleIntegerProperty;
+import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Environnement;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 
 public abstract class TourAvecPortée extends Tour {
 
@@ -13,8 +15,11 @@ public abstract class TourAvecPortée extends Tour {
 
     public boolean estDansLaZone(double x, double y){
         if(x >= this.centreTourX().getValue()-(getPortée()*32+16) && x <= this.centreTourX().getValue()+(getPortée()*32+16)
-                && y >= this.centreTourY().getValue()-(getPortée()*32+16) && y <= this.centreTourY().getValue()+(getPortée()*32+16))
+                && y >= this.centreTourY().getValue()-(getPortée()*32+16) && y <= this.centreTourY().getValue()+(getPortée()*32+16)) {
+            //System.out.println("Vérifie si est dans la zone");
             return true;
+        }
+        //System.out.println("nest plus dans la zone");
         return false;
     }
 

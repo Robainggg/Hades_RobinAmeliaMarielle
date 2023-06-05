@@ -1,6 +1,8 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Tours;
 
-import java.util.ArrayList;
+import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Environnement;
+import fr.iut.montreuil.saesprint1.modele.Projectiles.Flèche;
 
 public class Artémis extends TourAvecPortée {
     private final static int tailleCase = 32;
@@ -21,7 +23,6 @@ public class Artémis extends TourAvecPortée {
         this.ennemiAttaqué = null;
         this.env = env;
     }
-    
     @Override
     public void attaque () {
 
@@ -29,8 +30,8 @@ public class Artémis extends TourAvecPortée {
             int i = 0;
             if (this.ennemiAttaqué != null) {
                 if (super.ennemiZone(ennemiAttaqué) != null) {
-                    Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-                    this.env.ajouterProjectile(projectile);
+                    Flèche flèche = new Flèche(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+                    this.env.ajouterProjectile(flèche);
                 } else {
                     this.ennemiAttaqué = null;
                 }
@@ -39,8 +40,8 @@ public class Artémis extends TourAvecPortée {
             while (this.ennemiAttaqué == null && i < this.env.getEnnemis().size()) {
                 ennemiAttaqué = super.ennemiZone(this.env.getEnnemis().get(i));
                 if (ennemiAttaqué != null) {
-                    Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-                    this.env.ajouterProjectile(projectile);
+                    Flèche flèche = new Flèche(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+                    this.env.ajouterProjectile(flèche);
                 }
                 i++;
             }

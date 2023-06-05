@@ -1,13 +1,13 @@
 package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.*;
-import fr.iut.montreuil.saesprint1.modele.*;
+import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
+import fr.iut.montreuil.saesprint1.modele.Tours.Dionysos;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -15,9 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
@@ -25,9 +23,6 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javafx.scene.control.Tooltip;
 
 
 public class HelloController implements Initializable {
@@ -108,9 +103,11 @@ public class HelloController implements Initializable {
 
         //Test pour affichage de base
         Tour tour = new Artémis(12*32,13*32,evt);
+        Tour dyo = new Dionysos(10*32,10*32,evt);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
-        this.evt.ajouterTour(tour);
+        //this.evt.ajouterTour(tour);
+        this.evt.ajouterTour(dyo);
 
 
         initAnimation();
@@ -132,8 +129,8 @@ public class HelloController implements Initializable {
                 (ev ->{
                     if(this.temps % 100 == 0)
                         if(this.evt.getEnnemis().size() < 10) {
-                            System.out.println("taille liste ennemis : " + evt.getEnnemis().size());
-                            this.evt.ajouterEnnemi(new Ennemi(evt));
+                            //System.out.println("taille liste ennemis : " + evt.getEnnemis().size());
+                            //this.evt.ajouterEnnemi(new Ennemi(evt));
                         }
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
 //                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
@@ -150,7 +147,7 @@ public class HelloController implements Initializable {
                     }
 
                     for (int i = this.evt.getProjectiles().size()-1; i >= 0 ;  i--) {
-                       this.evt.getProjectiles().get(i).avance();
+                       this.evt.getProjectiles().get(i).agit();
                     }
 
                     temps++;
