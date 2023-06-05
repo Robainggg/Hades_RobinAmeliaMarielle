@@ -7,6 +7,7 @@ import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -59,6 +61,19 @@ public class HelloController implements Initializable {
     @FXML
     private Label pv;
 
+
+    @FXML
+    private VBox vboutique;
+
+    @FXML
+    private ImageView boutique_bg;
+
+    @FXML
+    private Pane boutique_pane;
+
+    @FXML
+    private ImageView getBoutique_bg;
+
     private int temps;
 
     private Terrain terrain;
@@ -88,7 +103,7 @@ public class HelloController implements Initializable {
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
         //Chargement de l'inventaire
-        this.vueInventaire = new VueInventaire(imageTourArthemis, boutonArthemis, boutonAjouterTour, panePrincipal, tilePane, evt);
+        this.vueInventaire = new VueInventaire(imageTourArthemis, boutonArthemis, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
      
 
         listenerEnnemis = new ListObsEnnemis(panePrincipal);

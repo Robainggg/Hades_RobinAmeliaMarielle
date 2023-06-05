@@ -4,16 +4,14 @@ import fr.iut.montreuil.saesprint1.modele.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tour;
 import javafx.animation.PauseTransition;
-import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
-import javafx.event.ActionEvent;
 
 public class VueInventaire {
 
@@ -22,19 +20,30 @@ public class VueInventaire {
     private Button boutonAjouterTour;
     private Pane panePrincipal;
     private TilePane tilePane;
+
     private Environnement evt;
 
-    private Tour tourEnCoursAjout ;
+    private ImageView imageView;
+
+    private VBox vboutique;
+
+    private Pane boutique_pane;
+
+    private ImageView boutique_bg;
+
+
+    private Tour tourEnCoursAjout;
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
 
-    public VueInventaire(ImageView imageTourArt, RadioButton boutonArt, Button boutonAjtTour, Pane pane, TilePane tp, Environnement ev) {
+    public VueInventaire(ImageView imageTourArt, RadioButton boutonArt, Button boutonAjtTour, Pane pane, TilePane tp, VBox vboutique, ImageView boutique_bg, Environnement evt) {
         this.imageTourArthemis = imageTourArt;
         this.boutonArthemis = boutonArt;
         this.boutonAjouterTour = boutonAjtTour;
         this.panePrincipal = pane;
         this.tilePane = tp;
-        this.evt = ev;
+        this.boutique_bg = boutique_bg;
+        this.evt = evt;
         chargerImage();
         this.placerDesTours();
         this.afficherCaractéristiquesArthémis();
@@ -44,14 +53,17 @@ public class VueInventaire {
     public void chargerImage() {
         Image image = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourArthemis.setImage(image);
+        Image image2 = new Image(getClass().getResourceAsStream("/images/boutique.png"));
+        boutique_bg.setImage(image2);
     }
 
 
-    public void placerDesTours(){
+    public void placerDesTours() {
         selectionTypeDeTour();
         placerUneTour();
     }
-    private void selectionTypeDeTour () {
+
+    private void selectionTypeDeTour() {
 
         boutonArthemis.setOnAction(event -> {
             if (boutonArthemis.isSelected()) {
@@ -59,7 +71,8 @@ public class VueInventaire {
             }
         });
     }
-    private void placerUneTour(){
+
+    private void placerUneTour() {
 
         boutonAjouterTour.setOnAction(event -> {
             ajoutTourEnCours = true;
@@ -75,26 +88,28 @@ public class VueInventaire {
                 int tourX = (int) (mouseX / tilePane.getTileWidth());
                 int tourY = (int) (mouseY / tilePane.getTileHeight());
 
-                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                double tileX = tourX * tilePane.getTileWidth();
-                double tileY = tourY * tilePane.getTileHeight();
+                if (!tourExiste(tourX, tourY)) {
+                    // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
+                    double tileX = tourX * tilePane.getTileWidth();
+                    double tileY = tourY * tilePane.getTileHeight();
 
-                // Créer la tour à l'emplacement du clic
-                if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
-                    Tour t;
+                    // Créer la tour à l'emplacement du clic
+                    if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
+                        Tour t;
 
-                    if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, evt);
-                        // Ajouter la tour au modèle
-                        this.evt.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        //creerUneTour(t);
-                    } else {
-                        System.out.println("les autres tours");
-                        // Créez d'autres types de tours en fonction de la sélection
+                        if (typeTourSelectionne.equals("Arthémis")) {
+                            t = new Artémis((int) tileX, (int) tileY, evt);
+                            // Ajouter la tour au modèle
+                            this.evt.ajouterTour(t);
+                            // Créer l'élément graphique de la tour
+                            //creerUneTour(t);
+                        } else {
+                            System.out.println("les autres tours");
+                            // Créez d'autres types de tours en fonction de la sélection
+                        }
                     }
+                    ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
                 }
-                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
             }
         });
     }
@@ -123,9 +138,32 @@ public class VueInventaire {
                 event.consume();
             }
         });
+
+
     }
 
 
+    public boolean tourExiste(int tourX, int tourY) {
+        for (Tour tour : evt.getTours()) {
+            int x = tour.getX() / Tour.tailleCase;
+            int y = tour.getY() / Tour.tailleCase;
+            if (x == tourX && y == tourY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
 }
+
+
+
+
+
+
+
 
 
