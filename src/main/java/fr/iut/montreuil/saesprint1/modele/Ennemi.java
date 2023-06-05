@@ -104,9 +104,10 @@ public class Ennemi {
 
     public void seDeplace() {
 
-        if(this.estArriveAuBout())
+        if(this.estArriveAuBout()) {
             this.estSorti = true;
             this.meurt();
+        }
 
         if(this.estArrivé()) {
             this.changeProchaineCase();

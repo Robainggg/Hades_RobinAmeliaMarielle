@@ -44,6 +44,7 @@ public class SpriteEnnemi {
             image.setImage(diableFace);
             System.out.println("image chargée");
         }
+        System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
 
 
 
@@ -51,6 +52,7 @@ public class SpriteEnnemi {
             switch(nouv){
                 case "d":
                     this.image.setImage(diableDroit);
+                    System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
                     break;
                 case "g":
                     this.image.setImage(diableGauche);

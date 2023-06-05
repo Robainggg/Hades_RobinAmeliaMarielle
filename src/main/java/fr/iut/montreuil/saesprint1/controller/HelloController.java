@@ -233,13 +233,7 @@ public class HelloController implements Initializable {
                             this.evt.ajouterEnnemi(new Ennemi(evt));
                         }
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
-//                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
-//                            System.out.println("fini");
-//                            gameLoop.stop();
-//                        }
-//                        else{
                         evt.getEnnemis().get(i).seDeplace();
-//                        }
                  }
                     for (Tour tour: this.evt.getTours()) {
                         if(temps% 100 == 0)

@@ -16,6 +16,7 @@ public class ListObsEnnemis implements ListChangeListener<Ennemi> {
     public void onChanged(Change<? extends Ennemi> c) {
         while(c.next()) {
             if (c.wasAdded()) {
+                System.out.println("a été ajouté");
                 Ennemi ennemiAjouté = c.getAddedSubList().get(0);
                 SpriteEnnemi sprite = new SpriteEnnemi(ennemiAjouté, pane);
             }
