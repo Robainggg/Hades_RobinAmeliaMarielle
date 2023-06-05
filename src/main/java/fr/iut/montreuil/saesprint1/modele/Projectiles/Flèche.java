@@ -6,11 +6,10 @@ import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 public class Flèche extends Projectile {
 
     private TourAvecPortée tourAvecPortée;
-    private int degats;
+    private int degats = 1;
     
-    public Flèche(TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
+    public Flèche(TourAvecPortée tour,int coordXEnnemi, int coordYEnnemi) {
         super(tour, coordXEnnemi, coordYEnnemi);
-        this.degats = degats;
         this.tourAvecPortée = (TourAvecPortée) this.getTour();
     }
 

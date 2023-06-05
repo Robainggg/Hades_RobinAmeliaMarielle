@@ -7,28 +7,35 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Ennemi {
-    private int espaceEntreDéplacement = 0; //Peut être modifié par des actions des Tours (arrêt)
+
+    //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
     private int pv = 1;
     private int vitesse;
 
-    private int stop = 0;
+    //Direction
     private IntegerProperty coordX;
     private IntegerProperty coordY;
     private Environnement environnement;
     private StringProperty direction;
     private Case prochaineCase;
+
+    //Etat
     private boolean estMort;
     private int recompense;
     private boolean estSorti;
-
+    private int ToursIvres;
 
     public Ennemi(Environnement environnement){
 
-        this.estSorti = false;
         this.idEnnemi = "E" + compteur;
+
+        //Etat de l'ennemi
+        this.estSorti = false;
         this.estMort = false;
+        this.ToursIvres = 0;
+
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
@@ -46,44 +53,12 @@ public class Ennemi {
         compteur++;
     }
 
-    public int getCoordX() {
-        return coordX.getValue();
-    }
-
-    public IntegerProperty coordXProperty() {
-        return coordX;
-    }
-
-    public void setCoordX(int coordX) {
-        this.coordX.setValue(coordX);
-    }
-
-    public int getCoordY() {
-        return coordY.getValue();
-    }
-
-    public IntegerProperty coordYProperty() {
-        return coordY;
-    }
-
-    public void setCoordY(int coordY) {
-        this.coordY.setValue(coordY);
-    }
-
-    public String getDirection() {
-        return direction.getValue();
-    }
-
     public boolean estArrivé(){
         return this.coordX.getValue()==this.prochaineCase.getI()*32 && this.coordY.getValue()==this.prochaineCase.getJ()*32;
     }
 
     public void changeProchaineCase(){
         prochaineCase=this.environnement.getBfs().obtenirProchaineCase(prochaineCase);
-    }
-
-    public Case getProchaineCase() {
-        return prochaineCase;
     }
 
     public void definirDirection() {
@@ -95,10 +70,6 @@ public class Ennemi {
             direction.setValue("b");
         else
             direction.setValue("h");
-    }
-
-    public ParcoursBFS getBfs() {
-        return this.environnement.getBfs();
     }
 
     public boolean estArriveAuBout(){
@@ -140,31 +111,19 @@ public class Ennemi {
     }
 
     public void agit(){
-        if(espaceEntreDéplacement == 0) {
+
+        if(this.ToursIvres == 0){
             this.seDeplace();
         }
-
-        else{
-            this.espaceEntreDéplacement --;
-        }
+        else
+            this.ToursIvres--;
+        
     }
-    
-
     public void meurt(){
         if(this.estSorti)
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
         this.environnement.getEnnemis().remove(this);
     }
-    
-
-    public StringProperty directionProperty() {
-        return direction;
-    }
-
-    public Environnement getEnvironnement() {
-        return environnement;
-    }
-
     public void pertPv(int dégâts){
         this.pv -= dégâts;
         if(this.pv <= 0){
@@ -172,17 +131,67 @@ public class Ennemi {
         }
     }
     
+    //
+    //Getters & Setters -> Etat de l'ennemi/Interaction avec le modèle
     public String getIdEnnemi() {
         return idEnnemi;
     }
-
-    public int getEspaceEntreDéplacement() {
-        return espaceEntreDéplacement;
+    public Environnement getEnvironnement() {
+        return environnement;
+    }
+    public int getToursIvres() {
+        return ToursIvres;
     }
 
-    public void arrêteEnnemi(int arrêt) {
-        this.espaceEntreDéplacement = arrêt;
-        this.stop = espaceEntreDéplacement;
+    public void setToursIvres(int toursIvres) {
+        ToursIvres = toursIvres;
+    }
+
+    //
+    // Getters & Setters ->  Mouvements de l'ennemi
+    public StringProperty directionProperty() {
+        return direction;
+    }
+    public ParcoursBFS getBfs() {
+        return this.environnement.getBfs();
+    }
+    public Case getProchaineCase() {
+        return prochaineCase;
+    }
+    public String getDirection() {
+        return direction.getValue();
+    }
+    public int getCoordX() {
+        return coordX.getValue();
+    }
+
+    public IntegerProperty coordXProperty() {
+        return coordX;
+    }
+
+    public void setCoordX(int coordX) {
+        this.coordX.setValue(coordX);
+    }
+
+    public int getCoordY() {
+        return coordY.getValue();
+    }
+
+    public IntegerProperty coordYProperty() {
+        return coordY;
+    }
+
+    public void setCoordY(int coordY) {
+        this.coordY.setValue(coordY);
+    }
+
+    public final IntegerProperty mainXEnnemi(){
+        IntegerProperty a = new SimpleIntegerProperty(this.getCoordX()+16);
+        return a;
+    }
+    public final IntegerProperty mainYEnnemi(){
+        IntegerProperty a = new SimpleIntegerProperty(this.getCoordY()+16);
+        return a;
     }
 
 }
