@@ -23,8 +23,7 @@ public class VueTerrain {
 
         }
     }
-
-
+    
     public ImageView chargerImage(int indice) throws FileNotFoundException {
         Image tileset = new Image(getClass().getResource("/images/terrain.png").toExternalForm());
         ImageView imageview = new ImageView(tileset);

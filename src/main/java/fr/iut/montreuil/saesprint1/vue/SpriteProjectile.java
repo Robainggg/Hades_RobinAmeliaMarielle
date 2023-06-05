@@ -5,6 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -13,20 +14,22 @@ public class SpriteProjectile {
     private Projectile projectile;
     private Pane pane;
 
-    private Circle c;
+    final Image fleche = new Image(getClass().getResource("/images/arrow.png").toExternalForm());
+
+    private ImageView image;
 
     public SpriteProjectile(Projectile projectile, Pane pane) {
         this.projectile = projectile;
         this.pane = pane;
-        this.c = new Circle(8);
 
-        c.setFill(Color.SILVER);
+        image = new ImageView();
+        image.setImage(fleche);
 
-        c.translateXProperty().bind(projectile.xProperty());
-        c.translateYProperty().bind(projectile.yProperty());
-        this.pane.getChildren().add(c);
+        image.translateXProperty().bind(projectile.xProperty());
+        image.translateYProperty().bind(projectile.yProperty());
+        this.pane.getChildren().add(image);
 
-        c.setId(projectile.getId());
+        image.setId(projectile.getId());
         
     }
 }

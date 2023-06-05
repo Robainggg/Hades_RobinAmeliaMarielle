@@ -19,6 +19,12 @@ public class ListObsEnnemis implements ListChangeListener<Ennemi> {
                 Ennemi ennemiAjouté = c.getAddedSubList().get(0);
                 SpriteEnnemi sprite = new SpriteEnnemi(ennemiAjouté, pane);
             }
+            if(c.wasRemoved()) {
+                Ennemi ennemiRetiré = c.getRemoved().get(0);
+                for(int i = 0; i < pane.getChildren().size(); i++)
+                    if(pane.getChildren().get(i).getId().equals(ennemiRetiré.getIdEnnemi()))
+                        pane.getChildren().remove(i);
+            }
         }
 
     }

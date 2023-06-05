@@ -12,36 +12,28 @@ import static java.lang.Math.round;
 public class Projectile {
 
     private static int compteur = 0 ;
-    private String idProjectile;
+    private int idProjectile;
 
     private DoubleProperty x;
     private DoubleProperty y;
-
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 2;
+    private int vitesse = 3;
 
     private double deltaX;
     private double deltaY;
-
     private double magnitude;
-
     private double normalizeDeltaX;
     private double normalizeDeltaY;
 
     private TourAvecPortée tour;
 
     private int degats;
-    private int a;
-    private int b;
-
-    private int indicateurDirectionX;
-
 
 
     public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
-        this.idProjectile = "P" + compteur;
+        this.idProjectile = compteur;
         compteur++;
         this.degats = degats;
         this.tour = tour;
@@ -49,7 +41,6 @@ public class Projectile {
         this.y = new SimpleDoubleProperty((double)tour.centreTourY().getValue());
         this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
         this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
-        this.indicateurDirectionX = indicateurDirectionX();
 
         //Calcul du vecteur de déplacement
         this.deltaX = this.coordXEnnemi.get() - this.x.get();
@@ -57,38 +48,21 @@ public class Projectile {
         this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         this.normalizeDeltaX = deltaX/magnitude;
         this.normalizeDeltaY = deltaY/magnitude;
-        
-        //Calcul du coefficient directeur et ordonnée
-//        this.a = (this.coordYEnnemi.get() - this.y.get()) / (this.coordXEnnemi.get() - this.x.get());
-//        this.b = this.y.get() - (a * this.x.get());
 
-        this.tour.getEnv().ajouterProjectile(this);
-    }
-
-    public int indicateurDirectionX (){
-
-        //Savoir dans quelle direction X doit évoluer
-        int indicateurDirectionX;
-
-        //Si la tour doit tirer en avant ou en arrière
-        if(this.getX()-coordXEnnemi.get() > 0){return -1;}
-        else if(this.getX()-coordXEnnemi.get() < 0){return 1;}
-        else{
-            System.out.println("Cas particulier");
-            return 0;
-        }
     }
     
     public void avance(){
 
         this.setX((this.x.get()+ normalizeDeltaX*vitesse));
         this.setY((this.y.get()+ normalizeDeltaY*vitesse));
-        
-//        this.setX(this.getX()+this.indicateurDirectionX*vitesse);
-//
-//        // y = ax+b
-//        this.setY((int)(this.getA()*this.getX()+this.getB()));
 
+        //S'il sort de la portée de sa tour
+        if(!this.tour.estDansLaZone(this.getX(),this.getY())){
+            this.tour.getEnv().supprimerProjectile(this);
+        }
+
+        //S'il touche un ennemi
+        
     }
     
     //Setters & Getters
@@ -108,14 +82,6 @@ public class Projectile {
         return y;
     }
 
-    public double getA() {
-        return a;
-    }
-
-    public double getB() {
-        return b;
-    }
-
     public int getDegats() {
         return degats;
     }
@@ -130,8 +96,5 @@ public class Projectile {
     public String getId(){
         return "Projectile"+this.idProjectile;
     }
-
-    public TourAvecPortée getTour() {
-        return tour;
-    }
+    
 }

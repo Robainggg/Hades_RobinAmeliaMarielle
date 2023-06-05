@@ -13,17 +13,17 @@ public abstract class Tour {
     private IntegerProperty x;
     private IntegerProperty y;
 
-    //Attention : pour le moment contre-intuitif. Il faut augmenter le nombre d'attaque pour qu'il y en ait moins
-    private int nbAttaques;
+    //De combien de tours sont espacés ses attaques
+    private int espaceEntreAttaques;
     public static int idTour = 0 ;
 
-    public Tour(String nomTour, int cout, int x, int y, Environnement env, int nbAttaques) {
+    public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = env;
-        this.nbAttaques = nbAttaques;
+        this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
         this.env.ajouterTour(this);
@@ -87,7 +87,7 @@ public abstract class Tour {
                 '}';
     }
 
-    public int getNbAttaques() {
-        return nbAttaques;
+    public int getEspaceEntreAttaques() {
+        return espaceEntreAttaques;
     }
 }

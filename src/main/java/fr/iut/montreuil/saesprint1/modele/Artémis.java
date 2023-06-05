@@ -9,50 +9,31 @@ public class Artémis extends TourAvecPortée {
 
     private Ennemi ennemiAttaqué;
     private Environnement env;
-
-
+    
     public Artémis(int x, int y, Environnement env) {
         super("Artémis", 10, x, y, env,3,30);
         this.ennemiAttaqué = null;
         this.env = env;
     }
-
-
-
-    private Ennemi ennemiZone() {
-
-        for (Ennemi e : this.env.getEnnemis()) {
-
-            if(e.getCoordX() >= this.centreTourX().getValue()-(getPortée()*32+16) && e.getCoordX() <= this.centreTourX().getValue()+(getPortée()*32+16)
-            && e.getCoordY() >= this.centreTourY().getValue()-(getPortée()*32+16) && e.getCoordY() <= this.centreTourY().getValue()+(getPortée()*32+16))
-                return e;
-//            Formule de Manhattan
-//            Portée +16 pour qu'il commence à la moitié de la case de 32 pixels
-//            if (((Math.abs(super.centreTourX().get() - e.getCoordX())) + (Math.abs(super.centreTourY().get() - e.getCoordY()))) <= super.getPortée()*tailleCase+(tailleCase/2)) {
-//                System.out.println("Trouve l'ennemi ");
-//                return e;
-//            }
-//            System.out.println((Math.sqrt(Math.pow(e.getCoordX() - super.centreTourX().get(),2) + Math.pow(e.getCoordY() - super.centreTourY().get(),2))));
-//            System.out.println(super.getPortée()*tailleCase+tailleCase/2);
-//            System.out.println("------------------------------------------------");
-//            if((Math.sqrt(Math.pow(e.getCoordX() - super.centreTourX().get(),2)) + (Math.pow(e.getCoordY() - super.centreTourY().get(),2))) <= super.getPortée()*tailleCase+(tailleCase/2)){
-//                return e;
-//            }
-
-
-        }
-
-        return null;
-    }
-
+    
     @Override
     public void attaque () {
-        //System.out.println("attaque");
-        Ennemi cible = this.ennemiZone();
-        if (cible != null) {
+        int i=0;
+        if(this.ennemiAttaqué != null) {
+            if (super.ennemiZone(ennemiAttaqué) != null) {
+//                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+//                this.env.ajouterProjectile(projectile);
+            }
+            else {this.ennemiAttaqué = null;}
+        }
 
-            Projectile projectile = new Projectile(this,1, cible.getCoordX(),cible.getCoordY());
-            System.out.println("envoit un projectile");
+        while(this.ennemiAttaqué == null && i < this.env.getEnnemis().size() ){
+            ennemiAttaqué = super.ennemiZone(this.env.getEnnemis().get(i));
+            if(ennemiAttaqué!=null){
+//                Projectile projectile = new Projectile(this, 1, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+//                this.env.ajouterProjectile(projectile);
+            }
+            i++;
         }
     }
 
