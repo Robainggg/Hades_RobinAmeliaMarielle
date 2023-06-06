@@ -1,6 +1,6 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Projectiles.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
 import fr.iut.montreuil.saesprint1.vue.SpriteProjectile;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

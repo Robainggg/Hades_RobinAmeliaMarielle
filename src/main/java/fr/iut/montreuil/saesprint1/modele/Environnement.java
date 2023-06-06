@@ -1,6 +1,6 @@
 package fr.iut.montreuil.saesprint1.modele;
 
-import fr.iut.montreuil.saesprint1.modele.Projectiles.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

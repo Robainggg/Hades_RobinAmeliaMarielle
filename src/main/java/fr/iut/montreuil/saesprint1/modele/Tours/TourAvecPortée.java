@@ -10,12 +10,12 @@ public abstract class TourAvecPortée extends Tour {
 
     public TourAvecPortée(String nomTour, int cout, int x, int y, Environnement env, int portée, int espaceEntreAttaques) {
         super(nomTour, cout, x, y, env, espaceEntreAttaques);
-        this.portée = portée;
+        this.portée = portée*32;
     }
 
     public boolean estDansLaZone(double x, double y){
-        if(x >= this.centreTourX().getValue()-(getPortée()*32+16) && x <= this.centreTourX().getValue()+(getPortée()*32+16)
-                && y >= this.centreTourY().getValue()-(getPortée()*32+16) && y <= this.centreTourY().getValue()+(getPortée()*32+16)) {
+        if(x >= this.centreTourX().getValue()-(getPortée()+16) && x <= this.centreTourX().getValue()+(getPortée()+16)
+                && y >= this.centreTourY().getValue()-(getPortée()+16) && y <= this.centreTourY().getValue()+(getPortée()+16)) {
             //System.out.println("Vérifie si est dans la zone");
             return true;
         }

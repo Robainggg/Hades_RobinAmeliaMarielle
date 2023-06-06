@@ -20,7 +20,7 @@ public class SpriteTour {
         this.t = new ImageView();
 
         if (tour instanceof TourAvecPortée) {
-            Circle c = new Circle(((TourAvecPortée) tour).getPortée() * 32);
+            Circle c = new Circle(((TourAvecPortée) tour).getPortée());
             c.setOpacity(0.1);
             c.setFill(Color.PINK);
             c.translateXProperty().bind(tour.centreTourX());

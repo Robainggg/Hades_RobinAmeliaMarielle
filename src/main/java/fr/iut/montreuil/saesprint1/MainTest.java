@@ -7,7 +7,7 @@ import fr.iut.montreuil.saesprint1.modele.Terrain;
 public class MainTest {
 
     public static void main(String[] args) {
-
+        
         Terrain terrain = new Terrain();
         terrain.afficheTableau();
         ParcoursBFS p = new ParcoursBFS(terrain);

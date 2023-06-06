@@ -3,7 +3,7 @@ package fr.iut.montreuil.saesprint1.modele.Tours;
 
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Projectiles.Bouteille;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 
 public class Dionysos extends Tour {
 
@@ -18,7 +18,6 @@ public class Dionysos extends Tour {
 
     //Attributs de la classe
     private Environnement env;
-    private int temps = 0;  //Propre à chaque Tour
 
     public Dionysos(int x, int y, Environnement env) {
         super("Dionysos", cout, x, y, env,espaceEntreAttaques);
@@ -28,7 +27,7 @@ public class Dionysos extends Tour {
     @Override
     public void attaque() {
 
-        if(this.temps%espaceEntreAttaques == 0) {
+        if(this.getTemps()%espaceEntreAttaques == 0) {
 
             //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
             int indice = (int) (Math.random() * this.env.getEnnemis().size());
@@ -46,9 +45,6 @@ public class Dionysos extends Tour {
             this.env.ajouterProjectile(bouteille);
             
         }
-        temps++;
-        
-        
-
+        this.incrementeTemps();
     }
 }

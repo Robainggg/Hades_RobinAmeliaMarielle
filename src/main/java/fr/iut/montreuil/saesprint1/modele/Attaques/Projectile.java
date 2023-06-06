@@ -1,4 +1,4 @@
-package fr.iut.montreuil.saesprint1.modele.Projectiles;
+package fr.iut.montreuil.saesprint1.modele.Attaques;
 
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.beans.property.DoubleProperty;
@@ -16,7 +16,7 @@ public abstract class Projectile {
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 5;
+    private int vitesse;
     private double deltaX;
     private double deltaY;
     private double magnitude;
@@ -24,9 +24,10 @@ public abstract class Projectile {
     private double normalizeDeltaY;
     private Tour tour;
 
-    public Projectile(Tour tour, int coordXEnnemi, int coordYEnnemi) {
+    public Projectile(Tour tour, int coordXEnnemi, int coordYEnnemi, int vitesse) {
         this.idProjectile = compteur;
         compteur++;
+        this.vitesse = vitesse;
 
         this.tour = tour;
         this.x = new SimpleDoubleProperty((double)tour.centreTourX().getValue());
@@ -45,7 +46,6 @@ public abstract class Projectile {
     public abstract void agit();
 
     public void avance(){
-
         this.setX((this.x.get()+ normalizeDeltaX*vitesse));
         this.setY((this.y.get()+ normalizeDeltaY*vitesse));
     }

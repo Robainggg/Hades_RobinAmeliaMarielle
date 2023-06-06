@@ -2,7 +2,7 @@ package fr.iut.montreuil.saesprint1.modele.Tours;
 
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Projectiles.Flèche;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Flèche;
 
 public class Artémis extends TourAvecPortée {
 
@@ -13,7 +13,6 @@ public class Artémis extends TourAvecPortée {
 
     //Attributs de la classe
     private Ennemi ennemiAttaqué;
-    private int temps = 0;  //Propre à chaque Tour
     
     public Artémis(int x, int y, Environnement env) {
         super("Artémis", cout, x, y, env,portée,espaceEntreAttaques);
@@ -22,7 +21,7 @@ public class Artémis extends TourAvecPortée {
     @Override
     public void attaque () {
 
-        if(this.temps %this.getEspaceEntreAttaques() == 0) {
+        if(this.getTemps() %this.getEspaceEntreAttaques() == 0) {
             int i = 0;
             if (this.ennemiAttaqué != null) {
                 if (super.ennemiZone(ennemiAttaqué) != null) {
@@ -42,7 +41,7 @@ public class Artémis extends TourAvecPortée {
                 i++;
             }
         }
-        this.temps++;
+        this.incrementeTemps();
     }
 
 }
