@@ -10,11 +10,10 @@ public class Vagues {
 
     //Calcule les coordonnées des petites vagues de son périmètre
     private TourAvecPortée tourAvecPortée;
-    private ArrayList<Point> destinationVagues;
 
     public Vagues(TourAvecPortée tourAvecPortée) {
         this.tourAvecPortée = tourAvecPortée;
-        this.destinationVagues = new ArrayList<>();
+        this.creerVagues();
     }
 
     public void creerVagues() {
@@ -33,8 +32,9 @@ public class Vagues {
             int y = (int) (centerY + rayon * Math.sin(i * angle));
 
             PetiteVague vague = new PetiteVague(this.tourAvecPortée,x,y);
-
             System.out.println("Vague num : " + (i + 1) + " en : (" + x + ", " + y + ")");
+            this.tourAvecPortée.getEnv().ajouterProjectile(vague);
+
         }
     }
 }

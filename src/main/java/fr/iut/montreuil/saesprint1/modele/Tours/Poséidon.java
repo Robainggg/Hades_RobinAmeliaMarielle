@@ -8,10 +8,10 @@ public class Poséidon extends TourAvecPortée{
 
     //Constantes pour faciliter leur changement
     private final static int cout = 20;
-    private final static int espaceEntreAttaques = 1000;
+    private final static int espaceEntreAttaques = 600;
     private final static int portée = 6;
 
-    public Poséidon(String nomTour, int x, int y, Environnement env) {
+    public Poséidon(int x, int y, Environnement env) {
         super("Poséidon", cout, x, y, env, portée, espaceEntreAttaques);
     }
 
@@ -23,11 +23,14 @@ public class Poséidon extends TourAvecPortée{
 
         if(this.getTemps()%this.getEspaceEntreAttaques() == 0) {
             i = this.getEnv().getEnnemis().size()-1;
-            while( i>0 && !attaque){
+            while( i >= 0 && !attaque){
                 Ennemi e = this.getEnv().getEnnemis().get(i);
                 if(ennemiZone(e)!=null){
-                    attaque = true;
+                    System.out.println("Centre X Tour : "+ this.centreTourX());
+                    System.out.println("Centre Y Tour: "+ this.centreTourY());
+                    System.out.println();
                     Vagues vagues = new Vagues(this);
+                    attaque = true;
                 }
                 i--;
             }

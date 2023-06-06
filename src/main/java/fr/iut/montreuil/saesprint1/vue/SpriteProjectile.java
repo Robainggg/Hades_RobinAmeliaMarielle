@@ -2,6 +2,7 @@ package fr.iut.montreuil.saesprint1.vue;
 
 import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Flèche;
+import fr.iut.montreuil.saesprint1.modele.Attaques.PetiteVague;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,8 @@ public class SpriteProjectile {
 
     final Image fleche = new Image(getClass().getResource("/images/projectiles/arrow.png").toExternalForm());
     final Image biere = new Image(getClass().getResource("/images/projectiles/beer.png").toExternalForm());
+
+    final Image vague = new Image(getClass().getResource("/images/projectiles/wave.png").toExternalForm());
 
     private ImageView image;
 
@@ -36,6 +39,15 @@ public class SpriteProjectile {
             image.setImage(biere);
             image.translateXProperty().bind(((Bouteille) this.projectile).getEnnemi().mainXEnnemi());
             image.translateYProperty().bind(((Bouteille) this.projectile).getEnnemi().mainYEnnemi());
+            this.pane.getChildren().add(image);
+
+            image.setId(projectile.getId());
+        }
+        if(this.projectile instanceof PetiteVague){
+
+            image.setImage(vague);
+            image.translateXProperty().bind(projectile.xProperty());
+            image.translateYProperty().bind(projectile.yProperty());
             this.pane.getChildren().add(image);
 
             image.setId(projectile.getId());

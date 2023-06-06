@@ -8,7 +8,7 @@ public class Artémis extends TourAvecPortée {
 
     //Constantes pour faciliter leur changement
     private final static int cout = 10;
-    private final static int espaceEntreAttaques = 100;
+    private final static int espaceEntreAttaques = 120;
     private final static int portée = 3;
 
     //Attributs de la classe
