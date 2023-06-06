@@ -90,4 +90,8 @@ public abstract class Tour {
     public int getEspaceEntreAttaques() {
         return espaceEntreAttaques;
     }
+
+    public int getPosX() {
+        return getX();
+    }
 }

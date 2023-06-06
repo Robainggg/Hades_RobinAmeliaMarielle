@@ -70,4 +70,20 @@ public class Environnement {
     public Joueur getJoueur() {
         return joueur;
     }
+
+    public Tour getTour(int x, int y) {
+        for (Tour tour : tours) {
+            int tourX = tour.getX() / 32;
+            int tourY = tour.getY() / 32;
+
+            if (tourX == x && tourY == y) {
+                return tour;
+            }
+        }
+
+        return null;
+    }
+
+
+
 }

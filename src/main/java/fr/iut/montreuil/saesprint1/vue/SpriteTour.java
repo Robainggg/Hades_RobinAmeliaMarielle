@@ -37,6 +37,7 @@ public class SpriteTour {
             t.translateYProperty().bind(tour.getYProperty());
             pane.getChildren().add(t);
             t.setId(tour.getId());
+
         }
     }
 
