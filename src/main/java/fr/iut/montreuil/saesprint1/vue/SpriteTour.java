@@ -1,5 +1,7 @@
 package fr.iut.montreuil.saesprint1.vue;
 
+import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
+import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 import javafx.scene.image.Image;
@@ -22,7 +24,13 @@ public class SpriteTour {
         if (tour instanceof TourAvecPortée) {
             Circle c = new Circle(((TourAvecPortée) tour).getPortée());
             c.setOpacity(0.1);
-            c.setFill(Color.PINK);
+            if(tour instanceof Artémis){
+                c.setFill(Color.PINK);
+            }
+            else if(tour instanceof Poséidon){
+                c.setFill(Color.CADETBLUE);
+            }
+
             c.translateXProperty().bind(tour.centreTourX());
             c.translateYProperty().bind(tour.centreTourY());
             pane.getChildren().add(c);
