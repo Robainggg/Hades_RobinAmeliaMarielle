@@ -11,7 +11,7 @@ public class Ennemi {
     //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
-    private int pv = 1;
+    private int pv = 100;
     private int vitesse;
 
     //Direction
@@ -73,7 +73,12 @@ public class Ennemi {
     }
 
     public boolean estArriveAuBout(){
-        return this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32;
+
+        if(this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32) {
+            this.estSorti = true;
+            return true;
+        }
+        return false;
     }
 
     public void seDeplace() {
@@ -120,11 +125,13 @@ public class Ennemi {
         
     }
     public void meurt(){
-        if(this.estSorti)
+        if(!this.estSorti)
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
         this.environnement.getEnnemis().remove(this);
+        this.estMort = true;
     }
     public void pertPv(int dégâts){
+        System.out.println(this.idEnnemi + " a " + pv + " points de vies, et perds " + dégâts+ " points de vies ");
         this.pv -= dégâts;
         if(this.pv <= 0){
             this.meurt();
@@ -194,6 +201,9 @@ public class Ennemi {
         return a;
     }
 
+    public boolean isEstMort() {
+        return estMort;
+    }
 }
 
 

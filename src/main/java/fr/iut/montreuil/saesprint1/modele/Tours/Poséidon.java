@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1.modele.Tours;
 
-import fr.iut.montreuil.saesprint1.modele.Attaques.Flèche;
 import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vagues;
 

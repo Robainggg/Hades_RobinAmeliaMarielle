@@ -1,17 +1,14 @@
 package fr.iut.montreuil.saesprint1.modele.Attaques;
 
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
-import java.awt.Point;
-import java.util.ArrayList;
 
 
 //On aura 8 points de coordonnées par Vague qui avanceront autour de la tour sans sortir de la portée
 public class PetiteVague extends Projectile{
 
     private TourAvecPortée tourAvecPortée;
-    private int degats = 1;
+    private int degats = 2;
     private static int vitesse = 1;
 
     public PetiteVague(TourAvecPortée tour, int coordX, int coordY) {
@@ -28,7 +25,7 @@ public class PetiteVague extends Projectile{
             this.tourAvecPortée.getEnv().supprimerProjectile(this);
         }
 
-        for (int i = this.tourAvecPortée.getEnv().getEnnemis().size()-1; i > 0; i--){
+        for (int i = this.tourAvecPortée.getEnv().getEnnemis().size()-1; i >= 0; i--){
             Ennemi ennemi = this.tourAvecPortée.getEnv().getEnnemis().get(i);
             if(this.tourAvecPortée.ennemiZone(ennemi)!=null){
                 if(ennemi.getCoordX() <= this.getX()+16 && ennemi.getCoordX()+32 >= this.getX()+16 &&
