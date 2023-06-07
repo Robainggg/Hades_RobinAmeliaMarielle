@@ -88,8 +88,6 @@
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <RadioButton fx:id="boutonArthemis" layoutX="12.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Arthémis" />
-      
-      
                                     <ImageView fx:id="imageTourArthemis" fitHeight="101.0" fitWidth="79.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
