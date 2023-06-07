@@ -56,6 +56,7 @@ public class VueInventaire {
         this.placerDesTours();
         this.afficherCaractéristiquesArthémis();
 
+
     }
 
     public void chargerImage() {
@@ -80,237 +81,70 @@ public class VueInventaire {
         });
     }
 
+   /* private boolean tuileEstVide(Pane pane, int x, int y) {
+        for (Node node : pane.getChildren()) {
+            Bounds bounds = node.getBoundsInParent();
+            if (bounds.getMinX() <= x && bounds.getMaxX() >= x &&
+                    bounds.getMinY() <= y && bounds.getMaxY() >= y) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-
-
-
-
-
-    private void placerUneTour() {
-        panePrincipal.setOnMouseClicked(event -> {
-
-            double mouseX = event.getX();
-            double mouseY = event.getY();
-            // Obtenir l'indice de la tuile à partir des coordonnées du clic de souris
-            int tuileX = (int) (mouseX / 32);
-            int tuileY = (int) (mouseY / 32);
-            int tuileIndex = tuileY * 30 + tuileX;
-
-            // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-            double tileX = tuileX * 32;
-            double tileY = tuileY * 32;
-
-            if (ajoutTourEnCours) {
-
-                        if (evt.getTerrain().get(tuileIndex) == 114) {
-                            // Ajouter une nouvelle tour sur la tuile cliqué
-                            Tour t;
-                            if (typeTourSelectionne.equals("Arthémis")) {
-                                t = new Artémis((int) tileX, (int) tileY, evt);
-                                // Ajouter la tour au modèle
-                                this.evt.ajouterTour(t);
-                                // Créer l'élément graphique de la tour
-                                //creerUneTour(t);
-                            } else {
-                                System.out.println("les autres tours");
-                                // Créez d'autres types de tours en fonction de la sélection
-                            }
-                        }
-
-                        ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-                    }
-
-            event.consume();
-
-
-        });
+    /*private boolean tuileEstVide(Pane pane, int x, int y) {
+        ObservableList<Node> nodes = pane.getChildren();
+        for (Node node : nodes) {
+            Bounds bounds = node.getBoundsInParent();
+            if (bounds.intersects(x, y, 1, 1)) {
+                return false; // si l'emplacement est occupé, retourne false
+            }
+        }
+        return true; // si l'emplacement est vide, retourne true
     }
 
 
-                /*
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                // Obtenir l'indice de la tuile à partir des coordonnées du clic de souris
-                int tuileX = (int) (mouseX / 32);
-                int tuileY = (int) (mouseY / 32);
-                int tuileIndex = tuileY * 30 + tuileX;
-
-                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                double tileX = tuileX * 32;
-                double tileY = tuileY * 32;
-
-                // Vérifier s'il y a déjà une tour sur la tuile cliqué
-                if (!tuileContientImage(tileX, tileY) && evt.getTerrain().get(tuileIndex) == 114) {
-                    // Ajouter une nouvelle tour sur la tuile cliqué
-                    Tour t;
-                    if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, evt);
-                        // Ajouter la tour au modèle
-                        this.evt.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        //creerUneTour(t);
-                    } else {
-                        System.out.println("les autres tours");
-                        // Créez d'autres types de tours en fonction de la sélection
-                    }
-                }
-
-                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-            }
-        });
-
-      /*  panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                int tourX = (int)((mouseX - panePrincipal.getLayoutX()) / 32);
-                int tourY = (int)((mouseY - panePrincipal.getLayoutX()) / 32);
-                ///int tourX = (int) (mouseX / tilePane.getTileWidth());
-                //int tourY = (int) (mouseY / tilePane.getTileHeight());
+    */
 
 
-                if (evt.getTerrain().get(tourY * 30 + tourX) != 114) {
-                    System.out.println("Impossible de placer une tour sur cette tuile.");
-                    return;
-                }
-
-                double tileX = tourX * tilePane.getTileWidth();
-                double tileY = tourY * tilePane.getTileHeight();
-
-                Tour t;
-
-                if (typeTourSelectionne.equals("Arthémis")) {
-                    t = new Artémis((int) tileX, (int) tileY, evt);
-                    evt.ajouterTour(t);
-                } else {
-                    System.out.println("les autres tours");
-                    // Créez d'autres types de tours en fonction de la sélection
-                }
-
-                ajoutTourEnCours = false;
-            }
-        });
-
+    public void placerUneTour() {
         panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
+            if (ajoutTourEnCours && boutonArthemis.isSelected()) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
+                Pane toursPane = new Pane();
+                panePrincipal.getChildren().add(toursPane);
 
-                // Obtenir l'indice de la tuile à partir des coordonnées du clic de souris
-                int tuileX = (int) (mouseX / tilePane.getTileWidth());
-                int tuileY = (int) (mouseY / tilePane.getTileHeight());
-                int tuileIndex = tuileY * 30 + tuileX;
-
-                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                double tileX = tuileX * tilePane.getTileWidth();
-                double tileY = tuileY * tilePane.getTileHeight();
-
-                // Vérifier s'il y a déjà une tour sur la tuile cliqué
-                if (evt.getTour(tuileX, tuileY) == null && evt.getTerrain().get(tuileY * 30 + tuileX) == 114) {
-                    // Ajouter une nouvelle tour sur la tuile cliqué
-                    Tour t;
-
-                    if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, evt);
-                        // Ajouter la tour au modèle
-                        this.evt.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        //creerUneTour(t);
-                    } else {
-                        System.out.println("les autres tours");
-                        // Créez d'autres types de tours en fonction de la sélection
-                    }
-                }
-
-                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-            }
-        });
-
-      /*  boutonAjouterTour.setOnAction(event -> {
-            ajoutTourEnCours = true;
-
-        });
-
-        panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
 
                 // Convertir les coordonnées du clic de souris en position sur le TilePane
                 int tourX = (int) (mouseX / tilePane.getTileWidth());
                 int tourY = (int) (mouseY / tilePane.getTileHeight());
 
-                    // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                    double tileX = tourX * tilePane.getTileWidth();
-                    double tileY = tourY * tilePane.getTileHeight();
-
-
-
-                // Créer la tour à l'emplacement du clic
-                    if  (evt.getTerrain().get(tourY * 30 + tourX) == 114 && !caseOccupee(tourX, tourY)) {
-                        Tour t;
-
-                        if (typeTourSelectionne.equals("Arthémis")) {
-                            t = new Artémis((int) tileX, (int) tileY, evt);
-                            // Ajouter la tour au modèle
-                            this.evt.ajouterTour(t);
-                            // Créer l'élément graphique de la tour
-                            //creerUneTour(t);
-                        } else {
-                            System.out.println("les autres tours");
-                            // Créez d'autres types de tours en fonction de la sélection
-                        }
-                    }
-                    ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-                }
-
-        });*/
-
-
-
-    /*private void placerUneTour() {
-        boutonAjouterTour.setOnAction(event -> {
-            ajoutTourEnCours = true;
-        });
-        panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-                int tourX = (int) (mouseX / tilePane.getTileWidth());
-                int tourY = (int) (mouseY / tilePane.getTileHeight());
-
-                if (isTourPresent(tilePane, tourX, tourY)) {
-                    System.out.println("Une tour est déjà présente à cet emplacement.");
-                    return;
-                }
-
-                // Vérifier si la tuile cliquée est libre ou non
-                if (evt.getTerrain().get(tourY * 30 + tourX) != 114) {
-                    System.out.println("Impossible de placer une tour sur cette tuile.");
-                    return;
-                }
-
+                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
                 double tileX = tourX * tilePane.getTileWidth();
                 double tileY = tourY * tilePane.getTileHeight();
 
-                Tour t;
-
+                // Vérifier si la case correspondante est valide et aucune tour n'est présente
                 // Créer la tour à l'emplacement du clic
-                if (typeTourSelectionne.equals("Arthémis")) {
-                    t = new Artémis((int) tileX, (int) tileY, evt);
-                    this.evt.ajouterTour(t);
-                } else {
-                    System.out.println("les autres tours");
-                    // Créez d'autres types de tours en fonction de la sélection
+                if (evt.getTerrain().get(tourY * 30 + tourX) == 114 && !evt.isTourPresent(tourX, tourY)) {
+                    Tour t;
+
+                    if (typeTourSelectionne.equals("Arthémis")) {
+                        t = new Artémis((int) tileX, (int) tileY, evt);
+                        // Ajouter la tour au modèle
+                        evt.ajouterTour(t);
+                        // Créer l'élément graphique de la tour
+
+                    } else {
+                        System.out.println("les autres tours");
+                        // Créez d'autres types de tours en fonction de la sélection
+                    }
                 }
 
-                ajoutTourEnCours = false;
+                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
             }
         });
-        */
-
+    }
 
 
     public void afficherCaractéristiquesArthémis() {

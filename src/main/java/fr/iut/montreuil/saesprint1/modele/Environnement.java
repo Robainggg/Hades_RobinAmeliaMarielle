@@ -71,17 +71,13 @@ public class Environnement {
         return joueur;
     }
 
-    public Tour getTour(int x, int y) {
+    public boolean isTourPresent(int x, int y) {
         for (Tour tour : tours) {
-            int tourX = tour.getX() / 32;
-            int tourY = tour.getY() / 32;
-
-            if (tourX == x && tourY == y) {
-                return tour;
+            if (tour.getX() == x && tour.getY() == y) {
+                return true; // Une tour est déjà présente à cet emplacement
             }
         }
-
-        return null;
+        return false; // Aucune tour n'est présente à cet emplacement
     }
 
 
