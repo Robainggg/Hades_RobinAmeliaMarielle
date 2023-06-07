@@ -1,31 +1,45 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Tours;
 
+import fr.iut.montreuil.saesprint1.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tour {
+
+    public final static int tailleCase = 32;
 
     private String nomTour;
     private int cout;
     private Environnement env;
     private IntegerProperty x;
     private IntegerProperty y;
+
+    //De combien de tours sont espacés ses attaques
+    private int espaceEntreAttaques;
     public static int idTour = 0 ;
 
-    public Tour(String nomTour, int cout, int x, int y, Environnement env) {
+    private int temps = 0;//Propre à chaque Tour
+
+    public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = env;
+        this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
     }
 
     public abstract void attaque();
 
+    public void incrementeTemps(){this.temps += 1;}
+    //Getters & Setters
     public int getCout() {
         return cout;
+    }
+    public int getTemps() {
+        return temps;
     }
 
     public final int getY() {
@@ -35,7 +49,6 @@ public abstract class Tour {
     public final int getX() {
         return this.x.get();
     }
-
     public void setX(int x) {
         this.x.set(x);
     }
@@ -49,12 +62,12 @@ public abstract class Tour {
     }
 
     public final IntegerProperty centreTourX(){
-        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.x.get()+(tailleCase/2));
         return a;
     }
 
     public final IntegerProperty centreTourY(){
-        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+16);
+        IntegerProperty a = new SimpleIntegerProperty(this.y.get()+(tailleCase/2));
         return a;
     }
 
@@ -62,8 +75,12 @@ public abstract class Tour {
         return this.y;
     }
 
+    public Environnement getEnv() {
+        return env;
+    }
+
     public String getId(){
-        return this.idTour + "";
+        return "Tour"+this.idTour;
     }
 
     @Override
@@ -76,4 +93,11 @@ public abstract class Tour {
                 '}';
     }
 
+    public int getEspaceEntreAttaques() {
+        return espaceEntreAttaques;
+    }
+
+    public int getPosX() {
+        return getX();
+    }
 }

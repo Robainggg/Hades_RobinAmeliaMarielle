@@ -1,10 +1,13 @@
 package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.*;
+import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
+import fr.iut.montreuil.saesprint1.modele.Tours.Dionysos;
+import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,21 +15,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javafx.scene.control.Tooltip;
-
-
-
 
 
 public class HelloController implements Initializable {
@@ -50,123 +47,81 @@ public class HelloController implements Initializable {
     @FXML
     private Button boutonAjouterTour;
 
+    @FXML
+    private Label argent;
+
+    @FXML
+    private Label pv;
+
+    @FXML
+    private VBox vboutique;
+
+    @FXML
+    private ImageView boutique_bg;
 
     private int temps;
 
     private Terrain terrain;
 
+    private Environnement evt;
+
     private VueTerrain vueTerrain;
 
     private VueInventaire vueInventaire;
     private Timeline gameLoop;
-
-    private Environnement environnement;
+    
+    private ListObsEnnemis listenerEnnemis;
 
     private Ennemi ennemi;
+
+    private ListObsProjectile listenersProjectiles;
+    private ListObsTours listenersTours;
 
     private Tour tourEnCoursAjout ;
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
-
-
-
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.terrain=new Terrain();
-        this.vueTerrain = new VueTerrain(tilePane, terrain);
-        this.vueInventaire = new VueInventaire(imageTourArthemis);
-        ennemi = new Ennemi(terrain);
-        testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
-        testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
+        //Chargement de l'environnement et du Terrain
+        this.evt = new Environnement();
+        this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
-        //position sur le terrain * 32 pour la vue
-        this.environnement = new Environnement(this.terrain);
-        Tour tour = new Artémis(12*32,2*32,environnement);
+        //Chargement de l'inventaire
+        this.vueInventaire = new VueInventaire(imageTourArthemis, boutonArthemis, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
-        environnement.ajouterTour(tour);
-        creerUneTour(tour);
-        environnement.ajouterEnnemi(ennemi);
-        //ajouter les images dans la boutique;
+        //Listeners
+        listenerEnnemis = new ListObsEnnemis(panePrincipal);
+        this.listenersProjectiles = new ListObsProjectile(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal);
+
+        this.evt.getEnnemis().addListener(listenerEnnemis);
+        this.evt.getProjectiles().addListener(listenersProjectiles);
+        this.evt.getTours().addListener(listenersTours);
+        
+        this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
+        this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
+        //Test pour affichage de base
+        Tour tour = new Artémis(12*32,13*32,evt);
+        Tour dyo = new Dionysos(10*32,10*32,evt);
+        Tour poseidon = new Poséidon(8*32,8*32,evt);
+        //ennemi = new Ennemi(evt);
+        //evt.ajouterEnnemi(ennemi);
+        //this.evt.ajouterTour(tour);
+        //this.evt.ajouterTour(dyo);
+        this.evt.ajouterTour(poseidon);
+
 
         initAnimation();
         gameLoop.play();
 
-        this.terrain.afficheTableau();
-
-
-        //Bouton selection des tours
-        boutonArthemis.setOnAction(event -> {
-            if (boutonArthemis.isSelected()) {
-                typeTourSelectionne = "Arthémis";
-            }
-        });
-
-        // afficher les caractéristiques d'une tour
-        Tooltip tooltip = new Tooltip();
-        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-        final boolean[] tooltipVisible = {false};
-
-        imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isPrimaryButtonDown()) {
-                if (!tooltipVisible[0]) {
-                    Tooltip.install(imageTourArthemis, tooltip);
-                    tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                    tooltipVisible[0] = true;
-
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
-                    pause.setOnFinished(e -> {
-                        tooltip.hide();
-                        Tooltip.uninstall(imageTourArthemis, tooltip);
-                        tooltipVisible[0] = false;
-                    });
-                    pause.play();
-                }
-                event.consume();
-            }
-        });
-        //ajouter une tour (après selection)
-        boutonAjouterTour.setOnAction(event -> {
-            ajoutTourEnCours = true;
-
-        });
-        panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours && boutonArthemis.isSelected()) {
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                // Convertir les coordonnées du clic de souris en position sur le TilePane
-                int tourX = (int) (mouseX / tilePane.getTileWidth());
-                int tourY = (int) (mouseY / tilePane.getTileHeight());
-
-                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                double tileX = tourX * tilePane.getTileWidth();
-                double tileY = tourY * tilePane.getTileHeight();
-
-                // Créer la tour à l'emplacement du clic
-                if (environnement.getTerrain().get(tourY * 30 + tourX) == 114 && !environnement.isTourPresent((int) tileX, (int) tileY)) {
-                    Tour t;
-
-                    if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, environnement);
-                        // Ajouter la tour au modèle
-                        environnement.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        creerUneTour(t);
-                    } else {
-                        System.out.println("les autres tours");
-                        // Créez d'autres types de tours en fonction de la sélection
-                    }
-                }
-                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-            }
-        });
+        this.evt.getTerrain().afficheTableau();
     }
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps = 0;
+        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -175,79 +130,30 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(ennemi.estArriveAuBout()){
-                        System.out.println("fini");
-                        gameLoop.stop();
+                    if(temps%60 == 0)
+                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    for(int i = 0; i < evt.getEnnemis().size();i++) {
+//                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
+//                            System.out.println("fini");
+//                            gameLoop.stop();
+//                        }
+//                        else{
+                        evt.getEnnemis().get(i).agit();
+                    //}
                     }
-                    else{
-                        if(ennemi.estArrivé()) {
-                            if(ennemi.getBfs().getParcours().size()==0)
-                                gameLoop.stop();
-                            ennemi.changeProchaineCase();
-                            System.out.println(ennemi.getProchaineCase());
-                            if(ennemi.getProchaineCase() != null)
-                                ennemi.definirDirection();
-                            System.out.println(ennemi.getDirection());
-                        }
-                        if(ennemi.getDirection() == 'd'){
-                            ennemi.setCoordX(ennemi.getCoordX()+2);
-                        }
-                        else if (ennemi.getDirection() == 'g'){
-                            ennemi.setCoordX(ennemi.getCoordX()-2);
-                        }
-                        else if (ennemi.getDirection() == 'h'){
-                            ennemi.setCoordY(ennemi.getCoordY()-2);
-                        }
-                        else if (ennemi.getDirection() == 'b'){
-                            ennemi.setCoordY(ennemi.getCoordY()+2);
-                        }
-                        //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
+                    for (Tour tour: this.evt.getTours()) {
+                            tour.attaque();
                     }
+
+                    for (int i = this.evt.getProjectiles().size()-1; i >= 0 ;  i--) {
+                       this.evt.getProjectiles().get(i).agit();
+                    }
+
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
-    }
-
-
-    void creerUneTour(Tour tour){
-
-        Rectangle t = new Rectangle(32,32);
-
-        if(tour instanceof Artémis){
-            Artémis artémis = (Artémis) tour;
-
-            Circle c = new Circle(((Artémis) tour).getPortée()*32);
-            c.setOpacity(0.2);
-            c.setFill(Color.PINK);
-            c.translateXProperty().bind(tour.centreTourX());
-            c.translateYProperty().bind(tour.centreTourY());
-            panePrincipal.getChildren().add(c);
-
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-
-        }
-
-        else{
-            t.setFill(Color.PINK);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            panePrincipal.getChildren().add(t);
-            t.setId(tour.getId());
-        }
-
-    }
-
-    private void afficherCaracteristiquesTour(double x, double y, String nom, int puissance, int portee) {
-        Tooltip tooltip = new Tooltip();
-        tooltip.setText(nom + "\nPuissance : " + puissance + "\nPortée : " + portee);
-        Tooltip.install(imageTourArthemis, tooltip);
-        tooltip.show(imageTourArthemis, x, y);
     }
 
 }

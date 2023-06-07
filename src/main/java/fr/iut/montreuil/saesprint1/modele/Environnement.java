@@ -1,46 +1,92 @@
 package fr.iut.montreuil.saesprint1.modele;
 
-import java.util.ArrayList;
+import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Environnement {
 
-    private ArrayList<Ennemi> ennemis;
-    private ArrayList<Tour> tours;
+    private ObservableList<Ennemi> ennemis;
+    private ObservableList<Tour> tours;
+    private ObservableList<Projectile> projectiles;
     private Terrain terrain;
+    private int temps;
+    private ParcoursBFS bfs;
+    private Joueur joueur;
+    private int niveau;
+    private VagueEnnemie vagueActuelle;
 
-    public Environnement(Terrain terrain) {
-        this.ennemis = new ArrayList<>();
-        this.tours = new ArrayList<>();
-        this.terrain = terrain;
+    public Environnement() {
+        this.ennemis = FXCollections.observableArrayList();
+        this.tours = FXCollections.observableArrayList();
+        this.projectiles = FXCollections.observableArrayList();
+        this.terrain = new Terrain();
+        this.temps = 0;
+        this.bfs = new ParcoursBFS(terrain);
+        this.joueur = new Joueur();
+        this.niveau = 0;
+        this.vagueActuelle = new VagueEnnemie(this,joueur);
     }
 
-    public ArrayList<Ennemi> getEnnemis() {
+    public ObservableList<Ennemi> getEnnemis() {
         return ennemis;
     }
 
     public void ajouterTour(Tour tour){
-        this.tours.add(tour);
+        if(!(this.joueur.getArgent()-tour.getCout() < 0))
+            this.tours.add(tour);
     }
 
     public void ajouterEnnemi(Ennemi ennemi){
         this.ennemis.add(ennemi);
     }
 
+    public void ajouterProjectile(Projectile projectile){this.projectiles.add(projectile);}
+
+    public void supprimerProjectile(Projectile projectile){
+        this.projectiles.remove(projectile);
+    }
+
     public Terrain getTerrain() {
         return terrain;
     }
 
-    public ArrayList<Tour> getTours() {
+    public ObservableList<Tour> getTours() {
         return tours;
     }
 
-    public boolean isTourPresent(int x, int y) {
-        for (Tour tour : tours) {
-            if (tour.getX() == x && tour.getY() == y) {
-                return true; // Une tour est déjà présente à cet emplacement
-            }
-        }
-        return false; // Aucune tour n'est présente à cet emplacement
+    public void augmenteTemps(){
+        this.temps++;
+    }
+    public int getTemps() {
+        return temps;
     }
 
+    public ParcoursBFS getBfs() {
+        return bfs;
+    }
+
+    public ObservableList<Projectile> getProjectiles() {
+        return projectiles;
+    }
+    
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void nouvelleVague(){
+        if(this.vagueActuelle.isVagueEstFinie())
+            niveau++;
+            this.vagueActuelle = new VagueEnnemie(this,joueur);
+    }
+
+    public VagueEnnemie getVagueActuelle() {
+        return vagueActuelle;
+    }
 }
