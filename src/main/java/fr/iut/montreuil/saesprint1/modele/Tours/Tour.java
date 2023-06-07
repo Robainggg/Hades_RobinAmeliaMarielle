@@ -1,5 +1,6 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Tours;
 
+import fr.iut.montreuil.saesprint1.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -17,6 +18,8 @@ public abstract class Tour {
     private int espaceEntreAttaques;
     public static int idTour = 0 ;
 
+    private int temps = 0;//Propre à chaque Tour
+
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
@@ -26,13 +29,17 @@ public abstract class Tour {
         this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
-        this.env.ajouterTour(this);
     }
 
     public abstract void attaque();
 
+    public void incrementeTemps(){this.temps += 1;}
+    //Getters & Setters
     public int getCout() {
         return cout;
+    }
+    public int getTemps() {
+        return temps;
     }
 
     public final int getY() {
@@ -42,7 +49,6 @@ public abstract class Tour {
     public final int getX() {
         return this.x.get();
     }
-
     public void setX(int x) {
         this.x.set(x);
     }

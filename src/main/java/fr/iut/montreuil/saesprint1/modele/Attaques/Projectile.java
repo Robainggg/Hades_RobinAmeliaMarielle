@@ -1,41 +1,34 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Attaques;
 
-import fr.iut.montreuil.saesprint1.vue.SpriteProjectile;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import static java.lang.Math.ceil;
 import static java.lang.Math.round;
 
-public class Projectile {
-
+public abstract class Projectile {
     private static int compteur = 0 ;
     private int idProjectile;
-
     private DoubleProperty x;
     private DoubleProperty y;
     private IntegerProperty coordXEnnemi;
     private IntegerProperty coordYEnnemi;
     //y = ax+b
-    private int vitesse = 5;
-
+    private int vitesse;
     private double deltaX;
     private double deltaY;
     private double magnitude;
     private double normalizeDeltaX;
     private double normalizeDeltaY;
+    private Tour tour;
 
-    private TourAvecPortée tour;
-
-    private int degats;
-
-
-    public Projectile( TourAvecPortée tour, int degats, int coordXEnnemi, int coordYEnnemi) {
+    public Projectile(Tour tour, int coordXEnnemi, int coordYEnnemi, int vitesse) {
         this.idProjectile = compteur;
         compteur++;
-        this.degats = degats;
+        this.vitesse = vitesse;
+
         this.tour = tour;
         this.x = new SimpleDoubleProperty((double)tour.centreTourX().getValue());
         this.y = new SimpleDoubleProperty((double)tour.centreTourY().getValue());
@@ -48,32 +41,13 @@ public class Projectile {
         this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         this.normalizeDeltaX = deltaX/magnitude;
         this.normalizeDeltaY = deltaY/magnitude;
-
     }
-    
-    public void avance(){
 
+    public abstract void agit();
+
+    public void avance(){
         this.setX((this.x.get()+ normalizeDeltaX*vitesse));
         this.setY((this.y.get()+ normalizeDeltaY*vitesse));
-
-        //S'il sort de la portée de sa tour
-        if(!this.tour.estDansLaZone(this.getX(),this.getY())){
-            this.tour.getEnv().supprimerProjectile(this);
-        }
-
-        //S'il touche un ennemi
-        for (int i = this.tour.getEnv().getEnnemis().size()-1; i > 0; i--){
-            Ennemi ennemi = this.tour.getEnv().getEnnemis().get(i);
-            if(this.tour.ennemiZone(ennemi)!=null){
-                if(ennemi.getCoordX() <= this.getX() && ennemi.getCoordX()+32 >= this.getX() &&
-                        ennemi.getCoordY() <= this.getY() && ennemi.getCoordY()+32 >= this.getY()) {
-                    ennemi.pertPv(this.degats);
-                    this.tour.getEnv().supprimerProjectile(this);
-                    System.out.println(ennemi.getIdEnnemi() + " perd des PV");
-                }
-            }
-        }
-
     }
     
     //Setters & Getters
@@ -92,10 +66,6 @@ public class Projectile {
     public final DoubleProperty yProperty() {
         return y;
     }
-
-    public int getDegats() {
-        return degats;
-    }
     
     public void setX(double x) {
         this.x.set(x);
@@ -106,6 +76,9 @@ public class Projectile {
 
     public String getId(){
         return "Projectile"+this.idProjectile;
+    }
+    public Tour getTour() {
+        return tour;
     }
     
 }
