@@ -105,12 +105,12 @@ public class HelloController implements Initializable {
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getProjectiles().addListener(listenersProjectiles);
         this.evt.getTours().addListener(listenersTours);
-        
+
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
         //Test pour affichage de base
-        Tour tour = new Artémis(12*32,13*32,evt);
+        Tour tour = new Artémis(12 * 32, 13 * 32, evt);
         //Tour tour1 = new Artémis(17*32,8*32,evt);
         ennemi = new Ennemi(evt);
         evt.ajouterEnnemi(ennemi);
@@ -123,96 +123,6 @@ public class HelloController implements Initializable {
 
         this.evt.getTerrain().afficheTableau();
 
-        //Placer des tours
-        boutonArthemis.setOnAction(event -> {
-            if (boutonArthemis.isSelected()) {
-                typeTourSelectionne = "Arthémis";
-            }
-        });
-
-
-        /*imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip();
-                tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });
-        imageTourArthemis.setOnMouseReleased(event -> {
-            if (event.isSecondaryButtonDown()) {
-                Tooltip tooltip = new Tooltip("Caractéristiques de la tour"); // Remplacez par les caractéristiques spécifiques de la tour
-                Tooltip.install(imageTourArthemis, tooltip);
-                tooltip.show(imageTourArthemis.getScene().getWindow(), event.getScreenX(), event.getScreenY());
-                event.consume();
-            }
-        });*/
-
-
-        Tooltip tooltip = new Tooltip();
-        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-        final boolean[] tooltipVisible = {false};
-
-        imageTourArthemis.setOnMousePressed(event -> {
-            if (event.isPrimaryButtonDown()) {
-                if (!tooltipVisible[0]) {
-                    Tooltip.install(imageTourArthemis, tooltip);
-                    tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                    tooltipVisible[0] = true;
-
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
-                    pause.setOnFinished(e -> {
-                        tooltip.hide();
-                        Tooltip.uninstall(imageTourArthemis, tooltip);
-                        tooltipVisible[0] = false;
-                    });
-                    pause.play();
-                }
-                event.consume();
-            }
-        });
-
-
-        //Petite Erreur à corriger : quand on clique sur ajouterTour même si aucune tour sélectionnée -> passe à true
-        //Donc entre dans la boucle en dessous
-        boutonAjouterTour.setOnAction(event -> {
-            ajoutTourEnCours = true;
-
-        });
-
-        panePrincipal.setOnMouseClicked(event -> {
-            if (ajoutTourEnCours) {
-                System.out.println("est entré dans ajoutTourEnCours");
-                double mouseX = event.getX();
-                double mouseY = event.getY();
-
-                // Convertir les coordonnées du clic de souris en position sur le TilePane
-                int tourX = (int) (mouseX / tilePane.getTileWidth());
-                int tourY = (int) (mouseY / tilePane.getTileHeight());
-
-                // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
-                double tileX = tourX * tilePane.getTileWidth();
-                double tileY = tourY * tilePane.getTileHeight();
-
-                // Créer la tour à l'emplacement du clic
-                if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
-                    Tour t;
-
-                    if (typeTourSelectionne.equals("Arthémis")) {
-                        t = new Artémis((int) tileX, (int) tileY, evt);
-                        // Ajouter la tour au modèle
-                        this.evt.ajouterTour(t);
-                        // Créer l'élément graphique de la tour
-                        //creerUneTour(t);
-                    } else {
-                        System.out.println("les autres tours");
-                        // Créez d'autres types de tours en fonction de la sélection
-                    }
-                }
-                ajoutTourEnCours = false; // Réinitialiser l'état d'ajout de tour
-            }
-        });
 
     }
 

@@ -68,6 +68,7 @@ public class VueInventaire {
 
 
     public void placerDesTours() {
+        System.out.println("entrererg");
         selectionTypeDeTour();
         placerUneTour();
     }
@@ -81,39 +82,12 @@ public class VueInventaire {
         });
     }
 
-   /* private boolean tuileEstVide(Pane pane, int x, int y) {
-        for (Node node : pane.getChildren()) {
-            Bounds bounds = node.getBoundsInParent();
-            if (bounds.getMinX() <= x && bounds.getMaxX() >= x &&
-                    bounds.getMinY() <= y && bounds.getMaxY() >= y) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /*private boolean tuileEstVide(Pane pane, int x, int y) {
-        ObservableList<Node> nodes = pane.getChildren();
-        for (Node node : nodes) {
-            Bounds bounds = node.getBoundsInParent();
-            if (bounds.intersects(x, y, 1, 1)) {
-                return false; // si l'emplacement est occupé, retourne false
-            }
-        }
-        return true; // si l'emplacement est vide, retourne true
-    }
-
-
-    */
-
-
     public void placerUneTour() {
+        System.out.println("entrer dans placer tour");
         panePrincipal.setOnMouseClicked(event -> {
             if (ajoutTourEnCours && boutonArthemis.isSelected()) {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-                Pane toursPane = new Pane();
-                panePrincipal.getChildren().add(toursPane);
 
 
                 // Convertir les coordonnées du clic de souris en position sur le TilePane

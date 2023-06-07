@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.vue;
 
+import fr.iut.montreuil.saesprint1.modele.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Tour;
 import fr.iut.montreuil.saesprint1.modele.TourAvecPortée;
 import javafx.scene.Node;
@@ -16,12 +17,13 @@ public class SpriteTour {
     private Pane pane;
     private ImageView t;
 
+
     public SpriteTour(Tour tour, Pane pane) {
+
+
         this.tour = tour;
         this.pane = pane;
         this.t = new ImageView();
-
-
 
         if (tour instanceof TourAvecPortée) {
             Circle c = new Circle(((TourAvecPortée) tour).getPortée() * 32);
@@ -41,8 +43,9 @@ public class SpriteTour {
             pane.getChildren().add(t);
             t.setId(tour.getId());
         }
-    }
 
+    }
+}
    /* public SpriteTour(Tour tour, Pane pane) {
         this.tour = tour;
         this.pane = pane;
@@ -76,4 +79,3 @@ public class SpriteTour {
     }
 
     */
-}
