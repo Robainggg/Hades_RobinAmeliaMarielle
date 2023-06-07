@@ -1,10 +1,6 @@
 package fr.iut.montreuil.saesprint1.modele.Attaques;
 
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
-
-import java.awt.Point;
-import java.util.ArrayList;
 
 public class Vagues {
 
