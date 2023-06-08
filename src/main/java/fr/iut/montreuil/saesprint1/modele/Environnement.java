@@ -82,9 +82,11 @@ public class Environnement {
     }
 
     public void nouvelleVague(){
-        if(this.vagueActuelle.isVagueEstFinie())
+
+        if(this.vagueActuelle.isVagueEstFinie()) {
             niveau++;
-            this.vagueActuelle = new VagueEnnemie(this,joueur);
+            this.vagueActuelle = new VagueEnnemie(this, joueur);
+        }
     }
 
     public VagueEnnemie getVagueActuelle() {
