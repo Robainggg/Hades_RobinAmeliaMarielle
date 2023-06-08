@@ -5,7 +5,6 @@ public class Case {
     private int i;
     private int j;
 
-
     public Case(int i, int j){
         this.i=i;
         this.j=j;
