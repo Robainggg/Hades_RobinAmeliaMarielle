@@ -35,4 +35,8 @@ public class Joueur {
     public final void paie(int argent){
         this.argent.setValue(this.getArgent()-argent);
     }
+
+    public void perdPv(int pv) {
+        this.pv.set(this.pv.getValue()-pv);
+    }
 }

@@ -134,6 +134,8 @@ public class HelloController implements Initializable {
                 (ev ->{
 //                    if(temps%60 == 0)
 //                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    if(this.evt.getJoueur().getPv() <=0)
+                        gameLoop.stop();
                     this.evt.getVagueActuelle().prochainEnnemi();
                     this.evt.nouvelleVague();
                     for(int i = 0; i < evt.getEnnemis().size();i++) {

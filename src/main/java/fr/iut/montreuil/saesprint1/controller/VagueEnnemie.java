@@ -29,7 +29,7 @@ public class VagueEnnemie {
         if(this.environnement.getNiveau() >= 6)
             this.cadenceApparition = 60;
         else
-           this.cadenceApparition = 240 - 30 * environnement.getNiveau();
+           this.cadenceApparition  = 240 - 30 * environnement.getNiveau();
 
         this.vagueEstFinie = false;
 
