@@ -25,6 +25,7 @@ public class Ennemi {
     private boolean estMort;
     private int recompense;
     private boolean estSorti;
+    private boolean estRalenti;
     private int ToursIvres;
 
     public Ennemi(Environnement environnement){
@@ -34,6 +35,7 @@ public class Ennemi {
         //Etat de l'ennemi
         this.estSorti = false;
         this.estMort = false;
+        this.estRalenti = false;
         this.ToursIvres = 0;
 
         coordY = new SimpleIntegerProperty();
@@ -43,7 +45,7 @@ public class Ennemi {
         coordY.setValue(2*32);
         this.environnement = environnement;
         prochaineCase = new Case(0,2);
-        vitesse = 1;
+        vitesse = 2;
         recompense = 10;
         this.definirDirection();
         incrementeCompteur();
@@ -139,7 +141,20 @@ public class Ennemi {
             this.meurt();
         }
     }
-    
+    public boolean estMort(){return this.estMort;}
+    public boolean estRalenti(){return this.estRalenti;}
+
+    public void seFaitRalentir(int ralentissement){
+        this.vitesse -= ralentissement;
+        this.estRalenti = true;
+    }
+
+    public void nestPlusRalenti(int ralentissement){
+        this.vitesse += ralentissement;
+        this.estRalenti = false;
+    }
+
+
     //
     //Getters & Setters -> Etat de l'ennemi/Interaction avec le modèle
     public String getIdEnnemi() {
@@ -155,6 +170,8 @@ public class Ennemi {
     public void setToursIvres(int toursIvres) {
         ToursIvres = toursIvres;
     }
+
+
 
     //
     // Getters & Setters ->  Mouvements de l'ennemi
@@ -206,6 +223,9 @@ public class Ennemi {
     public boolean isEstMort() {
         return estMort;
     }
+
+
+
 }
 
 

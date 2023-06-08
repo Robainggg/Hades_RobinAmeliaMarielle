@@ -5,7 +5,7 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Vagues;
 
 public class Poséidon extends TourAvecPortée{
 
-    //Constantes pour faciliter leur changement
+    //Ici pour faciliter leur changement
     private final static int cout = 20;
     private final static int espaceEntreAttaques = 600;
     private final static int portée = 6;
@@ -25,9 +25,6 @@ public class Poséidon extends TourAvecPortée{
             while( i >= 0 && !attaque){
                 Ennemi e = this.getEnv().getEnnemis().get(i);
                 if(ennemiZone(e)!=null){
-                    System.out.println("Centre X Tour : "+ this.centreTourX());
-                    System.out.println("Centre Y Tour: "+ this.centreTourY());
-                    System.out.println();
                     Vagues vagues = new Vagues(this);
                     attaque = true;
                 }

@@ -15,7 +15,6 @@ public class SpriteTour {
     private Tour tour;
     private Pane pane;
     private ImageView t;
-    final static Image image = new Image(SpriteTour.class.getResource("/images/Tower-PNG-Image.png").toExternalForm());
 
     public SpriteTour(Tour tour, Pane pane) {
         this.tour = tour;
@@ -36,17 +35,17 @@ public class SpriteTour {
             c.translateYProperty().bind(tour.centreTourY());
             pane.getChildren().add(c);
             c.setId("rangeOf" + tour.getId());
-            
+
         }
 
-
-            t.setImage(image);
-            t.setFitWidth(32);
-            t.setFitHeight(32);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            pane.getChildren().add(t);
-            t.setId(tour.getId());
+        Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
+        t.setImage(image);
+        t.setFitWidth(32);
+        t.setFitHeight(32);
+        t.translateXProperty().bind(tour.getXProperty());
+        t.translateYProperty().bind(tour.getYProperty());
+        pane.getChildren().add(t);
+        t.setId(tour.getId());
 
     }
 

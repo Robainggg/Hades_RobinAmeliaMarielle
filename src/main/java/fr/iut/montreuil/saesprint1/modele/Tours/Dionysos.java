@@ -9,12 +9,11 @@ public class Dionysos extends Tour {
 
     private final static int tailleCase = 32;
 
-    //Constantes pour faciliter leur changement
+    //Ici pour faciliter leur changement
     private final static int cout = 20;
-    private final static int espaceEntreAttaques = 400;
+    private final static int espaceEntreAttaques = 300;
 
-    private final static int nbToursIvres = 30;
-
+    private final static int nbToursIvres = 80;
 
     //Attributs de la classe
     private Environnement env;
@@ -41,8 +40,8 @@ public class Dionysos extends Tour {
             //Lui donne une bouteille
             Bouteille bouteille = new Bouteille(this,e);
             e.setToursIvres(nbToursIvres);
-            System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
-            this.env.ajouterProjectile(bouteille);
+            //System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
+            this.env.ajouterAttaqueTours(bouteille);
             
         }
         this.incrementeTemps();

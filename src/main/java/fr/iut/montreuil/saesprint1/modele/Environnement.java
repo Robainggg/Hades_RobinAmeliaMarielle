@@ -1,6 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele;
 
 import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
+import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.collections.FXCollections;
@@ -10,7 +11,7 @@ public class Environnement {
 
     private ObservableList<Ennemi> ennemis;
     private ObservableList<Tour> tours;
-    private ObservableList<Projectile> projectiles;
+    private ObservableList<AttaqueTours> attaques;
     private Terrain terrain;
     private int temps;
     private ParcoursBFS bfs;
@@ -21,7 +22,7 @@ public class Environnement {
     public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
-        this.projectiles = FXCollections.observableArrayList();
+        this.attaques = FXCollections.observableArrayList();
         this.terrain = new Terrain();
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
@@ -43,10 +44,10 @@ public class Environnement {
         this.ennemis.add(ennemi);
     }
 
-    public void ajouterProjectile(Projectile projectile){this.projectiles.add(projectile);}
+    public void ajouterAttaqueTours(AttaqueTours attaqueTours){this.attaques.add(attaqueTours);}
 
-    public void supprimerProjectile(Projectile projectile){
-        this.projectiles.remove(projectile);
+    public void supprimerAttaqueTours(AttaqueTours attaqueTours){
+        this.attaques.remove(attaqueTours);
     }
 
     public Terrain getTerrain() {
@@ -68,8 +69,8 @@ public class Environnement {
         return bfs;
     }
 
-    public ObservableList<Projectile> getProjectiles() {
-        return projectiles;
+    public ObservableList<AttaqueTours> getAttaques() {
+        return attaques;
     }
     
     public Joueur getJoueur() {
