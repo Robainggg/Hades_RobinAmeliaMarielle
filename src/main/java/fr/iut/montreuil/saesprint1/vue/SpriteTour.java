@@ -15,6 +15,7 @@ public class SpriteTour {
     private Tour tour;
     private Pane pane;
     private ImageView t;
+    final static Image image = new Image(SpriteTour.class.getResource("/images/Tower-PNG-Image.png").toExternalForm());
 
     public SpriteTour(Tour tour, Pane pane) {
         this.tour = tour;
@@ -38,7 +39,7 @@ public class SpriteTour {
             
         }
 
-            Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
+
             t.setImage(image);
             t.setFitWidth(32);
             t.setFitHeight(32);
