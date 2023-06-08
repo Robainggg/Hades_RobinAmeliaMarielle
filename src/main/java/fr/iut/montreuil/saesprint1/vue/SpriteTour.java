@@ -35,17 +35,17 @@ public class SpriteTour {
             c.translateYProperty().bind(tour.centreTourY());
             pane.getChildren().add(c);
             c.setId("rangeOf" + tour.getId());
-            
+
         }
 
-            Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
-            t.setImage(image);
-            t.setFitWidth(32);
-            t.setFitHeight(32);
-            t.translateXProperty().bind(tour.getXProperty());
-            t.translateYProperty().bind(tour.getYProperty());
-            pane.getChildren().add(t);
-            t.setId(tour.getId());
+        Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
+        t.setImage(image);
+        t.setFitWidth(32);
+        t.setFitHeight(32);
+        t.translateXProperty().bind(tour.getXProperty());
+        t.translateYProperty().bind(tour.getYProperty());
+        pane.getChildren().add(t);
+        t.setId(tour.getId());
 
     }
 

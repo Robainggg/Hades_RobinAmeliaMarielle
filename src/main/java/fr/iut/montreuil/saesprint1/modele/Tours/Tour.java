@@ -18,7 +18,7 @@ public abstract class Tour {
     private int espaceEntreAttaques;
     public static int idTour = 0 ;
 
-    private int temps = 0;//Propre à chaque Tour
+    private int temps = 0;
 
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
@@ -30,7 +30,6 @@ public abstract class Tour {
         this.idTour = idTour;
         idTour++;
     }
-
     public abstract void attaque();
 
     public void incrementeTemps(){this.temps += 1;}

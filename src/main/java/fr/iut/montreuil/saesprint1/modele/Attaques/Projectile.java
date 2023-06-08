@@ -8,53 +8,42 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import static java.lang.Math.round;
 
-public abstract class Projectile {
-    private static int compteur = 0 ;
-    private int idProjectile;
+public abstract class Projectile extends AttaqueTours {
     private DoubleProperty x;
     private DoubleProperty y;
-    private IntegerProperty coordXEnnemi;
-    private IntegerProperty coordYEnnemi;
-    //y = ax+b
     private int vitesse;
     private double deltaX;
     private double deltaY;
     private double magnitude;
     private double normalizeDeltaX;
     private double normalizeDeltaY;
-    private Tour tour;
 
-    public Projectile(Tour tour, int coordXEnnemi, int coordYEnnemi, int vitesse) {
-        this.idProjectile = compteur;
-        compteur++;
+    public Projectile(Tour tour, int coordXArrivé, int coordYArrivé, int vitesse) {
+
+        super(tour,coordXArrivé,coordYArrivé);
         this.vitesse = vitesse;
 
-        this.tour = tour;
         this.x = new SimpleDoubleProperty((double)tour.centreTourX().getValue());
         this.y = new SimpleDoubleProperty((double)tour.centreTourY().getValue());
-        this.coordXEnnemi = new SimpleIntegerProperty(coordXEnnemi);
-        this.coordYEnnemi = new SimpleIntegerProperty(coordYEnnemi);
+
 
         //Calcul du vecteur de déplacement
-        this.deltaX = this.coordXEnnemi.get() - this.x.get();
-        this.deltaY = this.coordYEnnemi.get() - this.y.get();
+        this.deltaX = super.getCoordXArrivé() - this.getX();
+        this.deltaY = super.getCoordYArrivé() - this.getY();
         this.magnitude = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         this.normalizeDeltaX = deltaX/magnitude;
         this.normalizeDeltaY = deltaY/magnitude;
     }
 
-    public abstract void agit();
-
     public void avance(){
-        this.setX((this.x.get()+ normalizeDeltaX*vitesse));
-        this.setY((this.y.get()+ normalizeDeltaY*vitesse));
+        this.setX((this.getX()+ normalizeDeltaX*vitesse));
+        this.setY((this.getY()+ normalizeDeltaY*vitesse));
     }
-    
-    //Setters & Getters
+
+    //Getters & Setters
     public final double getX() {
         return x.get();
     }
-
     public final DoubleProperty xProperty() {
         return x;
     }
@@ -66,7 +55,7 @@ public abstract class Projectile {
     public final DoubleProperty yProperty() {
         return y;
     }
-    
+
     public void setX(double x) {
         this.x.set(x);
     }
@@ -74,11 +63,8 @@ public abstract class Projectile {
         this.y.set(y);
     }
 
-    public String getId(){
-        return "Projectile"+this.idProjectile;
-    }
-    public Tour getTour() {
-        return tour;
-    }
-    
+
+
+
+
 }

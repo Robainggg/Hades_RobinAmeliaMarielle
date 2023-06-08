@@ -12,7 +12,7 @@ public abstract class TourAvecPortée extends Tour {
         super(nomTour, cout, x, y, env, espaceEntreAttaques);
         this.portée = portée*32;
     }
-
+    //Vérifie que l'élément est dans la portée
     public boolean estDansLaZone(double x, double y){
         if(x >= this.centreTourX().getValue()-(getPortée()+16) && x <= this.centreTourX().getValue()+(getPortée()+16)
                 && y >= this.centreTourY().getValue()-(getPortée()+16) && y <= this.centreTourY().getValue()+(getPortée()+16)) {
@@ -23,7 +23,7 @@ public abstract class TourAvecPortée extends Tour {
         return false;
     }
 
-    //Vérifie que l'ennemi est bien dans la zone
+    //Vérifie que l'ennemi est bien dans la portée
     public Ennemi ennemiZone(Ennemi e){
         if(estDansLaZone(e.getCoordX(),e.getCoordY()))
             return e;

@@ -5,9 +5,6 @@ public class Case {
     private int i;
     private int j;
 
-    private boolean tourPresent;
-
-
     public Case(int i, int j){
         this.i=i;
         this.j=j;
@@ -24,6 +21,5 @@ public class Case {
     public String toString(){
         return this.i + " , " +this.j;
     }
-
 
 }

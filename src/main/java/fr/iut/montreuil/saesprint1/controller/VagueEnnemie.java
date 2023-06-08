@@ -26,21 +26,34 @@ public class VagueEnnemie {
 
         this.nbEnnemis = environnement.getNiveau() * 5;
 
-        this.cadenceApparition = 240 - 30 * environnement.getNiveau();
+        if(this.environnement.getNiveau() >= 6)
+            this.cadenceApparition = 60;
+        else
+           this.cadenceApparition = 240 - 30 * environnement.getNiveau();
+
+        this.vagueEstFinie = false;
+
+        System.out.println("Une nouvelle vague de niveau " + this.environnement.getNiveau() + " est créée");
 
     }
 
     public void prochainEnnemi(){
+        System.out.println(nbEnnemis + " ennemis restants " + temps + " modulo " + cadenceApparition + " = " + temps%cadenceApparition);
+        this.incrementeTemps();
         if(this.nbEnnemis > 0 && this.temps%cadenceApparition == 0) {
             nbEnnemis--;
             this.environnement.ajouterEnnemi(new Ennemi(environnement));
         }
         if(this.nbEnnemis == 0)
             this.vagueEstFinie = true;
-        temps++;
+
     }
 
     public boolean isVagueEstFinie() {
         return vagueEstFinie;
+    }
+
+    public void incrementeTemps(){
+        this.temps++;
     }
 }
