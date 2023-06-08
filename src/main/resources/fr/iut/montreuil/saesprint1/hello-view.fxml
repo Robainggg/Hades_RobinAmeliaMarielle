@@ -87,8 +87,21 @@
                            <children>
                               <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <RadioButton fx:id="boutonArthemis" layoutX="12.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Arthémis" />
+
+
+                                    <RadioButton fx:id="boutonArthemis" layoutX="12.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Arthémis"  toggleGroup="$groupeRadio">
+
+
+                                    </RadioButton>
                                     <ImageView fx:id="imageTourArthemis" fitHeight="101.0" fitWidth="79.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <RadioButton  fx:id="boutonPoséidon" mnemonicParsing="false" text="Poséidon"  >
+                                     <ToggleGroup fx:id="groupeRadio"></ToggleGroup>
+                                    </RadioButton>
+                                    <ImageView fx:id="imageTourPoséidon" fitHeight="102.0" fitWidth="79.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                            </children>
@@ -97,7 +110,7 @@
                   </Pane>
                   <Pane layoutX="2.0" layoutY="500.0" prefHeight="81.0" prefWidth="197.0">
                      <children>
-                        <Button fx:id="boutonAjouterTour" layoutX="28.0" layoutY="2.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ajouter tour" />
+                        <Button fx:id="boutonAjouterTour" layoutX="28.0" layoutY="2.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ajouter tour"  />
                      </children>
                   </Pane>
                </children>
