@@ -38,14 +38,26 @@ public class HelloController implements Initializable {
     @FXML
     private Circle testCercleEnnemi;
 
+
     @FXML
     private ImageView imageTourArthemis;
+
+    @FXML
+    private ImageView imageTourPoséidon;
 
     @FXML
     private RadioButton boutonArthemis;
 
     @FXML
+    private RadioButton boutonPoséidon;
+
+    @FXML
+    private ToggleGroup groupeRadio;
+
+    @FXML
     private Button boutonAjouterTour;
+
+
 
     @FXML
     private Label argent;
@@ -88,7 +100,7 @@ public class HelloController implements Initializable {
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
         //Chargement de l'inventaire
-        this.vueInventaire = new VueInventaire(imageTourArthemis, boutonArthemis, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, boutonArthemis,  boutonPoséidon, groupeRadio, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
