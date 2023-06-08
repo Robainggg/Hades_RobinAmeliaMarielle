@@ -77,6 +77,8 @@ public class HelloController implements Initializable {
     private Tour tourEnCoursAjout ;
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
+
+
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -128,8 +130,10 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(temps%60 == 0)
-                        this.evt.ajouterEnnemi(new Ennemi(evt));
+//                    if(temps%60 == 0)
+//                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    this.evt.getVagueActuelle().prochainEnnemi();
+                    this.evt.nouvelleVague();
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
 //                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
 //                            System.out.println("fini");

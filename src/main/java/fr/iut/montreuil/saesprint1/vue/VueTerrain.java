@@ -13,6 +13,8 @@ public class VueTerrain {
     private TilePane tilePane;
     private Terrain terrain;
 
+    private static Image tileset =  new Image(VueTerrain.class.getResource("/images/terrain.png").toExternalForm());
+
     final static Image tileBlanche = new Image((VueTerrain.class.getResource("/images/tileChemin.png").toExternalForm()));
     final static Image tileNoire = new Image((VueTerrain.class.getResource("/images/tilePasChemin.png").toExternalForm()));
 
@@ -21,18 +23,18 @@ public class VueTerrain {
         ImageView pasChemin = null;
 
         for (int i=0; i<terrain.getL().size(); i++){
-//            try {
-//                tilePane.getChildren().add(chargerImage(terrain.getL().get(i)-1));
-//            } catch (FileNotFoundException e) {
+            try {
+                tilePane.getChildren().add(chargerImage(terrain.getL().get(i)-1));
+            } catch (FileNotFoundException e) {
+            }
+//            if(terrain.getL().get(i) == 114) {
+//                pasChemin = new ImageView(tileNoire);
+//                tilePane.getChildren().add(pasChemin);
 //            }
-            if(terrain.getL().get(i) == 114) {
-                pasChemin = new ImageView(tileNoire);
-                tilePane.getChildren().add(pasChemin);
-            }
-            else{
-                chemin = new ImageView(tileBlanche);
-                tilePane.getChildren().add(chemin);
-            }
+//            else{
+//                chemin = new ImageView(tileBlanche);
+//                tilePane.getChildren().add(chemin);
+//            }
 
 
 
@@ -40,7 +42,7 @@ public class VueTerrain {
     }
     
     public ImageView chargerImage(int indice) throws FileNotFoundException {
-        Image tileset = new Image(getClass().getResource("/images/terrain.png").toExternalForm());
+
         ImageView imageview = new ImageView(tileset);
         int tileWidth=32;
         int tileHeight=32;
