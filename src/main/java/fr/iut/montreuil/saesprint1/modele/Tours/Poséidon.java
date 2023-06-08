@@ -25,10 +25,6 @@ public class Poséidon extends TourAvecPortée{
             while( i >= 0 && !attaque){
                 Ennemi e = this.getEnv().getEnnemis().get(i);
                 if(ennemiZone(e)!=null){
-//                    System.out.println(ennemiZone(e));
-//                    System.out.println("Centre X Tour : "+ this.centreTourX());
-//                    System.out.println("Centre Y Tour: "+ this.centreTourY());
-//                    System.out.println();
                     Vagues vagues = new Vagues(this);
                     attaque = true;
                 }
