@@ -2,13 +2,12 @@ package fr.iut.montreuil.saesprint1.modele.Attaques;
 
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
-import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 
 public class Flèche extends Projectile {
 
     private Artémis tourArtémis;
     private static int degats = 10;
-    private static int vitesse = 5;
+    private static int vitesse = 6;
     
     public Flèche(Artémis tour,int coordXEnnemi, int coordYEnnemi) {
         super(tour, coordXEnnemi, coordYEnnemi,vitesse);
@@ -22,7 +21,7 @@ public class Flèche extends Projectile {
         
         //S'il sort de la portée de sa tour
         if(!this.tourArtémis.estDansLaZone(this.getX(),this.getY())){
-            this.tourArtémis.getEnv().supprimerProjectile(this);
+            this.tourArtémis.getEnv().supprimerAttaqueTours(this);
         }
 
         //S'il touche un ennemi
@@ -31,7 +30,7 @@ public class Flèche extends Projectile {
             if(this.tourArtémis.ennemiZone(ennemi)!=null){
                 if(ennemi.getCoordX() <= this.getX()+16 && ennemi.getCoordX()+32 >= this.getX()+16 &&
                         ennemi.getCoordY() <= this.getY()+16 && ennemi.getCoordY()+32 >= this.getY()+16) {
-                    this.getTour().getEnv().supprimerProjectile(this);
+                    this.getTour().getEnv().supprimerAttaqueTours(this);
                     ennemi.pertPv(this.degats);
                     System.out.println(ennemi.getIdEnnemi() + " perd des PV");
                     if(ennemi.isEstMort())
@@ -39,7 +38,6 @@ public class Flèche extends Projectile {
                 }
                 else
                     tourArtémis.setEnnemiAttaqué();
-
             }
 
         }

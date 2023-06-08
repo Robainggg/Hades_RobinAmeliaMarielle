@@ -28,8 +28,8 @@ public class Vagues {
             int y = (int) (centerY + rayon * Math.sin(i * angle));
 
             PetiteVague vague = new PetiteVague(this.tourAvecPortée,x,y);
-            System.out.println("Vague num : " + (i + 1) + " en : (" + x + ", " + y + ")");
-            this.tourAvecPortée.getEnv().ajouterProjectile(vague);
+            //System.out.println("Vague num : " + (i + 1) + " en : (" + x + ", " + y + ")");
+            this.tourAvecPortée.getEnv().ajouterAttaqueTours(vague);
 
         }
     }

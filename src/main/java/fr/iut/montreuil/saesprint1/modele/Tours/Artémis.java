@@ -6,7 +6,7 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Flèche;
 
 public class Artémis extends TourAvecPortée {
 
-    //Constantes pour faciliter leur changement
+    //Ici pour faciliter leur changement
     private final static int cout = 10;
     private final static int espaceEntreAttaques = 10;
     private final static int portée = 3;
@@ -21,12 +21,12 @@ public class Artémis extends TourAvecPortée {
     @Override
     public void attaque () {
 
-        if(this.getTemps() %this.getEspaceEntreAttaques() == 0) {
+        if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
             int i = 0;
             if (this.ennemiAttaqué != null) {
-                if (super.ennemiZone(ennemiAttaqué) != null) {
+                if (super.ennemiZone(ennemiAttaqué) != null && !this.ennemiAttaqué.estMort()) {
                     Flèche flèche = new Flèche(this, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-                    super.getEnv().ajouterProjectile(flèche);
+                    super.getEnv().ajouterAttaqueTours(flèche);
                 } else {
                     this.ennemiAttaqué = null;
                 }
@@ -36,10 +36,11 @@ public class Artémis extends TourAvecPortée {
                 ennemiAttaqué = super.ennemiZone(super.getEnv().getEnnemis().get(i));
                 if (ennemiAttaqué != null) {
                     Flèche flèche = new Flèche(this, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
-                    super.getEnv().ajouterProjectile(flèche);
+                    super.getEnv().ajouterAttaqueTours(flèche);
                 }
                 i++;
             }
+          
         }
         this.incrementeTemps();
     }

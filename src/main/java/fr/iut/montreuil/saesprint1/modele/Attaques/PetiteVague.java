@@ -22,7 +22,7 @@ public class PetiteVague extends Projectile{
         super.avance();
 
         if(!this.tourAvecPortée.estDansLaZone(this.getX(),this.getY())){
-            this.tourAvecPortée.getEnv().supprimerProjectile(this);
+            this.tourAvecPortée.getEnv().supprimerAttaqueTours(this);
         }
 
         for (int i = this.tourAvecPortée.getEnv().getEnnemis().size()-1; i >= 0; i--){
