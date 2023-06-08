@@ -168,9 +168,9 @@ public class HelloController implements Initializable {
                     }
 
                     //Condition en attendant d'en avoir une pour arrêter la gameloop
-                    if(this.evt.getEnnemis().isEmpty()){
-                        gameLoop.stop();
-                    }
+//                    if(this.evt.getEnnemis().isEmpty()){
+//                        gameLoop.stop();
+//                    }
 
                     temps++;
                 })

@@ -22,7 +22,7 @@ public class VagueEnnemie {
         this.environnement = environnement;
         this.joueur = joueur;
 
-        this.temps = 0;
+        this.temps = 1;
 
         this.nbEnnemis = environnement.getNiveau() * 5;
 

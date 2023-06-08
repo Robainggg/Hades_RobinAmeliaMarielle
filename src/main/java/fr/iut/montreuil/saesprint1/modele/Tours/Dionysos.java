@@ -25,7 +25,7 @@ public class Dionysos extends Tour {
     
     @Override
     public void attaque() {
-        if (this.env.getEnnemis().size() >= 0) {
+        if (!this.env.getEnnemis().isEmpty()) {
             if (this.getTemps() % espaceEntreAttaques == 0) {
 
                 //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
