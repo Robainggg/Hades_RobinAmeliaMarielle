@@ -8,9 +8,7 @@ public class Vegetation extends AttaqueTours{
         super(tour, coordXArrivé, coordYArrivé);
         
     }
-
+    
     @Override
-    public void agit() {
-
-    }
+    public void agit(){}
 }
