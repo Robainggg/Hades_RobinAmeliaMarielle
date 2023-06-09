@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1.modele;
 
-import fr.iut.montreuil.saesprint1.vue.SpriteEnnemi;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +25,9 @@ public class Ennemi {
     private int recompense;
     private boolean estSorti;
     private boolean estRalenti;
-    private int ToursIvres;
+    private int toursIvres;
+
+    private int toursEffetTonneau;
 
     public Ennemi(Environnement environnement){
 
@@ -36,7 +37,8 @@ public class Ennemi {
         this.estSorti = false;
         this.estMort = false;
         this.estRalenti = false;
-        this.ToursIvres = 0;
+        this.toursIvres = 0;
+        this.toursEffetTonneau = 0;
 
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
@@ -85,47 +87,54 @@ public class Ennemi {
 
     public void seDeplace() {
 
-            if (this.estArriveAuBout()) {
-                this.estSorti = true;
-                this.meurt();
-            }
-            if (this.estArrivé()) {
-                this.changeProchaineCase();
-                if (this.getProchaineCase() != null)
-                    this.definirDirection();
-            }
-            if (this.getDirection().equals("d")) {
-                if (this.getCoordX() + vitesse > prochaineCase.getI() * 32)
-                    this.setCoordX(prochaineCase.getI() * 32);
-                else
-                    this.setCoordX(this.getCoordX() + vitesse);
-            } else if (this.getDirection().equals("g")) {
-                if (this.getCoordX() - vitesse < prochaineCase.getI() * 32)
-                    this.setCoordX(prochaineCase.getI() * 32);
-                else
-                    this.setCoordX(this.getCoordX() - vitesse);
-            } else if (this.getDirection().equals("h")) {
-                if (this.getCoordY() - vitesse < prochaineCase.getJ() * 32)
-                    this.setCoordY(prochaineCase.getJ() * 32);
-                else
-                    this.setCoordY(this.getCoordY() - vitesse);
-            } else if (this.getDirection().equals("b")) {
-                if (this.getCoordY() + vitesse > prochaineCase.getJ() * 32)
-                    this.setCoordY(prochaineCase.getJ() * 32);
-                else
-                    this.setCoordY(this.getCoordY() + vitesse);
-            }
+        if (this.estArriveAuBout()) {
+            this.estSorti = true;
+            this.meurt();
+        }
+        if (this.estArrivé()) {
+            this.changeProchaineCase();
+            if (this.getProchaineCase() != null)
+                this.definirDirection();
+        }
+        if (this.getDirection().equals("d")) {
+            if (this.getCoordX() + vitesse > prochaineCase.getI() * 32)
+                this.setCoordX(prochaineCase.getI() * 32);
+            else
+                this.setCoordX(this.getCoordX() + vitesse);
+        } else if (this.getDirection().equals("g")) {
+            if (this.getCoordX() - vitesse < prochaineCase.getI() * 32)
+                this.setCoordX(prochaineCase.getI() * 32);
+            else
+                this.setCoordX(this.getCoordX() - vitesse);
+        } else if (this.getDirection().equals("h")) {
+            if (this.getCoordY() - vitesse < prochaineCase.getJ() * 32)
+                this.setCoordY(prochaineCase.getJ() * 32);
+            else
+                this.setCoordY(this.getCoordY() - vitesse);
+        } else if (this.getDirection().equals("b")) {
+            if (this.getCoordY() + vitesse > prochaineCase.getJ() * 32)
+                this.setCoordY(prochaineCase.getJ() * 32);
+            else
+                this.setCoordY(this.getCoordY() + vitesse);
+        }
     }
+
 
     public void agit(){
 
-        if(this.ToursIvres == 0){
+        if(this.toursIvres == 0 && this.toursEffetTonneau == 0){
             this.seDeplace();
         }
-        else
-            this.ToursIvres--;
-        
+        else if(this.toursIvres > 0){
+            this.toursIvres--;
+        }
+        else{
+            //Voir avec Robin pour trouver une méthode pour modifier le déplacement des ennemis
+            //sans tout casser
+            this.toursEffetTonneau--;
+        }
     }
+
     public void meurt(){
         if(!this.estSorti)
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
@@ -164,14 +173,20 @@ public class Ennemi {
         return environnement;
     }
     public int getToursIvres() {
-        return ToursIvres;
+        return toursIvres;
     }
 
     public void setToursIvres(int toursIvres) {
-        ToursIvres = toursIvres;
+        this.toursIvres = toursIvres;
     }
 
+    public int getToursEffetTonneau() {
+        return toursEffetTonneau;
+    }
 
+    public void setToursEffetTonneau(int toursEffetTonneau) {
+        this.toursEffetTonneau = toursEffetTonneau;
+    }
 
     //
     // Getters & Setters ->  Mouvements de l'ennemi
