@@ -5,13 +5,14 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.ProgressBar;
 
 public class Ennemi {
 
     //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
-    private int pv = 100;
+    private IntegerProperty pv;
     private int vitesse;
 
     //Direction
@@ -49,7 +50,11 @@ public class Ennemi {
         recompense = 10;
         this.definirDirection();
         incrementeCompteur();
+        pv = new SimpleIntegerProperty(100);
+        ProgressBar barreDeVie = new ProgressBar();
     }
+
+
 
     private static void incrementeCompteur(){
         compteur++;
@@ -132,10 +137,10 @@ public class Ennemi {
         this.environnement.getEnnemis().remove(this);
         this.estMort = true;
     }
-    public void pertPv(int dégâts){
-        System.out.println(this.idEnnemi + " a " + pv + " points de vies, et perds " + dégâts+ " points de vies ");
-        this.pv -= dégâts;
-        if(this.pv <= 0){
+     public void pertPv(int dégâts) {
+        System.out.println(this.idEnnemi + " a " + getPv() + " points de vies, et perds " + dégâts + " points de vies ");
+        setPv(getPv() - dégâts);
+        if (getPv() <= 0) {
             this.meurt();
         }
     }
@@ -221,6 +226,20 @@ public class Ennemi {
     public boolean isEstMort() {
         return estMort;
     }
+
+    public int getPv() {
+        return pv.get();
+    }
+
+    public IntegerProperty pvProperty() {
+        return pv;
+    }
+
+    public void setPv(int pv) {
+        this.pv.set(pv);
+    }
+
+
 
 
 
