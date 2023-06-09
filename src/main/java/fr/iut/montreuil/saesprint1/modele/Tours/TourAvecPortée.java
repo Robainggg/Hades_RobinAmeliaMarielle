@@ -16,10 +16,10 @@ public abstract class TourAvecPortée extends Tour {
     public boolean estDansLaZone(double x, double y){
         if(x >= this.centreTourX().getValue()-(getPortée()+16) && x <= this.centreTourX().getValue()+(getPortée()+16)
                 && y >= this.centreTourY().getValue()-(getPortée()+16) && y <= this.centreTourY().getValue()+(getPortée()+16)) {
-            //System.out.println("Vérifie si est dans la zone");
+            System.out.println("Vérifie si est dans la zone");
             return true;
         }
-        //System.out.println("nest plus dans la zone");
+        System.out.println("ne pense pas qu'il est dans la zone");
         return false;
     }
 
@@ -32,5 +32,16 @@ public abstract class TourAvecPortée extends Tour {
     
     public int getPortée() {
         return portée;
+    }
+
+    public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré, int portéeAméliorée){
+        System.out.println("Entre dans TourAvecPortée");
+        this.setPortée(portéeAméliorée*32);
+        super.améliorer(coutAmélioration,espaceEntreAttaquesAmélioré);
+
+    }
+
+    public void setPortée(int portée) {
+        this.portée = portée;
     }
 }

@@ -36,7 +36,7 @@ public abstract class  AttaqueTours {
             return coordXArrivé.get();
         }
 
-        public IntegerProperty coordXArrivéProperty() {
+        public IntegerProperty coordXprop() {
             return coordXArrivé;
         }
 
@@ -48,7 +48,7 @@ public abstract class  AttaqueTours {
             return coordYArrivé.get();
         }
 
-        public IntegerProperty coordYArrivéProperty() {
+        public IntegerProperty coordYprop() {
             return coordYArrivé;
         }
         public void setCoordYArrivé(int coordYArrivé) {

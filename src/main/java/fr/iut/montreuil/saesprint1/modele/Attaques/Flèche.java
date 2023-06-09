@@ -6,7 +6,7 @@ import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
 public class Flèche extends Projectile {
 
     private Artémis tourArtémis;
-    private static int degats = 10;
+    private static int degats = 5;
     private static int vitesse = 6;
     
     public Flèche(Artémis tour,int coordXEnnemi, int coordYEnnemi) {

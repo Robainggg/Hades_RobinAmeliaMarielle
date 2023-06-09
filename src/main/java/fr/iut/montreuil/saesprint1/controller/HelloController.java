@@ -112,8 +112,6 @@ public class HelloController implements Initializable {
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
 
-
-    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Chargement de l'environnement et du Terrain
@@ -136,22 +134,24 @@ public class HelloController implements Initializable {
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
         //Test pour affichage de base
-        Tour tour = new Artémis(12*32,13*32,evt);
+        Artémis artemis = new Artémis(2*32,2*32,evt);
+        Artémis tour = new Artémis(6*32,10*32,evt);
         Tour dyo = new Dionysos(10*32,10*32,evt);
-        Tour poseidon = new Poséidon(8*32,8*32,evt);
+        Tour poseidon = new Poséidon(9*32,7*32,evt);
         Tour demeter = new Déméter(15*32,10*32,evt);
         //ennemi = new Ennemi(evt);
         //evt.ajouterEnnemi(ennemi);
-        this.evt.ajouterTour(tour);
+        //this.evt.ajouterTour(tour);
+        this.evt.ajouterTour(artemis);
         this.evt.ajouterTour(dyo);
         this.evt.ajouterTour(poseidon);
         this.evt.ajouterTour(demeter);
 
-
+        artemis.améliorer();
+        
         initAnimation();
         gameLoop.play();
 
-        this.evt.getTerrain().afficheTableau();
     }
 
     private void initAnimation() {
@@ -188,12 +188,7 @@ public class HelloController implements Initializable {
                     for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
                        this.evt.getAttaques().get(i).agit();
                     }
-
-                    //Condition en attendant d'en avoir une pour arrêter la gameloop
-//                    if(this.evt.getEnnemis().isEmpty()){
-//                        gameLoop.stop();
-//                    }
-
+                    
                     temps++;
                 })
         );

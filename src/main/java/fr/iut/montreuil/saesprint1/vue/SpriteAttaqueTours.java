@@ -14,7 +14,7 @@ public class SpriteAttaqueTours {
     final Image biere = new Image(getClass().getResource("/images/projectiles/beer.png").toExternalForm());
 
     final Image vague = new Image(getClass().getResource("/images/projectiles/wave.png").toExternalForm());
-    final Image vegetation = new Image(getClass().getResource("/images/projectiles/vegetation.png").toExternalForm());
+    final Image buisson = new Image(getClass().getResource("/images/projectiles/vegetation.png").toExternalForm());
 
     private ImageView image;
 
@@ -52,6 +52,18 @@ public class SpriteAttaqueTours {
             this.pane.getChildren().add(image);
 
             image.setId(this.attaqueTours.getId());
+        }
+
+        if(this.attaqueTours instanceof Vegetation){
+            Vegetation vegetation = (Vegetation)this.attaqueTours;
+            image.setImage(buisson);
+            image.translateXProperty().bind(vegetation.coordXprop());
+            image.translateYProperty().bind(vegetation.coordYprop());
+            this.pane.getChildren().add(image);
+
+            image.setId(this.attaqueTours.getId());
+
+
         }
 
 
