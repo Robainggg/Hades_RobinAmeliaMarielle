@@ -143,8 +143,8 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-//                    if(temps%60 == 0)
-//                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    if(temps%60 == 0)
+                        this.evt.ajouterEnnemi(new Ennemi(evt));
                     if(this.evt.getJoueur().getPv() <=0)
                         gameLoop.stop();
                     this.evt.getVagueActuelle().prochainEnnemi();

@@ -9,11 +9,6 @@ import java.util.ArrayList;
 public class Artémis extends TourAvecPortée {
 
 
-    //Attributs après amélioration
-    private int coutAmélioration = 10;
-    private int espaceEntreAttaquesAmélioration = 5;
-    private int portéeAmélioration = 3;
-
     //Attributs de la classe
     private Ennemi ennemiAttaqué;
 
@@ -99,6 +94,6 @@ public class Artémis extends TourAvecPortée {
 
     public void améliorer(){
         System.out.println("Entre dans Artémis");
-        super.améliorer(coutAmélioration,espaceEntreAttaquesAmélioration,portéeAmélioration);
+        super.améliorer(20,5,3);
     }
 }
