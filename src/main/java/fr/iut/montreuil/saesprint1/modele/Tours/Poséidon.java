@@ -31,7 +31,7 @@ public class Poséidon extends TourAvecPortée{
     }
 
     public void améliorer(){
-        super.améliorer(45,this.getEspaceEntreAttaques(),3);
+        super.améliorer(45,this.getEspaceEntreAttaques(),10);
     }
 
 }

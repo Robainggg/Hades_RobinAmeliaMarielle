@@ -128,6 +128,9 @@ public class HelloController implements Initializable {
         dyo.améliorer();
         artemis.améliorer();
         poseidon.améliorer();
+
+
+
         
         initAnimation();
         gameLoop.play();

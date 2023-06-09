@@ -38,7 +38,8 @@ public class Dionysos extends Tour {
                     //System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
                     super.getEnv().ajouterAttaqueTours(bouteille);
 
-                } else {
+                }
+                else {
                     while (e.getToursEffetTonneau() != 0) {
                         indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
                         e = super.getEnv().getEnnemis().get(indice);
