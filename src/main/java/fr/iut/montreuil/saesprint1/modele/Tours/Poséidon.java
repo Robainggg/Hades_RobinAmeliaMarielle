@@ -5,13 +5,8 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Vagues;
 
 public class Poséidon extends TourAvecPortée{
 
-    //Ici pour faciliter leur changement
-    private final static int cout = 20;
-    private final static int espaceEntreAttaques = 600;
-    private final static int portée = 6;
-
     public Poséidon(int x, int y, Environnement env) {
-        super("Poséidon", cout, x, y, env, portée, espaceEntreAttaques);
+        super("Poséidon", 20, x, y, env, 6, 600);
     }
 
     @Override
@@ -34,4 +29,9 @@ public class Poséidon extends TourAvecPortée{
         this.incrementeTemps();
 
     }
+
+    public void améliorer(){
+        super.améliorer(45,this.getEspaceEntreAttaques(),3);
+    }
+
 }
