@@ -140,10 +140,12 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(temps%60 == 0)
-                        this.evt.ajouterEnnemi(new Ennemi(evt));
-//                    this.evt.getVagueActuelle().prochainEnnemi();
-//                    this.evt.nouvelleVague();
+//                    if(temps%60 == 0)
+//                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    if(this.evt.getJoueur().getPv() <=0)
+                        gameLoop.stop();
+                    this.evt.getVagueActuelle().prochainEnnemi();
+                    this.evt.nouvelleVague();
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
 //                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
 //                            System.out.println("fini");
@@ -161,12 +163,7 @@ public class HelloController implements Initializable {
                     for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
                        this.evt.getAttaques().get(i).agit();
                     }
-
-                    //Condition en attendant d'en avoir une pour arrêter la gameloop
-                    if(this.evt.getEnnemis().isEmpty()){
-                        gameLoop.stop();
-                    }
-
+                    
                     temps++;
                 })
         );

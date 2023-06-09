@@ -22,14 +22,14 @@ public class VagueEnnemie {
         this.environnement = environnement;
         this.joueur = joueur;
 
-        this.temps = 0;
+        this.temps = 1;
 
         this.nbEnnemis = environnement.getNiveau() * 5;
 
         if(this.environnement.getNiveau() >= 6)
             this.cadenceApparition = 60;
         else
-           this.cadenceApparition = 240 - 30 * environnement.getNiveau();
+           this.cadenceApparition  = 240 - 30 * environnement.getNiveau();
 
         this.vagueEstFinie = false;
 

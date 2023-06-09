@@ -129,6 +129,8 @@ public class Ennemi {
     public void meurt(){
         if(!this.estSorti)
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
+        else
+            this.environnement.getJoueur().perdPv(1);
         this.environnement.getEnnemis().remove(this);
         this.estMort = true;
     }

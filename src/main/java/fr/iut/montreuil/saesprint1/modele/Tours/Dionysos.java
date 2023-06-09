@@ -25,24 +25,25 @@ public class Dionysos extends Tour {
     
     @Override
     public void attaque() {
-
-        if(this.getTemps()%espaceEntreAttaques == 0) {
+        if (!this.env.getEnnemis().isEmpty()) {
+            if (this.getTemps() % espaceEntreAttaques == 0) {
 
             //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
             int indice = (int) (Math.random() * this.env.getEnnemis().size());
             Ennemi e = this.env.getEnnemis().get(indice);
 
-            //On cherche un nouvel ennemi si celui-ci est déjà en train de boire
-            while(e.getToursIvres() != 0){
-                indice = (int) (Math.random() * this.env.getEnnemis().size());
-                e = this.env.getEnnemis().get(indice);
+                //On cherche un nouvel ennemi si celui-ci est déjà en train de boire
+                while (e.getToursIvres() != 0) {
+                    indice = (int) (Math.random() * this.env.getEnnemis().size());
+                    e = this.env.getEnnemis().get(indice);
+                }
+                //Lui donne une bouteille
+                Bouteille bouteille = new Bouteille(this, e);
+                e.setToursIvres(nbToursIvres);
+                //System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
+                this.env.ajouterAttaqueTours(bouteille);
+
             }
-            //Lui donne une bouteille
-            Bouteille bouteille = new Bouteille(this,e);
-            e.setToursIvres(nbToursIvres);
-            //System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
-            this.env.ajouterAttaqueTours(bouteille);
-            
         }
         this.incrementeTemps();
     }
