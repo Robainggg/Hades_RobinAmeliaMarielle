@@ -7,15 +7,16 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Flèche;
 public class Artémis extends TourAvecPortée {
 
     //Ici pour faciliter leur changement
-    private final static int cout = 10;
+    public final static int coutArtémis = 10;
     private final static int espaceEntreAttaques = 10;
     private final static int portée = 3;
+
 
     //Attributs de la classe
     private Ennemi ennemiAttaqué;
     
     public Artémis(int x, int y, Environnement env) {
-        super("Artémis", cout, x, y, env,portée,espaceEntreAttaques);
+        super("Artémis", coutArtémis, x, y, env,portée,espaceEntreAttaques);
         this.ennemiAttaqué = null;
     }
     @Override
@@ -48,4 +49,6 @@ public class Artémis extends TourAvecPortée {
     public void setEnnemiAttaqué() {
         this.ennemiAttaqué = null;
     }
+
+
 }

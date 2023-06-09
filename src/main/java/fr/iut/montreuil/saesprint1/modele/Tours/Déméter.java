@@ -6,12 +6,12 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 public class Déméter extends TourAvecPortée {
 
     //Ici pour faciliter leur changement
-    private final static int cout = 20;
+    public final static int coutDéméter = 20;
     private final static int espaceEntreAttaques = 0;
     private final static int portée = 6;
     private static int ralentissement = 1;
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", cout, x, y, env, portée, espaceEntreAttaques);
+        super("Déméter", coutDéméter, x, y, env, portée, espaceEntreAttaques);
         creerVégétation();
     }
     @Override

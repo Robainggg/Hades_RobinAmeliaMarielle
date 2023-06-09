@@ -7,10 +7,10 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 
 public class Dionysos extends Tour {
 
-    private final static int tailleCase = 32;
+    public final static int tailleCase = 32;
 
     //Ici pour faciliter leur changement
-    private final static int cout = 20;
+    public final static int coutDionysos = 20;
     private final static int espaceEntreAttaques = 300;
 
     private final static int nbToursIvres = 80;
@@ -19,7 +19,7 @@ public class Dionysos extends Tour {
     private Environnement env;
 
     public Dionysos(int x, int y, Environnement env) {
-        super("Dionysos", cout, x, y, env,espaceEntreAttaques);
+        super("Dionysos", coutDionysos, x, y, env,espaceEntreAttaques);
         this.env = env;
     }
     

@@ -1,14 +1,9 @@
 package fr.iut.montreuil.saesprint1.vue;
 
 import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
-import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
+import fr.iut.montreuil.saesprint1.modele.Tours.*;
 import javafx.animation.PauseTransition;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,17 +11,35 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import javax.swing.*;
+
+import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
+import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
+import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
+import static fr.iut.montreuil.saesprint1.modele.Tours.Poséidon.coutPoséidon;
+
 public class VueInventaire {
 
     private ImageView imageTourArthemis;
     private ImageView imageTourPoséidon;
+    private ImageView imageTourDéméter;
+
+    private ImageView imageTourDionysos;
     private RadioButton boutonArthemis;
     private RadioButton boutonPoséidon;
-
+    private RadioButton boutonDemeter;
+    private RadioButton boutonDionysos;
     private ToggleGroup groupeRadio;
     private Button boutonAjouterTour;
     private Pane panePrincipal;
     private TilePane tilePane;
+
+    private ImageView pieces1;
+    private ImageView pieces2;
+
+    private Label argentItem;
+
+    private Label nomItem;
 
     private Environnement evt;
 
@@ -43,13 +56,22 @@ public class VueInventaire {
     private boolean boutonRadioSelectionne = false;
 
 
-    public VueInventaire(ImageView imageTourArt, ImageView imageTourPos, RadioButton boutonArt, RadioButton boutonPos, ToggleGroup groupeRadio, Button boutonAjtTour, Pane pane, TilePane tp, VBox vboutique, ImageView boutique_bg, Environnement evt) {
+    //this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+    public VueInventaire(ImageView imageTourArt, ImageView imageTourPos, ImageView imageTourDem, ImageView imageTourDio, RadioButton boutonArt, RadioButton boutonPos, RadioButton boutonDem, RadioButton boutonDio, ToggleGroup groupeRadio, Button boutonAjtTour, ImageView p1, ImageView p2, Label ai, Label ni, Pane pane, TilePane tp, VBox vboutique,  ImageView boutique_bg, Environnement evt ) {
         this.imageTourArthemis = imageTourArt;
         this.imageTourPoséidon = imageTourPos;
+        this.imageTourDéméter = imageTourDem;
+        this.imageTourDionysos = imageTourDio;
         this.boutonArthemis = boutonArt;
         this.boutonPoséidon = boutonPos;
+        this.boutonDemeter = boutonDem;
+        this.boutonDionysos = boutonDio;
         this.groupeRadio = groupeRadio;
         this.boutonAjouterTour = boutonAjtTour;
+        this.pieces1 = p1;
+        this.pieces2 = p2;
+        this.argentItem =ai;
+        this.nomItem = ni;
         this.panePrincipal = pane;
         this.tilePane = tp;
         this.boutique_bg = boutique_bg;
@@ -67,8 +89,16 @@ public class VueInventaire {
         imageTourArthemis.setImage(tourArthemis);
         Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourPoséidon.setImage(tourPoséidon);
+        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        imageTourDéméter.setImage(tourDémeter);
+        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        imageTourDionysos.setImage(tourDionysos);
         Image background = new Image(getClass().getResourceAsStream("/images/boutique.png"));
+        Image pieces = new Image(getClass().getResourceAsStream("/images/png_coins.jpg"));
+        pieces1.setImage(pieces);
+        pieces2.setImage(pieces);
         boutique_bg.setImage(background);
+
     }
 
 
@@ -76,25 +106,55 @@ public class VueInventaire {
         placerUneTour();
     }
     private void placerUneTour() {
+        boutonArthemis.setToggleGroup(groupeRadio);
         boutonArthemis.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 selectedType = "Arthémis";
-                boutonPoséidon.setSelected(false);
+                //boutonPoséidon.setSelected(false);
                 boutonRadioSelectionne = true;
-
+                mettreAJourLabel();
+                afficherTour();
             }
-            afficherTour();
+
         });
 
+        boutonPoséidon.setToggleGroup(groupeRadio);
         boutonPoséidon.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 selectedType = "Poséidon";
-                boutonArthemis.setSelected(false);
+                //boutonArthemis.setSelected(false);
                 boutonRadioSelectionne = true;
+                mettreAJourLabel();
+                afficherTour();
            }
-            afficherTour();
+
+
 
         });
+        boutonDemeter.setToggleGroup(groupeRadio);
+        boutonDemeter.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                selectedType = "Déméter";
+                //boutonPoséidon.setSelected(false);
+                boutonRadioSelectionne = true;
+                mettreAJourLabel();
+                afficherTour();
+            }
+
+        });
+
+        boutonDionysos.setToggleGroup(groupeRadio);
+        boutonDionysos.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                selectedType = "Dionysos";
+                //boutonPoséidon.setSelected(false);
+                boutonRadioSelectionne = true;
+                mettreAJourLabel();
+                afficherTour();
+            }
+
+        });
+
 
 
     }
@@ -108,7 +168,7 @@ public class VueInventaire {
     }
 
         private void afficherTour2() {
-            if (boutonArthemis.isSelected() || boutonPoséidon.isSelected()) {
+            if (boutonArthemis.isSelected() || boutonPoséidon.isSelected() || boutonDemeter.isSelected()|| boutonDionysos.isSelected()) {
                 panePrincipal.setOnMouseClicked(event -> {
                     double mouseX = event.getX();
                     double mouseY = event.getY();
@@ -135,16 +195,24 @@ public class VueInventaire {
                             } else if (selectedType.equals("Poséidon")) {
                                 t = new Poséidon((int) tileX, (int) tileY, evt);
                                 this.evt.ajouterTour(t);
+                            }
 
+                            else if (selectedType.equals("Déméter")){
+                                t = new Déméter((int) tileX, (int) tileY, evt);
+                                this.evt.ajouterTour(t);
+                            }
 
+                            else if (selectedType.equals("Dionysos")){
+                                t = new Dionysos((int) tileX, (int) tileY, evt);
+                                this.evt.ajouterTour(t);
                             }
                         }
                     }
 
-                    boutonArthemis.setSelected(false);
-                    boutonPoséidon.setSelected(false);
-                    panePrincipal.setOnMouseClicked(null);
 
+                    nomItem.setText("___________________________");
+                    argentItem.setText("___");
+                    panePrincipal.setOnMouseClicked(null);
                     boutonRadioSelectionne = false;
                 });
 
@@ -203,9 +271,11 @@ public class VueInventaire {
                 event.consume();
             }
         });
+
+
     }
 
-    public boolean tourExiste ( int tourX, int tourY){
+    private boolean tourExiste ( int tourX, int tourY){
         for (Tour tour : evt.getTours()) {
             int x = tour.getX() / Tour.tailleCase;
             int y = tour.getY() / Tour.tailleCase;
@@ -215,4 +285,44 @@ public class VueInventaire {
         }
         return false;
     }
+
+    private void mettreAJourLabel() {
+
+        RadioButton selectedButton = (RadioButton) groupeRadio.getSelectedToggle();
+        if (selectedButton != null) {
+            String tourName = selectedButton.getText();
+            nomItem.setText(getTypeItem(tourName));
+            argentItem.setText(""+ getPrixTour(tourName));
+        }
+    }
+
+    private String getTypeItem(String tourName) {
+        if (tourName.equals("Arthémis")) {
+            return "TOUR ARTÉMIS";
+        } else if (tourName.equals("Poséidon")) {
+            return "TOUR POSÉIDON";
+        }
+        else if (tourName.equals("Déméter"))
+            return "TOUR DÉMÉTER";
+        else if (tourName.equals("Dionysos"))
+            return "TOUR DIONYSOS";
+        return "___________________________";
+    }
+
+
+    private int getPrixTour(String tourName) {
+        // Retourner le prix de la tour en fonction de son nom
+        if (tourName.equals("Arthémis")) {
+            return coutArtémis;
+        } else if (tourName.equals("Poséidon")) {
+            return coutPoséidon;
+        } else if (tourName.equals("Déméter")){
+            return coutDéméter;
+        }else if (tourName.equals("Dionysos")){
+            return coutDionysos;
+        }
+        return 0;
+    }
+
+
 }

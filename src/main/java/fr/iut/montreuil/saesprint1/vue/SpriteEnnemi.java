@@ -26,7 +26,7 @@ public class SpriteEnnemi {
         this.image = new ImageView();
         image.setId(ennemi.getIdEnnemi());
         this.barreDeVie = new ProgressBar();
-        barreDeVie.setMaxWidth(32);  // Set the desired width of the health bar
+        barreDeVie.setMaxWidth(32);
         barreDeVie.setProgress(1.0);
 
 
