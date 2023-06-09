@@ -19,6 +19,7 @@ import javafx.util.Duration;
 // Créer une BufferedImage de 100 pixels de
 
 
+import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,17 +44,28 @@ public class HelloController implements Initializable {
     private ImageView imageTourPoséidon;
 
     @FXML
+    private ImageView imageTourDéméter;
+
+    @FXML
+    private ImageView imageTourDionysos;
+
+    @FXML
     private RadioButton boutonArthemis;
 
     @FXML
     private RadioButton boutonPoséidon;
 
     @FXML
+    private RadioButton boutonDéméter;
+
+    @FXML
+    private RadioButton boutonDionysos;
+
+    @FXML
     private ToggleGroup groupeRadio;
 
     @FXML
     private Button boutonAjouterTour;
-
 
 
     @FXML
@@ -67,6 +79,16 @@ public class HelloController implements Initializable {
 
     @FXML
     private ImageView boutique_bg;
+
+    @FXML
+    private Label nomItem;
+    @FXML
+    private Label argentItem;
+
+    @FXML
+    private ImageView pieces;
+    @FXML
+    private ImageView pieces2;
 
     private int temps;
 
@@ -99,7 +121,7 @@ public class HelloController implements Initializable {
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
         //Chargement de l'inventaire
-        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, boutonArthemis,  boutonPoséidon, groupeRadio, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);

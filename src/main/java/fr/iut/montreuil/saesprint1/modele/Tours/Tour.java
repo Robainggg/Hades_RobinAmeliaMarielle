@@ -20,6 +20,7 @@ public abstract class Tour {
 
     private int temps = 0;
 
+
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
         this.cout = cout;
@@ -29,6 +30,7 @@ public abstract class Tour {
         this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
+
     }
     public abstract void attaque();
 
@@ -99,4 +101,6 @@ public abstract class Tour {
     public int getPosX() {
         return getX();
     }
+
+
 }
