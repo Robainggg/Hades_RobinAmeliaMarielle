@@ -187,6 +187,7 @@ public class VueInventaire {
                         if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
                             Tour t;
 
+
                             if (selectedType.equals("Arthémis")) {
                                 t = new Artémis((int) tileX, (int) tileY, evt);
                                 this.evt.ajouterTour(t);
@@ -203,8 +204,8 @@ public class VueInventaire {
                             }
 
                             else if (selectedType.equals("Dionysos")){
-                                t = new Dionysos((int) tileX, (int) tileY, evt);
-                                this.evt.ajouterTour(t);
+                                Dionysos d = new Dionysos((int) tileX, (int) tileY, evt);
+                                this.evt.ajouterTour(d);
                             }
                         }
                     }

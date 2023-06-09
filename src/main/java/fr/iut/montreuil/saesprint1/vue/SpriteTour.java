@@ -30,7 +30,7 @@ public class SpriteTour {
         this.pane = pane;
         this.t = new ImageView();
 
-
+/*
             Circle c = new Circle(((TourAvecPortée) tour).getPortée());
             c.setOpacity(0.1);
             if(tour instanceof Artémis){
@@ -44,7 +44,7 @@ public class SpriteTour {
             c.translateYProperty().bind(tour.centreTourY());
             pane.getChildren().add(c);
             c.setId("rangeOf" + tour.getId());
-
+*/
 
         Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
         t.setImage(image);
