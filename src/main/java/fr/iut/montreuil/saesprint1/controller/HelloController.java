@@ -90,8 +90,6 @@ public class HelloController implements Initializable {
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
 
-
-    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Chargement de l'environnement et du Terrain
@@ -129,7 +127,6 @@ public class HelloController implements Initializable {
         initAnimation();
         gameLoop.play();
 
-        this.evt.getTerrain().afficheTableau();
     }
 
     private void initAnimation() {
@@ -166,12 +163,7 @@ public class HelloController implements Initializable {
                     for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
                        this.evt.getAttaques().get(i).agit();
                     }
-
-                    //Condition en attendant d'en avoir une pour arrêter la gameloop
-//                    if(this.evt.getEnnemis().isEmpty()){
-//                        gameLoop.stop();
-//                    }
-
+                    
                     temps++;
                 })
         );

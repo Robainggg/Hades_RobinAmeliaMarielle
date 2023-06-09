@@ -28,9 +28,9 @@ public class Dionysos extends Tour {
         if (!this.env.getEnnemis().isEmpty()) {
             if (this.getTemps() % espaceEntreAttaques == 0) {
 
-                //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
-                int indice = (int) (Math.random() * this.env.getEnnemis().size());
-                Ennemi e = this.env.getEnnemis().get(indice);
+            //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
+            int indice = (int) (Math.random() * this.env.getEnnemis().size());
+            Ennemi e = this.env.getEnnemis().get(indice);
 
                 //On cherche un nouvel ennemi si celui-ci est déjà en train de boire
                 while (e.getToursIvres() != 0) {
@@ -44,7 +44,7 @@ public class Dionysos extends Tour {
                 this.env.ajouterAttaqueTours(bouteille);
 
             }
-            this.incrementeTemps();
         }
+        this.incrementeTemps();
     }
 }
