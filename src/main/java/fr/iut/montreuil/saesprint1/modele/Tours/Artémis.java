@@ -28,7 +28,7 @@ public class Artémis extends TourAvecPortée {
     public void attaque () {
 
         if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
-            //if(!super.isAmélioré()) {
+            if(!super.isAmélioré()) {
                 int i = 0;
                 //System.out.println("Premier if : attaque ");
                 if (this.ennemiAttaqué != null) {
@@ -50,19 +50,47 @@ public class Artémis extends TourAvecPortée {
                     }
                     i++;
                 }
-            //}
-//            else{
-//                 if(!this.ennemisAttaqués.isEmpty()){
-//                     int tailleListe = this.ennemisAttaqués.size();
-//                     for(int e=0; e < tailleListe; e++){
-//
-//                     }
-//
-//                 }
-//            }
+            }
+            else{
+                ArrayList<Ennemi> ennemisCiblés = new ArrayList<>();
+                 if(!this.ennemisAttaqués.isEmpty()){
+                     for(int i=0; i < this.ennemisAttaqués.size(); i++) {
+                         if (super.ennemiZone(this.ennemisAttaqués.get(i)) != null && !this.ennemisAttaqués.get(i).estMort()) {
+                             //Le stocke dans la nouvelle liste
+                             ennemisCiblés.add(this.ennemisAttaqués.get(i));
+                         }
+                     }
+                 }
+                 int indiceEnnemi = 0;
+                 while( ennemisCiblés.size() < 3 && indiceEnnemi < super.getEnv().getEnnemis().size()){
+                     Ennemi regardé = super.ennemiZone(super.getEnv().getEnnemis().get(indiceEnnemi));
+                     if (regardé != null) {
+                         if(!this.déjaCiblé(ennemisCiblés,regardé)){
+                            ennemisCiblés.add(regardé);
+                         }
+                     }
+                     indiceEnnemi++;
+                 }
+                 this.ennemisAttaqués.clear();
+                 for(int i=0; i<ennemisCiblés.size();i++){
+                     this.ennemiAttaqué = ennemisCiblés.get(i);
+                     this.ennemisAttaqués.add(this.ennemiAttaqué);
+                     Flèche flèche = new Flèche(this, ennemiAttaqué.getCoordX(), ennemiAttaqué.getCoordY());
+                     super.getEnv().ajouterAttaqueTours(flèche);
+                 }
+            }
 
         }
         this.incrementeTemps();
+    }
+
+    public boolean déjaCiblé(ArrayList<Ennemi> liste, Ennemi ennemi){
+        for(int i=0; i < liste.size(); i++){
+            if(ennemi.equals(liste.get(i))){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setEnnemiAttaqué() {
