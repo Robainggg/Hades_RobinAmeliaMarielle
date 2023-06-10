@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.vue;
 
+import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
@@ -19,15 +20,21 @@ import javafx.util.Duration;
 
 public class SpriteTour {
 
+
+
     private Tour tour;
     private Pane pane;
     private ImageView t;
 
+    private Environnement evt;
+
+
     boolean ameliore = false;
 
-    public SpriteTour(Tour tour, Pane pane) {
+    public SpriteTour(Tour tour, Pane pane, Environnement evt) {
         this.tour = tour;
         this.pane = pane;
+        this.evt = evt;
         this.t = new ImageView();
 
 /*
@@ -115,8 +122,17 @@ public class SpriteTour {
             ameliore = true;
         });
 
+        Button boutonSupprimer = new Button("Supprimer");
+        boutonSupprimer.setOnAction(event -> {
+            System.out.println("Bouton Supprimer cliqué !");
+            pane.getChildren().remove(t);
+            evt.supprimerUneTour(tour);
+        });
+
+
+
         VBox tooltipContent = new VBox();
-        tooltipContent.getChildren().addAll(button);
+        tooltipContent.getChildren().addAll(button, boutonSupprimer);
         tooltip.setGraphic(tooltipContent);
 
         final boolean[] tooltipVisible = {false};
@@ -157,4 +173,5 @@ public class SpriteTour {
     public Tour getTour() {
         return tour;
     }
+
 }

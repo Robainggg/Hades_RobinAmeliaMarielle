@@ -25,9 +25,9 @@ public class MainTest {
         Artémis tour1 = new Artémis(10,20,environnement);
         System.out.println(tour1.getEspaceEntreAttaques());
         System.out.println(tour1.getPortée());
-        tour1.améliorer();
+       // tour1.améliorer();
         System.out.println(tour1.getEspaceEntreAttaques());
-        tour1.attaque();
+        //tour1.attaque();
         System.out.println(tour1.getPortée());
     }
 }

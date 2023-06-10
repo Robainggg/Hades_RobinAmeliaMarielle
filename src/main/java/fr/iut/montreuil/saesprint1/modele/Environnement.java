@@ -42,6 +42,13 @@ public class Environnement {
 
     }
 
+    public void supprimerUneTour(Tour t){
+        this.getTours().remove(t);
+        this.joueur.gagneArgent(t.getCout()/2);
+    }
+
+
+
 
     public void ajouterEnnemi(Ennemi ennemi){
         this.ennemis.add(ennemi);

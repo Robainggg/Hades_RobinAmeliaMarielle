@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Joueur {
     private IntegerProperty pv;
-    private IntegerProperty argent;
+    public IntegerProperty argent;
 
     public Joueur(){
         this.pv = new SimpleIntegerProperty(20);
@@ -27,6 +27,8 @@ public class Joueur {
     public void setArgent(int argent) {
         this.argent.set(argent);
     }
+
+    public void gagneArgent (int argent) {this.argent.setValue(this.getArgent()+argent);}
 
     public IntegerProperty argentProperty() {
         return argent;

@@ -124,7 +124,7 @@ public class HelloController implements Initializable {
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
-        this.listenersTours = new ListObsTours(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal,evt);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getAttaques().addListener(listenersAttaques);
@@ -147,7 +147,7 @@ public class HelloController implements Initializable {
         this.evt.ajouterTour(poseidon);
         this.evt.ajouterTour(demeter);
 
-        artemis.améliorer();
+       // artemis.améliorer();
         
         initAnimation();
         gameLoop.play();
