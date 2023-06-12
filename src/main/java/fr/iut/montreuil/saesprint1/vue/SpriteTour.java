@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.vue;
 
+import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
@@ -29,6 +30,7 @@ public class SpriteTour {
     public SpriteTour(Tour tour, Pane pane, Environnement evt) {
         this.tour = tour;
         this.pane = pane;
+        this.evt = evt;
         this.t = new ImageView();
 
 //        if (tour instanceof TourAvecPortée) {

@@ -6,10 +6,12 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 
 public class Déméter extends TourAvecPortée {
 
+
+    public static int coutDéméter = 20;
     private static int ralentissement = 1;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", 20, x, y, env, 4, 0);
+        super("Déméter", coutDéméter, x, y, env, 2, 0);
         this.ralentissement = 1;
     }
     @Override

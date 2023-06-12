@@ -38,11 +38,12 @@ public abstract class Tour {
         if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
             System.out.println("entre Tour");
             this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
-            this.setCout(coutAmélioration);
             this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
             this.setAmélioré(true);
         }
     }
+
+    public boolean isAmélioré() { return this.amélioré;}
 
     public void incrementeTemps(){this.temps += 1;}
     //Getters & Setters

@@ -33,10 +33,6 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Circle testCercleEnnemi;
-
-
-    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -47,14 +43,19 @@ public class HelloController implements Initializable {
 
     @FXML
     private RadioButton boutonPoséidon;
-
+    @FXML
+    private ImageView imageTourDéméter;
+    @FXML
+    private  ImageView imageTourDionysos;
+    @FXML
+    private RadioButton boutonDéméter;
+    @FXML
+    private RadioButton boutonDionysos;
     @FXML
     private ToggleGroup groupeRadio;
 
     @FXML
     private Button boutonAjouterTour;
-
-
 
     @FXML
     private Label argent;

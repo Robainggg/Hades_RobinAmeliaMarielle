@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Artémis extends TourAvecPortée {
 
     //Initial
-    private static int coutDeBase = 15;
+    public static int coutArtémis = 15;
     private static int porteeDeBase = 3;
     private static int espaceEntreAttaquesDeBase = 20;
 
@@ -24,7 +24,7 @@ public class Artémis extends TourAvecPortée {
     private ArrayList<Ennemi> ennemisAttaqués;
 
     public Artémis(int x, int y, Environnement env) {
-        super("Artémis", coutDeBase, x, y, env,porteeDeBase,espaceEntreAttaquesDeBase);
+        super("Artémis", coutArtémis, x, y, env,porteeDeBase,espaceEntreAttaquesDeBase);
         this.ennemiAttaqué = null;
         this.ennemisAttaqués = new ArrayList<>();
     }

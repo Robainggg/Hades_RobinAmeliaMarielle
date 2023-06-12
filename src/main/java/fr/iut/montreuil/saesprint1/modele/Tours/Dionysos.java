@@ -1,6 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele.Tours;
 
 
+import fr.iut.montreuil.saesprint1.modele.Attaques.Tonneau;
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
@@ -8,7 +9,7 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 public class Dionysos extends Tour {
 
     //Initial
-    private static int coutDeBase = 20;
+    public static int coutDionysos = 20;
     private static int espaceEntreAttaquesDeBase = 300;
 
     //Amélioration
@@ -22,7 +23,7 @@ public class Dionysos extends Tour {
     private Environnement env;
 
     public Dionysos(int x, int y, Environnement env) {
-        super("Dionysos", coutDeBase, x, y, env, espaceEntreAttaquesDeBase);
+        super("Dionysos", coutDionysos, x, y, env, espaceEntreAttaquesDeBase);
     }
     
     @Override
