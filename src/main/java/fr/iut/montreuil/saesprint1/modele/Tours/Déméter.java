@@ -6,12 +6,14 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 
 public class Déméter extends TourAvecPortée {
 
-
     public static int coutDéméter = 20;
+    private static int portéeDeBase = 3;
+    //Amélioration
+    private static int coutAmélioréDéméter = 25;
     private static int ralentissement = 1;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, 2, 0);
+        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 0);
         this.ralentissement = 1;
     }
     @Override
@@ -39,7 +41,7 @@ public class Déméter extends TourAvecPortée {
         }
     }
 
-        public void creerVégétation () {
+    public void creerVégétation () {
 
             int portée = this.getPortée();
             int maxX = this.getX() + portée - 16;
@@ -61,7 +63,7 @@ public class Déméter extends TourAvecPortée {
         }
 
     public void améliorer(){
-        super.améliorer(25, 0);
+        super.améliorer(coutAmélioréDéméter, 0);
     }
 
 }

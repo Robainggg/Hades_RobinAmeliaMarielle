@@ -7,7 +7,6 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 
 public class Dionysos extends Tour {
-
     //Initial
     public static int coutDionysos = 20;
     private static int espaceEntreAttaquesDeBase = 300;
