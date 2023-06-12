@@ -3,6 +3,7 @@ package fr.iut.montreuil.saesprint1.modele;
 import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,9 +37,15 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-        if(!(this.joueur.getArgent()-tour.getCout() < 0))
-            this.tours.add(tour);
 
+        if(this.joueur.getArgent()-tour.getCout() > 0){
+            if(tour instanceof Déméter){
+                ((Déméter) tour).creerVégétation();
+            }
+            this.tours.add(tour);
+            this.joueur.paie(tour.getCout());
+            System.out.println("le joueur paie une tour");
+        }
 
     }
 

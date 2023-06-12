@@ -122,21 +122,25 @@ public class HelloController implements Initializable {
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
         //Test pour affichage de base
-        Artémis artemis = new Artémis(2*32,2*32,evt);
-        Artémis tour = new Artémis(6*32,10*32,evt);
-        Tour dyo = new Dionysos(10*32,10*32,evt);
-        Tour poseidon = new Poséidon(9*32,7*32,evt);
-        Tour demeter = new Déméter(15*32,10*32,evt);
-        //ennemi = new Ennemi(evt);
-        //evt.ajouterEnnemi(ennemi);
-        //this.evt.ajouterTour(tour);
-        this.evt.ajouterTour(artemis);
-        this.evt.ajouterTour(dyo);
-        this.evt.ajouterTour(poseidon);
-        this.evt.ajouterTour(demeter);
+//        Artémis artemis = new Artémis(12*32,12*32,evt);
+//        Dionysos dyo = new Dionysos(10*32,10*32,evt);
+//        Poséidon poseidon = new Poséidon(9*32,7*32,evt);
+//        Déméter demeter = new Déméter(12*32,15*32,evt);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(dyo);
+//        this.evt.ajouterTour(poseidon);
+//        this.evt.ajouterTour(demeter);
+//
+//          dyo.améliorer();
+//        System.out.println("Dyonisos est-il amélioré ?"+dyo.isAmélioré());
+//          artemis.améliorer();
+//        System.out.println("Artemis est-il amélioré ?"+artemis.isAmélioré());
+//        poseidon.améliorer();
+//          demeter.améliorer();
+//        System.out.println("Déméter est-il amélioré ?"+demeter.isAmélioré());
 
 
-        
         initAnimation();
         gameLoop.play();
 

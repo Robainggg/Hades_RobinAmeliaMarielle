@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.SpriteTour;
 import javafx.collections.ListChangeListener;
@@ -10,11 +9,8 @@ public class ListObsTours implements ListChangeListener<Tour> {
 
     private Pane pane;
 
-    private Environnement evt;
-
-    public ListObsTours(Pane pane, Environnement evt) {
+    public ListObsTours(Pane pane) {
         this.pane = pane;
-        this.evt = evt;
     }
 
     @Override
@@ -22,9 +18,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
         while(c.next()){
             if(c.wasAdded()){
                Tour tour = c.getAddedSubList().get(0);
-               SpriteTour spriteTour = new SpriteTour(tour,pane, evt);
-               System.out.println("oui");
-              tour.getEnv().getJoueur().paie(tour.getCout());
+               SpriteTour spriteTour = new SpriteTour(tour,pane);
             }
         }
     }

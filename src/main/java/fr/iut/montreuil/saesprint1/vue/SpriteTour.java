@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1.vue;
 
-import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
@@ -20,38 +19,34 @@ import javafx.util.Duration;
 
 public class SpriteTour {
 
-
-
     private Tour tour;
     private Pane pane;
     private ImageView t;
 
     private Environnement evt;
-
-
     boolean ameliore = false;
 
     public SpriteTour(Tour tour, Pane pane, Environnement evt) {
         this.tour = tour;
         this.pane = pane;
-        this.evt = evt;
         this.t = new ImageView();
 
-/*
-            Circle c = new Circle(((TourAvecPortée) tour).getPortée());
-            c.setOpacity(0.1);
-            if(tour instanceof Artémis){
-                c.setFill(Color.PINK);
-            }
-            else if(tour instanceof Poséidon){
-                c.setFill(Color.CADETBLUE);
-            }
-
-            c.translateXProperty().bind(tour.centreTourX());
-            c.translateYProperty().bind(tour.centreTourY());
-            pane.getChildren().add(c);
-            c.setId("rangeOf" + tour.getId());
-*/
+//        if (tour instanceof TourAvecPortée) {
+//            Circle c = new Circle(((TourAvecPortée) tour).getPortée());
+//            c.setOpacity(0.1);
+//            if(tour instanceof Artémis){
+//                c.setFill(Color.PINK);
+//            }
+//            else if(tour instanceof Poséidon){
+//                c.setFill(Color.CADETBLUE);
+//            }
+//
+//            c.translateXProperty().bind(tour.centreTourX());
+//            c.translateYProperty().bind(tour.centreTourY());
+//            pane.getChildren().add(c);
+//            c.setId("rangeOf" + tour.getId());
+//
+//        }
 
         Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
         t.setImage(image);
