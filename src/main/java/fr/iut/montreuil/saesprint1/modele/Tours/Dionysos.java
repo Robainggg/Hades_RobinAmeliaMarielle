@@ -20,6 +20,7 @@ public class Dionysos extends Tour {
     @Override
     public void attaque() {
         if (!super.getEnv().getEnnemis().isEmpty()) {
+            System.out.println("Il y a un ennemi");
             if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
 
                 //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
@@ -27,6 +28,7 @@ public class Dionysos extends Tour {
                 Ennemi e = super.getEnv().getEnnemis().get(indice);
 
                 if (!super.isAmélioré()) {
+                    System.out.println("Bouteille");
                     //On cherche un nouvel ennemi si celui-ci est déjà en train de boire
                     while (e.getToursIvres() != 0) {
                         indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
@@ -40,6 +42,7 @@ public class Dionysos extends Tour {
 
                 }
                 else {
+                    System.out.println("Tonneau");
                     while (e.getToursEffetTonneau() != 0) {
                         indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
                         e = super.getEnv().getEnnemis().get(indice);
@@ -55,6 +58,7 @@ public class Dionysos extends Tour {
     }
 
     public void améliorer(){
+        System.out.println("Dyo s'améliore");
         super.améliorer(45,this.getEspaceEntreAttaques());
     }
 }

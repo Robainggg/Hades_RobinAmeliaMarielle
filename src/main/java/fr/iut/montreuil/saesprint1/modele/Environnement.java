@@ -36,8 +36,12 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-        if(!(this.joueur.getArgent()-tour.getCout() < 0))
+        if(this.joueur.getArgent()-tour.getCout() > 0){
             this.tours.add(tour);
+            this.joueur.paie(tour.getCout());
+            System.out.println("le joueur paie une tour");
+        }
+
     }
 
     public void ajouterEnnemi(Ennemi ennemi){

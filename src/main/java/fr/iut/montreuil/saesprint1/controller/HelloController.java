@@ -113,21 +113,20 @@ public class HelloController implements Initializable {
 
         //Test pour affichage de base
         Artémis artemis = new Artémis(8*32,12*32,evt);
-        Artémis tour = new Artémis(6*32,10*32,evt);
         Dionysos dyo = new Dionysos(10*32,10*32,evt);
         Poséidon poseidon = new Poséidon(9*32,7*32,evt);
-        Tour demeter = new Déméter(15*32,10*32,evt);
+        Déméter demeter = new Déméter(15*32,10*32,evt);
         //ennemi = new Ennemi(evt);
         //evt.ajouterEnnemi(ennemi);
-        //this.evt.ajouterTour(tour);
-        this.evt.ajouterTour(artemis);
-        this.evt.ajouterTour(dyo);
-        this.evt.ajouterTour(poseidon);
-        this.evt.ajouterTour(demeter);
+          this.evt.ajouterTour(artemis); //
+//          this.evt.ajouterTour(dyo);
+//          this.evt.ajouterTour(poseidon);
+          this.evt.ajouterTour(demeter);
 
-        dyo.améliorer();
-        artemis.améliorer();
-        poseidon.améliorer();
+//        dyo.améliorer();
+          artemis.améliorer();
+//        poseidon.améliorer();
+          demeter.améliorer();
 
 
 

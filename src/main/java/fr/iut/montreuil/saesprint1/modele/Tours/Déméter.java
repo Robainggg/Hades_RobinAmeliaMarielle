@@ -7,27 +7,32 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 public class Déméter extends TourAvecPortée {
 
     //Ici pour faciliter leur changement
-    private final static int cout = 20;
-    private final static int espaceEntreAttaques = 0;
-    private final static int portée = 4 ;
-    private static int ralentissement = 1;
+    private int ralentissement;
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", cout, x, y, env, portée, espaceEntreAttaques);
+        super("Déméter", 20, x, y, env, 3, 0);
+        this.ralentissement = 1;
         creerVégétation();
     }
     @Override
     public void attaque(){
 
-            //Créer de la végétation puis lui faire ralentir les ennemis tant qu'ils sont dans la portée de la tour
+            //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
             for (Ennemi e: this.getEnv().getEnnemis()) {
                 if(ennemiZone(e) != null && !e.estRalenti()){
                    e.seFaitRalentir(ralentissement);
                    System.out.println("ralentit un ennemi");
+
                 }
                 else if(ennemiZone(e) == null && e.estRalenti()) {
                     e.nestPlusRalenti(ralentissement);
                     System.out.println("ne ralentit plus l'ennemi");
                 }
+
+                //Les blesse si la tour est améliorée
+                if(super.isAmélioré()&&e.estRalenti()){
+                    e.pertPv(1);
+                }
+                
             }
     }
 
@@ -46,6 +51,10 @@ public class Déméter extends TourAvecPortée {
                 this.getEnv().ajouterAttaqueTours(vegetation);
             }
         }
+    }
+
+    public void améliorer(){
+        super.améliorer(25, 0);
     }
 
 }

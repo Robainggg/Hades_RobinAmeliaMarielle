@@ -10,7 +10,7 @@ public class Ennemi {
     //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
-    private int pv = 100;
+    private int pv = 300;
     private int vitesse;
 
     //Direction

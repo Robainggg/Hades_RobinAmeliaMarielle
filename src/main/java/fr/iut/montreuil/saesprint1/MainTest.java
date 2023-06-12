@@ -1,10 +1,8 @@
 package fr.iut.montreuil.saesprint1;
 
-import fr.iut.montreuil.saesprint1.modele.Case;
-import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.ParcoursBFS;
-import fr.iut.montreuil.saesprint1.modele.Terrain;
+import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
+import fr.iut.montreuil.saesprint1.modele.Tours.Dionysos;
 
 public class MainTest {
 
@@ -22,12 +20,17 @@ public class MainTest {
 
         //Test de l'amélioration
         Environnement environnement = new Environnement();
+        Ennemi ennemi = new Ennemi(environnement);
+
         Artémis tour1 = new Artémis(10,20,environnement);
-        System.out.println(tour1.getEspaceEntreAttaques());
-        System.out.println(tour1.getPortée());
-        tour1.améliorer();
-        System.out.println(tour1.getEspaceEntreAttaques());
-        tour1.attaque();
-        System.out.println(tour1.getPortée());
+        Dionysos dyo = new Dionysos(21,16,environnement);
+//        System.out.println(tour1.getEspaceEntreAttaques());
+//        System.out.println(tour1.getPortée());
+        System.out.println(dyo.getEspaceEntreAttaques());
+        dyo.attaque();
+        dyo.améliorer();
+        System.out.println(dyo.getEspaceEntreAttaques());
+        dyo.attaque();
+
     }
 }

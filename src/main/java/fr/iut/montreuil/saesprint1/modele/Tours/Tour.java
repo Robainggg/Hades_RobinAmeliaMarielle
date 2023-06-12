@@ -41,6 +41,7 @@ public abstract class Tour {
             this.setCout(coutAmélioration);
             this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
             this.setAmélioré(true);
+            System.out.println(amélioré);
         }
     }
 
