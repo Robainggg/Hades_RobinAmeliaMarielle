@@ -8,13 +8,20 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 
 public class Dionysos extends Tour {
 
+    //Initial
+    private static int coutDeBase = 20;
+    private static int espaceEntreAttaquesDeBase = 300;
+
+    //Amélioration
+    private static int coutAméliorationDionysos =  30;
+    private static int nouvelEspaceEntreAttaques = 200;
     private int nbToursIvres = 80;
 
-    private int nbToursTonneau = 120;
+    private int nbToursTonneau = 200;
 
 
     public Dionysos(int x, int y, Environnement env) {
-        super("Dionysos", 20, x, y, env, 300);
+        super("Dionysos", coutDeBase, x, y, env, espaceEntreAttaquesDeBase);
     }
 
     @Override
@@ -59,6 +66,6 @@ public class Dionysos extends Tour {
 
     public void améliorer(){
         System.out.println("Dyo s'améliore");
-        super.améliorer(45,this.getEspaceEntreAttaques());
+        super.améliorer(coutAméliorationDionysos,nouvelEspaceEntreAttaques);
     }
 }

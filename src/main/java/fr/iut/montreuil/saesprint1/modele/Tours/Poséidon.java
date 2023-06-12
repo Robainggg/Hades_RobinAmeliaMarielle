@@ -32,7 +32,7 @@ public class Poséidon extends TourAvecPortée{
 
     public void améliorer(){
         System.out.println("Poséidon s'améliore");
-        super.améliorer(45,400,10);
+        super.améliorer(45,400,12);
     }
 
 }
