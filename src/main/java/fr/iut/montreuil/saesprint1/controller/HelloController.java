@@ -135,7 +135,7 @@ public class HelloController implements Initializable {
         this.evt.ajouterTour(poseidon);
         this.evt.ajouterTour(demeter);
 
-        artemis.améliorer();
+
         
         initAnimation();
         gameLoop.play();
