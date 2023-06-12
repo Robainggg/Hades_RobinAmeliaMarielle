@@ -20,7 +20,6 @@ public class SpriteTour {
     private Tour tour;
     private Pane pane;
     private ImageView t;
-
     private Environnement evt;
 
     public SpriteTour(Tour tour, Pane pane, Environnement evt) {
