@@ -1,10 +1,7 @@
 package fr.iut.montreuil.saesprint1.vue;
 
 import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
-import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
-import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
+import fr.iut.montreuil.saesprint1.modele.Tours.*;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,7 +22,6 @@ public class SpriteTour {
     private ImageView t;
 
     private Environnement evt;
-    boolean ameliore = false;
 
     public SpriteTour(Tour tour, Pane pane, Environnement evt) {
         this.tour = tour;
@@ -58,7 +54,7 @@ public class SpriteTour {
         t.translateYProperty().bind(tour.getYProperty());
         pane.getChildren().add(t);
         t.setId(tour.getId());
-        if (!ameliore) {
+        if (!this.tour.isAmélioré()) {
             afficherAmélioration(t);
         }
 
@@ -114,9 +110,15 @@ public class SpriteTour {
         button.setOnAction(event -> {
             // Code pour gérer l'action du bouton "Améliorer"
             System.out.println("Bouton Améliorer cliqué !");
-            Image image = new Image(getClass().getResource("/images/tours/tour_ameliore.jpg").toExternalForm());
-            t.setImage(image);
-            ameliore = true;
+            if(tour instanceof Artémis){((Artémis) tour).améliorer();}
+            else if(tour instanceof Poséidon){((Poséidon) tour).améliorer();}
+            else if(tour instanceof Dionysos){((Dionysos) tour).améliorer();}
+            else if(tour instanceof Déméter){((Déméter) tour).améliorer();}
+            //Afficher la tour améliorée si l'amélioration s'est bien effectuée
+            if(this.tour.isAmélioré()) {
+                Image image = new Image(getClass().getResource("/images/tours/tour_ameliore.jpg").toExternalForm());
+                t.setImage(image);
+            }
         });
 
         Button boutonSupprimer = new Button("Supprimer");
@@ -135,7 +137,7 @@ public class SpriteTour {
         final boolean[] tooltipVisible = {false};
         imageView.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
-                if (!tooltipVisible[0] && !ameliore) {
+                if (!tooltipVisible[0] && !this.tour.isAmélioré()) {
                     String tourType = getTour().getClass().getSimpleName();
                     String tooltipText = "";
 
