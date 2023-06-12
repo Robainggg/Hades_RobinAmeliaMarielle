@@ -19,7 +19,6 @@ import javafx.util.Duration;
 // Créer une BufferedImage de 100 pixels de
 
 
-import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,28 +43,17 @@ public class HelloController implements Initializable {
     private ImageView imageTourPoséidon;
 
     @FXML
-    private ImageView imageTourDéméter;
-
-    @FXML
-    private ImageView imageTourDionysos;
-
-    @FXML
     private RadioButton boutonArthemis;
 
     @FXML
     private RadioButton boutonPoséidon;
 
     @FXML
-    private RadioButton boutonDéméter;
-
-    @FXML
-    private RadioButton boutonDionysos;
-
-    @FXML
     private ToggleGroup groupeRadio;
 
     @FXML
     private Button boutonAjouterTour;
+
 
 
     @FXML
@@ -147,7 +135,7 @@ public class HelloController implements Initializable {
         this.evt.ajouterTour(poseidon);
         this.evt.ajouterTour(demeter);
 
-       // artemis.améliorer();
+        artemis.améliorer();
         
         initAnimation();
         gameLoop.play();
