@@ -215,6 +215,7 @@ public class VueInventaire {
                     argentItem.setText("___");
                     panePrincipal.setOnMouseClicked(null);
                     boutonRadioSelectionne = false;
+                    groupeRadio.selectToggle(null);
                 });
 
             }
