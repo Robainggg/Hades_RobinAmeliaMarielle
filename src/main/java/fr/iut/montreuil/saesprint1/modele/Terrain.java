@@ -83,6 +83,7 @@ public class Terrain {
         return tabCases;
     }
 
+
     public boolean caseEstDansTerrain(Case c){
         return c.getI() >= 0 && c.getI() < dimX && c.getJ() >= 0 && c.getJ() < dimY;
     }
@@ -116,6 +117,16 @@ public class Terrain {
     public int getFinY() {
         return finY;
     }
+
+    public int get(int i){
+      return l.get(i);
+    }
+
+
+
+
+
+
 }
 
 
