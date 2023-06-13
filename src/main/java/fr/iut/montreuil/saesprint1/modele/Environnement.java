@@ -89,6 +89,17 @@ public class Environnement {
     public ObservableList<AttaqueTours> getAttaques() {
         return attaques;
     }
+
+    public boolean tourExiste ( int tourX, int tourY){
+        for (Tour tour : this.getTours()) {
+            int x = tour.getX() / Tour.tailleCase;
+            int y = tour.getY() / Tour.tailleCase;
+            if (x == tourX && y == tourY) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     public Joueur getJoueur() {
         return joueur;
