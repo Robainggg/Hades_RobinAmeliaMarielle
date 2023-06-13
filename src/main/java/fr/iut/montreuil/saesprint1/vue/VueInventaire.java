@@ -11,8 +11,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import javax.swing.*;
-
 import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
@@ -78,8 +76,6 @@ public class VueInventaire {
         this.evt = evt;
         chargerImage();
         this.placerDesTours();
-        this.afficherCaractéristiquesArthémis();
-        this.afficherCaractéristiquesPoséidon();
 
 
     }
@@ -87,12 +83,20 @@ public class VueInventaire {
     public void chargerImage() {
         Image tourArthemis = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourArthemis.setImage(tourArthemis);
+        this.afficherCaractéristiquesTours(imageTourArthemis);
+
         Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourPoséidon.setImage(tourPoséidon);
+        this.afficherCaractéristiquesTours(imageTourPoséidon);
+
         Image tourDémeter = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourDéméter.setImage(tourDémeter);
+        this.afficherCaractéristiquesTours(imageTourDéméter);
+
         Image tourDionysos = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
         imageTourDionysos.setImage(tourDionysos);
+        this.afficherCaractéristiquesTours(imageTourDionysos);
+
         Image background = new Image(getClass().getResourceAsStream("/images/boutique.png"));
         Image pieces = new Image(getClass().getResourceAsStream("/images/png_coins.jpg"));
         pieces1.setImage(pieces);
@@ -101,21 +105,18 @@ public class VueInventaire {
 
     }
 
-
     public void placerDesTours() {
-        placerUneTour();
+        selectionTour();
     }
-    private void placerUneTour() {
+    private void selectionTour() {
         boutonArthemis.setToggleGroup(groupeRadio);
         boutonArthemis.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 selectedType = "Arthémis";
-                //boutonPoséidon.setSelected(false);
                 boutonRadioSelectionne = true;
                 mettreAJourLabel();
-                afficherTour();
+                poserTour();
             }
-
         });
 
         boutonPoséidon.setToggleGroup(groupeRadio);
@@ -125,11 +126,8 @@ public class VueInventaire {
                 //boutonArthemis.setSelected(false);
                 boutonRadioSelectionne = true;
                 mettreAJourLabel();
-                afficherTour();
+                poserTour();
            }
-
-
-
         });
         boutonDemeter.setToggleGroup(groupeRadio);
         boutonDemeter.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -138,9 +136,8 @@ public class VueInventaire {
                 //boutonPoséidon.setSelected(false);
                 boutonRadioSelectionne = true;
                 mettreAJourLabel();
-                afficherTour();
+                poserTour();
             }
-
         });
 
         boutonDionysos.setToggleGroup(groupeRadio);
@@ -150,24 +147,20 @@ public class VueInventaire {
                 //boutonPoséidon.setSelected(false);
                 boutonRadioSelectionne = true;
                 mettreAJourLabel();
-                afficherTour();
+                poserTour();
             }
-
         });
-
-
-
     }
 
-        private void afficherTour(){
+        private void poserTour(){
         if (boutonRadioSelectionne) {
             boutonAjouterTour.setOnAction(event -> {
-                afficherTour2();
+                CréationTour();
             });
         }
     }
 
-        private void afficherTour2() {
+        private void CréationTour() {
             if (boutonArthemis.isSelected() || boutonPoséidon.isSelected() || boutonDemeter.isSelected()|| boutonDionysos.isSelected()) {
                 panePrincipal.setOnMouseClicked(event -> {
                     double mouseX = event.getX();
@@ -178,7 +171,7 @@ public class VueInventaire {
                     int tourX = (int) (mouseX / tilePane.getTileWidth());
                     int tourY = (int) (mouseY / tilePane.getTileHeight());
 
-                    if (!tourExiste(tourX, tourY)) {
+                    if (!evt.tourExiste(tourX, tourY)) {
                         // Calculer les coordonnées réelles du coin supérieur gauche de la tuile
                         double tileX = tourX * tilePane.getTileWidth();
                         double tileY = tourY * tilePane.getTileHeight();
@@ -210,7 +203,6 @@ public class VueInventaire {
                         }
                     }
 
-
                     nomItem.setText("___________________________");
                     argentItem.setText("___");
                     panePrincipal.setOnMouseClicked(null);
@@ -223,70 +215,41 @@ public class VueInventaire {
 
 
 
-    public void afficherCaractéristiquesArthémis () {
 
-        Tooltip tooltip = new Tooltip();
-        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-        final boolean[] tooltipVisible = {false};
+    public void afficherCaractéristiquesTours(ImageView im) {
 
-        imageTourArthemis.setOnMousePressed(event -> {
+        Tooltip tool = new Tooltip();
+
+        if (im.equals(imageTourArthemis))
+            tool.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10 \nPortée : 4");
+        else if (im.equals(imageTourPoséidon))
+            tool.setText("Caractéristiques de la tour Poséidon :\nAttaque : 8\nPortée : 5");
+        else if (im.equals(imageTourDéméter))
+            tool.setText("Caractéristiques de la tour Démeter :\nRalenstissement \nPortée : 4");
+        else if (im.equals(imageTourDionysos))
+            tool.setText("Caractéristiques de la tour Dionysos : \nrend ivre 1 ennemi");
+
+        final boolean[] tooltip = {false};
+        im.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown()) {
-                if (!tooltipVisible[0]) {
-                    Tooltip.install(imageTourArthemis, tooltip);
-                    tooltip.show(imageTourArthemis, event.getScreenX(), event.getScreenY());
-                    tooltipVisible[0] = true;
+                if (!tooltip[0]) {
+                    Tooltip.install(imageTourPoséidon, tool);
+                    tool.show(imageTourPoséidon, event.getScreenX(), event.getScreenY());
+                    tooltip[0] = true;
 
                     PauseTransition pause = new PauseTransition(Duration.seconds(2));
                     pause.setOnFinished(e -> {
-                        tooltip.hide();
-                        Tooltip.uninstall(imageTourArthemis, tooltip);
-                        tooltipVisible[0] = false;
+                        tool.hide();
+                        Tooltip.uninstall(imageTourPoséidon, tool);
+                        tooltip[0] = false;
                     });
                     pause.play();
                 }
                 event.consume();
             }
         });
-
-
-    }
-    public void afficherCaractéristiquesPoséidon() {
-        Tooltip tooltipPoséidon = new Tooltip();
-        tooltipPoséidon.setText("Caractéristiques de la tour Poséidon :\nAttaque : 8\nPortée : 5");
-        final boolean[] tooltipVisiblePoséidon = {false};
-
-        imageTourPoséidon.setOnMousePressed(event -> {
-            if (event.isPrimaryButtonDown()) {
-                if (!tooltipVisiblePoséidon[0]) {
-                    Tooltip.install(imageTourPoséidon, tooltipPoséidon);
-                    tooltipPoséidon.show(imageTourPoséidon, event.getScreenX(), event.getScreenY());
-                    tooltipVisiblePoséidon[0] = true;
-
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
-                    pause.setOnFinished(e -> {
-                        tooltipPoséidon.hide();
-                        Tooltip.uninstall(imageTourPoséidon, tooltipPoséidon);
-                        tooltipVisiblePoséidon[0] = false;
-                    });
-                    pause.play();
-                }
-                event.consume();
-            }
-        });
-
-
     }
 
-    private boolean tourExiste ( int tourX, int tourY){
-        for (Tour tour : evt.getTours()) {
-            int x = tour.getX() / Tour.tailleCase;
-            int y = tour.getY() / Tour.tailleCase;
-            if (x == tourX && y == tourY) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     private void mettreAJourLabel() {
 
