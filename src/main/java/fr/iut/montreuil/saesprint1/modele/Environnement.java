@@ -37,7 +37,7 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-        if (this.joueur.getArgent() - tour.getCout() > 0) {
+        if (this.joueur.getArgent() - tour.getCout() >= 0) {
             if (tour instanceof Déméter) {
                 ((Déméter) tour).creerVégétation();
             }

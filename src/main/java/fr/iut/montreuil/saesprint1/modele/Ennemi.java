@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1.modele;
 
-import fr.iut.montreuil.saesprint1.vue.SpriteEnnemi;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,7 +28,8 @@ public class Ennemi {
     private int recompense;
     private boolean estSorti;
     private boolean estRalenti;
-    private int ToursIvres;
+    private int toursIvres;
+    private int toursEffetTonneau;
 
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
@@ -39,7 +39,7 @@ public class Ennemi {
         this.estSorti = false;
         this.estMort = false;
         this.estRalenti = false;
-        this.ToursIvres = 0;
+        this.toursIvres = 0;
 
 
         this.coordXDepart = coordXDepart;
@@ -130,11 +130,11 @@ public class Ennemi {
 
     public void agit(){
 
-        if(this.ToursIvres == 0){
+        if(this.toursIvres == 0){
             this.seDeplace();
         }
         else
-            this.ToursIvres--;
+            this.toursIvres--;
         
     }
     public void meurt(){
@@ -175,11 +175,11 @@ public class Ennemi {
         return environnement;
     }
     public int getToursIvres() {
-        return ToursIvres;
+        return toursIvres;
     }
 
     public void setToursIvres(int toursIvres) {
-        ToursIvres = toursIvres;
+        this.toursIvres = toursIvres;
     }
 
 
@@ -248,9 +248,11 @@ public class Ennemi {
     }
 
 
+    public int getToursEffetTonneau() { return toursEffetTonneau;}
 
-
-
+    public void setToursEffetTonneau(int toursEffetTonneau) {
+        this.toursEffetTonneau = toursEffetTonneau;
+    }
 }
 
 
