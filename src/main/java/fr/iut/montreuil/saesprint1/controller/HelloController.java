@@ -1,18 +1,19 @@
 package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.*;
+import fr.iut.montreuil.saesprint1.modele.Tours.*;
+import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
@@ -34,52 +35,109 @@ public class HelloController implements Initializable {
     @FXML
     private Circle testCercleEnnemi;
 
+
+    @FXML
+    private ImageView imageTourArthemis;
+
+    @FXML
+    private ImageView imageTourPoséidon;
+
+    @FXML
+    private RadioButton boutonArthemis;
+
+    @FXML
+    private RadioButton boutonPoséidon;
+
+    @FXML
+    private ToggleGroup groupeRadio;
+
+    @FXML
+    private Button boutonAjouterTour;
+
+
+
+    @FXML
+    private Label argent;
+
+    @FXML
+    private Label pv;
+
+    @FXML
+    private VBox vboutique;
+
+    @FXML
+    private ImageView boutique_bg;
+
     private int temps;
 
     private Terrain terrain;
 
+    private Environnement evt;
+
     private VueTerrain vueTerrain;
 
+    private VueInventaire vueInventaire;
     private Timeline gameLoop;
 
-    private Environnement environnement;
+    private ListObsEnnemis listenerEnnemis;
 
     private Ennemi ennemi;
 
-    private ListObsProjectile listenersProjectiles;
+    private ListObsAttaquesTours listenersAttaques;
     private ListObsTours listenersTours;
+
+    private Tour tourEnCoursAjout ;
+    private boolean ajoutTourEnCours = false;
+    private String typeTourSelectionne;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.terrain=new Terrain();
-        this.vueTerrain = new VueTerrain(tilePane, terrain);
-        this.environnement = new Environnement(this.terrain);
-        this.listenersProjectiles = new ListObsProjectile(panePrincipal);
+        //Chargement de l'environnement et du Terrain
+        this.evt = new Environnement();
+        this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
+
+        //Chargement de l'inventaire
+        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, boutonArthemis,  boutonPoséidon, groupeRadio, boutonAjouterTour, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+
+        //Listeners
+        listenerEnnemis = new ListObsEnnemis(panePrincipal);
+        this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal);
-        this.environnement.getProjectiles().addListener(listenersProjectiles);
-        this.environnement.getTours().addListener(listenersTours);
 
-        //Pour le test
-        ennemi = new Ennemi(terrain);
-        testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
-        testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
-        Tour tour = new Artémis(12,10,environnement);
-        Tour tour1 = new Artémis(17,8,environnement);
+        this.evt.getEnnemis().addListener(listenerEnnemis);
+        this.evt.getAttaques().addListener(listenersAttaques);
+        this.evt.getTours().addListener(listenersTours);
 
-        this.environnement.ajouterTour(tour);
-        this.environnement.ajouterTour(tour1);
-        this.environnement.ajouterEnnemi(ennemi);
-        
+        this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
+        this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
+        //Test pour affichage de base
+        Artémis artemis = new Artémis(12*32,12*32,evt);
+        Dionysos dyo = new Dionysos(10*32,10*32,evt);
+        Poséidon poseidon = new Poséidon(9*32,7*32,evt);
+        Déméter demeter = new Déméter(12*32,15*32,evt);
+          this.evt.ajouterTour(artemis);
+//          this.evt.ajouterTour(dyo);
+//          this.evt.ajouterTour(poseidon);
+//          this.evt.ajouterTour(demeter);
+
+//          dyo.améliorer();
+//        System.out.println("Dyonisos est-il amélioré ?"+dyo.isAmélioré());
+          artemis.améliorer();
+//        System.out.println("Artemis est-il amélioré ?"+artemis.isAmélioré());
+//        poseidon.améliorer();
+          demeter.améliorer();
+        System.out.println("Déméter est-il amélioré ?"+demeter.isAmélioré());
+
+
         initAnimation();
         gameLoop.play();
-
-        this.terrain.afficheTableau();
 
     }
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps = 0;
+        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -88,47 +146,28 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(temps%100 == 0)
-                        if(environnement.getEnnemis().size()<10)
-                            this.environnement.ajouterEnnemi(new Ennemi(terrain));
-                    if(ennemi.estArriveAuBout()){
-                        System.out.println("fini");
+                    if(temps%60 == 0)
+                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    if(this.evt.getJoueur().getPv() <=0)
                         gameLoop.stop();
-                    }
-                    else if (temps%4 == 0){
-                        if(ennemi.estArrivé()) {
-                            if(ennemi.getBfs().getParcours().size()==0)
-                                gameLoop.stop();
-                            ennemi.changeProchaineCase();
-                            //System.out.println(ennemi.getProchaineCase());
-                            if(ennemi.getProchaineCase() != null)
-                                ennemi.definirDirection();
-                            //System.out.println(ennemi.getDirection());
-                        }
-                        if(ennemi.getDirection() == 'd'){
-                            ennemi.setCoordX(ennemi.getCoordX()+2);
-                        }
-                        else if (ennemi.getDirection() == 'g'){
-                            ennemi.setCoordX(ennemi.getCoordX()-2);
-                        }
-                        else if (ennemi.getDirection() == 'h'){
-                            ennemi.setCoordY(ennemi.getCoordY()-2);
-                        }
-                        else if (ennemi.getDirection() == 'b'){
-                            ennemi.setCoordY(ennemi.getCoordY()+2);
-                        }
-                        //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
-
+                    this.evt.getVagueActuelle().prochainEnnemi();
+                    this.evt.nouvelleVague();
+                    for(int i = 0; i < evt.getEnnemis().size();i++) {
+//                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
+//                            System.out.println("fini");
+//                            gameLoop.stop();
+//                        }
+//                        else{
+                        evt.getEnnemis().get(i).agit();
+                        //}
                     }
 
-                    for (Tour tour: this.environnement.getTours()) {
-                            if(temps% (tour.getNbAttaques()*Tour.tailleCase) == 0) {
-                                tour.attaque();
-                            }
+                    for (Tour tour: this.evt.getTours()) {
+                        tour.attaque();
                     }
 
-                    for (Projectile projectile : this.environnement.getProjectiles()) {
-                        projectile.avance();
+                    for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
+                       this.evt.getAttaques().get(i).agit();
                     }
                     
                     temps++;
@@ -136,6 +175,5 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-    
 
 }

@@ -1,6 +1,6 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Tour;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.SpriteTour;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

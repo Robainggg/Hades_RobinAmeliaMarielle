@@ -1,22 +1,35 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
+import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
+import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 public class Environnement {
 
     private ObservableList<Ennemi> ennemis;
     private ObservableList<Tour> tours;
-    private ObservableList<Projectile> projectiles;
+    private ObservableList<AttaqueTours> attaques;
     private Terrain terrain;
+    private int temps;
+    private ParcoursBFS bfs;
+    private Joueur joueur;
+    private int niveau;
+    private VagueEnnemie vagueActuelle;
 
-    public Environnement(Terrain terrain) {
+    public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
-        this.projectiles = FXCollections.observableArrayList();
-        this.terrain = terrain;
+        this.attaques = FXCollections.observableArrayList();
+        this.terrain = new Terrain();
+        this.temps = 0;
+        this.bfs = new ParcoursBFS(terrain);
+        this.joueur = new Joueur();
+        this.niveau = 0;
+        this.vagueActuelle = new VagueEnnemie(this,joueur);
     }
 
     public ObservableList<Ennemi> getEnnemis() {
@@ -24,17 +37,26 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-        this.tours.add(tour);
+        
+        if(this.joueur.getArgent()-tour.getCout() > 0){
+            if(tour instanceof Déméter){
+                ((Déméter) tour).creerVégétation();
+            }
+            this.tours.add(tour);
+            this.joueur.paie(tour.getCout());
+            System.out.println("le joueur paie une tour");
+        }
+        
     }
 
     public void ajouterEnnemi(Ennemi ennemi){
         this.ennemis.add(ennemi);
     }
 
-    public void ajouterProjectile(Projectile projectile){this.projectiles.add(projectile);}
+    public void ajouterAttaqueTours(AttaqueTours attaqueTours){this.attaques.add(attaqueTours);}
 
-    public void supprimerProjectile(Projectile projectile){
-        this.projectiles.remove(projectile);
+    public void supprimerAttaqueTours(AttaqueTours attaqueTours){
+        this.attaques.remove(attaqueTours);
     }
 
     public Terrain getTerrain() {
@@ -45,8 +67,38 @@ public class Environnement {
         return tours;
     }
 
-    public ObservableList<Projectile> getProjectiles() {
-        return projectiles;
+    public void augmenteTemps(){
+        this.temps++;
+    }
+    public int getTemps() {
+        return temps;
     }
 
+    public ParcoursBFS getBfs() {
+        return bfs;
+    }
+
+    public ObservableList<AttaqueTours> getAttaques() {
+        return attaques;
+    }
+    
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void nouvelleVague(){
+
+        if(this.vagueActuelle.isVagueEstFinie()) {
+            niveau++;
+            this.vagueActuelle = new VagueEnnemie(this, joueur);
+        }
+    }
+
+    public VagueEnnemie getVagueActuelle() {
+        return vagueActuelle;
+    }
 }
