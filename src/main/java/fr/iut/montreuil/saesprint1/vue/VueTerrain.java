@@ -42,11 +42,14 @@ public class VueTerrain {
     }
     
     public ImageView chargerImage(int indice) throws FileNotFoundException {
+        int indiceUtilisé = indice;
+        if(indiceUtilisé == 1)
+            indiceUtilisé = 367;
 
         ImageView imageview = new ImageView(tileset);
         int tileWidth=32;
         int tileHeight=32;
-        int indiceTile=indice;
+        int indiceTile=indiceUtilisé;
         int tileParLigne= (int)(tileset.getWidth()/tileWidth);
         int indiceLigne= indiceTile/tileParLigne;
         int indiceColonne = indiceTile %tileParLigne;
