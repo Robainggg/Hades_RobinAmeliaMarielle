@@ -11,6 +11,8 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import javax.swing.*;
+
 import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
 //import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
@@ -78,6 +80,7 @@ public class VueInventaire {
         this.placerDesTours();
 
 
+
     }
 
     public void chargerImage() {
@@ -105,6 +108,7 @@ public class VueInventaire {
 
     }
 
+
     public void placerDesTours() {
         selectionTour();
     }
@@ -113,10 +117,12 @@ public class VueInventaire {
         boutonArthemis.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 selectedType = "Arthémis";
+                //boutonPoséidon.setSelected(false);
                 boutonRadioSelectionne = true;
                 mettreAJourLabel();
                 poserTour();
             }
+
         });
 
         boutonPoséidon.setToggleGroup(groupeRadio);
@@ -138,6 +144,7 @@ public class VueInventaire {
                 mettreAJourLabel();
                 poserTour();
             }
+
         });
 
         boutonDionysos.setToggleGroup(groupeRadio);
@@ -149,7 +156,11 @@ public class VueInventaire {
                 mettreAJourLabel();
                 poserTour();
             }
+
         });
+
+
+
     }
 
         private void poserTour(){
@@ -203,6 +214,7 @@ public class VueInventaire {
                         }
                     }
 
+
                     nomItem.setText("___________________________");
                     argentItem.setText("___");
                     panePrincipal.setOnMouseClicked(null);
@@ -215,6 +227,12 @@ public class VueInventaire {
 
 
 
+    public void afficherCaractéristiquesArthémis () {
+
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
+        final boolean[] tooltipVisible = {false};
+    }
 
     public void afficherCaractéristiquesTours(ImageView im) {
 
@@ -248,6 +266,8 @@ public class VueInventaire {
                 event.consume();
             }
         });
+
+
     }
 
 

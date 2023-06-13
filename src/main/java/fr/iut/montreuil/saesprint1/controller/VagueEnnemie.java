@@ -6,7 +6,9 @@ import fr.iut.montreuil.saesprint1.modele.Joueur;
 
 public class VagueEnnemie {
 
-    private Environnement environnement;
+    private Partie partie;
+
+    Environnement environnement;
 
     private int temps;
 
@@ -16,24 +18,28 @@ public class VagueEnnemie {
 
     private int cadenceApparition;
 
+    private boolean alterneSpawn;
+
     private boolean vagueEstFinie;
 
-    public VagueEnnemie(Environnement environnement, Joueur joueur){
-        this.environnement = environnement;
+    public VagueEnnemie(Partie partie, Joueur joueur, Environnement environnement){
+        this.partie = partie;
         this.joueur = joueur;
+        this.alterneSpawn = false;
+        this.environnement = environnement;
 
         this.temps = 1;
 
-        this.nbEnnemis = environnement.getNiveau() * 5;
+        this.nbEnnemis = partie.getNiveau() * 5 + 5;
 
-        if(this.environnement.getNiveau() >= 6)
+        if(this.partie.getNiveau() >= 6)
             this.cadenceApparition = 60;
         else
-           this.cadenceApparition  = 240 - 30 * environnement.getNiveau();
+           this.cadenceApparition  = 240 - 30 * partie.getNiveau();
 
         this.vagueEstFinie = false;
 
-        System.out.println("Une nouvelle vague de niveau " + this.environnement.getNiveau() + " est créée");
+        System.out.println("Une nouvelle vague de niveau " + this.partie.getNiveau() + " est créée");
 
     }
 
@@ -42,7 +48,17 @@ public class VagueEnnemie {
         this.incrementeTemps();
         if(this.nbEnnemis > 0 && this.temps%cadenceApparition == 0) {
             nbEnnemis--;
-            this.environnement.ajouterEnnemi(new Ennemi(environnement));
+            if(!alterneSpawn) {
+                this.environnement.ajouterEnnemi(new Ennemi(environnement, 0, 2));
+                this.environnement.ajouterEnnemi(new Ennemi(environnement, 0, 3));
+
+                alterneSpawn = !alterneSpawn;
+            }
+            else {
+                this.environnement.ajouterEnnemi(new Ennemi(environnement, 1, 19));
+                alterneSpawn = !alterneSpawn;
+            }
+
         }
         if(this.nbEnnemis == 0)
             this.vagueEstFinie = true;

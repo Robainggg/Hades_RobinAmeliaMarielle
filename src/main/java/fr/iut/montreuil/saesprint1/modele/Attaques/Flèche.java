@@ -7,7 +7,7 @@ public class Flèche extends Projectile {
 
     private Artémis tourArtémis;
     private static int degats = 5;
-    private static int vitesse = 6;
+    private static int vitesse = 8;
     
     public Flèche(Artémis tour,int coordXEnnemi, int coordYEnnemi) {
         super(tour, coordXEnnemi, coordYEnnemi,vitesse);
