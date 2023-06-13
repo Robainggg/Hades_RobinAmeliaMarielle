@@ -1,13 +1,18 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
-import fr.iut.montreuil.saesprint1.modele.Terrain;
+import fr.iut.montreuil.saesprint1.modele.*;
+import fr.iut.montreuil.saesprint1.modele.Tours.*;
+import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -20,34 +25,125 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+
+    @FXML
+    private Pane panePrincipal;
+
     @FXML
     private TilePane tilePane;
 
+    @FXML
+    private ImageView imageTourArthemis;
 
     @FXML
-    private Circle testCercleEnnemi;
+    private ImageView imageTourPoséidon;
 
-    private Terrain terrain;
+    @FXML
+    private RadioButton boutonArthemis;
 
-    private VueTerrain vueTerrain;
+    @FXML
+    private RadioButton boutonPoséidon;
+    @FXML
+    private ImageView imageTourDéméter;
+    @FXML
+    private  ImageView imageTourDionysos;
+    @FXML
+    private RadioButton boutonDéméter;
+    @FXML
+    private RadioButton boutonDionysos;
+    @FXML
+    private ToggleGroup groupeRadio;
 
-    private Timeline gameLoop;
+    @FXML
+    private Button boutonAjouterTour;
+
+    @FXML
+    private Label argent;
+
+    @FXML
+    private Label pv;
+
+    @FXML
+    private VBox vboutique;
+
+    @FXML
+    private ImageView boutique_bg;
+
+    @FXML
+    private Label nomItem;
+    @FXML
+    private Label argentItem;
+
+    @FXML
+    private ImageView pieces;
+    @FXML
+    private ImageView pieces2;
 
     private int temps;
 
+    private Terrain terrain;
+
+    private Environnement evt;
+
+    private VueTerrain vueTerrain;
+
+    private VueInventaire vueInventaire;
+    private Timeline gameLoop;
+
+    private ListObsEnnemis listenerEnnemis;
+
     private Ennemi ennemi;
+
+    private ListObsAttaquesTours listenersAttaques;
+    private ListObsTours listenersTours;
+
+    private Tour tourEnCoursAjout ;
+    private boolean ajoutTourEnCours = false;
+    private String typeTourSelectionne;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.terrain=new Terrain();
-        this.vueTerrain = new VueTerrain(tilePane, terrain);
-        ennemi = new Ennemi(terrain);
-        testCercleEnnemi.translateXProperty().bind(ennemi.coordXProperty());
-        testCercleEnnemi.translateYProperty().bind(ennemi.coordYProperty());
+        //Chargement de l'environnement et du Terrain
+        this.evt = new Environnement();
+        this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
+
+        //Chargement de l'inventaire
+        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+
+        //Listeners
+        listenerEnnemis = new ListObsEnnemis(panePrincipal);
+        this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
+        this.listenersTours = new ListObsTours(panePrincipal,evt);
+
+        this.evt.getEnnemis().addListener(listenerEnnemis);
+        this.evt.getAttaques().addListener(listenersAttaques);
+        this.evt.getTours().addListener(listenersTours);
+
+        this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
+        this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
+        //Test pour affichage de base
+//        Artémis artemis = new Artémis(12*32,12*32,evt);
+//        Dionysos dyo = new Dionysos(10*32,10*32,evt);
+//        Poséidon poseidon = new Poséidon(9*32,7*32,evt);
+//        Déméter demeter = new Déméter(12*32,15*32,evt);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(dyo);
+//        this.evt.ajouterTour(poseidon);
+//        this.evt.ajouterTour(demeter);
+//
+//          dyo.améliorer();
+//        System.out.println("Dyonisos est-il amélioré ?"+dyo.isAmélioré());
+//          artemis.améliorer();
+//        System.out.println("Artemis est-il amélioré ?"+artemis.isAmélioré());
+//        poseidon.améliorer();
+//          demeter.améliorer();
+//        System.out.println("Déméter est-il amélioré ?"+demeter.isAmélioré());
+
+
         initAnimation();
         gameLoop.play();
-
-        this.terrain.afficheTableau();
 
     }
 
@@ -62,40 +158,34 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    if(ennemi.estArriveAuBout()){
-                        System.out.println("fini");
+//                    if(temps%60 == 0)
+//                        this.evt.ajouterEnnemi(new Ennemi(evt));
+                    if(this.evt.getJoueur().getPv() <=0)
                         gameLoop.stop();
+                    this.evt.getVagueActuelle().prochainEnnemi();
+                    this.evt.nouvelleVague();
+                    for(int i = 0; i < evt.getEnnemis().size();i++) {
+//                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
+//                            System.out.println("fini");
+//                            gameLoop.stop();
+//                        }
+//                        else{
+                        evt.getEnnemis().get(i).agit();
+                        //}
                     }
-                    else{
-                        if(ennemi.estArrivé()) {
-                            if(ennemi.getBfs().getParcours().size()==0)
-                                gameLoop.stop();
-                            ennemi.changeProchaineCase();
-                            System.out.println(ennemi.getProchaineCase());
-                            if(ennemi.getProchaineCase() != null)
-                                ennemi.definirDirection();
-                            System.out.println(ennemi.getDirection());
-                        }
-                        if(ennemi.getDirection() == 'd'){
-                            ennemi.setCoordX(ennemi.getCoordX()+2);
-                        }
-                        else if (ennemi.getDirection() == 'g'){
-                            ennemi.setCoordX(ennemi.getCoordX()-2);
-                        }
-                        else if (ennemi.getDirection() == 'h'){
-                            ennemi.setCoordY(ennemi.getCoordY()-2);
-                        }
-                        else if (ennemi.getDirection() == 'b'){
-                            ennemi.setCoordY(ennemi.getCoordY()+2);
-                        }
-                        //System.out.println(ennemiTesté.estArrivé() + " ennemi a pour coordonnées: " + ennemiTesté.getCoordX() + " , " + ennemiTesté.getCoordY() + " et pour destination " + (ennemiTesté.getProchaineCase().getI()*32-16) + " ," + (ennemiTesté.getProchaineCase().getJ()*32-16));
 
+                    for (Tour tour: this.evt.getTours()) {
+                        tour.attaque();
                     }
+
+                    for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
+                       this.evt.getAttaques().get(i).agit();
+                    }
+                    
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
 
 }
