@@ -128,9 +128,10 @@ public class SpriteTour {
             else if(tour instanceof Poséidon){((Poséidon) tour).améliorer();}
             else if(tour instanceof Dionysos){((Dionysos) tour).améliorer();}
             else if(tour instanceof Déméter){((Déméter) tour).améliorer();}
-            ameliore = true;
+            
             //Afficher la tour améliorée si l'amélioration s'est bien effectuée
             if(this.tour.isAmélioré()) {
+                ameliore = true;
                 Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
                 t.setImage(image);
             }

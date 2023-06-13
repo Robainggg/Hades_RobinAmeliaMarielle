@@ -16,10 +16,13 @@ public abstract class Tour {
 
     //De combien de tours sont espacés ses attaques
     private int espaceEntreAttaques;
-    public static int idTour = 0 ;
+
+    private static String idTour;
+    public static int compteur = 0 ;
 
     private int temps = 0;
 
+    private boolean amélioré = false;
 
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
@@ -28,11 +31,22 @@ public abstract class Tour {
         this.y = new SimpleIntegerProperty(y);
         this.env = env;
         this.espaceEntreAttaques = espaceEntreAttaques;
-        this.idTour = idTour;
-        idTour++;
-
+        this.idTour = "Tour";
+        compteur++;
     }
     public abstract void attaque();
+
+    public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){
+        if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
+            System.out.println("entre Tour");
+            this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
+            this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
+            this.setAmélioré(true);
+        }
+        System.out.println(this.amélioré);
+    }
+
+    public boolean isAmélioré() { return this.amélioré;}
 
     public void incrementeTemps(){this.temps += 1;}
     //Getters & Setters
@@ -81,7 +95,7 @@ public abstract class Tour {
     }
 
     public String getId(){
-        return "Tour"+this.idTour;
+        return this.idTour;
     }
 
     @Override
@@ -102,5 +116,11 @@ public abstract class Tour {
         return getX();
     }
 
+    public void setAmélioré(boolean amélioré) {
+        this.amélioré = amélioré;
+    }
 
+    public void setEspaceEntreAttaques(int espaceEntreAttaques) {
+        this.espaceEntreAttaques = espaceEntreAttaques;
+    }
 }

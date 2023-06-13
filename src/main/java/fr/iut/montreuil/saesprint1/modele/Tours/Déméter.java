@@ -63,7 +63,8 @@ public class Déméter extends TourAvecPortée {
         }
 
     public void améliorer(){
-        super.améliorer(coutAmélioréDéméter, 0);
+        super.améliorer(coutAmélioréDéméter, 0,3);
+        creerVégétation();
     }
 
 }
