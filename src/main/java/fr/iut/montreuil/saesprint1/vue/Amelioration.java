@@ -14,7 +14,6 @@ public class Amelioration {
     public void afficherAmélioration() {
         spriteTour.getT().setOnMouseClicked(event -> {
 
-
         });
     }
 }

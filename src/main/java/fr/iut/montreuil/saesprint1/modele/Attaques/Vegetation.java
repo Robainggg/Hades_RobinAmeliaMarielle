@@ -6,6 +6,7 @@ public class Vegetation extends AttaqueTours{
     public Vegetation(Tour tour, int coordXArrivé, int coordYArrivé) {
 
         super(tour, coordXArrivé, coordYArrivé);
+        
     }
     @Override
     public void agit() {
