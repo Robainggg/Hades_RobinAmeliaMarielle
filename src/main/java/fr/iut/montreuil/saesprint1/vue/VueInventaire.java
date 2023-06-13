@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
-import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
+//import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Poséidon.coutPoséidon;
 
@@ -81,19 +81,19 @@ public class VueInventaire {
     }
 
     public void chargerImage() {
-        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourArthemis.setImage(tourArthemis);
         this.afficherCaractéristiquesTours(imageTourArthemis);
 
-        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourPoséidon.setImage(tourPoséidon);
         this.afficherCaractéristiquesTours(imageTourPoséidon);
 
-        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourDéméter.setImage(tourDémeter);
         this.afficherCaractéristiquesTours(imageTourDéméter);
 
-        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourDionysos.setImage(tourDionysos);
         this.afficherCaractéristiquesTours(imageTourDionysos);
 
@@ -177,7 +177,7 @@ public class VueInventaire {
                         double tileY = tourY * tilePane.getTileHeight();
 
                         // Créer la tour à l'emplacement du clic
-                        if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
+                        if (evt.getTerrain().get(tourY * 30 + tourX) == 371) {
                             Tour t;
 
 
@@ -284,7 +284,7 @@ public class VueInventaire {
         } else if (tourName.equals("Déméter")){
             return coutDéméter;
         }else if (tourName.equals("Dionysos")){
-            return coutDionysos;
+            return 20;
         }
         return 0;
     }
