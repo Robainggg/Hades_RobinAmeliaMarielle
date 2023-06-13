@@ -53,7 +53,7 @@ public class ParcoursBFS {
 
                 if (terrain.caseEstDansTerrain(new Case(nextI, nextJ))
                         && terrain.getTableauTerrain()[nextJ][nextI] != 0
-                        && BFS[nextJ][nextI] == -1 && terrain.getTableauTerrain()[nextJ][nextI] != 114 ) {
+                        && BFS[nextJ][nextI] == -1 && terrain.getTableauTerrain()[nextJ][nextI] != 371 ) {
 
                     if (BFS[nextJ][nextI] > BFS[cJ][cI] + 1 || BFS[nextJ][nextI] == -1) {
                         aFaire.add(new Case(nextI, nextJ));

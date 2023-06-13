@@ -11,8 +11,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import javax.swing.*;
-
 import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
@@ -85,13 +83,13 @@ public class VueInventaire {
     }
 
     public void chargerImage() {
-        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/tours/artemisHD.png"));
         imageTourArthemis.setImage(tourArthemis);
-        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/tours/poseidonHD.png"));
         imageTourPoséidon.setImage(tourPoséidon);
-        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourDéméter.setImage(tourDémeter);
-        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/Tower-PNG-Image.png"));
+        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
         imageTourDionysos.setImage(tourDionysos);
         Image background = new Image(getClass().getResourceAsStream("/images/boutique.png"));
         Image pieces = new Image(getClass().getResourceAsStream("/images/png_coins.jpg"));
@@ -184,7 +182,7 @@ public class VueInventaire {
                         double tileY = tourY * tilePane.getTileHeight();
 
                         // Créer la tour à l'emplacement du clic
-                        if (evt.getTerrain().get(tourY * 30 + tourX) == 114) {
+                        if (evt.getTerrain().get(tourY * 30 + tourX) == 371) {
                             Tour t;
 
 

@@ -4,21 +4,21 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
 import fr.iut.montreuil.saesprint1.modele.Tours.Poséidon;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
-import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
+
 public class SpriteTour {
+
+    final static Image artemis = new Image(SpriteTour.class.getResource("/images/tours/artemis.png").toExternalForm());
+    final static Image poseidon = new Image(SpriteTour.class.getResource("/images/tours/poseidon.png").toExternalForm());
 
 
 
@@ -36,6 +36,7 @@ public class SpriteTour {
         this.pane = pane;
         this.evt = evt;
         this.t = new ImageView();
+        Image image;
 
 /*
             Circle c = new Circle(((TourAvecPortée) tour).getPortée());
@@ -53,7 +54,13 @@ public class SpriteTour {
             c.setId("rangeOf" + tour.getId());
 */
 
-        Image image = new Image(getClass().getResource("/images/Tower-PNG-Image.png").toExternalForm());
+       // Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
+        if(tour instanceof Artémis)
+            image = artemis;
+        else if(tour instanceof Poséidon)
+            image = poseidon;
+        else
+            image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
         t.setImage(image);
         t.setFitWidth(32);
         t.setFitHeight(32);

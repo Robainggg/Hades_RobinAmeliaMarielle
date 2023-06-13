@@ -134,18 +134,18 @@ public class HelloController implements Initializable {
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
         //Test pour affichage de base
-        Artémis artemis = new Artémis(2*32,2*32,evt);
-        Artémis tour = new Artémis(6*32,10*32,evt);
-        Tour dyo = new Dionysos(10*32,10*32,evt);
-        Tour poseidon = new Poséidon(9*32,7*32,evt);
-        Tour demeter = new Déméter(15*32,10*32,evt);
+//        Artémis artemis = new Artémis(2*32,2*32,evt);
+//        Artémis tour = new Artémis(6*32,10*32,evt);
+//        Tour dyo = new Dionysos(10*32,10*32,evt);
+//        Tour poseidon = new Poséidon(9*32,7*32,evt);
+//        Tour demeter = new Déméter(15*32,10*32,evt);
         //ennemi = new Ennemi(evt);
         //evt.ajouterEnnemi(ennemi);
         //this.evt.ajouterTour(tour);
-        this.evt.ajouterTour(artemis);
-        this.evt.ajouterTour(dyo);
-        this.evt.ajouterTour(poseidon);
-        this.evt.ajouterTour(demeter);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(dyo);
+//        this.evt.ajouterTour(poseidon);
+//        this.evt.ajouterTour(demeter);
 
        // artemis.améliorer();
         
