@@ -17,16 +17,7 @@ public class Vagues {
         int centerX = this.tourAvecPortée.centreTourX().get();
         int centerY = this.tourAvecPortée.centreTourY().get();
         int rayon = this.tourAvecPortée.getPortée();
-        int numVagues;
-
-        if(this.tourAvecPortée.isAmélioré()){
-            numVagues = 16;
-//            System.out.println(numVagues);
-        }
-        else{
-            numVagues = 8;
-//            System.out.println(numVagues);
-        }
+        int numVagues = 8;
 
         // Calcul de l'angle entre chaque point sur le périmètre
         double angle = 2 * Math.PI / numVagues;

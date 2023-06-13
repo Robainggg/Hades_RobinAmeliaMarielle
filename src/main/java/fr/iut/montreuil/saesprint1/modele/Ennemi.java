@@ -12,7 +12,6 @@ public class Ennemi {
     //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
-    private static int pvDeBase = 150;
     private IntegerProperty pv;
     private int vitesse;
     private int coordXDepart;
@@ -30,8 +29,7 @@ public class Ennemi {
     private int recompense;
     private boolean estSorti;
     private boolean estRalenti;
-    private int toursIvres;
-    private int toursEffetTonneau;
+    private int ToursIvres;
 
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
@@ -41,8 +39,7 @@ public class Ennemi {
         this.estSorti = false;
         this.estMort = false;
         this.estRalenti = false;
-        this.toursIvres = 0;
-        this.toursEffetTonneau = 0;
+        this.ToursIvres = 0;
 
 
         this.coordXDepart = coordXDepart;
@@ -59,9 +56,11 @@ public class Ennemi {
         recompense = 10;
         this.definirDirection();
         incrementeCompteur();
-        pv = new SimpleIntegerProperty(pvDeBase);
+        pv = new SimpleIntegerProperty(100);
         ProgressBar barreDeVie = new ProgressBar();
     }
+
+
 
     private static void incrementeCompteur(){
         compteur++;
@@ -131,15 +130,12 @@ public class Ennemi {
 
     public void agit(){
 
-        if(this.toursIvres == 0 && this.toursEffetTonneau == 0){
+        if(this.ToursIvres == 0){
             this.seDeplace();
         }
-        else if(this.toursIvres > 0){
-            this.toursIvres--;
-        }
-        else{
-            this.toursEffetTonneau--;
-        }
+        else
+            this.ToursIvres--;
+        
     }
     public void meurt(){
         if(!this.estSorti)
@@ -179,20 +175,14 @@ public class Ennemi {
         return environnement;
     }
     public int getToursIvres() {
-        return toursIvres;
+        return ToursIvres;
     }
 
     public void setToursIvres(int toursIvres) {
-        this.toursIvres = toursIvres;
+        ToursIvres = toursIvres;
     }
 
-    public int getToursEffetTonneau() {
-        return toursEffetTonneau;
-    }
 
-    public void setToursEffetTonneau(int toursEffetTonneau) {
-        this.toursEffetTonneau = toursEffetTonneau;
-    }
 
     //
     // Getters & Setters ->  Mouvements de l'ennemi
@@ -256,6 +246,9 @@ public class Ennemi {
     public void setPv(int pv) {
         this.pv.set(pv);
     }
+
+
+
 
 
 }

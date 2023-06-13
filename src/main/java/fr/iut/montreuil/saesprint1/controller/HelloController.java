@@ -19,7 +19,6 @@ import javafx.util.Duration;
 // Créer une BufferedImage de 100 pixels de
 
 
-import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.ResourceBundle;
 

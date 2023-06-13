@@ -20,7 +20,6 @@ public abstract class Tour {
 
     private int temps = 0;
 
-    private boolean amélioré = false;
 
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
@@ -31,19 +30,9 @@ public abstract class Tour {
         this.espaceEntreAttaques = espaceEntreAttaques;
         this.idTour = idTour;
         idTour++;
+
     }
     public abstract void attaque();
-
-    public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){
-        if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
-            System.out.println("entre Tour");
-            this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
-            this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
-            this.setAmélioré(true);
-        }
-    }
-
-    public boolean isAmélioré() { return this.amélioré;}
 
     public void incrementeTemps(){this.temps += 1;}
     //Getters & Setters
@@ -113,11 +102,5 @@ public abstract class Tour {
         return getX();
     }
 
-    public void setAmélioré(boolean amélioré) {
-        this.amélioré = amélioré;
-    }
 
-    public void setEspaceEntreAttaques(int espaceEntreAttaques) {
-        this.espaceEntreAttaques = espaceEntreAttaques;
-    }
 }
