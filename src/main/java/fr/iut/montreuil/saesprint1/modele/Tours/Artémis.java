@@ -105,5 +105,6 @@ public class Artémis extends TourAvecPortée {
     public void améliorer(){
         System.out.println("Entre dans Artémis");
         super.améliorer(coutAméliorationArtémis,nouvelEspaceEntreAttaques,nouvellePortée);
+        this.setAmélioré(true);
     }
 }
