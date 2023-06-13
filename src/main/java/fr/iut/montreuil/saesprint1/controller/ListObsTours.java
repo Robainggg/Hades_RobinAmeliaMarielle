@@ -31,7 +31,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
                 Tour aSupprimer = c.getRemoved().get(0);
                 this.pane.getChildren().remove(this.pane.lookup("#"+aSupprimer.getId()));
                 if(aSupprimer instanceof Déméter){
-                    for(int i = 0; i < this.evt.getAttaques().size(); i++){
+                    for(int i = this.evt.getAttaques().size()-1; i >= 0; i--){
                         AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
                         if(attaqueTours instanceof Vegetation){
                             if(attaqueTours.getTour().equals(aSupprimer)){

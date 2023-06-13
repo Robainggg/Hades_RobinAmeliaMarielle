@@ -13,30 +13,25 @@ public class Déméter extends TourAvecPortée {
     private static int ralentissement = 1;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 0);
+        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 1);
         this.ralentissement = 1;
     }
     @Override
     public void attaque() {
 
-        if (!super.getEnv().getEnnemis().isEmpty()) {
-            //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
-            for (int i = this.getEnv().getEnnemis().size() - 1; i > 0; i--) {
-                Ennemi e = this.getEnv().getEnnemis().get(i);
-                if (ennemiZone(e) != null && !e.estRalenti()) {
-                    e.seFaitRalentir(ralentissement);
-                    System.out.println("ralentit un ennemi");
+        //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
+        for (int i = this.getEnv().getEnnemis().size() - 1; i > 0; i--) {
+            Ennemi e = this.getEnv().getEnnemis().get(i);
+            if (ennemiZone(e) != null && !e.estRalenti()) {
+                e.seFaitRalentir(ralentissement);
 
-                } else if (ennemiZone(e) == null && e.estRalenti()) {
-                    e.nestPlusRalenti(ralentissement);
-                    System.out.println("ne ralentit plus l'ennemi");
-                }
+            } else if (ennemiZone(e) == null && e.estRalenti()) {
+                e.nestPlusRalenti(ralentissement);
+            }
 
-                //Les blesse si la tour est améliorée
-                if (super.isAmélioré() && e.estRalenti()) {
-                    e.pertPv(1);
-                }
-
+            //Les blesse si la tour est améliorée
+            if (super.isAmélioré() && e.estRalenti()) {
+                e.pertPv(1);
             }
         }
     }
@@ -51,9 +46,7 @@ public class Déméter extends TourAvecPortée {
 
             for (int x = maxX; x > minX; x -= 32) {
                 for (int y = maxY; y > minY; y -= 32) {
-                    if (y == this.getY() && x == this.getX()) {
-                        System.out.println("Tour : pas de végétation ");
-                    } else if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
+                    if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
                         System.out.println("Creation végétaux");
                         Vegetation vegetation = new Vegetation(this, x, y);
                         this.getEnv().ajouterAttaqueTours(vegetation);

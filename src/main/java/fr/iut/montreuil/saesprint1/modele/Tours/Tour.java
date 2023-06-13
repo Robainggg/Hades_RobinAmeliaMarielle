@@ -34,6 +34,15 @@ public abstract class Tour {
         this.idTour = "Tour";
         compteur++;
     }
+
+    public void agit(){
+        if (!this.getEnv().getEnnemis().isEmpty()) {
+            if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
+                this.attaque();
+            }
+        }
+        this.incrementeTemps();
+    }
     public abstract void attaque();
 
     public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){

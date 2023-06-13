@@ -16,10 +16,6 @@ public class Tonneau extends AttaqueTours{
         if(this.ennemi.estMort() || this.ennemi.getToursEffetTonneau() == 0){
             this.getTour().getEnv().supprimerAttaqueTours(this);
         }
-        else{
-
-        }
-
     }
 
     public Ennemi getEnnemi() {

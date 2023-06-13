@@ -59,9 +59,7 @@ public class Ennemi {
         pv = new SimpleIntegerProperty(100);
         ProgressBar barreDeVie = new ProgressBar();
     }
-
-
-
+    
     private static void incrementeCompteur(){
         compteur++;
     }
@@ -130,11 +128,15 @@ public class Ennemi {
 
     public void agit(){
 
-        if(this.toursIvres == 0){
+        if(this.toursIvres == 0 && this.toursEffetTonneau == 0){
             this.seDeplace();
         }
-        else
+        else if(this.toursIvres > 0){
             this.toursIvres--;
+        }
+        else{
+            this.toursEffetTonneau--;
+        }
         
     }
     public void meurt(){

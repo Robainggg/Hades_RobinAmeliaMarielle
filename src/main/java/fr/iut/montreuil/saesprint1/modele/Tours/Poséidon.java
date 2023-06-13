@@ -20,25 +20,18 @@ public class Poséidon extends TourAvecPortée{
     public void attaque() {
 
         boolean attaque = false;
-        int i;
-
-        if(this.getTemps()%this.getEspaceEntreAttaques() == 0) {
-            i = this.getEnv().getEnnemis().size()-1;
-            while( i >= 0 && !attaque){
-                Ennemi e = this.getEnv().getEnnemis().get(i);
-                if(ennemiZone(e)!=null){
-                    Vagues vagues = new Vagues(this);
-                    attaque = true;
-                }
-                i--;
+        int i = this.getEnv().getEnnemis().size()-1;
+        while (i >= 0 && !attaque) {
+            Ennemi e = this.getEnv().getEnnemis().get(i);
+            if (ennemiZone(e) != null) {
+                Vagues vagues = new Vagues(this);
+                attaque = true;
             }
+            i--;
         }
-        this.incrementeTemps();
-
     }
 
     public void améliorer(){
-        System.out.println("Poséidon s'améliore");
         super.améliorer(nouveauCout,nouvelEspaceEntreAttaques,nouvellePortée);
     }
 

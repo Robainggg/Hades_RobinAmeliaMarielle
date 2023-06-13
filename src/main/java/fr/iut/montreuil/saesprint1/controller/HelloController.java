@@ -190,7 +190,7 @@ public class HelloController implements Initializable {
                     }
 
                     for (Tour tour: this.evt.getTours()) {
-                        tour.attaque();
+                        tour.agit();
                     }
 
                     for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
