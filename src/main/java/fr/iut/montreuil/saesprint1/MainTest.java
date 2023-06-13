@@ -21,13 +21,18 @@ public class MainTest {
         System.out.println();
 
         //Test de l'amélioration
-        Environnement environnement = new Environnement();
-        Artémis tour1 = new Artémis(10,20,environnement);
-        System.out.println(tour1.getEspaceEntreAttaques());
-        System.out.println(tour1.getPortée());
-       // tour1.améliorer();
-        System.out.println(tour1.getEspaceEntreAttaques());
-        //tour1.attaque();
-        System.out.println(tour1.getPortée());
+//        Environnement environnement = new Environnement();
+//        Ennemi ennemi = new Ennemi(environnement);
+//
+//        Artémis tour1 = new Artémis(10,20,environnement);
+//        Dionysos dyo = new Dionysos(21,16,environnement);
+////        System.out.println(tour1.getEspaceEntreAttaques());
+////        System.out.println(tour1.getPortée());
+//        System.out.println(dyo.getEspaceEntreAttaques());
+//        dyo.attaque();
+//        dyo.améliorer();
+//        System.out.println(dyo.getEspaceEntreAttaques());
+//        dyo.attaque();
+
     }
 }
