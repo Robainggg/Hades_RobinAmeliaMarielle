@@ -1,6 +1,9 @@
 package fr.iut.montreuil.saesprint1.controller;
 
+import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
+import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.SpriteTour;
 import javafx.collections.ListChangeListener;
@@ -23,6 +26,21 @@ public class ListObsTours implements ListChangeListener<Tour> {
             if(c.wasAdded()){
                Tour tour = c.getAddedSubList().get(0);
                SpriteTour spriteTour = new SpriteTour(tour,pane, evt);
+            }
+            if(c.wasRemoved()){
+                Tour aSupprimer = c.getRemoved().get(0);
+                this.pane.getChildren().remove(this.pane.lookup("#"+aSupprimer.getId()));
+                if(aSupprimer instanceof Déméter){
+                    for(int i = 0; i < this.evt.getAttaques().size(); i++){
+                        AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
+                        if(attaqueTours instanceof Vegetation){
+                            if(attaqueTours.getTour().equals(aSupprimer)){
+                                this.evt.supprimerAttaqueTours(attaqueTours);
+                            }
+                        }
+                    }
+
+                }
             }
         }
     }

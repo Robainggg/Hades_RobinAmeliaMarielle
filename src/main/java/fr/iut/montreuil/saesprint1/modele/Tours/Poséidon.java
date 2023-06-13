@@ -12,7 +12,7 @@ public class Poséidon extends TourAvecPortée{
     private static int nouveauCout = 45;
     private static int nouvelEspaceEntreAttaques = 400;
     private static int nouvellePortée = 12;
-    
+
     public Poséidon(int x, int y, Environnement env) {
         super("Poséidon", coutPoséidon, x, y, env, portéePoséidon, espaceEntreAttaquesPoséidon);
     }
