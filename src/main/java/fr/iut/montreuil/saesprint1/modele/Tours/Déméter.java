@@ -7,7 +7,7 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 public class Déméter extends TourAvecPortée {
 
     public static int coutDéméter = 20;
-    private static int portéeDeBase = 3;
+    private static int portéeDeBase = 2;
     //Amélioration
     private static int coutAmélioréDéméter = 25;
     private static int ralentissement = 1;
