@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import fr.iut.montreuil.saesprint1.controller.Partie;
 import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
@@ -17,8 +18,8 @@ public class Environnement {
     private int temps;
     private ParcoursBFS bfs;
     private Joueur joueur;
-    private int niveau;
-    private VagueEnnemie vagueActuelle;
+    private boolean peutPlacerUneTour;
+    private Partie partie;
 
     public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
@@ -28,8 +29,7 @@ public class Environnement {
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
         this.joueur = new Joueur();
-        this.niveau = 0;
-        this.vagueActuelle = new VagueEnnemie(this,joueur);
+        peutPlacerUneTour = false;
     }
 
     public ObservableList<Ennemi> getEnnemis() {
@@ -37,9 +37,8 @@ public class Environnement {
     }
 
     public void ajouterTour(Tour tour){
-
-        if(this.joueur.getArgent()-tour.getCout() > 0){
-            if(tour instanceof Déméter){
+        if (this.joueur.getArgent() - tour.getCout() > 0) {
+            if (tour instanceof Déméter) {
                 ((Déméter) tour).creerVégétation();
             }
             this.tours.add(tour);
@@ -94,19 +93,24 @@ public class Environnement {
         return joueur;
     }
 
-    public int getNiveau() {
-        return niveau;
+
+//    public void nouvelleVague(){
+//
+//        if(this.vagueActuelle.isVagueEstFinie()) {
+//            niveau++;
+//            this.vagueActuelle = new VagueEnnemie(this, joueur);
+//        }
+//    }
+
+    //public VagueEnnemie getVagueActuelle() {
+       // return vagueActuelle;
+   // }
+
+    public void changeEtatPlaçage(){
+        this.peutPlacerUneTour = !peutPlacerUneTour;
     }
 
-    public void nouvelleVague(){
-
-        if(this.vagueActuelle.isVagueEstFinie()) {
-            niveau++;
-            this.vagueActuelle = new VagueEnnemie(this, joueur);
-        }
-    }
-
-    public VagueEnnemie getVagueActuelle() {
-        return vagueActuelle;
+    public boolean isPeutPlacerUneTour() {
+        return peutPlacerUneTour;
     }
 }

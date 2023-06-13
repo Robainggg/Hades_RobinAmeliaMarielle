@@ -58,6 +58,9 @@ public class HelloController implements Initializable {
     private Button boutonAjouterTour;
 
     @FXML
+    private Button boutonProchaineVague;
+
+    @FXML
     private Label argent;
 
     @FXML
@@ -101,6 +104,8 @@ public class HelloController implements Initializable {
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
 
+    private Partie partie;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Chargement de l'environnement et du Terrain
@@ -109,6 +114,8 @@ public class HelloController implements Initializable {
 
         //Chargement de l'inventaire
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+
+        partie = new Partie(evt.getJoueur(),evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
@@ -121,6 +128,13 @@ public class HelloController implements Initializable {
 
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
+        this.boutonProchaineVague.setOnAction(e -> {
+            if(this.partie.getVagueActuelle() == null){
+                this.partie.lanceVague();
+            }
+
+        });
 
         //Test pour affichage de base
 //        Artémis artemis = new Artémis(12*32,12*32,evt);
@@ -157,21 +171,16 @@ public class HelloController implements Initializable {
                 Duration.seconds(0.017),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
+
                 (ev ->{
-//                    if(temps%60 == 0)
-//                        this.evt.ajouterEnnemi(new Ennemi(evt));
-                    if(this.evt.getJoueur().getPv() <=0)
-                        gameLoop.stop();
-                    this.evt.getVagueActuelle().prochainEnnemi();
-                    this.evt.nouvelleVague();
+                    if(this.partie.getVagueActuelle() != null) {
+                        this.partie.getVagueActuelle().prochainEnnemi();
+                        if(this.partie.getVagueActuelle().isVagueEstFinie()){
+                            this.partie.stoppeVagueActuelle();
+                        }
+                    }
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
-//                        if (evt.getEnnemis().get(i).estArriveAuBout()) {
-//                            System.out.println("fini");
-//                            gameLoop.stop();
-//                        }
-//                        else{
                         evt.getEnnemis().get(i).agit();
-                        //}
                     }
 
                     for (Tour tour: this.evt.getTours()) {

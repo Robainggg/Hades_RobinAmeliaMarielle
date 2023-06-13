@@ -15,6 +15,8 @@ public class Ennemi {
     private static int pvDeBase = 150;
     private IntegerProperty pv;
     private int vitesse;
+    private int coordXDepart;
+    private int coordYDepart;
 
     //Direction
     private IntegerProperty coordX;
@@ -31,7 +33,7 @@ public class Ennemi {
     private int toursIvres;
     private int toursEffetTonneau;
 
-    public Ennemi(Environnement environnement){
+    public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
         this.idEnnemi = "E" + compteur;
 
@@ -42,13 +44,17 @@ public class Ennemi {
         this.toursIvres = 0;
         this.toursEffetTonneau = 0;
 
+
+        this.coordXDepart = coordXDepart;
+        this.coordYDepart = coordYDepart;
+
         coordY = new SimpleIntegerProperty();
         coordX = new SimpleIntegerProperty();
         direction = new SimpleStringProperty();
-        coordX.setValue(0*32);
-        coordY.setValue(2*32);
+        coordX.setValue(coordXDepart*32);
+        coordY.setValue(coordYDepart*32);
         this.environnement = environnement;
-        prochaineCase = new Case(0,2);
+        prochaineCase = new Case(coordXDepart,coordYDepart);
         vitesse = 2;
         recompense = 10;
         this.definirDirection();
