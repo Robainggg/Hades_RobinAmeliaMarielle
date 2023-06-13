@@ -81,11 +81,11 @@ public class VueInventaire {
     }
 
     public void chargerImage() {
-        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
+        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/tours/artemisHD.png"));
         imageTourArthemis.setImage(tourArthemis);
         this.afficherCaractéristiquesTours(imageTourArthemis);
 
-        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
+        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/tours/poseidonHD.png"));
         imageTourPoséidon.setImage(tourPoséidon);
         this.afficherCaractéristiquesTours(imageTourPoséidon);
 
