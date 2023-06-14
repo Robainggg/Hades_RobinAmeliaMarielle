@@ -136,6 +136,7 @@ public class HelloController implements Initializable {
         this.boutonProchaineVague.setOnAction(e -> {
             if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
                 this.partie.lanceVague();
+                System.out.println("Nouvelle vague de niveau : "+this.partie.getNiveau());
             }
 
         });
@@ -166,7 +167,7 @@ public class HelloController implements Initializable {
                         if (this.partie.getNiveau() == 6)
                             gameLoop.stop();
                     }
-
+                    
                     this.action();
 
                     if (this.evt.getJoueur().aPerdu()) {
@@ -177,7 +178,7 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
+    
     public void action() {
 
         int indiceEnnemi = evt.getEnnemis().size() - 1;

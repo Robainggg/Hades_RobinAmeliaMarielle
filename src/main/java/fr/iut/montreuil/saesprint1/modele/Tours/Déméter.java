@@ -38,6 +38,7 @@ public class Déméter extends TourAvecPortée {
 
     public void creerVégétation () {
 
+            //On fait en sorte que la tour se retrouve au milieu de la végétation
             int portée = this.getPortée();
             int maxX = this.getX() + portée - 16;
             int minX = this.getX() - portée - 16;
@@ -46,6 +47,7 @@ public class Déméter extends TourAvecPortée {
 
             for (int x = maxX; x > minX; x -= 32) {
                 for (int y = maxY; y > minY; y -= 32) {
+                    //On ajoute pas la végétation en dehors des limites du terrain
                     if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
                         Vegetation vegetation = new Vegetation(this, x, y);
                         this.getEnv().ajouterVegetation(vegetation);

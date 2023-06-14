@@ -35,7 +35,6 @@ public class Artémis extends TourAvecPortée {
         else
             attaqueAméliorée();
     }
-
     public void attaqueNonAméliorée() {
 
         int i = 0;
