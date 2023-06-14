@@ -43,7 +43,7 @@ public class Joueur {
     }
 
     public boolean aPerdu(){
-        if(this.pv.getValue() <=0){return true;}
+        if(this.pv.getValue() == 0){return true;}
         return false;
     }
 

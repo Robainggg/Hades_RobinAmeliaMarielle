@@ -46,8 +46,6 @@ public class Environnement {
             }
             this.tours.add(tour);
             this.joueur.paie(tour.getCout());
-            System.out.println("le joueur paie une tour");
-            System.out.println(tour.getId());
         }
 
     }
@@ -56,10 +54,6 @@ public class Environnement {
         this.getTours().remove(t);
         this.joueur.gagneArgent(t.getCout()/2);
     }
-
-
-
-
     public void ajouterEnnemi(Ennemi ennemi){
         this.ennemis.add(ennemi);
     }

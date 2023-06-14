@@ -47,7 +47,6 @@ public class Déméter extends TourAvecPortée {
             for (int x = maxX; x > minX; x -= 32) {
                 for (int y = maxY; y > minY; y -= 32) {
                     if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
-                        System.out.println("Creation végétaux");
                         Vegetation vegetation = new Vegetation(this, x, y);
                         this.getEnv().ajouterVegetation(vegetation);
                     }

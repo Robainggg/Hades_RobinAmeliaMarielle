@@ -32,10 +32,7 @@ public class VagueEnnemie {
 
         this.nbEnnemis = partie.getNiveau() * 5 + 5;
 
-        if(this.partie.getNiveau() >= 6)
-            this.cadenceApparition = 60;
-        else
-           this.cadenceApparition  = 240 - 30 * partie.getNiveau();
+        this.cadenceApparition  = 240 - 30 * partie.getNiveau();
 
         this.vagueEstFinie = false;
 
