@@ -60,9 +60,9 @@ public class SpriteTour {
 // }
 
 // Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
-        if(tour instanceof Artémis)
+        if (tour instanceof Artémis)
             image = artemis;
-        else if(tour instanceof Poséidon)
+        else if (tour instanceof Poséidon)
             image = poseidon;
         else
             image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
@@ -71,65 +71,25 @@ public class SpriteTour {
         t.setFitHeight(32);
         t.translateXProperty().bind(tour.getXProperty());
         t.translateYProperty().bind(tour.getYProperty());
-        pane.getChildren().add(t);
         t.setId(tour.getId());
+        pane.getChildren().add(t);
         afficherOptionsAméliorationSuppression(t);
     }
 
     private void afficherOptionsAméliorationSuppression(ImageView imageView) {
-/*
-if (!ameliore) {
-Tooltip tooltipPoséidon = new Tooltip();
-
-tooltipPoséidon.setText(getTour().getId() + "\n" + "Amélioration : 10€");
-
-Button button = new Button("Améliorer");
-button.setOnAction(event -> {
-// Code pour gérer l'action du bouton "Améliorer"
-System.out.println("Bouton Améliorer cliqué !");
-Image image = new Image(getClass().getResource("/images/tours/tour_ameliore.jpg").toExternalForm());
-t.setImage(image);
-ameliore = true;
-
-});
-
-VBox tooltipContent = new VBox();
-tooltipContent.getChildren().addAll(button);
-tooltipPoséidon.setGraphic(tooltipContent);
-
-final boolean[] tooltipVisiblePoséidon = {false};
-imageView.setOnMousePressed(event -> {
-if (event.isPrimaryButtonDown()) {
-if (!tooltipVisiblePoséidon[0] && !ameliore) {
-Tooltip.install(imageView, tooltipPoséidon);
-tooltipPoséidon.show(imageView, event.getScreenX(), event.getScreenY());
-tooltipVisiblePoséidon[0] = true;
-
-PauseTransition pause = new PauseTransition(Duration.seconds(2));
-pause.setOnFinished(e -> {
-tooltipPoséidon.hide();
-Tooltip.uninstall(imageView, tooltipPoséidon);
-tooltipVisiblePoséidon[0] = false;
-});
-pause.play();
-}
-event.consume();
-}
-});
-}*/
 
         Tooltip tooltip = new Tooltip();
 
         Button button = new Button("Améliorer");
         button.setOnAction(event -> {
-// Code pour gérer l'action du bouton "Améliorer"
+            // Code pour gérer l'action du bouton "Améliorer"
             System.out.println("Bouton Améliorer cliqué !");
             if(tour instanceof Artémis){((Artémis) tour).améliorer();}
             else if(tour instanceof Poséidon){((Poséidon) tour).améliorer();}
             else if(tour instanceof Dionysos){((Dionysos) tour).améliorer();}
             else if(tour instanceof Déméter){((Déméter) tour).améliorer();}
-
-//Afficher la tour améliorée si l'amélioration s'est bien effectuée
+            
+            //Afficher la tour améliorée si l'amélioration s'est bien effectuée
             if(this.tour.isAmélioré()) {
                 ameliore = true;
                 Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());

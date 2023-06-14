@@ -36,30 +36,23 @@ public class Ennemi {
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
         this.idEnnemi = "E" + compteur;
+        incrementeCompteur();
 
         //Etat de l'ennemi
         this.estSorti = false;
         this.estMort = false;
         this.estRalenti = false;
         this.toursIvres = 0;
+        this.pv = new SimpleIntegerProperty(100);
 
-
-        this.coordXDepart = coordXDepart;
-        this.coordYDepart = coordYDepart;
-
-        coordY = new SimpleIntegerProperty();
-        coordX = new SimpleIntegerProperty();
+        coordY = new SimpleIntegerProperty(coordYDepart*32);
+        coordX = new SimpleIntegerProperty(coordXDepart*32);
         direction = new SimpleStringProperty();
-        coordX.setValue(coordXDepart*32);
-        coordY.setValue(coordYDepart*32);
         this.environnement = environnement;
         prochaineCase = new Case(coordXDepart,coordYDepart);
         vitesse = 2;
         recompense = 10;
         this.definirDirection();
-        incrementeCompteur();
-        pv = new SimpleIntegerProperty(100);
-
     }
     
     private static void incrementeCompteur(){
@@ -250,7 +243,6 @@ public class Ennemi {
     public IntegerProperty pvProperty() {
         return pv;
     }
-
 
     public void setPv(int pv) {
         this.pv.set(pv);

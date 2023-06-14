@@ -90,15 +90,7 @@ public class SpriteEnnemi {
         barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
         barreDeVie.translateXProperty().bind(image.translateXProperty());
         barreDeVie.translateYProperty().bind(image.translateYProperty().subtract(10));
-
-
-
-
-
-
-
-
-
+        
     }
 
     public ProgressBar getBarreDeVie() {

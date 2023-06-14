@@ -18,13 +18,13 @@ public class ListObsEnnemis implements ListChangeListener<Ennemi> {
     private List<SpriteEnnemi> spritesEnnemis = new ArrayList<>();
 
 
-    public ListObsEnnemis(Pane pane){
+    public ListObsEnnemis(Pane pane) {
         this.pane = pane;
     }
+
     @Override
     public void onChanged(Change<? extends Ennemi> c) {
-
-        while(c.next()){
+        while (c.next()) {
             if (c.wasAdded()) {
                 System.out.println("a été ajouté");
                 Ennemi ennemiAjouté = c.getAddedSubList().get(0);
@@ -47,22 +47,5 @@ public class ListObsEnnemis implements ListChangeListener<Ennemi> {
 
 
         }
-       /* while (c.next()) {
-            if (c.wasAdded()) {
-                System.out.println("a été ajouté");
-                Ennemi ennemiAjouté = c.getAddedSubList().get(0);
-                SpriteEnnemi sprite = new SpriteEnnemi(ennemiAjouté, pane);
-
-            }
-            if (c.wasRemoved()) {
-                Ennemi ennemiRetiré = c.getRemoved().get(0);
-                for (int i = 0;i<=pane.getChildren().size(); i++) {
-                    if (pane.getChildren().get(i).getId().equals(ennemiRetiré.getIdEnnemi()))
-                        pane.getChildren().remove(i);
-                }
-
-
-            }
-        }*/
     }
 }

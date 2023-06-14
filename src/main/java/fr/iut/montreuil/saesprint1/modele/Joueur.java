@@ -8,7 +8,7 @@ public class Joueur {
     public IntegerProperty argent;
 
     public Joueur(){
-        this.pv = new SimpleIntegerProperty(20);
+        this.pv = new SimpleIntegerProperty(5);
         this.argent = new SimpleIntegerProperty(100);
     }
 
@@ -39,8 +39,15 @@ public class Joueur {
     }
 
     public void perdPv(int pv) {
-        this.pv.set(this.pv.getValue()-pv);
+        this.pv.setValue(this.pv.getValue()-pv);
     }
+
+    public boolean aPerdu(){
+        if(this.pv.getValue() <=0){return true;}
+        return false;
+    }
+
+    public void setPV(int pv){this.pv.setValue(pv);}
 
 
 }
