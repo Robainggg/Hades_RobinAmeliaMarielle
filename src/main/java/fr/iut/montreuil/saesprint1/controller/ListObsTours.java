@@ -29,7 +29,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
             }
             if (c.wasRemoved()) {
                 Tour aSupprimer = c.getRemoved().get(0);
-                this.pane.getChildren().remove(this.pane.lookup("#" + aSupprimer.getId()));
+
 
                 if (aSupprimer instanceof Déméter) {
                     for (int i = this.evt.getVegetation().size() - 1; i >= 0; i--) {
