@@ -41,4 +41,6 @@ public class Joueur {
     public void perdPv(int pv) {
         this.pv.set(this.pv.getValue()-pv);
     }
+
+
 }

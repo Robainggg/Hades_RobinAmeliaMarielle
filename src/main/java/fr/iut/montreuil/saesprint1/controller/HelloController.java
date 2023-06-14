@@ -116,14 +116,24 @@ public class HelloController implements Initializable {
 
     private Partie partie;
 
+    @FXML
+    private ProgressBar barreDeVie;
+
+    private Joueur joueur;
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        joueur = new Joueur();
         //Chargement de l'environnement et du Terrain
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
         //Chargement de l'inventaire
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+
 
         partie = new Partie(evt.getJoueur(),evt);
 
@@ -146,21 +156,6 @@ public class HelloController implements Initializable {
 
         });
 
-        //Test pour affichage de base
-//        Artémis artemis = new Artémis(2*32,2*32,evt);
-//        Artémis tour = new Artémis(6*32,10*32,evt);
-//        Tour dyo = new Dionysos(10*32,10*32,evt);
-//        Tour poseidon = new Poséidon(9*32,7*32,evt);
-//        Tour demeter = new Déméter(15*32,10*32,evt);
-        //ennemi = new Ennemi(evt);
-        //evt.ajouterEnnemi(ennemi);
-        //this.evt.ajouterTour(tour);
-//        this.evt.ajouterTour(artemis);
-//        this.evt.ajouterTour(dyo);
-//        this.evt.ajouterTour(poseidon);
-//        this.evt.ajouterTour(demeter);
-
-       // artemis.améliorer();
 
         initAnimation();
         gameLoop.play();

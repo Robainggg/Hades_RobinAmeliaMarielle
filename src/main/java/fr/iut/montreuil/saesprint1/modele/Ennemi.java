@@ -31,6 +31,8 @@ public class Ennemi {
     private int toursIvres;
     private int toursEffetTonneau;
 
+
+
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
         this.idEnnemi = "E" + compteur;
@@ -57,7 +59,7 @@ public class Ennemi {
         this.definirDirection();
         incrementeCompteur();
         pv = new SimpleIntegerProperty(100);
-        ProgressBar barreDeVie = new ProgressBar();
+
     }
 
 
@@ -243,6 +245,7 @@ public class Ennemi {
         return pv;
     }
 
+
     public void setPv(int pv) {
         this.pv.set(pv);
     }
@@ -252,6 +255,10 @@ public class Ennemi {
 
     public void setToursEffetTonneau(int toursEffetTonneau) {
         this.toursEffetTonneau = toursEffetTonneau;
+    }
+
+    public double getPointsDeVieMax() {
+        return 100;
     }
 }
 
