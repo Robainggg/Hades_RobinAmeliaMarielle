@@ -87,6 +87,8 @@ public class Ennemi {
 
         if(this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32) {
             this.estSorti = true;
+            this.setToursIvres(0);
+            this.setToursEffetTonneau(0);
             return true;
         }
         return false;
@@ -145,6 +147,8 @@ public class Ennemi {
         else
             this.environnement.getJoueur().perdPv(1);
         this.environnement.getEnnemis().remove(this);
+        this.setToursIvres(0);
+        this.setToursEffetTonneau(0);
         this.estMort = true;
     }
      public void pertPv(int dégâts) {
@@ -204,7 +208,7 @@ public class Ennemi {
         return coordX.getValue();
     }
 
-    public IntegerProperty coordXProperty() {
+    public final IntegerProperty coordXProperty() {
         return coordX;
     }
 
@@ -212,11 +216,11 @@ public class Ennemi {
         this.coordX.setValue(coordX);
     }
 
-    public int getCoordY() {
+    public final int getCoordY() {
         return coordY.getValue();
     }
 
-    public IntegerProperty coordYProperty() {
+    public final IntegerProperty coordYProperty() {
         return coordY;
     }
 

@@ -16,7 +16,7 @@ public class Artémis extends TourAvecPortée {
     //Amélioration
     private static int coutAméliorationArtémis =  30;
     private static int nouvelEspaceEntreAttaques = 10;
-    private static int nouvellePortée = 5;
+    private static int nouvellePortée = 4;
 
     //Attributs de la classe
     private Ennemi ennemiAttaqué;

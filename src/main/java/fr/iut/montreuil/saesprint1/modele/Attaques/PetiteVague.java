@@ -18,12 +18,9 @@ public class PetiteVague extends Projectile{
     }
 
     @Override
-    public void agit(){
-        super.avance();
+    public void attaque(){
 
-        if(!this.tourAvecPortée.estDansLaZone(this.getX(),this.getY())){
-            this.tourAvecPortée.getEnv().supprimerAttaqueTours(this);
-        }
+        super.attaque();
 
         for (int i = this.tourAvecPortée.getEnv().getEnnemis().size()-1; i >= 0; i--){
             Ennemi ennemi = this.tourAvecPortée.getEnv().getEnnemis().get(i);

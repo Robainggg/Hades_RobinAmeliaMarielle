@@ -11,7 +11,7 @@ public class Tonneau extends AttaqueTours{
     }
 
     @Override
-    public void agit() {
+    public void attaque() {
 
         if(this.ennemi.estMort() || this.ennemi.getToursEffetTonneau() == 0){
             this.getTour().getEnv().supprimerAttaqueTours(this);

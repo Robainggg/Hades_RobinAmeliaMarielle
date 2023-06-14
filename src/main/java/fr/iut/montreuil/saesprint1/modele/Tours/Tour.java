@@ -37,11 +37,12 @@ public abstract class Tour {
 
     public void agit(){
         if (!this.getEnv().getEnnemis().isEmpty()) {
-            if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
+            if(this.temps%this.getEspaceEntreAttaques()== 0) {
                 this.attaque();
             }
+            this.incrementeTemps();
         }
-        this.incrementeTemps();
+
     }
     public abstract void attaque();
 

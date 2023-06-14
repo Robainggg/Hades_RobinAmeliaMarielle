@@ -110,6 +110,8 @@ public class HelloController implements Initializable {
     private ListObsAttaquesTours listenersAttaques;
     private ListObsTours listenersTours;
 
+    private ListObsVegetation listenersVegetation;
+
     private Tour tourEnCoursAjout ;
     private boolean ajoutTourEnCours = false;
     private String typeTourSelectionne;
@@ -131,10 +133,12 @@ public class HelloController implements Initializable {
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal,evt);
+        this.listenersVegetation = new ListObsVegetation(panePrincipal);
 
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getAttaques().addListener(listenersAttaques);
         this.evt.getTours().addListener(listenersTours);
+        this.evt.getVegetation().addListener(listenersVegetation);
 
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
@@ -185,18 +189,20 @@ public class HelloController implements Initializable {
                             this.partie.stoppeVagueActuelle();
                         }
                     }
+
                     for(int i = 0; i < evt.getEnnemis().size();i++) {
                         evt.getEnnemis().get(i).agit();
                     }
 
-                    for (Tour tour: this.evt.getTours()) {
+                    for (Tour tour : this.evt.getTours()) {
                         tour.agit();
                     }
 
-                    for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
-                       this.evt.getAttaques().get(i).agit();
+                    for (int i = this.evt.getAttaques().size()-1 ; i >= 0; i--) {
+                        this.evt.getAttaques().get(i).attaque();
                     }
-                    
+
+
                     temps++;
                 })
         );

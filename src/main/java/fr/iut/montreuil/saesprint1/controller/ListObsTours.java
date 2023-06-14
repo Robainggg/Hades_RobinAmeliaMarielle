@@ -22,21 +22,21 @@ public class ListObsTours implements ListChangeListener<Tour> {
 
     @Override
     public void onChanged(Change<? extends Tour> c) {
-        while(c.next()){
-            if(c.wasAdded()){
-               Tour tour = c.getAddedSubList().get(0);
-               SpriteTour spriteTour = new SpriteTour(tour,pane, evt);
+        while (c.next()) {
+            if (c.wasAdded()) {
+                Tour tour = c.getAddedSubList().get(0);
+                SpriteTour spriteTour = new SpriteTour(tour, pane, evt);
             }
-            if(c.wasRemoved()){
+            if (c.wasRemoved()) {
                 Tour aSupprimer = c.getRemoved().get(0);
-                this.pane.getChildren().remove(this.pane.lookup("#"+aSupprimer.getId()));
-                if(aSupprimer instanceof Déméter){
-                    for(int i = this.evt.getAttaques().size()-1; i >= 0; i--){
-                        AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
-                        if(attaqueTours instanceof Vegetation){
-                            if(attaqueTours.getTour().equals(aSupprimer)){
-                                this.evt.supprimerAttaqueTours(attaqueTours);
-                            }
+                this.pane.getChildren().remove(this.pane.lookup("#" + aSupprimer.getId()));
+
+                if (aSupprimer instanceof Déméter) {
+                    for (int i = this.evt.getVegetation().size() - 1; i >= 0; i--) {
+                        Vegetation vege = this.evt.getVegetation().get(i);
+
+                        if (vege.getTour().equals(aSupprimer)) {
+                            this.evt.supprimerVegetation(vege);
                         }
                     }
 

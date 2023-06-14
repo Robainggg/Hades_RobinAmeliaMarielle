@@ -14,7 +14,6 @@ public class SpriteAttaqueTours {
     final Image biere = new Image(getClass().getResource("/images/projectiles/beer.png").toExternalForm());
 
     final Image vague = new Image(getClass().getResource("/images/projectiles/wave.png").toExternalForm());
-    final Image buisson = new Image(getClass().getResource("/images/projectiles/vegetation.png").toExternalForm());
 
     final Image barrel = new Image(getClass().getResource("/images/projectiles/tonneau.png").toExternalForm());
 
@@ -46,12 +45,6 @@ public class SpriteAttaqueTours {
             image.translateYProperty().bind(petiteVague.yProperty());
         }
 
-        if(this.attaqueTours instanceof Vegetation){
-            Vegetation vegetation = (Vegetation)this.attaqueTours;
-            image.setImage(buisson);
-            image.translateXProperty().bind(vegetation.coordXprop());
-            image.translateYProperty().bind(vegetation.coordYprop());
-        }
         
         if(this.attaqueTours instanceof Tonneau){
             Tonneau tonneau = (Tonneau) this.attaqueTours;

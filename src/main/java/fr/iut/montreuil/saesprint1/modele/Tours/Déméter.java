@@ -13,14 +13,14 @@ public class Déméter extends TourAvecPortée {
     private static int ralentissement = 1;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 1);
+        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 3);
         this.ralentissement = 1;
     }
     @Override
     public void attaque() {
 
         //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
-        for (int i = this.getEnv().getEnnemis().size() - 1; i > 0; i--) {
+        for (int i = this.getEnv().getEnnemis().size() - 1; i >= 0; i--) {
             Ennemi e = this.getEnv().getEnnemis().get(i);
             if (ennemiZone(e) != null && !e.estRalenti()) {
                 e.seFaitRalentir(ralentissement);
@@ -49,14 +49,14 @@ public class Déméter extends TourAvecPortée {
                     if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
                         System.out.println("Creation végétaux");
                         Vegetation vegetation = new Vegetation(this, x, y);
-                        this.getEnv().ajouterAttaqueTours(vegetation);
+                        this.getEnv().ajouterVegetation(vegetation);
                     }
                 }
             }
         }
 
     public void améliorer(){
-        super.améliorer(coutAmélioréDéméter, 0,3);
+        super.améliorer(coutAmélioréDéméter, this.getEspaceEntreAttaques(),3);
         creerVégétation();
     }
 
