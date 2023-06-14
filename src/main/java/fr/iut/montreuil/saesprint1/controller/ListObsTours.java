@@ -29,17 +29,19 @@ public class ListObsTours implements ListChangeListener<Tour> {
             }
             if (c.wasRemoved()) {
                 Tour aSupprimer = c.getRemoved().get(0);
-                if (aSupprimer instanceof Déméter) {
-                    for (int i = this.evt.getVegetation().size() - 1; i >= 0; i--) {
+                if (aSupprimer instanceof Déméter){
+                    for(int indEnnemi = this.evt.getEnnemis().size()-1; indEnnemi >= 0; indEnnemi--){
+                        this.evt.getEnnemis().get(indEnnemi).nestPlusRalenti(1);
+                    }
+                    for (int i = this.evt.getVegetation().size()-1; i >= 0; i--) {
                         Vegetation vege = this.evt.getVegetation().get(i);
-
-                        if (vege.getTour().equals(aSupprimer)) {
+                        if (vege.getTour().equals(aSupprimer)){
                             this.evt.supprimerVegetation(vege);
                         }
                     }
                 }
                 else{
-                    for (int i = this.evt.getAttaques().size() - 1; i >= 0; i--){
+                    for (int i = this.evt.getAttaques().size()-1; i >= 0; i--){
                         AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
                         if(attaqueTours.getTour().equals(aSupprimer)){
                             this.evt.supprimerAttaqueTours(attaqueTours);

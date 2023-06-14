@@ -24,8 +24,7 @@ public class ListObsVegetation implements ListChangeListener<Vegetation> {
             }
             if(c.wasRemoved()) {
                 Vegetation aSupprimer = c.getRemoved().get(0);
-                this.pane.getChildren().remove(this.pane.lookup("#" + aSupprimer.getId()));
-
+                this.pane.getChildren().remove(this.pane.lookup("#"+aSupprimer.getId()));
             }
         }
     }

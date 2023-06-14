@@ -47,6 +47,7 @@ public class Environnement {
             this.tours.add(tour);
             this.joueur.paie(tour.getCout());
             System.out.println("le joueur paie une tour");
+            System.out.println(tour.getId());
         }
 
     }

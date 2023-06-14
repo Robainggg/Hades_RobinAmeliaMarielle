@@ -17,7 +17,7 @@ public abstract class Tour {
     //De combien de tours sont espacés ses attaques
     private int espaceEntreAttaques;
 
-    private static String idTour;
+    private String idTour;
     public static int compteur = 0 ;
 
     private int temps = 0;
@@ -31,7 +31,7 @@ public abstract class Tour {
         this.y = new SimpleIntegerProperty(y);
         this.env = env;
         this.espaceEntreAttaques = espaceEntreAttaques;
-        this.idTour = "Tour";
+        this.idTour ="Tour"+compteur;
         compteur++;
     }
 

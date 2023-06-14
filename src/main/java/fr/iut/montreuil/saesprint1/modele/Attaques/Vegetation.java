@@ -6,23 +6,23 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Vegetation {
-    private Déméter tour;
+    private Tour tour;
     private IntegerProperty coordXArrivé;
     private IntegerProperty coordYArrivé;
     private static int compteur = 0;
-    private String idVege;
-    public Vegetation(Déméter tour, int coordXArrivé, int coordYArrivé) {
+    private int idVege;
+    public Vegetation(Tour tour, int coordXArrivé, int coordYArrivé) {
         this.tour = tour;
         this.coordXArrivé = new SimpleIntegerProperty(coordXArrivé);
         this.coordYArrivé = new SimpleIntegerProperty(coordYArrivé);
-        this.idVege = "Vegetation"+idVege;
+        this.idVege = compteur;
         compteur++;
     }
     public String getId() {
-        return idVege;
+        return "Vegetation"+ this.idVege;
     }
 
-    public Déméter getTour() {
+    public Tour getTour() {
         return tour;
     }
     public final IntegerProperty coordXprop() {
