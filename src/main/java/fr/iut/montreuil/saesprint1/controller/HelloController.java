@@ -33,10 +33,6 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Circle testCercleEnnemi;
-
-
-    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -92,10 +88,6 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView pieces2;
 
-    private int temps;
-
-    private Terrain terrain;
-
     private Environnement evt;
 
     private VueTerrain vueTerrain;
@@ -105,16 +97,11 @@ public class HelloController implements Initializable {
 
     private ListObsEnnemis listenerEnnemis;
 
-    private Ennemi ennemi;
 
     private ListObsAttaquesTours listenersAttaques;
     private ListObsTours listenersTours;
 
     private ListObsVegetation listenersVegetation;
-
-    private Tour tourEnCoursAjout ;
-    private boolean ajoutTourEnCours = false;
-    private String typeTourSelectionne;
 
     private Partie partie;
 
@@ -134,7 +121,6 @@ public class HelloController implements Initializable {
         this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal,evt);
         this.listenersVegetation = new ListObsVegetation(panePrincipal);
-
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getAttaques().addListener(listenersAttaques);
         this.evt.getTours().addListener(listenersTours);
@@ -150,22 +136,6 @@ public class HelloController implements Initializable {
 
         });
 
-        //Test pour affichage de base
-//        Artémis artemis = new Artémis(2*32,2*32,evt);
-//        Artémis tour = new Artémis(6*32,10*32,evt);
-//        Tour dyo = new Dionysos(10*32,10*32,evt);
-//        Tour poseidon = new Poséidon(9*32,7*32,evt);
-//        Tour demeter = new Déméter(15*32,10*32,evt);
-        //ennemi = new Ennemi(evt);
-        //evt.ajouterEnnemi(ennemi);
-        //this.evt.ajouterTour(tour);
-//        this.evt.ajouterTour(artemis);
-//        this.evt.ajouterTour(dyo);
-//        this.evt.ajouterTour(poseidon);
-//        this.evt.ajouterTour(demeter);
-
-       // artemis.améliorer();
-
         initAnimation();
         gameLoop.play();
 
@@ -173,7 +143,6 @@ public class HelloController implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -203,7 +172,7 @@ public class HelloController implements Initializable {
                     }
 
 
-                    temps++;
+
                 })
         );
         gameLoop.getKeyFrames().add(kf);
