@@ -110,9 +110,7 @@ public class HelloController implements Initializable {
     private ListObsAttaquesTours listenersAttaques;
     private ListObsTours listenersTours;
 
-    private Tour tourEnCoursAjout ;
-    private boolean ajoutTourEnCours = false;
-    private String typeTourSelectionne;
+    private ListObsVegetation listenersVegetation;
 
     private Partie partie;
 
@@ -134,17 +132,17 @@ public class HelloController implements Initializable {
         //Chargement de l'inventaire
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
-
         partie = new Partie(evt.getJoueur(),evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
         this.listenersTours = new ListObsTours(panePrincipal,evt);
-
+        this.listenersVegetation = new ListObsVegetation(panePrincipal);
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getAttaques().addListener(listenersAttaques);
         this.evt.getTours().addListener(listenersTours);
+        this.evt.getVegetation().addListener(listenersVegetation);
 
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
@@ -156,6 +154,21 @@ public class HelloController implements Initializable {
 
         });
 
+        //Test pour affichage de base
+//        Artémis artemis = new Artémis(2*32,2*32,evt);
+//        Artémis tour = new Artémis(6*32,10*32,evt);
+//        Tour dyo = new Dionysos(10*32,10*32,evt);
+//        Tour poseidon = new Poséidon(9*32,7*32,evt);
+//        Tour demeter = new Déméter(15*32,10*32,evt);
+        //ennemi = new Ennemi(evt);
+        //evt.ajouterEnnemi(ennemi);
+        //this.evt.ajouterTour(tour);
+//        this.evt.ajouterTour(artemis);
+//        this.evt.ajouterTour(dyo);
+//        this.evt.ajouterTour(poseidon);
+//        this.evt.ajouterTour(demeter);
+
+       // artemis.améliorer();
 
         initAnimation();
         gameLoop.play();
@@ -184,12 +197,12 @@ public class HelloController implements Initializable {
                         evt.getEnnemis().get(i).agit();
                     }
 
-                    for (Tour tour: this.evt.getTours()) {
-                        tour.attaque();
+                    for (Tour tour : this.evt.getTours()) {
+                        tour.agit();
                     }
 
-                    for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
-                       this.evt.getAttaques().get(i).agit();
+                    for (int i = this.evt.getAttaques().size()-1 ; i >= 0; i--) {
+                        this.evt.getAttaques().get(i).attaque();
                     }
                     
                     temps++;

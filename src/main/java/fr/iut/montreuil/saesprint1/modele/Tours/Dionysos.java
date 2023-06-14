@@ -16,7 +16,7 @@ public class Dionysos extends Tour {
     private static int nouvelEspaceEntreAttaques = 200;
 
     private int nbToursIvres = 80;
-    private int nbToursTonneau = 200;
+    private int nbToursTonneau = 160;
 
     //Attributs de la classe
     private Environnement env;
@@ -27,42 +27,37 @@ public class Dionysos extends Tour {
     
     @Override
     public void attaque() {
-        if (!super.getEnv().getEnnemis().isEmpty()) {
-            System.out.println("Il y a un ennemi");
-            if (this.getTemps() % this.getEspaceEntreAttaques() == 0) {
 
-            //Choisit un ennemi au hasard parmi tous les ennemis (attention pas tjrs le premier de la liste)
-            int indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
-            Ennemi e = super.getEnv().getEnnemis().get(indice);
+        //Choisit un ennemi au hasard parmi tous les ennemis
+        int indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
+        Ennemi e = super.getEnv().getEnnemis().get(indice);
 
-                if (!super.isAmélioré()) {
-                    System.out.println("Bouteille");
-                    //On cherche un nouvel ennemi si celui-ci est déjà en train de boire
-                    while (e.getToursIvres() != 0) {
-                        indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
-                        e = super.getEnv().getEnnemis().get(indice);
-                    }
-                    //Lui donne une bouteille
-                    Bouteille bouteille = new Bouteille(this, e);
-                    e.setToursIvres(nbToursIvres);
-                    //System.out.println("Arrête un ennemi" + nbToursIvres + " tours");
-                    super.getEnv().ajouterAttaqueTours(bouteille);
-
-                }
-                else {
-                    System.out.println("Tonneau");
-                    while (e.getToursEffetTonneau() != 0) {
-                        indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
-                        e = super.getEnv().getEnnemis().get(indice);
-                    }
-                    //Lui balance un tonneau
-                    Tonneau tonneau = new Tonneau(this, e);
-                    e.setToursEffetTonneau(nbToursTonneau);
-                    super.getEnv().ajouterAttaqueTours(tonneau);
-                }
-            }
+        //Trouve un nouvel ennemi si celui-ci est déjà ivre
+        while (e.getToursIvres() != 0 || e.getToursEffetTonneau() != 0) {
+            indice = (int) (Math.random() * super.getEnv().getEnnemis().size());
+            e = super.getEnv().getEnnemis().get(indice);
         }
-        this.incrementeTemps();
+
+        if (!super.isAmélioré())
+            attaqueNonAméliorée(e);
+
+        else
+            attaqueAméliorée(e);
+        
+    }
+
+    public void attaqueNonAméliorée(Ennemi e){
+
+        Bouteille bouteille = new Bouteille(this, e);
+        e.setToursIvres(nbToursIvres);
+        super.getEnv().ajouterAttaqueTours(bouteille);
+    }
+
+    public void attaqueAméliorée(Ennemi e){
+
+        Tonneau tonneau = new Tonneau(this, e);
+        e.setToursEffetTonneau(nbToursTonneau);
+        super.getEnv().ajouterAttaqueTours(tonneau);
     }
 
     public void améliorer(){

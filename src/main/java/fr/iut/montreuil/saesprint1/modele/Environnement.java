@@ -4,6 +4,7 @@ import fr.iut.montreuil.saesprint1.controller.Partie;
 import fr.iut.montreuil.saesprint1.controller.VagueEnnemie;
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.collections.FXCollections;
@@ -14,6 +15,7 @@ public class Environnement {
     private ObservableList<Ennemi> ennemis;
     private ObservableList<Tour> tours;
     private ObservableList<AttaqueTours> attaques;
+    private ObservableList<Vegetation> vegetations;
     private Terrain terrain;
     private int temps;
     private ParcoursBFS bfs;
@@ -25,6 +27,7 @@ public class Environnement {
         this.ennemis = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
         this.attaques = FXCollections.observableArrayList();
+        this.vegetations = FXCollections.observableArrayList();
         this.terrain = new Terrain();
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
@@ -65,6 +68,14 @@ public class Environnement {
     public void supprimerAttaqueTours(AttaqueTours attaqueTours){
         this.attaques.remove(attaqueTours);
     }
+
+    public void ajouterVegetation(Vegetation vegetation){this.vegetations.add(vegetation);}
+
+    public void supprimerVegetation(Vegetation vegetation){
+        this.vegetations.remove(vegetation);
+    }
+
+    public ObservableList<Vegetation> getVegetation(){return this.vegetations;}
 
     public Terrain getTerrain() {
         return terrain;

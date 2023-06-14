@@ -10,10 +10,8 @@ public class Bouteille extends AttaqueTours{
         this.ennemi = ennemi;
     }
     @Override
-    public void agit(){
-
-        //Si l'ennemi est mort, la bouteille doit disparaître
-        //Si l'ennemi n'est plus ivre, doit disparaitre
+    public void attaque(){
+        
         if(this.ennemi.estMort() || this.ennemi.getToursIvres() == 0){
             this.getTour().getEnv().supprimerAttaqueTours(this);
         }

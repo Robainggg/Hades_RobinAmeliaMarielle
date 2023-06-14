@@ -1,9 +1,8 @@
 package fr.iut.montreuil.saesprint1.modele.Attaques;
 
+import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class  AttaqueTours {
@@ -22,37 +21,30 @@ public abstract class  AttaqueTours {
         this.tour = tour;
     }
 
-    public abstract void agit();
+    public abstract void attaque();
 
-    //Setters & Getters
-    
-        public String getId(){
-            return "AttaqueTours"+this.idAttaque;
-        }
-        public Tour getTour() {
-            return tour;
-        }
-        public int getCoordXArrivé() {
-            return coordXArrivé.get();
-        }
+    public String getId() {
+        return "AttaqueTours" + this.idAttaque;
+    }
 
-        public IntegerProperty coordXprop() {
-            return coordXArrivé;
-        }
+    public Tour getTour() {
+        return tour;
+    }
 
-        public void setCoordXArrivé(int coordXArrivé) {
-            this.coordXArrivé.set(coordXArrivé);
-        }
+    public final int getCoordXArrivé() {
+        return coordXArrivé.get();
+    }
 
-        public int getCoordYArrivé() {
-            return coordYArrivé.get();
-        }
+    public final IntegerProperty coordXprop() {
+        return coordXArrivé;
+    }
 
-        public IntegerProperty coordYprop() {
-            return coordYArrivé;
-        }
-        public void setCoordYArrivé(int coordYArrivé) {
-            this.coordYArrivé.set(coordYArrivé);
-        }
+    public final int getCoordYArrivé() {
+        return coordYArrivé.get();
+    }
+
+    public final IntegerProperty coordYprop() {
+        return coordYArrivé;
+    }
 
 }
