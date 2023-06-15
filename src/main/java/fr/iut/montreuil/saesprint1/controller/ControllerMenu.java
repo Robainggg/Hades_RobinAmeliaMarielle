@@ -27,10 +27,8 @@ public class ControllerMenu implements Initializable {
     private StackPane background;
     @FXML
     private Button launchApp2Button;
-
     @FXML
     private ImageView im;
-
     private Stage primaryStage; // Référence à la Stage principale de App1
 
 
@@ -52,25 +50,7 @@ public class ControllerMenu implements Initializable {
             }
         });
     }
-
 }
-/*
-    @FXML
-    private Pane background;
-    @FXML
-    private ImageView im;
-    @FXML
-    private Button play;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        VueMenu v = new VueMenu(im, background);
-    }
-
-    @FXML
-    void play(ActionEvent event){
-        System.out.println("...");
-    }*/
 
 
 
