@@ -38,10 +38,6 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Circle testCercleEnnemi;
-
-
-    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -106,6 +102,9 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView pieces2;
 
+    @FXML
+    private Label nombreVagues;
+
     private Environnement evt;
 
     private VueTerrain vueTerrain;
@@ -156,6 +155,7 @@ public class HelloController implements Initializable {
         //Initialisation Joueur
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+
 
         this.boutonProchaineVague.setOnMouseClicked(e -> {
             if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {

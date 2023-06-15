@@ -6,6 +6,7 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 //import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.modele.Tours.*;
 import javafx.animation.PauseTransition;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -26,8 +27,7 @@ public class SpriteTour {
     final static Image poseidon = new Image(SpriteTour.class.getResource("/images/tours/poseidon.png").toExternalForm());
     final static Image demeter = new Image(SpriteTour.class.getResource("/images/tours/demeter.png").toExternalForm());
     final static Image dionysos = new Image(SpriteTour.class.getResource("/images/tours/dionysos.png").toExternalForm());
-
-
+    
     private Tour tour;
     private Pane pane;
     private ImageView t;
@@ -88,12 +88,13 @@ public class SpriteTour {
             if (this.tour.isAmélioré()) {
                 ameliore = true;
             }
+
+            
         });
 
         Button boutonSupprimer = new Button("Supprimer");
         boutonSupprimer.setOnAction(event -> {
             System.out.println("Bouton Supprimer cliqué !");
-//            pane.getChildren().remove(t);
             evt.supprimerUneTour(tour);
         });
 
