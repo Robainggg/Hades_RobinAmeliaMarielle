@@ -33,10 +33,6 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Circle testCercleEnnemi;
-
-
-    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -111,13 +107,10 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //Chargement de l'environnement et du Terrain
+        //Chargement Environnement/Terrain/Inventaire/Partie
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
-
-        //Chargement de l'inventaire
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis, boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
-
         partie = new Partie(this.evt.getJoueur(), evt);
 
         //Listeners
@@ -130,13 +123,14 @@ public class HelloController implements Initializable {
         this.evt.getTours().addListener(listenersTours);
         this.evt.getVegetation().addListener(listenersVegetation);
 
+        //Initialisation Joueur
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
+        //Bouton déclenchement vagues d'ennemis
         this.boutonProchaineVague.setOnAction(e -> {
-            if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
+            if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 3) {
                 this.partie.lanceVague();
-                System.out.println("Nouvelle vague de niveau : "+this.partie.getNiveau());
             }
 
         });
@@ -164,7 +158,7 @@ public class HelloController implements Initializable {
                             this.partie.stoppeVagueActuelle();
                         }
                     } else {
-                        if (this.partie.getNiveau() == 6)
+                        if (this.partie.getNiveau() == 3)
                             gameLoop.stop();
                     }
                     
@@ -190,15 +184,11 @@ public class HelloController implements Initializable {
         while (indice >= 0 && !this.evt.getJoueur().aPerdu()) {
             if (changeIndice == 0) {
                 evt.getEnnemis().get(indice).agit();
-                System.out.println("parcours les ennemis");
             } else if (changeIndice == 1) {
                 evt.getTours().get(indice).agit();
-                System.out.println("parcours les tours");
             } else if (changeIndice == 2) {
                 evt.getAttaques().get(indice).attaque();
-                System.out.println("parcours les attaques");
             }
-            System.out.println(this.evt.getJoueur().aPerdu());
             indice--;
             if (indice < 0) {
                 changeIndice++;

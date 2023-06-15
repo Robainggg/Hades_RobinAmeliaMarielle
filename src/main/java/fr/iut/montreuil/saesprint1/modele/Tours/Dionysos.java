@@ -24,7 +24,7 @@ public class Dionysos extends Tour {
     public Dionysos(int x, int y, Environnement env) {
         super("Dionysos", coutDionysos, x, y, env, espaceEntreAttaquesDeBase);
     }
-    
+
     @Override
     public void attaque() {
 
@@ -61,7 +61,6 @@ public class Dionysos extends Tour {
     }
 
     public void améliorer(){
-        System.out.println("Dyo s'améliore");
         super.améliorer(coutAméliorationDionysos,nouvelEspaceEntreAttaques);
     }
 }

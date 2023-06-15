@@ -1,6 +1,8 @@
 package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
+import fr.iut.montreuil.saesprint1.modele.Attaques.Tonneau;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.vue.SpriteAttaqueTours;
 import javafx.collections.ListChangeListener;
@@ -23,6 +25,13 @@ public class ListObsAttaquesTours implements ListChangeListener<AttaqueTours> {
             if (c.wasRemoved()) {
                 AttaqueTours finAttaque = c.getRemoved().get(0);
                 this.pane.getChildren().remove(this.pane.lookup("#" + finAttaque.getId()));
+
+                if(finAttaque instanceof Bouteille){
+                    ((Bouteille) finAttaque).getEnnemi().setToursIvres(0);
+                }
+                else if(finAttaque instanceof Tonneau){
+                    ((Tonneau) finAttaque).getEnnemi().setToursEffetTonneau(0);
+                }
             }
         }
 

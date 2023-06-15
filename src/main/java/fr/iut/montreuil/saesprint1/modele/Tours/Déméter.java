@@ -4,6 +4,8 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.modele.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 
+import java.util.ArrayList;
+
 public class Déméter extends TourAvecPortée {
 
     public static int coutDéméter = 20;
@@ -12,52 +14,74 @@ public class Déméter extends TourAvecPortée {
     private static int coutAmélioréDéméter = 25;
     private static int ralentissement = 1;
 
+    private ArrayList<Ennemi> ennemisAportée;
+
     public Déméter(int x, int y, Environnement env) {
         super("Déméter", coutDéméter, x, y, env, portéeDeBase, 3);
         this.ralentissement = 1;
+        this.ennemisAportée = new ArrayList<>();
     }
+
+    //Vérifie que les ennemis qui ne sont plus à portée ne sont plus ralentit par cette Tour
+    //Ralentit les ennemis à portée si ce n'est pas déjà le cas et les blesse si la tour est améliorée
     @Override
     public void attaque() {
 
-        //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
+        ArrayList<Ennemi> nouvellesCibles = this.chercheCibles();
+
+        for (int indOld = this.ennemisAportée.size() - 1; indOld >= 0; indOld--) {
+            Ennemi ancien = this.ennemisAportée.get(indOld);
+            if (ennemiZone(ancien) == null && ancien.estRalenti()) {
+                ancien.nestPlusRalenti(ralentissement);
+            }
+        }
+
+        for (int indNouv = nouvellesCibles.size() - 1; indNouv >= 0; indNouv--) {
+            Ennemi nouveau = nouvellesCibles.get(indNouv);
+            if (!nouveau.estRalenti()) {
+                nouveau.seFaitRalentir(1);
+            }
+            if (super.isAmélioré() && nouveau.estRalenti()) {
+                nouveau.pertPv(1);
+            }
+        }
+        this.ennemisAportée = nouvellesCibles;
+    }
+
+    public ArrayList<Ennemi> chercheCibles() {
+
+        ArrayList<Ennemi> nouvellesCibles = new ArrayList<>();
         for (int i = this.getEnv().getEnnemis().size() - 1; i >= 0; i--) {
             Ennemi e = this.getEnv().getEnnemis().get(i);
-            if (ennemiZone(e) != null && !e.estRalenti()) {
-                e.seFaitRalentir(ralentissement);
-
-            } else if (ennemiZone(e) == null && e.estRalenti()) {
-                e.nestPlusRalenti(ralentissement);
+            if (ennemiZone(e) != null) {
+                nouvellesCibles.add(e);
             }
+        }
+        return nouvellesCibles;
+    }
 
-            //Les blesse si la tour est améliorée
-            if (super.isAmélioré() && e.estRalenti()) {
-                e.pertPv(1);
+    public void creerVégétation() {
+
+        //On fait en sorte que la tour se retrouve au milieu de la végétation
+        int portée = this.getPortée();
+        int maxX = this.getX() + portée - 16;
+        int minX = this.getX() - portée - 16;
+        int maxY = this.getY() + portée - 16;
+        int minY = this.getY() - portée - 16;
+
+        for (int x = maxX; x > minX; x -= 32) {
+            for (int y = maxY; y > minY; y -= 32) {
+                //On ajoute pas la végétation en dehors des limites du terrain
+                if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
+                    Vegetation vegetation = new Vegetation(this, x, y);
+                    this.getEnv().ajouterVegetation(vegetation);
+                }
             }
         }
     }
 
-    public void creerVégétation () {
-
-            //On fait en sorte que la tour se retrouve au milieu de la végétation
-            int portée = this.getPortée();
-            int maxX = this.getX() + portée - 16;
-            int minX = this.getX() - portée - 16;
-            int maxY = this.getY() + portée - 16;
-            int minY = this.getY() - portée - 16;
-
-            for (int x = maxX; x > minX; x -= 32) {
-                for (int y = maxY; y > minY; y -= 32) {
-                    //On ajoute pas la végétation en dehors des limites du terrain
-                    if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
-                        Vegetation vegetation = new Vegetation(this, x, y);
-                        this.getEnv().ajouterVegetation(vegetation);
-                    }
-                }
-            }
-        }
-
-    public void améliorer(){
-        super.améliorer(coutAmélioréDéméter, this.getEspaceEntreAttaques(),3);
+    public void améliorer() {
+        super.améliorer(coutAmélioréDéméter, this.getEspaceEntreAttaques(), 3);
         creerVégétation();
     }
 
