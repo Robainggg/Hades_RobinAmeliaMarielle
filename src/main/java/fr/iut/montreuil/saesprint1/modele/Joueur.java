@@ -1,15 +1,19 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Joueur {
     private IntegerProperty pv;
     public IntegerProperty argent;
 
+    private DoubleProperty pourcentageVie;
     public Joueur(){
         this.pv = new SimpleIntegerProperty(5);
         this.argent = new SimpleIntegerProperty(100);
+        this.pourcentageVie = new SimpleDoubleProperty(1.0);
     }
 
     public int getPv() {
@@ -54,5 +58,21 @@ public class Joueur {
         this.setArgent(100);
     }
 
+    public double getPourcentageVie() {
+        return pourcentageVie.get();
+    }
+
+    public DoubleProperty pourcentageVieProperty() {
+        return pourcentageVie;
+    }
+
+    public void setPourcentageVie(double pourcentageVie) {
+        this.pourcentageVie.set(pourcentageVie);
+    }
+
+    public void perdPvD(int pvPerdus, int vieMax) {
+        double nouveauPourcentage = (double) (vieMax - pvPerdus) / vieMax;
+        this.pourcentageVie.set(nouveauPourcentage);
+    }
 
 }

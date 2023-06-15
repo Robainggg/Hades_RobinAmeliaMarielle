@@ -1,5 +1,6 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -141,10 +142,11 @@ public class Ennemi {
             this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
         else
             this.environnement.getJoueur().perdPv(1);
-        this.environnement.getEnnemis().remove(this);
-        this.setToursIvres(0);
-        this.setToursEffetTonneau(0);
-        this.estMort = true;
+            this.environnement.getEnnemis().remove(this);
+            this.setToursIvres(0);
+            this.setToursEffetTonneau(0);
+            this.estMort = true;
+
     }
      public void pertPv(int dégâts) {
         System.out.println(this.idEnnemi + " a " + getPv() + " points de vies, et perds " + dégâts + " points de vies ");
