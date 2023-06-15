@@ -31,7 +31,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
             if (c.wasRemoved()) {
                 Tour aSupprimer = c.getRemoved().get(0);
                 this.disparitionAttaques(aSupprimer);
-
+                this.pane.getChildren().remove(this.pane.lookup("#"+aSupprimer.getId()));
             }
         }
     }

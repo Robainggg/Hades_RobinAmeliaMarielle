@@ -100,7 +100,7 @@ public class SpriteTour {
         Button boutonSupprimer = new Button("Supprimer");
         boutonSupprimer.setOnAction(event -> {
             System.out.println("Bouton Supprimer cliqué !");
-            pane.getChildren().remove(t);
+//            pane.getChildren().remove(t);
             evt.supprimerUneTour(tour);
         });
 
