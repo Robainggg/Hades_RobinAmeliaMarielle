@@ -57,53 +57,6 @@ public class MainMenu extends Application {
 
 
 }
-    /*
-
-
-
-
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1160, 740);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
-}*/
-
-/*
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Créer le contenu de la fenêtre
-        Button button = new Button("Lancer App2");
-        button.setOnAction(event -> {
-            // Créer une instance de la classe App2 et appeler sa méthode start()
-            HelloApplication app2 = new HelloApplication();
-            try {
-                app2.start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        StackPane root = new StackPane(button);
-        Scene scene = new Scene(root, 400, 300);
-
-        primaryStage.setTitle("App1");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }*/
 
 
 

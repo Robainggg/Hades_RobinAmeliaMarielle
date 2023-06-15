@@ -1,6 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele.Attaques;
 
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
+import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import static java.lang.Math.round;
 
-public abstract class Projectile extends AttaqueTours {
+public class Projectile extends AttaqueTours {
     private DoubleProperty x;
     private DoubleProperty y;
     private int vitesse;
@@ -18,7 +19,7 @@ public abstract class Projectile extends AttaqueTours {
     private double normalizeDeltaX;
     private double normalizeDeltaY;
 
-    public Projectile(Tour tour, int coordXArrivé, int coordYArrivé, int vitesse) {
+    public Projectile(TourAvecPortée tour, int coordXArrivé, int coordYArrivé, int vitesse) {
 
         super(tour,coordXArrivé,coordYArrivé);
         this.vitesse = vitesse;
@@ -64,7 +65,17 @@ public abstract class Projectile extends AttaqueTours {
     }
 
 
+    @Override
+    public void attaque() {
 
+        this.avance();
 
+        TourAvecPortée tourAvecPortée = (TourAvecPortée) super.getTour();
 
+        //S'il est sorti de la portée ou en dehors de la map
+        if(!tourAvecPortée.estDansLaZone(this.getX(),this.getY())
+                || this.getX() >= 960-32 || this.getX() <= 32 || this.getY() >= 640-32 || this.getY() <= 32){
+            tourAvecPortée.getEnv().supprimerAttaqueTours(this);
+        }
+    }
 }

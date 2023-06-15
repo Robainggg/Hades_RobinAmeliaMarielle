@@ -13,36 +13,32 @@ public class Déméter extends TourAvecPortée {
     private static int ralentissement = 1;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 0);
+        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 3);
         this.ralentissement = 1;
     }
     @Override
     public void attaque() {
 
-        if (!super.getEnv().getEnnemis().isEmpty()) {
-            //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
-            for (int i = this.getEnv().getEnnemis().size() - 1; i > 0; i--) {
-                Ennemi e = this.getEnv().getEnnemis().get(i);
-                if (ennemiZone(e) != null && !e.estRalenti()) {
-                    e.seFaitRalentir(ralentissement);
-                    System.out.println("ralentit un ennemi");
+        //fait ralentir les ennemis tant qu'ils sont dans la portée de la tour
+        for (int i = this.getEnv().getEnnemis().size() - 1; i >= 0; i--) {
+            Ennemi e = this.getEnv().getEnnemis().get(i);
+            if (ennemiZone(e) != null && !e.estRalenti()) {
+                e.seFaitRalentir(ralentissement);
 
-                } else if (ennemiZone(e) == null && e.estRalenti()) {
-                    e.nestPlusRalenti(ralentissement);
-                    System.out.println("ne ralentit plus l'ennemi");
-                }
+            } else if (ennemiZone(e) == null && e.estRalenti()) {
+                e.nestPlusRalenti(ralentissement);
+            }
 
-                //Les blesse si la tour est améliorée
-                if (super.isAmélioré() && e.estRalenti()) {
-                    e.pertPv(1);
-                }
-
+            //Les blesse si la tour est améliorée
+            if (super.isAmélioré() && e.estRalenti()) {
+                e.pertPv(1);
             }
         }
     }
 
     public void creerVégétation () {
 
+            //On fait en sorte que la tour se retrouve au milieu de la végétation
             int portée = this.getPortée();
             int maxX = this.getX() + portée - 16;
             int minX = this.getX() - portée - 16;
@@ -51,19 +47,17 @@ public class Déméter extends TourAvecPortée {
 
             for (int x = maxX; x > minX; x -= 32) {
                 for (int y = maxY; y > minY; y -= 32) {
-                    if (y == this.getY() && x == this.getX()) {
-                        System.out.println("Tour : pas de végétation ");
-                    } else if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
-                        System.out.println("Creation végétaux");
+                    //On ajoute pas la végétation en dehors des limites du terrain
+                    if (x > 0 && x < (960 - 32) && y > 0 && y < (640 - 32)) {
                         Vegetation vegetation = new Vegetation(this, x, y);
-                        this.getEnv().ajouterAttaqueTours(vegetation);
+                        this.getEnv().ajouterVegetation(vegetation);
                     }
                 }
             }
         }
 
     public void améliorer(){
-        super.améliorer(coutAmélioréDéméter, 0,3);
+        super.améliorer(coutAmélioréDéméter, this.getEspaceEntreAttaques(),3);
         creerVégétation();
     }
 

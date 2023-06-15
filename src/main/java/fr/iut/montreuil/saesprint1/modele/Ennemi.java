@@ -31,37 +31,30 @@ public class Ennemi {
     private int toursIvres;
     private int toursEffetTonneau;
 
+
+
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
         this.idEnnemi = "E" + compteur;
+        incrementeCompteur();
 
         //Etat de l'ennemi
         this.estSorti = false;
         this.estMort = false;
         this.estRalenti = false;
         this.toursIvres = 0;
+        this.pv = new SimpleIntegerProperty(100);
 
-
-        this.coordXDepart = coordXDepart;
-        this.coordYDepart = coordYDepart;
-
-        coordY = new SimpleIntegerProperty();
-        coordX = new SimpleIntegerProperty();
+        coordY = new SimpleIntegerProperty(coordYDepart*32);
+        coordX = new SimpleIntegerProperty(coordXDepart*32);
         direction = new SimpleStringProperty();
-        coordX.setValue(coordXDepart*32);
-        coordY.setValue(coordYDepart*32);
         this.environnement = environnement;
         prochaineCase = new Case(coordXDepart,coordYDepart);
         vitesse = 2;
         recompense = 10;
         this.definirDirection();
-        incrementeCompteur();
-        pv = new SimpleIntegerProperty(100);
-        ProgressBar barreDeVie = new ProgressBar();
     }
-
-
-
+    
     private static void incrementeCompteur(){
         compteur++;
     }
@@ -89,6 +82,8 @@ public class Ennemi {
 
         if(this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32) {
             this.estSorti = true;
+            this.setToursIvres(0);
+            this.setToursEffetTonneau(0);
             return true;
         }
         return false;
@@ -130,11 +125,15 @@ public class Ennemi {
 
     public void agit(){
 
-        if(this.toursIvres == 0){
+        if(this.toursIvres == 0 && this.toursEffetTonneau == 0){
             this.seDeplace();
         }
-        else
+        else if(this.toursIvres > 0){
             this.toursIvres--;
+        }
+        else{
+            this.toursEffetTonneau--;
+        }
         
     }
     public void meurt(){
@@ -143,6 +142,8 @@ public class Ennemi {
         else
             this.environnement.getJoueur().perdPv(1);
         this.environnement.getEnnemis().remove(this);
+        this.setToursIvres(0);
+        this.setToursEffetTonneau(0);
         this.estMort = true;
     }
      public void pertPv(int dégâts) {
@@ -202,7 +203,7 @@ public class Ennemi {
         return coordX.getValue();
     }
 
-    public IntegerProperty coordXProperty() {
+    public final IntegerProperty coordXProperty() {
         return coordX;
     }
 
@@ -210,11 +211,11 @@ public class Ennemi {
         this.coordX.setValue(coordX);
     }
 
-    public int getCoordY() {
+    public final int getCoordY() {
         return coordY.getValue();
     }
 
-    public IntegerProperty coordYProperty() {
+    public final IntegerProperty coordYProperty() {
         return coordY;
     }
 
@@ -252,6 +253,10 @@ public class Ennemi {
 
     public void setToursEffetTonneau(int toursEffetTonneau) {
         this.toursEffetTonneau = toursEffetTonneau;
+    }
+
+    public double getPointsDeVieMax() {
+        return 100;
     }
 }
 

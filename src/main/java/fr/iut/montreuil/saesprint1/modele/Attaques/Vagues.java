@@ -17,7 +17,14 @@ public class Vagues {
         int centerX = this.tourAvecPortée.centreTourX().get();
         int centerY = this.tourAvecPortée.centreTourY().get();
         int rayon = this.tourAvecPortée.getPortée();
-        int numVagues = 8;
+        int numVagues;
+
+        if(this.tourAvecPortée.isAmélioré()){
+            numVagues = 16;
+        }
+        else{
+            numVagues = 8;
+        }
 
         // Calcul de l'angle entre chaque point sur le périmètre
         double angle = 2 * Math.PI / numVagues;
@@ -28,8 +35,8 @@ public class Vagues {
             int y = (int) (centerY + rayon * Math.sin(i * angle));
 
             PetiteVague vague = new PetiteVague(this.tourAvecPortée,x,y);
-            //System.out.println("Vague num : " + (i + 1) + " en : (" + x + ", " + y + ")");
             this.tourAvecPortée.getEnv().ajouterAttaqueTours(vague);
+
 
         }
     }

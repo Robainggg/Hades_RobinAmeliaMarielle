@@ -25,11 +25,15 @@ public class SpriteEnnemi {
         this.pane = pane;
         this.image = new ImageView();
         image.setId(ennemi.getIdEnnemi());
+
+
+        // Créer la barre de vie
         this.barreDeVie = new ProgressBar();
-        barreDeVie.setMaxWidth(32);
-        barreDeVie.setProgress(1.0);
+        barreDeVie.setPrefWidth(32);
 
 
+
+        this.pane.getChildren().add(barreDeVie);
 
         if(this.ennemi.getDirection().equals("d")) {
             System.out.println("début chargement");
@@ -81,12 +85,22 @@ public class SpriteEnnemi {
 
 
 
+        barreDeVie.setId(ennemi.getIdEnnemi());
+        barreDeVie.progressProperty().bind(ennemi.pvProperty().divide(ennemi.getPointsDeVieMax()));
+        barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
+        barreDeVie.translateXProperty().bind(image.translateXProperty());
+        barreDeVie.translateYProperty().bind(image.translateYProperty().subtract(10));
+        
+    }
 
+    public ProgressBar getBarreDeVie() {
+        return barreDeVie;
+    }
 
-
-
-
-
-
+    public ImageView getImage() {
+        return image;
+    }
+    public Ennemi getEnnemi() {
+        return ennemi;
     }
 }

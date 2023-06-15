@@ -92,10 +92,6 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView pieces2;
 
-    private int temps;
-
-    private Terrain terrain;
-
     private Environnement evt;
 
     private VueTerrain vueTerrain;
@@ -105,62 +101,45 @@ public class HelloController implements Initializable {
 
     private ListObsEnnemis listenerEnnemis;
 
-    private Ennemi ennemi;
-
     private ListObsAttaquesTours listenersAttaques;
     private ListObsTours listenersTours;
 
-    private Tour tourEnCoursAjout ;
-    private boolean ajoutTourEnCours = false;
-    private String typeTourSelectionne;
+    private ListObsVegetation listenersVegetation;
 
     private Partie partie;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         //Chargement de l'environnement et du Terrain
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
 
         //Chargement de l'inventaire
-        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
+        this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis, boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
 
-        partie = new Partie(evt.getJoueur(),evt);
+        partie = new Partie(this.evt.getJoueur(), evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
         this.listenersAttaques = new ListObsAttaquesTours(panePrincipal);
-        this.listenersTours = new ListObsTours(panePrincipal,evt);
-
+        this.listenersTours = new ListObsTours(panePrincipal, evt);
+        this.listenersVegetation = new ListObsVegetation(panePrincipal);
         this.evt.getEnnemis().addListener(listenerEnnemis);
         this.evt.getAttaques().addListener(listenersAttaques);
         this.evt.getTours().addListener(listenersTours);
+        this.evt.getVegetation().addListener(listenersVegetation);
 
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
         this.boutonProchaineVague.setOnAction(e -> {
-            if(this.partie.getVagueActuelle() == null){
+            if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
                 this.partie.lanceVague();
+                System.out.println("Nouvelle vague de niveau : "+this.partie.getNiveau());
             }
 
         });
-
-        //Test pour affichage de base
-//        Artémis artemis = new Artémis(2*32,2*32,evt);
-//        Artémis tour = new Artémis(6*32,10*32,evt);
-//        Tour dyo = new Dionysos(10*32,10*32,evt);
-//        Tour poseidon = new Poséidon(9*32,7*32,evt);
-//        Tour demeter = new Déméter(15*32,10*32,evt);
-        //ennemi = new Ennemi(evt);
-        //evt.ajouterEnnemi(ennemi);
-        //this.evt.ajouterTour(tour);
-//        this.evt.ajouterTour(artemis);
-//        this.evt.ajouterTour(dyo);
-//        this.evt.ajouterTour(poseidon);
-//        this.evt.ajouterTour(demeter);
-
-       // artemis.améliorer();
 
         initAnimation();
         gameLoop.play();
@@ -169,7 +148,6 @@ public class HelloController implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -178,29 +156,60 @@ public class HelloController implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
 
-                (ev ->{
-                    if(this.partie.getVagueActuelle() != null) {
+                (ev -> {
+
+                    if (this.partie.getVagueActuelle() != null) {
                         this.partie.getVagueActuelle().prochainEnnemi();
-                        if(this.partie.getVagueActuelle().isVagueEstFinie()){
+                        if (this.partie.getVagueActuelle().isVagueEstFinie()) {
                             this.partie.stoppeVagueActuelle();
                         }
-                    }
-                    for(int i = 0; i < evt.getEnnemis().size();i++) {
-                        evt.getEnnemis().get(i).agit();
-                    }
-
-                    for (Tour tour: this.evt.getTours()) {
-                        tour.attaque();
-                    }
-
-                    for (int i = this.evt.getAttaques().size()-1; i >= 0 ; i--) {
-                       this.evt.getAttaques().get(i).agit();
+                    } else {
+                        if (this.partie.getNiveau() == 6)
+                            gameLoop.stop();
                     }
                     
-                    temps++;
+                    this.action();
+
+                    if (this.evt.getJoueur().aPerdu()) {
+                        gameLoop.stop();
+                    }
+
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+    
+    public void action() {
+
+        int indiceEnnemi = evt.getEnnemis().size() - 1;
+        int indiceTour = evt.getTours().size() - 1;
+        int indiceAttaque = evt.getAttaques().size() - 1;
+        int indice = indiceEnnemi;
+        int changeIndice = 0;
+
+        while (indice >= 0 && !this.evt.getJoueur().aPerdu()) {
+            if (changeIndice == 0) {
+                evt.getEnnemis().get(indice).agit();
+                System.out.println("parcours les ennemis");
+            } else if (changeIndice == 1) {
+                evt.getTours().get(indice).agit();
+                System.out.println("parcours les tours");
+            } else if (changeIndice == 2) {
+                evt.getAttaques().get(indice).attaque();
+                System.out.println("parcours les attaques");
+            }
+            System.out.println(this.evt.getJoueur().aPerdu());
+            indice--;
+            if (indice < 0) {
+                changeIndice++;
+                if (changeIndice == 1) {
+                    indice = indiceTour;
+                } else if (changeIndice == 2) {
+                    indice = indiceAttaque;
+                }
+            }
+        }
+
     }
 
 }

@@ -42,27 +42,27 @@ public class SpriteTour {
         this.t = new ImageView();
         Image image;
 
-//        if (tour instanceof TourAvecPortée) {
-//            Circle c = new Circle(((TourAvecPortée) tour).getPortée());
-//            c.setOpacity(0.1);
-//            if(tour instanceof Artémis){
-//                c.setFill(Color.PINK);
-//            }
-//            else if(tour instanceof Poséidon){
-//                c.setFill(Color.CADETBLUE);
-//            }
+// if (tour instanceof TourAvecPortée) {
+// Circle c = new Circle(((TourAvecPortée) tour).getPortée());
+// c.setOpacity(0.1);
+// if(tour instanceof Artémis){
+// c.setFill(Color.PINK);
+// }
+// else if(tour instanceof Poséidon){
+// c.setFill(Color.CADETBLUE);
+// }
 //
-//            c.translateXProperty().bind(tour.centreTourX());
-//            c.translateYProperty().bind(tour.centreTourY());
-//            pane.getChildren().add(c);
-//            c.setId("rangeOf" + tour.getId());
+// c.translateXProperty().bind(tour.centreTourX());
+// c.translateYProperty().bind(tour.centreTourY());
+// pane.getChildren().add(c);
+// c.setId("rangeOf" + tour.getId());
 //
-//        }
+// }
 
-       // Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
-        if(tour instanceof Artémis)
+// Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
+        if (tour instanceof Artémis)
             image = artemis;
-        else if(tour instanceof Poséidon)
+        else if (tour instanceof Poséidon)
             image = poseidon;
         else
             image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
@@ -71,52 +71,12 @@ public class SpriteTour {
         t.setFitHeight(32);
         t.translateXProperty().bind(tour.getXProperty());
         t.translateYProperty().bind(tour.getYProperty());
-        pane.getChildren().add(t);
         t.setId(tour.getId());
+        pane.getChildren().add(t);
         afficherOptionsAméliorationSuppression(t);
     }
 
     private void afficherOptionsAméliorationSuppression(ImageView imageView) {
-/*
-        if (!ameliore) {
-            Tooltip tooltipPoséidon = new Tooltip();
-
-            tooltipPoséidon.setText(getTour().getId() + "\n" + "Amélioration : 10€");
-
-            Button button = new Button("Améliorer");
-            button.setOnAction(event -> {
-                // Code pour gérer l'action du bouton "Améliorer"
-                System.out.println("Bouton Améliorer cliqué !");
-                Image image = new Image(getClass().getResource("/images/tours/tour_ameliore.jpg").toExternalForm());
-                t.setImage(image);
-                ameliore = true;
-
-            });
-
-            VBox tooltipContent = new VBox();
-            tooltipContent.getChildren().addAll(button);
-            tooltipPoséidon.setGraphic(tooltipContent);
-
-            final boolean[] tooltipVisiblePoséidon = {false};
-            imageView.setOnMousePressed(event -> {
-                if (event.isPrimaryButtonDown()) {
-                    if (!tooltipVisiblePoséidon[0] && !ameliore) {
-                        Tooltip.install(imageView, tooltipPoséidon);
-                        tooltipPoséidon.show(imageView, event.getScreenX(), event.getScreenY());
-                        tooltipVisiblePoséidon[0] = true;
-
-                        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-                        pause.setOnFinished(e -> {
-                            tooltipPoséidon.hide();
-                            Tooltip.uninstall(imageView, tooltipPoséidon);
-                            tooltipVisiblePoséidon[0] = false;
-                        });
-                        pause.play();
-                    }
-                    event.consume();
-                }
-            });
-        }*/
 
         Tooltip tooltip = new Tooltip();
 
