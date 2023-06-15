@@ -55,6 +55,11 @@ public class VueInventaire {
     private String selectedType;
     private boolean boutonRadioSelectionne = false;
 
+    final static Image artemis = new Image(VueInventaire.class.getResourceAsStream("/images/tours/artemisHD.png"));
+    final static Image demeter = new Image(VueInventaire.class.getResourceAsStream("/images/tours/demeterHD.png"));
+    final static Image dionysos = new Image(VueInventaire.class.getResourceAsStream("/images/tours/dionysosHD.png"));
+    final static Image poseidon = new Image(VueInventaire.class.getResourceAsStream("/images/tours/poseidonHD.png"));
+
 
     //this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
     public VueInventaire(ImageView imageTourArt, ImageView imageTourPos, ImageView imageTourDem, ImageView imageTourDio, RadioButton boutonArt, RadioButton boutonPos, RadioButton boutonDem, RadioButton boutonDio, ToggleGroup groupeRadio, Button boutonAjtTour, ImageView p1, ImageView p2, Label ai, Label ni, Pane pane, TilePane tp, VBox vboutique,  ImageView boutique_bg, Environnement evt ) {
@@ -84,19 +89,19 @@ public class VueInventaire {
     }
 
     public void chargerImage() {
-        Image tourArthemis = new Image(getClass().getResourceAsStream("/images/tours/artemisHD.png"));
+        Image tourArthemis = artemis;
         imageTourArthemis.setImage(tourArthemis);
         this.afficherCaractéristiquesTours(imageTourArthemis);
 
-        Image tourPoséidon = new Image(getClass().getResourceAsStream("/images/tours/poseidonHD.png"));
+        Image tourPoséidon = poseidon;
         imageTourPoséidon.setImage(tourPoséidon);
         this.afficherCaractéristiquesTours(imageTourPoséidon);
 
-        Image tourDémeter = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
+        Image tourDémeter = demeter;
         imageTourDéméter.setImage(tourDémeter);
         this.afficherCaractéristiquesTours(imageTourDéméter);
 
-        Image tourDionysos = new Image(getClass().getResourceAsStream("/images/tours/Tower-PNG-Image.png"));
+        Image tourDionysos = dionysos;
         imageTourDionysos.setImage(tourDionysos);
         this.afficherCaractéristiquesTours(imageTourDionysos);
 

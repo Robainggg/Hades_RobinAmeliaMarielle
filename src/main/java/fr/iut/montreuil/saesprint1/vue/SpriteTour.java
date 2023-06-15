@@ -24,6 +24,8 @@ public class SpriteTour {
 
     final static Image artemis = new Image(SpriteTour.class.getResource("/images/tours/artemis.png").toExternalForm());
     final static Image poseidon = new Image(SpriteTour.class.getResource("/images/tours/poseidon.png").toExternalForm());
+    final static Image demeter = new Image(SpriteTour.class.getResource("/images/tours/demeter.png").toExternalForm());
+    final static Image dionysos = new Image(SpriteTour.class.getResource("/images/tours/dionysos.png").toExternalForm());
 
 
     private Tour tour;
@@ -64,8 +66,13 @@ public class SpriteTour {
             image = artemis;
         else if (tour instanceof Poséidon)
             image = poseidon;
+        else if (tour instanceof Déméter)
+            image = demeter;
+        else if(tour instanceof Dionysos)
+            image = dionysos;
         else
             image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
+
         t.setImage(image);
         t.setFitWidth(32);
         t.setFitHeight(32);
