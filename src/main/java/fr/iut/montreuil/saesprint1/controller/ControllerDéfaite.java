@@ -34,7 +34,7 @@ public class ControllerDéfaite implements Initializable {
             HelloApplication app2 = new HelloApplication();
             try {
                 app2.start(new Stage());
-                primaryStage.close();
+                this.primaryStage.close();
 
             } catch (Exception e) {
                 e.printStackTrace();

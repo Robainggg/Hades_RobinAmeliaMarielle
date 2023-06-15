@@ -29,7 +29,7 @@ public class ControllerMenu implements Initializable {
     private Button launchApp2Button;
     @FXML
     private ImageView im;
-    private Stage primaryStage; // Référence à la Stage principale de App1
+    private Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;

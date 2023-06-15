@@ -125,18 +125,23 @@ public class HelloController implements Initializable {
     @FXML
     private ProgressBar barreDeVie;
 
-    private Joueur joueur;
+    private Stage primaryStage;
 
-
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
         //Chargement Environnement/Terrain/Inventaire/Partie
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis, boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
         partie = new Partie(this.evt.getJoueur(), evt);
+
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
@@ -195,11 +200,12 @@ public class HelloController implements Initializable {
                             this.partie.stoppeVagueActuelle();
                         }
                     } else {
-                        if (this.partie.getNiveau() == 3) {
+                        if (this.partie.getNiveau() == 3 && this.evt.getEnnemis().isEmpty()) {
                             gameLoop.stop();
                             PanneauVictoire panneauVictoire = new PanneauVictoire();
                             try {
                                 panneauVictoire.start(new Stage());
+                                this.primaryStage.close();
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
@@ -213,6 +219,7 @@ public class HelloController implements Initializable {
                         PanneauDéfaite panneauDéfaite = new PanneauDéfaite();
                         try {
                             panneauDéfaite.start(new Stage());
+                            this.primaryStage.close();
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }

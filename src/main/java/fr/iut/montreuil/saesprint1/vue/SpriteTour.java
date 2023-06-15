@@ -87,8 +87,6 @@ public class SpriteTour {
             //Afficher la tour améliorée si l'amélioration s'est bien effectuée
             if (this.tour.isAmélioré()) {
                 ameliore = true;
-                Image image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
-                t.setImage(image);
             }
         });
 

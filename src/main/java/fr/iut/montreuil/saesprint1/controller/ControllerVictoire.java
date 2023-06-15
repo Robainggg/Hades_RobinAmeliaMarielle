@@ -20,7 +20,7 @@ public class ControllerVictoire implements Initializable {
     private Button recommencerAprèsVictoire;
     @FXML
     private ImageView imageVictoire;
-    private Stage primaryStage; // Référence à la Stage principale de App1
+    private Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -34,7 +34,7 @@ public class ControllerVictoire implements Initializable {
             HelloApplication app2 = new HelloApplication();
             try {
                 app2.start(new Stage());
-                primaryStage.close();
+                this.primaryStage.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
