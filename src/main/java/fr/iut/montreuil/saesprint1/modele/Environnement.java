@@ -130,4 +130,15 @@ public class Environnement {
     public boolean isPeutPlacerUneTour() {
         return peutPlacerUneTour;
     }
+
+    public void nettoieEnvironnement(){
+        for(int i = ennemis.size()-1; i >= 0; i--)
+            this.ennemis.remove(i);
+        for(int i = attaques.size()-1; i >= 0; i--)
+            this.attaques.remove(i);
+        for(int i = vegetations.size()-1; i >= 0; i--)
+            this.vegetations.remove(i);
+        for(int i = tours.size()-1; i >= 0; i--)
+            this.tours.remove(i);
+    }
 }

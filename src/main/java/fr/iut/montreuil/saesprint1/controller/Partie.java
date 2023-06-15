@@ -39,4 +39,9 @@ public class Partie {
         this.vagueActuelle = null;
     }
 
+    public void resetPartie(){
+        this.niveau = 0;
+        this.vagueActuelle = null;
+    }
+
 }

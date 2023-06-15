@@ -49,5 +49,10 @@ public class Joueur {
 
     public void setPV(int pv){this.pv.setValue(pv);}
 
+    public void resetJoueur(){
+        this.setPV(20);
+        this.setArgent(100);
+    }
+
 
 }

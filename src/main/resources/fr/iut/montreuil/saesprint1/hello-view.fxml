@@ -52,11 +52,38 @@
                             </children>
                         </Pane>
                     </children></VBox>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
+            <GridPane alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button fx:id="boutonProchaineVague" mnemonicParsing="false" text="Prochaine Vague" />
+                  <ImageView fx:id="boutonRelancerPartie" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/relancerPartie.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="boutonPause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/pause.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="boutonDepause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/depause.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="boutonProchaineVague" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/pauseOptions/prochaineVagueButton.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </VBox>
+            </GridPane>
 
             </children>
         </HBox>

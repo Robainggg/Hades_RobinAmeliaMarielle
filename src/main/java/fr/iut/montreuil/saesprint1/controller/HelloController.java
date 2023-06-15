@@ -64,7 +64,16 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    private Button boutonProchaineVague;
+    private ImageView boutonProchaineVague;
+
+    @FXML
+    private ImageView boutonPause;
+
+    @FXML
+    private ImageView boutonDepause;
+
+    @FXML
+    private ImageView boutonRelancerPartie;
 
     @FXML
     private Label argent;
@@ -127,12 +136,24 @@ public class HelloController implements Initializable {
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
 
-        //Bouton déclenchement vagues d'ennemis
-        this.boutonProchaineVague.setOnAction(e -> {
-            if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 3) {
+        this.boutonProchaineVague.setOnMouseClicked(e -> {
+            if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
                 this.partie.lanceVague();
+                System.out.println("Nouvelle vague de niveau : "+this.partie.getNiveau());
             }
 
+        });
+
+        this.boutonPause.setOnMouseClicked(e -> this.gameLoop.pause());
+
+        this.boutonDepause.setOnMouseClicked(e -> this.gameLoop.play());
+
+        this.boutonRelancerPartie.setOnMouseClicked(e -> {
+            gameLoop.stop();
+            this.partie.resetPartie();
+            this.evt.nettoieEnvironnement();
+            this.evt.getJoueur().resetJoueur();
+            gameLoop.play();
         });
 
         initAnimation();
@@ -189,6 +210,7 @@ public class HelloController implements Initializable {
             } else if (changeIndice == 2) {
                 evt.getAttaques().get(indice).attaque();
             }
+
             indice--;
             if (indice < 0) {
                 changeIndice++;
