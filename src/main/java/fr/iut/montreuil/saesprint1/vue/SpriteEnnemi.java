@@ -30,6 +30,7 @@ public class SpriteEnnemi {
         // Créer la barre de vie
         this.barreDeVie = new ProgressBar();
         barreDeVie.setPrefWidth(32);
+        barreDeVie.setStyle("-fx-accent: green;");
 
 
 
@@ -92,6 +93,16 @@ public class SpriteEnnemi {
         barreDeVie.translateYProperty().bind(image.translateYProperty().subtract(10));
 
 
+        // Ajouter une écoute sur la propriété de progression de la barre de vie
+        barreDeVie.progressProperty().addListener((obs, oldProgress, newProgress) -> {
+            // Vérifier si la barre atteint la moitié
+            if (newProgress.doubleValue() >= 0.75 && newProgress.doubleValue()<=1) {
+                barreDeVie.setStyle("-fx-accent: orange;");
+            }
+            else if (newProgress.doubleValue() <= 0.5) {
+                barreDeVie.setStyle("-fx-accent: red;");
+            }
+        });
 
 
 
