@@ -139,7 +139,7 @@ public class HelloController implements Initializable {
         this.boutonProchaineVague.setOnMouseClicked(e -> {
             if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
                 this.partie.lanceVague();
-                System.out.println("Nouvelle vague de niveau : "+this.partie.getNiveau());
+                System.out.println("Nouvelle vague de niveau : " + this.partie.getNiveau());
             }
 
         });
@@ -182,8 +182,12 @@ public class HelloController implements Initializable {
                         if (this.partie.getNiveau() == 3)
                             gameLoop.stop();
                     }
-                    
+
                     this.action();
+
+                    for(int i = this.evt.getAttaques().size()-1; i >=0; i--){
+                        this.evt.getAttaques().get(i).attaque();
+                    }
 
                     if (this.evt.getJoueur().aPerdu()) {
                         gameLoop.stop();
@@ -193,12 +197,11 @@ public class HelloController implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-    
+
     public void action() {
 
         int indiceEnnemi = evt.getEnnemis().size() - 1;
         int indiceTour = evt.getTours().size() - 1;
-        int indiceAttaque = evt.getAttaques().size() - 1;
         int indice = indiceEnnemi;
         int changeIndice = 0;
 
@@ -207,21 +210,16 @@ public class HelloController implements Initializable {
                 evt.getEnnemis().get(indice).agit();
             } else if (changeIndice == 1) {
                 evt.getTours().get(indice).agit();
-            } else if (changeIndice == 2) {
-                evt.getAttaques().get(indice).attaque();
             }
-
             indice--;
             if (indice < 0) {
                 changeIndice++;
                 if (changeIndice == 1) {
                     indice = indiceTour;
-                } else if (changeIndice == 2) {
-                    indice = indiceAttaque;
                 }
             }
+
         }
 
     }
-
 }
