@@ -11,7 +11,7 @@ public class Joueur {
 
     private DoubleProperty pourcentageVie;
     public Joueur(){
-        this.pv = new SimpleIntegerProperty(5);
+        this.pv = new SimpleIntegerProperty(20);
         this.argent = new SimpleIntegerProperty(100);
         this.pourcentageVie = new SimpleDoubleProperty(1.0);
     }

@@ -133,4 +133,5 @@ public abstract class Tour {
     public void setEspaceEntreAttaques(int espaceEntreAttaques) {
         this.espaceEntreAttaques = espaceEntreAttaques;
     }
+    
 }

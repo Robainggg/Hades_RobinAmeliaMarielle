@@ -52,7 +52,7 @@ public class Ennemi {
         this.environnement = environnement;
         prochaineCase = new Case(coordXDepart,coordYDepart);
         vitesse = 2;
-        recompense = 10;
+        recompense = 2;
         this.definirDirection();
     }
     
