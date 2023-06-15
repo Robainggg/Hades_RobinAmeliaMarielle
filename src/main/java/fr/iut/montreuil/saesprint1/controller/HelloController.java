@@ -1,9 +1,13 @@
 package fr.iut.montreuil.saesprint1.controller;
 
+import fr.iut.montreuil.saesprint1.PanneauDéfaite;
+import fr.iut.montreuil.saesprint1.PanneauVictoire;
 import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.modele.Tours.*;
+import fr.iut.montreuil.saesprint1.vue.VueDéfaite;
 import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
+import fr.iut.montreuil.saesprint1.vue.VueVictoire;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -14,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 // Créer une BufferedImage de 100 pixels de
@@ -179,17 +184,31 @@ public class HelloController implements Initializable {
                             this.partie.stoppeVagueActuelle();
                         }
                     } else {
-                        if (this.partie.getNiveau() == 3)
+                        if (this.partie.getNiveau() == 3) {
                             gameLoop.stop();
+                            PanneauVictoire panneauVictoire = new PanneauVictoire();
+                            try {
+                                panneauVictoire.start(new Stage());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
                     }
 
                     this.action();
 
                     if (this.evt.getJoueur().aPerdu()) {
                         gameLoop.stop();
+                        PanneauDéfaite panneauDéfaite = new PanneauDéfaite();
+                        try {
+                            panneauDéfaite.start(new Stage());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
 
-                    for(int i = this.evt.getAttaques().size()-1; i >=0; i--){
+                    for (int i = this.evt.getAttaques().size() - 1; i >= 0; i--) {
                         this.evt.getAttaques().get(i).attaque();
                     }
 

@@ -4,12 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class VueDéfaite {
+public class VueVictoire {
 
     private StackPane pane;
     private ImageView imageView;
 
-    public VueDéfaite(ImageView imv, StackPane pane) {
+    public VueVictoire(ImageView imv, StackPane pane) {
         this.imageView=imv;
         this.pane = pane;
         charger();

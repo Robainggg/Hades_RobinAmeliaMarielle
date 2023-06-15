@@ -45,7 +45,7 @@ public class MainMenu extends Application {
 
         Scene scene = new Scene(root, 1160, 740);
 
-        primaryStage.setTitle("App1");
+        primaryStage.setTitle("Hadès vs ses morts");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -31,7 +31,6 @@ public class ControllerMenu implements Initializable {
     private ImageView im;
     private Stage primaryStage; // Référence à la Stage principale de App1
 
-
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
