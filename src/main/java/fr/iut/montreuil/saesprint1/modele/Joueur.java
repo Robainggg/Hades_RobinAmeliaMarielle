@@ -8,7 +8,7 @@ public class Joueur {
     public IntegerProperty argent;
 
     public Joueur(){
-        this.pv = new SimpleIntegerProperty(20);
+        this.pv = new SimpleIntegerProperty(5);
         this.argent = new SimpleIntegerProperty(100);
     }
 
