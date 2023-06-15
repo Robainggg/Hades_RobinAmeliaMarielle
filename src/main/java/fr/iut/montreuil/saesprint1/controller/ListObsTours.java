@@ -3,6 +3,7 @@ package fr.iut.montreuil.saesprint1.controller;
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
+import fr.iut.montreuil.saesprint1.modele.Tours.Dionysos;
 import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.vue.SpriteTour;
@@ -29,24 +30,31 @@ public class ListObsTours implements ListChangeListener<Tour> {
             }
             if (c.wasRemoved()) {
                 Tour aSupprimer = c.getRemoved().get(0);
-                if (aSupprimer instanceof Déméter){
-                    for(int indEnnemi = this.evt.getEnnemis().size()-1; indEnnemi >= 0; indEnnemi--){
-                        this.evt.getEnnemis().get(indEnnemi).nestPlusRalenti(1);
-                    }
-                    for (int i = this.evt.getVegetation().size()-1; i >= 0; i--) {
-                        Vegetation vege = this.evt.getVegetation().get(i);
-                        if (vege.getTour().equals(aSupprimer)){
-                            this.evt.supprimerVegetation(vege);
-                        }
-                    }
+                this.disparitionAttaques(aSupprimer);
+
+            }
+        }
+    }
+
+    public void disparitionAttaques(Tour tour){
+
+        if (tour instanceof Déméter){
+            for(int indEnnemi = this.evt.getEnnemis().size()-1; indEnnemi >= 0; indEnnemi--){
+                this.evt.getEnnemis().get(indEnnemi).nestPlusRalenti(1);
+            }
+            for (int i = this.evt.getVegetation().size()-1; i >= 0; i--) {
+                Vegetation vege = this.evt.getVegetation().get(i);
+                if (vege.getTour().equals(tour)){
+                    this.evt.supprimerVegetation(vege);
                 }
-                else{
-                    for (int i = this.evt.getAttaques().size()-1; i >= 0; i--){
-                        AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
-                        if(attaqueTours.getTour().equals(aSupprimer)){
-                            this.evt.supprimerAttaqueTours(attaqueTours);
-                        }
-                    }
+            }
+        }
+
+        else{
+            for (int i = this.evt.getAttaques().size()-1; i >= 0; i--){
+                AttaqueTours attaqueTours = this.evt.getAttaques().get(i);
+                if(attaqueTours.getTour().equals(tour)){
+                    this.evt.supprimerAttaqueTours(attaqueTours);
                 }
             }
         }

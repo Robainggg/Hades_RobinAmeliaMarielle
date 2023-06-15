@@ -14,8 +14,8 @@ public abstract class TourAvecPortée extends Tour {
     }
     //Vérifie que l'élément est dans la portée
     public boolean estDansLaZone(double x, double y){
-        if(x >= this.centreTourX().getValue()-(getPortée()-16) && x <= this.centreTourX().getValue()+(getPortée()-16)
-                && y >= this.centreTourY().getValue()-(getPortée()-16) && y <= this.centreTourY().getValue()+(getPortée()-16)) {
+        if(x >= this.centreTourX().getValue()-(getPortée()+16) && x <= this.centreTourX().getValue()+(getPortée()+16)
+                && y >= this.centreTourY().getValue()-(getPortée()+16) && y <= this.centreTourY().getValue()+(getPortée()+16)) {
             return true;
         }
         return false;
