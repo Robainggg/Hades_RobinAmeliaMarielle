@@ -18,14 +18,13 @@ public class VagueEnnemie {
 
     private int cadenceApparition;
 
-    private boolean alterneSpawn;
+    private double alterneSpawn;
 
     private boolean vagueEstFinie;
 
     public VagueEnnemie(Partie partie, Joueur joueur, Environnement environnement){
         this.partie = partie;
         this.joueur = joueur;
-        this.alterneSpawn = false;
         this.environnement = environnement;
 
         this.temps = 1;
@@ -41,19 +40,19 @@ public class VagueEnnemie {
     }
 
     public void prochainEnnemi(){
-        System.out.println(nbEnnemis + " ennemis restants " + temps + " modulo " + cadenceApparition + " = " + temps%cadenceApparition);
+        double doubleSpawn;
+        //System.out.println(nbEnnemis + " ennemis restants " + temps + " modulo " + cadenceApparition + " = " + temps%cadenceApparition);
         this.incrementeTemps();
         if(this.nbEnnemis > 0 && this.temps%cadenceApparition == 0) {
             nbEnnemis--;
-            if(!alterneSpawn) {
-                this.environnement.ajouterEnnemi(new Ennemi(environnement, 0, 2));
-                this.environnement.ajouterEnnemi(new Ennemi(environnement, 0, 3));
-
-                alterneSpawn = !alterneSpawn;
+            this.alterneSpawn = Math.random() *2;
+            if(alterneSpawn<=1) {
+                doubleSpawn = Math.random() *2;
+                this.spawnBas( doubleSpawn <= 1);
             }
             else {
-                this.environnement.ajouterEnnemi(new Ennemi(environnement, 1, 19));
-                alterneSpawn = !alterneSpawn;
+                doubleSpawn = Math.random() *2;
+                this.spawnHaut( doubleSpawn <= 1);
             }
 
         }
@@ -68,5 +67,17 @@ public class VagueEnnemie {
 
     public void incrementeTemps(){
         this.temps++;
+    }
+
+    public void spawnBas(boolean doubleSpawn){
+        this.environnement.ajouterEnnemi(new Ennemi(environnement,0,19));
+        if(doubleSpawn)
+            this.environnement.ajouterEnnemi((new Ennemi(environnement,1,19)));
+    }
+
+    public void spawnHaut(boolean doubleSpawn){
+        this.environnement.ajouterEnnemi(new Ennemi(environnement,0,2));
+        if(doubleSpawn)
+            this.environnement.ajouterEnnemi((new Ennemi(environnement,0,3)));
     }
 }

@@ -38,6 +38,10 @@ public class HelloController implements Initializable {
     private TilePane tilePane;
 
     @FXML
+    private Circle testCercleEnnemi;
+
+
+    @FXML
     private ImageView imageTourArthemis;
 
     @FXML
@@ -117,6 +121,13 @@ public class HelloController implements Initializable {
     private ListObsVegetation listenersVegetation;
 
     private Partie partie;
+
+    @FXML
+    private ProgressBar barreDeVie;
+
+    private Joueur joueur;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
