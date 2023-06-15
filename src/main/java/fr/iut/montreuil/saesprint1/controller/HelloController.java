@@ -185,12 +185,12 @@ public class HelloController implements Initializable {
 
                     this.action();
 
-                    for(int i = this.evt.getAttaques().size()-1; i >=0; i--){
-                        this.evt.getAttaques().get(i).attaque();
-                    }
-
                     if (this.evt.getJoueur().aPerdu()) {
                         gameLoop.stop();
+                    }
+
+                    for(int i = this.evt.getAttaques().size()-1; i >=0; i--){
+                        this.evt.getAttaques().get(i).attaque();
                     }
 
                 })
