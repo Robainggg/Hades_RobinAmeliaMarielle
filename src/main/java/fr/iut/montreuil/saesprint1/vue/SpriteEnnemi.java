@@ -19,8 +19,8 @@ public class SpriteEnnemi {
     final static Image diableFace = new Image(SpriteEnnemi.class.getResource("/images/diable/devilFront.png").toExternalForm());
 
 
-    public SpriteEnnemi(Ennemi ennemi, Pane pane){
-        
+    public SpriteEnnemi(Ennemi ennemi, Pane pane) {
+
         this.ennemi = ennemi;
         this.pane = pane;
         this.image = new ImageView();
@@ -30,27 +30,24 @@ public class SpriteEnnemi {
         // Créer la barre de vie
         this.barreDeVie = new ProgressBar();
         barreDeVie.setPrefWidth(32);
-
+        barreDeVie.setStyle("-fx-accent: green");
 
 
         this.pane.getChildren().add(barreDeVie);
 
-        if(this.ennemi.getDirection().equals("d")) {
+        if (this.ennemi.getDirection().equals("d")) {
             System.out.println("début chargement");
             image.setImage(diableDroit);
             System.out.println("image chargée");
-        }
-        else if(this.ennemi.getDirection().equals("g")) {
+        } else if (this.ennemi.getDirection().equals("g")) {
             System.out.println("début chargement");
             image.setImage(diableGauche);
             System.out.println("image chargée");
-        }
-        else if(this.ennemi.getDirection().equals("h")) {
+        } else if (this.ennemi.getDirection().equals("h")) {
             System.out.println("début chargement");
-                image.setImage(diableDos);
+            image.setImage(diableDos);
             System.out.println("image chargée");
-            }
-        else {
+        } else {
             System.out.println("début chargement");
             image.setImage(diableFace);
             System.out.println("image chargée");
@@ -58,9 +55,8 @@ public class SpriteEnnemi {
         System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
 
 
-
         ChangeListener<String> listenerDirection = (((obs, old, nouv) -> {
-            switch(nouv){
+            switch (nouv) {
                 case "d":
                     this.image.setImage(diableDroit);
                     System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
@@ -84,14 +80,21 @@ public class SpriteEnnemi {
         this.pane.getChildren().add(image);
 
 
-
         barreDeVie.setId(ennemi.getIdEnnemi());
         barreDeVie.progressProperty().bind(ennemi.pvProperty().divide(ennemi.getPointsDeVieMax()));
         barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
         barreDeVie.translateXProperty().bind(image.translateXProperty());
         barreDeVie.translateYProperty().bind(image.translateYProperty().subtract(10));
-        
+
+        barreDeVie.progressProperty().addListener((obs, oldProgress, newProgress) -> {
+            if (newProgress.doubleValue() <= 0.75 && newProgress.doubleValue() >= 0.5) {
+                barreDeVie.setStyle("-fx-accent: orange;");
+            } else if (newProgress.doubleValue() <= 0.5){
+                barreDeVie.setStyle("-fx-accent: red");
+            }
+        });
     }
+
 
     public ProgressBar getBarreDeVie() {
         return barreDeVie;
