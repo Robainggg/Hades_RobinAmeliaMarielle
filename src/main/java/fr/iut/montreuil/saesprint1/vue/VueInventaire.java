@@ -95,7 +95,7 @@ public class VueInventaire {
         this.afficherCaractéristiquesTours(imageTourDionysos);
 
         Image background = new Image(getClass().getResourceAsStream("/images/boutique.png"));
-        Image pieces = new Image(getClass().getResourceAsStream("/images/png_coins.jpg"));
+        Image pieces = new Image(getClass().getResourceAsStream("/images/lespieces.png"));
         pieces1.setImage(pieces);
         pieces2.setImage(pieces);
         boutique_bg.setImage(background);
