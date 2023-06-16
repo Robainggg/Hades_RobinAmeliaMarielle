@@ -112,7 +112,7 @@ public class SpriteTour {
                 if (!tooltipVisible[0]) {
                     //affichage de l'id de la tour et du type de tour
                     String tourType = getTour().getClass().getSimpleName();
-                    String tooltipText = tour.getId() + "\nType : ";
+                    String tooltipText = "Prix : "+ getTour().getCoutAmélioration()+" or" + "\nType : ";
                     if (tourType.equals("Artémis")) {
                         tooltipText += "Arthémis";
                     } else if (tourType.equals("Poséidon")) {
@@ -134,7 +134,7 @@ public class SpriteTour {
                     tooltipVisible[0] = true;
 
                     //Disparition de la bulle au bout de 1s
-                    PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
                     pause.setOnFinished(e -> {
                         tooltip.hide();
                         Tooltip.uninstall(imageView, tooltip);

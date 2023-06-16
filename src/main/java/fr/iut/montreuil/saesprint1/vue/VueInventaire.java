@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import javax.swing.*;
 
 import static fr.iut.montreuil.saesprint1.modele.Tours.Artémis.coutArtémis;
-//import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
+import static fr.iut.montreuil.saesprint1.modele.Tours.Dionysos.coutDionysos;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Déméter.coutDéméter;
 import static fr.iut.montreuil.saesprint1.modele.Tours.Poséidon.coutPoséidon;
 
@@ -228,13 +228,13 @@ public class VueInventaire {
         Tooltip tool = new Tooltip();
 
         if (im.equals(imageTourArthemis))
-            tool.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10 \nPortée : 4");
+            tool.setText("Caractéristiques de la tour Arthémis : \n Envoit des flèches \n Attaque tous les : 20 tours \nPortée : 3 \nAprès Amélioration : \nAttaque tous les : 10 tours \n Portée : 4 \n Vise 3 ennemis en même temps");
         else if (im.equals(imageTourPoséidon))
-            tool.setText("Caractéristiques de la tour Poséidon :\nAttaque : 8\nPortée : 5");
+            tool.setText("Caractéristiques de la tour Poséidon :\n Envoit des vagues \nAttaque tous les : 500 tours \nPortée : 6 \nAprès Amélioration : \nAttaque tous les : 300 tours \n Portée : 12 \n Double les vagues ");
         else if (im.equals(imageTourDéméter))
-            tool.setText("Caractéristiques de la tour Démeter :\nRalentissement \nPortée : 2");
+            tool.setText("Caractéristiques de la tour Démeter :\nRalentit les ennemis dans la végétation \nPortée : 2 \nAprès Amélioration : \n Portée : 3 \n La végétation fait subir des dégâts en plus ");
         else if (im.equals(imageTourDionysos))
-            tool.setText("Caractéristiques de la tour Dionysos : \nrend ivre 1 ennemi");
+            tool.setText("Caractéristiques de la tour Dionysos : \n rend ivre 1 ennemi \nAttaque tous les : 300 tours \n Pendant 80 tours  \nAprès Amélioration : \nAttaque tous les : 200 tours \n Pendant 160 tours");
 
         final boolean[] tooltip = {false};
         im.setOnMousePressed(event -> {
@@ -244,7 +244,7 @@ public class VueInventaire {
                     tool.show(imageTourPoséidon, event.getScreenX(), event.getScreenY());
                     tooltip[0] = true;
 
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                    PauseTransition pause = new PauseTransition(Duration.seconds(8));
                     pause.setOnFinished(e -> {
                         tool.hide();
                         Tooltip.uninstall(imageTourPoséidon, tool);
@@ -255,8 +255,6 @@ public class VueInventaire {
                 event.consume();
             }
         });
-
-
     }
 
 
@@ -291,7 +289,7 @@ public class VueInventaire {
         } else if (tourName.equals("Déméter")) {
             return coutDéméter;
         } else if (tourName.equals("Dionysos")) {
-            return 20;
+            return coutDionysos;
         }
         return 0;
     }
