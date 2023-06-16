@@ -7,15 +7,17 @@ public class Poséidon extends TourAvecPortée{
 
     //Ici pour faciliter leur changement
     public static int coutPoséidon = 20;
-    private static int espaceEntreAttaquesPoséidon = 600;
+    private static int espaceEntreAttaquesPoséidon = 500;
     private static int portéePoséidon = 6;
     private static int nouveauCout = 45;
-    private static int nouvelEspaceEntreAttaques = 400;
+    private static int nouvelEspaceEntreAttaques = 300;
     private static int nouvellePortée = 12;
 
     public Poséidon(int x, int y, Environnement env) {
         super("Poséidon", coutPoséidon, x, y, env, portéePoséidon, espaceEntreAttaquesPoséidon);
     }
+
+    //S'il trouve un ennemi à sa portée lance une attaque Vagues qui crée des projectiles
     @Override
     public void attaque() {
 

@@ -6,25 +6,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.StringProperty;
 
 public abstract class Tour {
-
     public final static int tailleCase = 32;
-
     private String nomTour;
     private int cout;
     private Environnement env;
     private IntegerProperty x;
     private IntegerProperty y;
-
-    //De combien de tours sont espacés ses attaques
     private int espaceEntreAttaques;
-
     private int idTour;
     public static int compteur = 0 ;
-
     private int temps = 0;
-
     private boolean amélioré = false;
-    
 
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
@@ -37,6 +29,8 @@ public abstract class Tour {
         compteur++;
     }
 
+    //Vérifie que la tour peut attaquer avant de déclencher la méthode attaque
+    //que chaque tour a obligatoirement
     public void agit(){
         if (!this.getEnv().getEnnemis().isEmpty()) {
             if(this.temps%this.getEspaceEntreAttaques()== 0) {
@@ -44,10 +38,11 @@ public abstract class Tour {
             }
             this.incrementeTemps();
         }
-
     }
+
     public abstract void attaque();
 
+    //Passe le booleen à vrai si l'ennemi a assez d'argent pour payer la tour et lui enlève les sous
     public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){
         if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
             this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
@@ -67,9 +62,6 @@ public abstract class Tour {
     public int getCout() {
         return cout;
     }
-    public int getTemps() {
-        return temps;
-    }
 
     public final int getY() {
         return this.y.get();
@@ -80,10 +72,6 @@ public abstract class Tour {
     }
     public void setX(int x) {
         this.x.set(x);
-    }
-
-    public void setY(int y) {
-        this.y.set(y);
     }
 
     public final IntegerProperty getXProperty(){
@@ -124,10 +112,6 @@ public abstract class Tour {
 
     public int getEspaceEntreAttaques() {
         return espaceEntreAttaques;
-    }
-
-    public int getPosX() {
-        return getX();
     }
 
     public void setAmélioré(boolean amélioré) {

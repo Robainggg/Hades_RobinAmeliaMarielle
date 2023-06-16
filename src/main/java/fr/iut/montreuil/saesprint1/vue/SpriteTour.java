@@ -34,8 +34,6 @@ public class SpriteTour {
 
     private Environnement evt;
 
-    private Label afficheAmélioration;
-
     boolean ameliore = false;
 
     public SpriteTour(Tour tour, Pane pane, Environnement evt) {
@@ -61,7 +59,7 @@ public class SpriteTour {
         t.setFitHeight(32);
         t.translateXProperty().bind(tour.getXProperty());
         t.translateYProperty().bind(tour.getYProperty());
-        pane.getChildren().add(t);
+        this.pane.getChildren().add(t);
         t.setId(tour.getId());
         InitialisationOptionsAméliorationSuppression(t);
     }
@@ -74,7 +72,6 @@ public class SpriteTour {
         button.setOnAction(event -> {
 
             // Code pour gérer l'action du bouton "Améliorer"
-            System.out.println("Bouton Améliorer cliqué !");
             if (tour instanceof Artémis) {
                 ((Artémis) tour).améliorer();
             } else if (tour instanceof Poséidon) {
@@ -84,8 +81,7 @@ public class SpriteTour {
             } else if (tour instanceof Déméter) {
                 ((Déméter) tour).améliorer();
             }
-
-            //Afficher la tour améliorée si l'amélioration s'est bien effectuée
+            
             if (this.tour.isAmélioré()) {
                 ameliore = true;
             }
@@ -94,7 +90,6 @@ public class SpriteTour {
 
         Button boutonSupprimer = new Button("Supprimer");
         boutonSupprimer.setOnAction(event -> {
-            System.out.println("Bouton Supprimer cliqué !");
             evt.supprimerUneTour(tour);
         });
 
@@ -143,11 +138,6 @@ public class SpriteTour {
                 event.consume();
             }
         });
-    }
-
-
-    public ImageView getT() {
-        return t;
     }
 
     public Tour getTour() {

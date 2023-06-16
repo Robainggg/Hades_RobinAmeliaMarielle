@@ -33,8 +33,8 @@ public abstract class TourAvecPortée extends Tour {
     }
 
     public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré, int portéeAméliorée){
-        this.setPortée(portéeAméliorée*32);
         super.améliorer(coutAmélioration,espaceEntreAttaquesAmélioré);
+        if(this.isAmélioré()){ this.setPortée(portéeAméliorée*32);}
     }
 
     public void setPortée(int portée) {

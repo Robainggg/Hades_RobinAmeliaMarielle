@@ -8,24 +8,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Partie {
 
-    private Joueur joueur;
-
     private Environnement environnement;
 
     private IntegerProperty niveau;
 
     private VagueEnnemie vagueActuelle;
 
-    public Partie(Joueur joueur, Environnement environnement){
+    public Partie(Environnement environnement){
         this.niveau = new SimpleIntegerProperty(0);
-        this.joueur = joueur;
         this.environnement = environnement;
         vagueActuelle = null;
-        //vagueActuelle = new VagueEnnemie(environnement,joueur);
     }
 
     public void lanceVague(){
-        this.vagueActuelle = new VagueEnnemie(this,joueur, environnement);
+        this.vagueActuelle = new VagueEnnemie(this,environnement);
         niveau.setValue(this.getNiveau()+1);
     }
 

@@ -16,13 +16,11 @@ public class Environnement {
     private ObservableList<AttaqueTours> attaques;
     private ObservableList<Vegetation> vegetations;
     private Terrain terrain;
-    private int temps;
     private ParcoursBFS bfs;
     private Joueur joueur;
     private boolean peutPlacerUneTour;
 
     private StringProperty argentSuffisant;
-    private Partie partie;
 
     public Environnement() {
         this.ennemis = FXCollections.observableArrayList();
@@ -30,7 +28,6 @@ public class Environnement {
         this.attaques = FXCollections.observableArrayList();
         this.vegetations = FXCollections.observableArrayList();
         this.terrain = new Terrain();
-        this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
         this.joueur = new Joueur();
         this.argentSuffisant = new SimpleStringProperty();
@@ -53,7 +50,6 @@ public class Environnement {
         else{
             this.argentSuffisant.setValue("Pas assez d'argent pour acheter la tour");
         }
-
     }
 
     public void supprimerUneTour(Tour t){
@@ -86,13 +82,6 @@ public class Environnement {
         return tours;
     }
 
-    public void augmenteTemps(){
-        this.temps++;
-    }
-    public int getTemps() {
-        return temps;
-    }
-
     public ParcoursBFS getBfs() {
         return bfs;
     }
@@ -114,27 +103,6 @@ public class Environnement {
     
     public Joueur getJoueur() {
         return joueur;
-    }
-
-
-//    public void nouvelleVague(){
-//
-//        if(this.vagueActuelle.isVagueEstFinie()) {
-//            niveau++;
-//            this.vagueActuelle = new VagueEnnemie(this, joueur);
-//        }
-//    }
-
-    //public VagueEnnemie getVagueActuelle() {
-       // return vagueActuelle;
-   // }
-
-    public void changeEtatPlaçage(){
-        this.peutPlacerUneTour = !peutPlacerUneTour;
-    }
-
-    public boolean isPeutPlacerUneTour() {
-        return peutPlacerUneTour;
     }
 
     public void nettoieEnvironnement(){

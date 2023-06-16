@@ -4,7 +4,7 @@ import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 
 public class Vagues {
 
-    //Calcule les coordonnées des petites vagues de son périmètre
+
     private TourAvecPortée tourAvecPortée;
 
     public Vagues(TourAvecPortée tourAvecPortée) {
@@ -12,6 +12,8 @@ public class Vagues {
         this.creerVagues();
     }
 
+    // Permet de créer les projectiles de la tour Poséidon (PetiteVague)
+    // Calcule les coordonnées des petites vagues de son périmètre
     public void creerVagues() {
 
         int centerX = this.tourAvecPortée.centreTourX().get();
@@ -19,12 +21,8 @@ public class Vagues {
         int rayon = this.tourAvecPortée.getPortée();
         int numVagues;
 
-        if(this.tourAvecPortée.isAmélioré()){
-            numVagues = 16;
-        }
-        else{
-            numVagues = 8;
-        }
+        if(this.tourAvecPortée.isAmélioré()){numVagues = 16;}
+        else{numVagues = 8;}
 
         // Calcul de l'angle entre chaque point sur le périmètre
         double angle = 2 * Math.PI / numVagues;
@@ -36,8 +34,6 @@ public class Vagues {
 
             PetiteVague vague = new PetiteVague(this.tourAvecPortée,x,y);
             this.tourAvecPortée.getEnv().ajouterAttaqueTours(vague);
-
-
         }
     }
 }

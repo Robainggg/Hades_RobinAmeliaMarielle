@@ -26,6 +26,7 @@ public class ListObsAttaquesTours implements ListChangeListener<AttaqueTours> {
                 AttaqueTours finAttaque = c.getRemoved().get(0);
                 this.pane.getChildren().remove(this.pane.lookup("#" + finAttaque.getId()));
 
+                //Enlève les états ivre et effetsTonneau à la disparition des bouteilles et des tonneaux
                 if(finAttaque instanceof Bouteille){
                     ((Bouteille) finAttaque).getEnnemi().setToursIvres(0);
                 }

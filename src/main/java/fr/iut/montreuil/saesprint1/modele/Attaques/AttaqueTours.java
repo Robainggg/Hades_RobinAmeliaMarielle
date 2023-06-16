@@ -5,8 +5,8 @@ import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+//Superclass abstraite qui associe l'attaque à sa tour et lui donne une position
 public abstract class  AttaqueTours {
-
         private static int compteur = 0 ;
         private int idAttaque;
         private IntegerProperty coordXArrivé;
@@ -35,16 +35,8 @@ public abstract class  AttaqueTours {
         return coordXArrivé.get();
     }
 
-    public final IntegerProperty coordXprop() {
-        return coordXArrivé;
-    }
-
     public final int getCoordYArrivé() {
         return coordYArrivé.get();
-    }
-
-    public final IntegerProperty coordYprop() {
-        return coordYArrivé;
     }
 
 }

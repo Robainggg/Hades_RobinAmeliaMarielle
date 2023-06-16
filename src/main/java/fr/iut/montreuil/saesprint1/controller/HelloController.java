@@ -119,10 +119,7 @@ public class HelloController implements Initializable {
     private ListObsVegetation listenersVegetation;
 
     private Partie partie;
-
-    @FXML
-    private ProgressBar barreDeVie;
-
+    
     private Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {
@@ -131,15 +128,12 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
+        
         //Chargement Environnement/Terrain/Inventaire/Partie
         this.evt = new Environnement();
         this.vueTerrain = new VueTerrain(tilePane, evt.getTerrain());
         this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis, boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
-        partie = new Partie(this.evt.getJoueur(), evt);
-
+        partie = new Partie(evt);
 
         //Listeners
         listenerEnnemis = new ListObsEnnemis(panePrincipal);
@@ -235,6 +229,7 @@ public class HelloController implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
+    //Fait agir les ennemis et les tours tant que le joueur n'a pas perdu
     public void action() {
 
         int indiceEnnemi = evt.getEnnemis().size() - 1;

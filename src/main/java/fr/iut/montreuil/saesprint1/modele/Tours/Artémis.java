@@ -8,21 +8,15 @@ import java.util.ArrayList;
 
 public class Artémis extends TourAvecPortée {
 
-    //Initial
-    public static int coutArtémis = 15;
+    public static int coutArtémis = 20;
     private static int porteeDeBase = 3;
     private static int espaceEntreAttaquesDeBase = 20;
-
-    //Amélioration
     private static int coutAméliorationArtémis =  30;
     private static int nouvelEspaceEntreAttaques = 10;
     private static int nouvellePortée = 4;
-
-    //Attributs de la classe
     private Ennemi ennemiAttaqué;
-
     private ArrayList<Ennemi> ennemisAttaqués;
-
+    
     public Artémis(int x, int y, Environnement env) {
         super("Artémis", coutArtémis, x, y, env,porteeDeBase,espaceEntreAttaquesDeBase);
         this.ennemiAttaqué = null;
@@ -35,6 +29,9 @@ public class Artémis extends TourAvecPortée {
         else
             attaqueAméliorée();
     }
+
+    //Vérifie s'il a une cible qu'elle est toujours vivante et dans la zone et lui envoit une flèche
+    //Sinon recherche une nouvelle cible puis l'attaque s'il en trouve une
     public void attaqueNonAméliorée() {
 
         int i = 0;
@@ -56,13 +53,14 @@ public class Artémis extends TourAvecPortée {
             i++;
         }
     }
-    
+
+    //Vérfie s'il a des cibles que celles-ci sont vivantes et dans la zone pour les attaquer
+    //Sinon cherche de nouvelles cibles puis les attaque et met à jour la liste d'ennemis ciblés
     public void attaqueAméliorée(){
         ArrayList<Ennemi> ennemisCiblés = new ArrayList<>();
         if (!this.ennemisAttaqués.isEmpty()) {
             for (int i = 0; i < this.ennemisAttaqués.size(); i++) {
                 if (super.ennemiZone(this.ennemisAttaqués.get(i)) != null && !this.ennemisAttaqués.get(i).estMort()) {
-                    //Le stocke dans la nouvelle liste
                     ennemisCiblés.add(this.ennemisAttaqués.get(i));
                 }
             }
@@ -100,8 +98,6 @@ public class Artémis extends TourAvecPortée {
     }
 
     public void améliorer(){
-        System.out.println("Entre dans Artémis");
         super.améliorer(coutAméliorationArtémis,nouvelEspaceEntreAttaques,nouvellePortée);
-        this.setAmélioré(true);
     }
 }

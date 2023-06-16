@@ -7,24 +7,20 @@ import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Bouteille;
 
 public class Dionysos extends Tour {
-    //Initial
     public static int coutDionysos = 20;
     private static int espaceEntreAttaquesDeBase = 300;
-
-    //Amélioration
     private static int coutAméliorationDionysos =  30;
     private static int nouvelEspaceEntreAttaques = 200;
-
     private int nbToursIvres = 80;
     private int nbToursTonneau = 160;
-
-    //Attributs de la classe
     private Environnement env;
 
     public Dionysos(int x, int y, Environnement env) {
         super("Dionysos", coutDionysos, x, y, env, espaceEntreAttaquesDeBase);
     }
 
+    //Sélectionne un ennemi au hasard et vérifie qu'il n'est pas déjà servi
+    //L'affecte s'il en trouve un non affecté
     @Override
     public void attaque() {
 
