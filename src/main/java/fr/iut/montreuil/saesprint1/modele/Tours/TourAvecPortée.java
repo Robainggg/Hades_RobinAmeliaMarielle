@@ -1,8 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele.Tours;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 
 public abstract class TourAvecPortée extends Tour {
 

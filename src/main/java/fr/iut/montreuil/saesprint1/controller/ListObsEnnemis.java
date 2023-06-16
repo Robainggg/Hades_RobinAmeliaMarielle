@@ -1,10 +1,8 @@
 package fr.iut.montreuil.saesprint1.controller;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import fr.iut.montreuil.saesprint1.vue.SpriteEnnemi;
-import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
-import javafx.concurrent.Task;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 

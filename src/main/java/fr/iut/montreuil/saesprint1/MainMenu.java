@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class MainMenu extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("Menu.fxml"));
         Parent root = fxmlLoader.load();
 
         ControllerMenu controller = fxmlLoader.getController();

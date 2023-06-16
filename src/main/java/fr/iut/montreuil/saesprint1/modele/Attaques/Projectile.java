@@ -1,13 +1,10 @@
 package fr.iut.montreuil.saesprint1.modele.Attaques;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Tours.Artémis;
-import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import fr.iut.montreuil.saesprint1.modele.Tours.TourAvecPortée;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import static java.lang.Math.round;
 

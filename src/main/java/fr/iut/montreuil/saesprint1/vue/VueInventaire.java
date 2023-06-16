@@ -224,7 +224,7 @@ public class VueInventaire {
         else if (im.equals(imageTourPoséidon))
             tool.setText("Caractéristiques de la tour Poséidon :\nAttaque : 8\nPortée : 5");
         else if (im.equals(imageTourDéméter))
-            tool.setText("Caractéristiques de la tour Démeter :\nRalenstissement \nPortée : 4");
+            tool.setText("Caractéristiques de la tour Démeter :\nRalentissement \nPortée : 2");
         else if (im.equals(imageTourDionysos))
             tool.setText("Caractéristiques de la tour Dionysos : \nrend ivre 1 ennemi");
 

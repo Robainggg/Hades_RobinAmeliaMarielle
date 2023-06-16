@@ -1,7 +1,7 @@
 package fr.iut.montreuil.saesprint1.modele.Tours;
 
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package fr.iut.montreuil.saesprint1.vue;
 
-import fr.iut.montreuil.saesprint1.modele.Ennemi;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.DiableJaune;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -12,11 +13,17 @@ public class SpriteEnnemi {
     private ImageView image;
     private Pane pane;
     private ProgressBar barreDeVie;
+    private boolean estJaune;
 
     final static Image diableGauche = new Image(SpriteEnnemi.class.getResource("/images/diable/devilLeft.png").toExternalForm());
     final static Image diableDroit = new Image(SpriteEnnemi.class.getResource("/images/diable/devilRight.png").toExternalForm());
     final static Image diableDos = new Image(SpriteEnnemi.class.getResource("/images/diable/devilBack.png").toExternalForm());
     final static Image diableFace = new Image(SpriteEnnemi.class.getResource("/images/diable/devilFront.png").toExternalForm());
+    final static Image diableJauneGauche = new Image(SpriteEnnemi.class.getResource("/images/diable/YellowDevilLeft.png").toExternalForm());
+    final static Image diableJauneDroit = new Image(SpriteEnnemi.class.getResource("/images/diable/YellowDevilRight.png").toExternalForm());
+    final static Image diableJauneDos = new Image(SpriteEnnemi.class.getResource("/images/diable/YellowDevilBack.png").toExternalForm());
+    final static Image diableJauneFace = new Image(SpriteEnnemi.class.getResource("/images/diable/YellowDevilFront.png").toExternalForm());
+
 
 
     public SpriteEnnemi(Ennemi ennemi, Pane pane) {
@@ -26,6 +33,12 @@ public class SpriteEnnemi {
         this.image = new ImageView();
         image.setId(ennemi.getIdEnnemi());
 
+        if(ennemi instanceof DiableJaune)
+            this.estJaune = true;
+        else
+            this.estJaune = false;
+
+
 
         // Créer la barre de vie
         this.barreDeVie = new ProgressBar();
@@ -34,32 +47,62 @@ public class SpriteEnnemi {
 
 
         this.pane.getChildren().add(barreDeVie);
-
-        if (this.ennemi.getDirection().equals("d")) {
-            image.setImage(diableDroit);
-        } else if (this.ennemi.getDirection().equals("g")) {
-            image.setImage(diableGauche);
-        } else if (this.ennemi.getDirection().equals("h")) {
-            image.setImage(diableDos);
-        } else {
-            image.setImage(diableFace);
+        if(!this.estJaune) {
+            if (this.ennemi.getDirection().equals("d")) {
+                image.setImage(diableDroit);
+            } else if (this.ennemi.getDirection().equals("g")) {
+                image.setImage(diableGauche);
+            } else if (this.ennemi.getDirection().equals("h")) {
+                image.setImage(diableDos);
+            } else {
+                image.setImage(diableFace);
+            }
+        }
+        else{
+            if (this.ennemi.getDirection().equals("d")) {
+                image.setImage(diableJauneDroit);
+            } else if (this.ennemi.getDirection().equals("g")) {
+                image.setImage(diableJauneGauche);
+            } else if (this.ennemi.getDirection().equals("h")) {
+                image.setImage(diableJauneDos);
+            } else {
+                image.setImage(diableJauneFace);
+            }
         }
 
 
         ChangeListener<String> listenerDirection = (((obs, old, nouv) -> {
-            switch (nouv) {
-                case "d":
-                    this.image.setImage(diableDroit);
-                    break;
-                case "g":
-                    this.image.setImage(diableGauche);
-                    break;
-                case "h":
-                    this.image.setImage(diableDos);
-                    break;
-                case "b":
-                    this.image.setImage(diableFace);
-                    break;
+            if(!this.estJaune) {
+                switch (nouv) {
+                    case "d":
+                        this.image.setImage(diableDroit);
+                        break;
+                    case "g":
+                        this.image.setImage(diableGauche);
+                        break;
+                    case "h":
+                        this.image.setImage(diableDos);
+                        break;
+                    case "b":
+                        this.image.setImage(diableFace);
+                        break;
+                }
+            }
+            else{
+                switch (nouv) {
+                    case "d":
+                        this.image.setImage(diableJauneDroit);
+                        break;
+                    case "g":
+                        this.image.setImage(diableJauneGauche);
+                        break;
+                    case "h":
+                        this.image.setImage(diableJauneDos);
+                        break;
+                    case "b":
+                        this.image.setImage(diableJauneFace);
+                        break;
+                }
             }
         }));
 
@@ -70,6 +113,8 @@ public class SpriteEnnemi {
         this.pane.getChildren().add(image);
 
         barreDeVie.setId(ennemi.getIdEnnemi());
+        barreDeVie.setMaxHeight(10);
+
         barreDeVie.progressProperty().bind(ennemi.pvProperty().divide(ennemi.getPointsDeVieMax()));
         barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
         barreDeVie.translateXProperty().bind(image.translateXProperty());

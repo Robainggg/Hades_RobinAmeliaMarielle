@@ -1,5 +1,9 @@
 package fr.iut.montreuil.saesprint1.modele;
 
+import fr.iut.montreuil.saesprint1.modele.Ennemis.DiableJaune;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.DiableRouge;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
+
 public class VagueEnnemie {
     private Partie partie;
     Environnement environnement;
@@ -48,14 +52,26 @@ public class VagueEnnemie {
     }
 
     public void spawnBas(boolean doubleSpawn){
-        this.environnement.ajouterEnnemi(new Ennemi(environnement,0,19));
-        if(doubleSpawn)
-            this.environnement.ajouterEnnemi((new Ennemi(environnement,1,19)));
+        double jaune;
+        jaune = Math.random()*2;
+        if(jaune <= 1)
+            this.environnement.ajouterEnnemi(new DiableJaune(environnement,0,19));
+        else {
+            this.environnement.ajouterEnnemi(new DiableRouge(environnement, 0, 19));
+            if (doubleSpawn)
+                this.environnement.ajouterEnnemi((new DiableRouge(environnement, 1, 19)));
+        }
     }
 
     public void spawnHaut(boolean doubleSpawn){
-        this.environnement.ajouterEnnemi(new Ennemi(environnement,0,2));
-        if(doubleSpawn)
-            this.environnement.ajouterEnnemi((new Ennemi(environnement,0,3)));
+        double jaune;
+        jaune = Math.random()*2;
+        if(jaune <= 1)
+            this.environnement.ajouterEnnemi(new DiableJaune(environnement,0,2));
+        else {
+            this.environnement.ajouterEnnemi(new DiableRouge(environnement, 0, 2));
+            if (doubleSpawn)
+                this.environnement.ajouterEnnemi((new DiableRouge(environnement, 0, 3)));
+        }
     }
 }

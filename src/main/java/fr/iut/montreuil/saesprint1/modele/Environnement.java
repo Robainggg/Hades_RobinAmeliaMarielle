@@ -2,6 +2,7 @@ package fr.iut.montreuil.saesprint1.modele;
 
 import fr.iut.montreuil.saesprint1.modele.Attaques.AttaqueTours;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
 import javafx.beans.property.SimpleStringProperty;

@@ -2,6 +2,7 @@ package fr.iut.montreuil.saesprint1.modele.Tours;
 
 import fr.iut.montreuil.saesprint1.modele.*;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vagues;
+import fr.iut.montreuil.saesprint1.modele.Ennemis.Ennemi;
 
 public class Poséidon extends TourAvecPortée{
 

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class PanneauVictoire extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("victoire.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PanneauVictoire.class.getResource("victoire.fxml"));
         Parent root = fxmlLoader.load();
 
         ControllerVictoire controller = fxmlLoader.getController();

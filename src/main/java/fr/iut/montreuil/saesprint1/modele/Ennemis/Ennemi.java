@@ -1,5 +1,7 @@
-package fr.iut.montreuil.saesprint1.modele;
+package fr.iut.montreuil.saesprint1.modele.Ennemis;
 
+import fr.iut.montreuil.saesprint1.modele.Case;
+import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -7,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;
 
-public class Ennemi {
+public abstract class Ennemi {
 
     private static int compteur = 0;
     private String idEnnemi;
@@ -22,12 +24,12 @@ public class Ennemi {
     //Etat
     private boolean estMort;
     private int recompense;
-    private boolean estSorti;
+    protected boolean estSorti;
     private boolean estRalenti;
     private int toursIvres;
     private int toursEffetTonneau;
 
-    public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
+    public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart, int vitesse, IntegerProperty pv){
 
         this.idEnnemi = "E" + compteur;
         incrementeCompteur();
@@ -37,14 +39,14 @@ public class Ennemi {
         this.estMort = false;
         this.estRalenti = false;
         this.toursIvres = 0;
-        this.pv = new SimpleIntegerProperty(100);
+        this.pv = pv;
 
         coordY = new SimpleIntegerProperty(coordYDepart*32);
         coordX = new SimpleIntegerProperty(coordXDepart*32);
         direction = new SimpleStringProperty();
         this.environnement = environnement;
         prochaineCase = new Case(coordXDepart,coordYDepart);
-        vitesse = 2;
+        this.vitesse = vitesse;
         recompense = 3;
         this.definirDirection();
     }
@@ -73,16 +75,7 @@ public class Ennemi {
             direction.setValue("h");
     }
 
-    public boolean estArriveAuBout(){
-
-        if(this.coordX.getValue() == 29*32 && this.coordY.getValue() == 13*32) {
-            this.estSorti = true;
-            this.setToursIvres(0);
-            this.setToursEffetTonneau(0);
-            return true;
-        }
-        return false;
-    }
+    public abstract boolean estArriveAuBout();
 
     //
     public void seDeplace() {
@@ -246,9 +239,7 @@ public class Ennemi {
         this.toursEffetTonneau = toursEffetTonneau;
     }
 
-    public double getPointsDeVieMax() {
-        return 100;
-    }
+    public abstract double getPointsDeVieMax();
 }
 
 
