@@ -17,7 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
+
+
+<BorderPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.HelloController">
     <center>
         <Pane fx:id="panePrincipal" prefHeight="640" prefWidth="960" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
             <TilePane fx:id="tilePane" prefHeight="640" prefWidth="960">
@@ -30,8 +32,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
                     <children>
-                        <Label text="PV" />
-                        <Label fx:id="pv" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="67.0" layoutY="14.0" text="PV" />
+                                <Label fx:id="pv" layoutX="29.0" layoutY="35.0" prefHeight="31.0" prefWidth="93.0" style="-fx-border-color: red;" text="0" />
+                            </children>
+                        </Pane>
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" layoutX="17.0" layoutY="12.0" prefHeight="100.0" prefWidth="150.0">
@@ -63,46 +69,41 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                             <children>
-                                <Label fx:id="afficheAmélioration" layoutX="7.0" layoutY="17.0" prefHeight="17.0"
-                                       prefWidth="280.0"/>
-                                <Label layoutX="324.0" layoutY="17.0" text="Vague n°: "/>
-                                <Label fx:id="nombreVagues" layoutX="385.0" layoutY="17.0" text="0"/>
+                                <Label fx:id="afficheAmélioration" layoutX="7.0" layoutY="17.0" prefHeight="17.0" prefWidth="325.0" />
+                                <Label layoutX="346.0" layoutY="18.0" text="Vague n°: " />
+                                <Label fx:id="nombreVagues" layoutX="421.0" layoutY="18.0" prefHeight="16.0" prefWidth="120.0" />
                             </children>
                         </Pane>
                     </children>
                 </VBox>
                 <GridPane alignment="CENTER">
                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ImageView fx:id="boutonRelancerPartie" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="1">
+                        <ImageView fx:id="boutonRelancerPartie" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                             <image>
-                                <Image url="@../../../../images/pauseOptions/relancerPartie.png"/>
+                                <Image url="@../../../../images/pauseOptions/relancerPartie.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="boutonPause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.rowIndex="1">
+                        <ImageView fx:id="boutonPause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                             <image>
-                                <Image url="@../../../../images/pauseOptions/pause.png"/>
+                                <Image url="@../../../../images/pauseOptions/pause.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="boutonDepause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                                   preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <ImageView fx:id="boutonDepause" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <image>
-                                <Image url="@../../../../images/pauseOptions/depause.png"/>
+                                <Image url="@../../../../images/pauseOptions/depause.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="boutonProchaineVague" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                                   preserveRatio="true">
+                        <ImageView fx:id="boutonProchaineVague" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../images/pauseOptions/prochaineVagueButton.png"/>
+                                <Image url="@../../../../images/pauseOptions/prochaineVagueButton.png" />
                             </image>
                         </ImageView>
                     </children>
@@ -115,9 +116,9 @@
         <VBox id="vboutique" fx:id="vboutique" blendMode="SRC_ATOP" prefHeight="640.0" prefWidth="200.0" styleClass="vboutique" stylesheets="@style.css" BorderPane.alignment="CENTER">
 
             <children>
-                <Pane prefHeight="655.0" prefWidth="200.0">
+                <Pane prefHeight="650.0" prefWidth="200.0">
                     <children>
-                        <ImageView fx:id="boutique_bg" fitHeight="644.0" fitWidth="200.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="boutique_bg" fitHeight="635.0" fitWidth="208.0" layoutX="10.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="200.0" prefWidth="200.0">
                             <children>
                                 <GridPane layoutX="2.0" layoutY="64.0" prefHeight="500.0" prefWidth="197.0">
@@ -135,60 +136,45 @@
                                             <children>
 
 
-                                                <RadioButton fx:id="boutonArthemis" layoutX="6.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Arthémis">
+                                                <RadioButton fx:id="boutonArthemis" layoutX="14.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="86.0" text="Arthémis">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="groupeRadio" />
                                                     </toggleGroup>
                                                     <font>
-                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0"/>
+                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0" />
                                                     </font>
                                                 </RadioButton>
-                                                <ImageView fx:id="imageTourArthemis" fitHeight="101.0" fitWidth="79.0"
-                                                           layoutX="14.0" layoutY="25.0" pickOnBounds="true"
-                                                           preserveRatio="true"/>
+                                                <ImageView fx:id="imageTourArthemis" fitHeight="101.0" fitWidth="79.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                                             </children>
                                         </Pane>
                                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                             <children>
-                                                <RadioButton fx:id="boutonPoséidon" mnemonicParsing="false"
-                                                             prefHeight="0.0" prefWidth="83.0" text="Poséidon"
-                                                             toggleGroup="$groupeRadio">
+                                                <RadioButton fx:id="boutonPoséidon" mnemonicParsing="false" prefHeight="0.0" prefWidth="83.0" text="Poséidon" toggleGroup="$groupeRadio">
                                                     <font>
-                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0"/>
+                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0" />
                                                     </font>
                                                 </RadioButton>
-                                                <ImageView fx:id="imageTourPoséidon" fitHeight="102.0" fitWidth="79.0"
-                                                           layoutX="10.0" layoutY="25.0" pickOnBounds="true"
-                                                           preserveRatio="true"/>
+                                                <ImageView fx:id="imageTourPoséidon" fitHeight="102.0" fitWidth="79.0" layoutX="10.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                                             </children>
                                         </Pane>
                                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <RadioButton fx:id="boutonDéméter" layoutX="8.0" layoutY="5.0"
-                                                             mnemonicParsing="false" prefHeight="17.0" prefWidth="76.0"
-                                                             text="Déméter" toggleGroup="$groupeRadio">
+                                                <RadioButton fx:id="boutonDéméter" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="76.0" text="Déméter" toggleGroup="$groupeRadio">
                                                     <font>
-                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0"/>
+                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0" />
                                                     </font>
                                                 </RadioButton>
-                                                <ImageView fx:id="imageTourDéméter" fitHeight="101.0" fitWidth="79.0"
-                                                           layoutX="14.0" layoutY="33.0" pickOnBounds="true"
-                                                           preserveRatio="true"/>
+                                                <ImageView fx:id="imageTourDéméter" fitHeight="101.0" fitWidth="79.0" layoutX="14.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
                                             </children>
                                         </Pane>
-                                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                                              GridPane.rowIndex="1">
+                                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                             <children>
-                                                <RadioButton fx:id="boutonDionysos" layoutY="5.0"
-                                                             mnemonicParsing="false" text="Dionysos"
-                                                             toggleGroup="$groupeRadio">
+                                                <RadioButton fx:id="boutonDionysos" layoutY="5.0" mnemonicParsing="false" text="Dionysos" toggleGroup="$groupeRadio">
                                                     <font>
-                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0"/>
+                                                        <Font name="Ubuntu Mono Bold Italic" size="13.0" />
                                                     </font>
                                                 </RadioButton>
-                                                <ImageView fx:id="imageTourDionysos" fitHeight="101.0" fitWidth="79.0"
-                                                           layoutX="10.0" layoutY="33.0" pickOnBounds="true"
-                                                           preserveRatio="true"/>
+                                                <ImageView fx:id="imageTourDionysos" fitHeight="101.0" fitWidth="79.0" layoutX="10.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
                                             </children>
                                         </Pane>
                                     </children>
@@ -197,7 +183,7 @@
                         </Pane>
                         <Pane layoutX="2.0" layoutY="500.0" prefHeight="81.0" prefWidth="197.0">
                             <children>
-                                <Button fx:id="boutonAjouterTour" layoutX="28.0" layoutY="2.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ajouter tour" />
+                                <Button fx:id="boutonAjouterTour" layoutX="32.0" layoutY="2.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ajouter tour" />
                             </children>
                         </Pane>
                     </children>
