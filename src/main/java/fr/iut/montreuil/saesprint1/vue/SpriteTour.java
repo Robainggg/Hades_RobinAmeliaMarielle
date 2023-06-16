@@ -34,6 +34,7 @@ public class SpriteTour {
 
     private Environnement evt;
 
+    private Label afficheAmélioration;
 
     boolean ameliore = false;
 
@@ -89,7 +90,6 @@ public class SpriteTour {
                 ameliore = true;
             }
 
-            
         });
 
         Button boutonSupprimer = new Button("Supprimer");

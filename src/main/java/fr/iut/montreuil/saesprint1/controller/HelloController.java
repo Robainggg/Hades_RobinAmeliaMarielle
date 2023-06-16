@@ -105,6 +105,9 @@ public class HelloController implements Initializable {
     @FXML
     private Label nombreVagues;
 
+    @FXML
+    private Label afficheAmélioration;
+
     private Environnement evt;
 
     private VueTerrain vueTerrain;
@@ -155,7 +158,8 @@ public class HelloController implements Initializable {
         //Initialisation Joueur
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
-
+        this.nombreVagues.textProperty().bind(this.partie.niveauProperty().asString());
+        this.afficheAmélioration.textProperty().bind(this.evt.argentSuffisantProperty());
 
         this.boutonProchaineVague.setOnMouseClicked(e -> {
             if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {

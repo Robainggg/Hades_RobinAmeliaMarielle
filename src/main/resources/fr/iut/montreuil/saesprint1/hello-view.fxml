@@ -63,9 +63,9 @@
                         </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label id="afficheAchat" layoutX="7.0" layoutY="17.0" prefHeight="17.0" prefWidth="280.0" />
+                        <Label fx:id="afficheAmélioration" layoutX="7.0" layoutY="17.0" prefHeight="17.0" prefWidth="280.0" />
                         <Label layoutX="324.0" layoutY="17.0" text="Vague n°: " />
-                        <Label id="nombreVagues" layoutX="385.0" layoutY="17.0" />
+                        <Label fx:id="nombreVagues" layoutX="385.0" layoutY="17.0" text="0" />
                      </children>
                   </Pane>
                     </children></VBox>
