@@ -34,9 +34,15 @@ public class VueRegles {
         imageView.setFitWidth(1160);
         imageView.setFitHeight(740);
         imageView.setImage(image);
-        String lesRegles = "Tu es Hades, grand roi qui règne en maître dans les enfers,\n Cependant les âmes qui s'y trouvent se rebellent et veulent renverser ton royaume...\n Une armée se prépare... \nAinsi pour maintenir l'ordre tu a fait appel aux dieux de l'Olympe \n Tu a su obtenir :\n les fleches d'Arthémis, \n les vagues de Poséidon,\n les moisson de Déméter,\n et l'alcool de Dionysos. \n A toi de sauver ton royaume ! ";
+        String lesRegles = "Tu es Hades, grand roi qui règne en maître dans les enfers,\n"
+                +"Cependant les âmes qui s'y trouvent se rebellent et veulent renverser ton royaume...\n"+
+                "Une armée se prépare... \n"+"Ainsi pour maintenir l'ordre tu a fait appel aux dieux de l'Olympe \n"+
+                "Tu a su obtenir :\n les fleches d'Arthémis, \n les vagues de Poséidon,\n les moisson de Déméter,\n et l'alcool de Dionysos. \n "+
+                "A toi de sauver ton royaume \n\n "+" Comment jouer ? \n"+
+                " Poser une Tour : Sélectionnez le bouton de la tour voulue puis cliquez sur “Ajouter Tour” et cliquez sur le terrain à l’endroit où vous souhaitez la positionner\n"+
+                "Caractéristiques d’une Tour : Clic droit sur une Tour dans l’inventaire pour les afficher\n" +
+                "Améliorer/Supprimer une Tour : Clic droit sur la Tour dans le terrain puis clic sur le bouton voulu\n ! ";
         label.setText(lesRegles);
-
-
+        
     }
 }

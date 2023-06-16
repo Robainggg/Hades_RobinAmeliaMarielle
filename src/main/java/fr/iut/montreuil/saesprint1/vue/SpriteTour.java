@@ -75,7 +75,6 @@ public class SpriteTour {
         //Button AMÉLIORER qui une fois cliquée appelle la méthode améliorer qui améliore les tours en terme d'attaque et/ou la portée
         Button button = new Button("Améliorer");
         button.setOnAction(event -> {
-
             // Code pour gérer l'action du bouton "Améliorer"
             if (tour instanceof Artémis) {
                 ((Artémis) tour).améliorer();

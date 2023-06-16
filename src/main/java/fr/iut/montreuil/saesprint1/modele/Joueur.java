@@ -10,7 +10,7 @@ public class Joueur {
     public IntegerProperty argent;
     
     public Joueur(){
-        this.pv = new SimpleIntegerProperty(15);
+        this.pv = new SimpleIntegerProperty(10);
         this.argent = new SimpleIntegerProperty(100);
     }
 
@@ -48,7 +48,7 @@ public class Joueur {
     public void setPV(int pv){this.pv.setValue(pv);}
 
     public void resetJoueur(){
-        this.setPV(15);
+        this.setPV(10);
         this.setArgent(100);
     }
 

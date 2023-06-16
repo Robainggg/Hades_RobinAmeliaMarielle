@@ -11,7 +11,7 @@
        <ImageView fx:id="fond" fitHeight="740" fitWidth="1160" />
       <Pane fx:id="pane" prefHeight="740" prefWidth="1160">
          <children>
-              <Label fx:id="regles" layoutX="150.0" layoutY="130.0" prefHeight="220.0" prefWidth="900.0" textAlignment="CENTER">
+              <Label fx:id="regles" layoutX="150.0" layoutY="130.0" prefHeight="400.0" prefWidth="900.0" textAlignment="CENTER">
                <font>
                   <Font name="Ubuntu Mono Bold Italic" size="20.0" />
                </font>
@@ -31,7 +31,7 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-              <Button fx:id="lancerJeu" layoutX="425.0" layoutY="380.0" styleClass="button" text="PLAY NOW !" />
+              <Button fx:id="lancerJeu" layoutX="500.0" layoutY="500.0" styleClass="button" text="PLAY NOW !" />
          </children>
       </Pane>
     </children>
