@@ -31,7 +31,7 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-              <Button fx:id="lancerJeu" layoutX="425.0" layoutY="500.0" styleClass="button" text="PLAY NOW !" />
+              <Button fx:id="lancerJeu" layoutX="423.0" layoutY="500.0" styleClass="button" text="PLAY NOW !" />
          </children>
       </Pane>
     </children>
