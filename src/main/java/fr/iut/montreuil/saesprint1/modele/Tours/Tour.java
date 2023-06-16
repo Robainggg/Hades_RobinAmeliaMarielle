@@ -18,14 +18,20 @@ public abstract class Tour {
     private int temps = 0;
     private boolean amélioré = false;
 
-    public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
+    private int coutAmélioration;
+
+    private int espaceEntreAttaquesAmélioré;
+
+    public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques, int coutAmélioration, int espaceEntreAttaquesAmélioré) {
         this.nomTour = nomTour;
         this.cout = cout;
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = env;
         this.espaceEntreAttaques = espaceEntreAttaques;
-        this.idTour =compteur;
+        this.coutAmélioration = coutAmélioration;
+        this.espaceEntreAttaquesAmélioré = espaceEntreAttaquesAmélioré;
+        this.idTour = compteur;
         compteur++;
     }
 
@@ -43,10 +49,10 @@ public abstract class Tour {
     public abstract void attaque();
 
     //Passe le booleen à vrai si l'ennemi a assez d'argent pour payer la tour et lui enlève les sous
-    public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){
-        if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
-            this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
-            this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
+    public void améliorer(){
+        if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= this.coutAmélioration){
+            this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-this.coutAmélioration);
+            this.setEspaceEntreAttaques(this.espaceEntreAttaquesAmélioré);
             this.setAmélioré(true);
             this.env.argentSuffisantProperty().setValue("");
         }
@@ -69,9 +75,6 @@ public abstract class Tour {
 
     public final int getX() {
         return this.x.get();
-    }
-    public void setX(int x) {
-        this.x.set(x);
     }
 
     public final IntegerProperty getXProperty(){
@@ -121,5 +124,4 @@ public abstract class Tour {
     public void setEspaceEntreAttaques(int espaceEntreAttaques) {
         this.espaceEntreAttaques = espaceEntreAttaques;
     }
-    
 }

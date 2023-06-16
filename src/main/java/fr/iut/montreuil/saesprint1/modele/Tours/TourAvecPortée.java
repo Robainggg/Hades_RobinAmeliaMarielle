@@ -7,9 +7,12 @@ public abstract class TourAvecPortée extends Tour {
 
     private int portée;
 
-    public TourAvecPortée(String nomTour, int cout, int x, int y, Environnement env, int portée, int espaceEntreAttaques) {
-        super(nomTour, cout, x, y, env, espaceEntreAttaques);
+    private int portéeAméliorée;
+
+    public TourAvecPortée(String nomTour, int cout, int x, int y, Environnement env, int portée, int espaceEntreAttaques, int coutAmélioration, int nouvelEspaceAtt, int nouvellePortée) {
+        super(nomTour, cout, x, y, env, espaceEntreAttaques,coutAmélioration,nouvelEspaceAtt);
         this.portée = portée*32;
+        this.portéeAméliorée = nouvellePortée*32;
     }
     //Vérifie que l'élément est dans la portée
     public boolean estDansLaZone(double x, double y){
@@ -31,9 +34,10 @@ public abstract class TourAvecPortée extends Tour {
         return portée;
     }
 
-    public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré, int portéeAméliorée){
-        super.améliorer(coutAmélioration,espaceEntreAttaquesAmélioré);
-        if(this.isAmélioré()){ this.setPortée(portéeAméliorée*32);}
+
+    public void améliorer(){
+        super.améliorer();
+        if(this.isAmélioré()){ this.setPortée(this.portéeAméliorée);}
     }
 
     public void setPortée(int portée) {

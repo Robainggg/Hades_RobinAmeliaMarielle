@@ -18,7 +18,7 @@ public class Artémis extends TourAvecPortée {
     private ArrayList<Ennemi> ennemisAttaqués;
     
     public Artémis(int x, int y, Environnement env) {
-        super("Artémis", coutArtémis, x, y, env,porteeDeBase,espaceEntreAttaquesDeBase);
+        super("Artémis", coutArtémis, x, y, env,porteeDeBase,espaceEntreAttaquesDeBase, coutAméliorationArtémis,nouvelEspaceEntreAttaques,nouvellePortée);
         this.ennemiAttaqué = null;
         this.ennemisAttaqués = new ArrayList<>();
     }
@@ -97,7 +97,4 @@ public class Artémis extends TourAvecPortée {
         this.ennemiAttaqué = null;
     }
 
-    public void améliorer(){
-        super.améliorer(coutAméliorationArtémis,nouvelEspaceEntreAttaques,nouvellePortée);
-    }
 }

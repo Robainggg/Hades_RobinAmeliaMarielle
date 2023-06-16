@@ -12,12 +12,14 @@ public class Déméter extends TourAvecPortée {
     private static int portéeDeBase = 2;
     //Amélioration
     private static int coutAmélioréDéméter = 25;
+
+    private static int portéeAmélioréeDéméter = 3;
     private static int ralentissement = 1;
 
     private ArrayList<Ennemi> ennemisAportée;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 8);
+        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 8, coutAmélioréDéméter,8,portéeAmélioréeDéméter);
         this.ralentissement = 1;
         this.ennemisAportée = new ArrayList<>();
     }
@@ -81,7 +83,7 @@ public class Déméter extends TourAvecPortée {
     }
 
     public void améliorer() {
-        super.améliorer(coutAmélioréDéméter, this.getEspaceEntreAttaques(), 3);
+        super.améliorer();
         if(this.isAmélioré()){creerVégétation();}
     }
 
