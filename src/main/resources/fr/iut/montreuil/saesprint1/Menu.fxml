@@ -8,14 +8,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane  xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.ControllerMenu" fx:id="background">
+<StackPane stylesheets="@menu.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.fenetres.ControllerMenu" fx:id="background">
     <children>
-        <ImageView fx:id="im" />
-        <Button fx:id="launchApp2Button" styleClass="button"  text="PLAY">
-         <font>
-            <Font name="Ubuntu Mono Bold Italic" size="38.0" />
-         </font></Button>
+        <ImageView fx:id="im"></ImageView>
+        <Button fx:id="launchApp2Button" styleClass="button" text="PLAY">
+            <font>
+                <Font name="Ubuntu Mono Bold Italic" size="38.0" />
+            </font>
+        </Button>
     </children>
 </StackPane>
+
 
 

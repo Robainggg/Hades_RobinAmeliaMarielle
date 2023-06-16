@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="background" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.ControllerRegles">
+<StackPane fx:id="background" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.saesprint1.controller.fenetres.ControllerRegles">
     <children>
        <ImageView fx:id="fond" fitHeight="740" fitWidth="1160" />
       <Pane fx:id="pane" prefHeight="740" prefWidth="1160">

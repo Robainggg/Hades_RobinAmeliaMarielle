@@ -1,4 +1,4 @@
-package fr.iut.montreuil.saesprint1.controller;
+package fr.iut.montreuil.saesprint1.controller.fenetres;
 
 import fr.iut.montreuil.saesprint1.HelloApplication;
 import fr.iut.montreuil.saesprint1.vue.VueMenu;
