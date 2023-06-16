@@ -47,6 +47,7 @@ public class MainMenu extends Application {
 
         primaryStage.setTitle("Hadès vs ses morts");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

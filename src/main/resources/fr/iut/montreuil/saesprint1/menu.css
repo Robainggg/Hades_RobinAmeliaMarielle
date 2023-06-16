@@ -1,5 +1,13 @@
-
-#background {
-  -fx-background-image: url("/images/boutique.png");
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-radius: 10px;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 10px;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 30pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-text-alignment: center;
 }
-
