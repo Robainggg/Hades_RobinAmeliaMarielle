@@ -9,6 +9,8 @@ public class Bouteille extends AttaqueTours{
         super(tour, ennemi.getCoordX(), ennemi.getCoordY());
         this.ennemi = ennemi;
     }
+
+    //Se supprime si l'ennemi n'est plus affecté par la bouteille
     @Override
     public void attaque(){
         

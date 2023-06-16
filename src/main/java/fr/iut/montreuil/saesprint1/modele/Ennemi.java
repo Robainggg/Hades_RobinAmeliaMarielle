@@ -9,15 +9,10 @@ import javafx.scene.control.ProgressBar;
 
 public class Ennemi {
 
-    //Constructeur
     private static int compteur = 0;
     private String idEnnemi;
     private IntegerProperty pv;
     private int vitesse;
-    private int coordXDepart;
-    private int coordYDepart;
-
-    //Direction
     private IntegerProperty coordX;
     private IntegerProperty coordY;
     private Environnement environnement;
@@ -31,8 +26,6 @@ public class Ennemi {
     private boolean estRalenti;
     private int toursIvres;
     private int toursEffetTonneau;
-
-
 
     public Ennemi(Environnement environnement, int coordXDepart, int coordYDepart){
 
@@ -52,7 +45,7 @@ public class Ennemi {
         this.environnement = environnement;
         prochaineCase = new Case(coordXDepart,coordYDepart);
         vitesse = 2;
-        recompense = 2;
+        recompense = 3;
         this.definirDirection();
     }
     
@@ -139,7 +132,7 @@ public class Ennemi {
     }
     public void meurt(){
         if(!this.estSorti)
-            this.environnement.getJoueur().setArgent(this.environnement.getJoueur().getArgent()+this.recompense);
+            this.environnement.getJoueur().gagneArgent(this.recompense);
         else
             this.environnement.getJoueur().perdPv(1);
             this.environnement.getEnnemis().remove(this);
@@ -191,9 +184,6 @@ public class Ennemi {
     // Getters & Setters ->  Mouvements de l'ennemi
     public StringProperty directionProperty() {
         return direction;
-    }
-    public ParcoursBFS getBfs() {
-        return this.environnement.getBfs();
     }
     public Case getProchaineCase() {
         return prochaineCase;

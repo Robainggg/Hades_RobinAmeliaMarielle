@@ -25,7 +25,6 @@ public class VueInventaire {
     private ImageView imageTourArthemis;
     private ImageView imageTourPoséidon;
     private ImageView imageTourDéméter;
-
     private ImageView imageTourDionysos;
     private RadioButton boutonArthemis;
     private RadioButton boutonPoséidon;
@@ -45,15 +44,7 @@ public class VueInventaire {
 
     private Environnement evt;
 
-    private ImageView imageView;
-
-    private VBox vboutique;
-
-    private Pane boutique_pane;
-
     private ImageView boutique_bg;
-
-
     private String selectedType;
     private boolean boutonRadioSelectionne = false;
 
@@ -62,11 +53,6 @@ public class VueInventaire {
     final static Image dionysos = new Image(VueInventaire.class.getResourceAsStream("/images/tours/dionysosHD.png"));
     final static Image poseidon = new Image(VueInventaire.class.getResourceAsStream("/images/tours/poseidonHD.png"));
 
-
-
-
-
-    //this.vueInventaire = new VueInventaire(imageTourArthemis, imageTourPoséidon, imageTourDéméter, imageTourDionysos, boutonArthemis,  boutonPoséidon, boutonDéméter, boutonDionysos, groupeRadio, boutonAjouterTour, pieces, pieces2, argentItem, nomItem, panePrincipal, tilePane, vboutique, boutique_bg, evt);
     public VueInventaire(ImageView imageTourArt, ImageView imageTourPos, ImageView imageTourDem, ImageView imageTourDio, RadioButton boutonArt, RadioButton boutonPos, RadioButton boutonDem, RadioButton boutonDio, ToggleGroup groupeRadio, Button boutonAjtTour, ImageView p1, ImageView p2, Label ai, Label ni, Pane pane, TilePane tp, VBox vboutique, ImageView boutique_bg, Environnement evt) {
         this.imageTourArthemis = imageTourArt;
         this.imageTourPoséidon = imageTourPos;
@@ -88,7 +74,6 @@ public class VueInventaire {
         this.evt = evt;
         chargerImage();
         this.placerDesTours();
-
 
     }
 
@@ -230,14 +215,6 @@ public class VueInventaire {
         }
     }
 
-
-    public void afficherCaractéristiquesArthémis() {
-
-        Tooltip tooltip = new Tooltip();
-        tooltip.setText("Caractéristiques de la tour Arthémis :\nAttaque : 10\nPortée : 4");
-        final boolean[] tooltipVisible = {false};
-    }
-
     public void afficherCaractéristiquesTours(ImageView im) {
 
         Tooltip tool = new Tooltip();
@@ -296,9 +273,6 @@ public class VueInventaire {
             return "TOUR DIONYSOS";
         return "___________________________";
     }
-
-
-
 
     private int getPrixTour(String tourName) {
         // Retourner le prix de la tour en fonction de son nom

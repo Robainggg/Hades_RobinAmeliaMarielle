@@ -10,9 +10,9 @@ public class Tonneau extends AttaqueTours{
         this.ennemi = ennemi;
     }
 
+    //Enlève le tonneau si l'ennemi est mort ou n'est plus sous effet
     @Override
     public void attaque() {
-
         if(this.ennemi.estMort() || this.ennemi.getToursEffetTonneau() == 0){
             this.getTour().getEnv().supprimerAttaqueTours(this);
         }

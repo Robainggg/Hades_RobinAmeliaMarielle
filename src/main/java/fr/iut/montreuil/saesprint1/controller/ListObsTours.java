@@ -37,6 +37,7 @@ public class ListObsTours implements ListChangeListener<Tour> {
         }
     }
 
+    //Fait disparaitre les attaques de la tour qui va être supprimée
     public void disparitionAttaques(Tour tour){
 
         if (tour instanceof Déméter){

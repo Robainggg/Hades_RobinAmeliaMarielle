@@ -8,16 +8,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Joueur {
     private IntegerProperty pv;
     public IntegerProperty argent;
-
-    private DoubleProperty pourcentageVie;
+    
     public Joueur(){
         this.pv = new SimpleIntegerProperty(20);
-        this.argent = new SimpleIntegerProperty(50);
-        this.pourcentageVie = new SimpleDoubleProperty(1.0);
-    }
-
-    public int getPv() {
-        return pv.get();
+        this.argent = new SimpleIntegerProperty(100);
     }
 
     public IntegerProperty pvProperty() {
@@ -56,23 +50,6 @@ public class Joueur {
     public void resetJoueur(){
         this.setPV(20);
         this.setArgent(100);
-    }
-
-    public double getPourcentageVie() {
-        return pourcentageVie.get();
-    }
-
-    public DoubleProperty pourcentageVieProperty() {
-        return pourcentageVie;
-    }
-
-    public void setPourcentageVie(double pourcentageVie) {
-        this.pourcentageVie.set(pourcentageVie);
-    }
-
-    public void perdPvD(int pvPerdus, int vieMax) {
-        double nouveauPourcentage = (double) (vieMax - pvPerdus) / vieMax;
-        this.pourcentageVie.set(nouveauPourcentage);
     }
 
 }

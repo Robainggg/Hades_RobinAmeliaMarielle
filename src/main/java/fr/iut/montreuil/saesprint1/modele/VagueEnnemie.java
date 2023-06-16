@@ -1,43 +1,25 @@
 package fr.iut.montreuil.saesprint1.modele;
 
 public class VagueEnnemie {
-
     private Partie partie;
-
     Environnement environnement;
-
     private int temps;
-
-    private Joueur joueur;
-
     private int nbEnnemis;
-
     private int cadenceApparition;
-
     private double alterneSpawn;
-
     private boolean vagueEstFinie;
 
-    public VagueEnnemie(Partie partie, Joueur joueur, Environnement environnement){
+    public VagueEnnemie(Partie partie, Environnement environnement){
         this.partie = partie;
-        this.joueur = joueur;
         this.environnement = environnement;
-
         this.temps = 1;
-
         this.nbEnnemis = partie.getNiveau() * 5 + 5;
-
         this.cadenceApparition  = 240 - 30 * partie.getNiveau();
-
         this.vagueEstFinie = false;
-
-        System.out.println("Une nouvelle vague de niveau " + this.partie.getNiveau() + " est créée");
-
     }
 
     public void prochainEnnemi(){
         double doubleSpawn;
-        //System.out.println(nbEnnemis + " ennemis restants " + temps + " modulo " + cadenceApparition + " = " + temps%cadenceApparition);
         this.incrementeTemps();
         if(this.nbEnnemis > 0 && this.temps%cadenceApparition == 0) {
             nbEnnemis--;

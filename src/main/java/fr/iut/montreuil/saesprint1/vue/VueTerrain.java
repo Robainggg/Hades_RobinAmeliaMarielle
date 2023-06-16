@@ -27,17 +27,6 @@ public class VueTerrain {
                 tilePane.getChildren().add(chargerImage(terrain.getL().get(i)-1));
             } catch (FileNotFoundException e) {
             }
-//            if(terrain.getL().get(i) == 114) {
-//                pasChemin = new ImageView(tileNoire);
-//                tilePane.getChildren().add(pasChemin);
-//            }
-//            else{
-//                chemin = new ImageView(tileBlanche);
-//                tilePane.getChildren().add(chemin);
-//            }
-
-
-
         }
     }
     
