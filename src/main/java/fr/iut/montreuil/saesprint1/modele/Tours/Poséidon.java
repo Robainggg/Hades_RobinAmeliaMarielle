@@ -14,7 +14,7 @@ public class Poséidon extends TourAvecPortée{
     private static int nouvellePortée = 12;
 
     public Poséidon(int x, int y, Environnement env) {
-        super("Poséidon", coutPoséidon, x, y, env, portéePoséidon, espaceEntreAttaquesPoséidon);
+        super("Poséidon", coutPoséidon, x, y, env, portéePoséidon, espaceEntreAttaquesPoséidon,nouveauCout,nouvelEspaceEntreAttaques,nouvellePortée);
     }
 
     //S'il trouve un ennemi à sa portée lance une attaque Vagues qui crée des projectiles
@@ -33,8 +33,5 @@ public class Poséidon extends TourAvecPortée{
         }
     }
 
-    public void améliorer(){
-        super.améliorer(nouveauCout,nouvelEspaceEntreAttaques,nouvellePortée);
-    }
 
 }

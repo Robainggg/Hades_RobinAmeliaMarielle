@@ -76,15 +76,10 @@ public class SpriteTour {
         Button button = new Button("Améliorer");
         button.setOnAction(event -> {
             // Code pour gérer l'action du bouton "Améliorer"
-            if (tour instanceof Artémis) {
-                ((Artémis) tour).améliorer();
-            } else if (tour instanceof Poséidon) {
-                ((Poséidon) tour).améliorer();
-            } else if (tour instanceof Dionysos) {
-                ((Dionysos) tour).améliorer();
-            } else if (tour instanceof Déméter) {
+            if (tour instanceof Déméter) {
                 ((Déméter) tour).améliorer();
             }
+            else{tour.améliorer();}
 
             //augmentation de la taille quand amélioration
             if (this.tour.isAmélioré()) {

@@ -16,7 +16,7 @@ public class Dionysos extends Tour {
     private Environnement env;
 
     public Dionysos(int x, int y, Environnement env) {
-        super("Dionysos", coutDionysos, x, y, env, espaceEntreAttaquesDeBase);
+        super("Dionysos", coutDionysos, x, y, env, espaceEntreAttaquesDeBase,coutAméliorationDionysos,nouvelEspaceEntreAttaques);
     }
 
     //Sélectionne un ennemi au hasard et vérifie qu'il n'est pas déjà servi
@@ -56,7 +56,4 @@ public class Dionysos extends Tour {
         super.getEnv().ajouterAttaqueTours(tonneau);
     }
 
-    public void améliorer(){
-        super.améliorer(coutAméliorationDionysos,nouvelEspaceEntreAttaques);
-    }
 }
