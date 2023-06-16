@@ -1,7 +1,6 @@
 package fr.iut.montreuil.saesprint1;
 
-import fr.iut.montreuil.saesprint1.controller.ControllerDéfaite;
-import fr.iut.montreuil.saesprint1.controller.ControllerMenu;
+import fr.iut.montreuil.saesprint1.controller.fenetres.ControllerDéfaite;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

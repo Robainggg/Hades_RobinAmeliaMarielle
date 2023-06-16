@@ -3,6 +3,7 @@ package fr.iut.montreuil.saesprint1.modele.Tours;
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
 
 public abstract class Tour {
 
@@ -23,6 +24,7 @@ public abstract class Tour {
     private int temps = 0;
 
     private boolean amélioré = false;
+    
 
     public Tour(String nomTour, int cout, int x, int y, Environnement env, int espaceEntreAttaques) {
         this.nomTour = nomTour;
@@ -48,12 +50,14 @@ public abstract class Tour {
 
     public void améliorer(int coutAmélioration, int espaceEntreAttaquesAmélioré){
         if(!this.isAmélioré() && this.getEnv().getJoueur().getArgent() >= coutAmélioration){
-            System.out.println("entre Tour");
             this.getEnv().getJoueur().setArgent(this.getEnv().getJoueur().getArgent()-coutAmélioration);
             this.setEspaceEntreAttaques(espaceEntreAttaquesAmélioré);
             this.setAmélioré(true);
+            this.env.argentSuffisantProperty().setValue("");
         }
-        System.out.println(this.amélioré);
+        else{
+            this.env.argentSuffisantProperty().setValue("Pas assez d'argent pour l'amélioration");
+        }
     }
 
     public boolean isAmélioré() { return this.amélioré;}
@@ -133,4 +137,5 @@ public abstract class Tour {
     public void setEspaceEntreAttaques(int espaceEntreAttaques) {
         this.espaceEntreAttaques = espaceEntreAttaques;
     }
+    
 }

@@ -3,11 +3,8 @@ package fr.iut.montreuil.saesprint1.controller;
 import fr.iut.montreuil.saesprint1.PanneauDéfaite;
 import fr.iut.montreuil.saesprint1.PanneauVictoire;
 import fr.iut.montreuil.saesprint1.modele.*;
-import fr.iut.montreuil.saesprint1.modele.Tours.*;
-import fr.iut.montreuil.saesprint1.vue.VueDéfaite;
 import fr.iut.montreuil.saesprint1.vue.VueInventaire;
 import fr.iut.montreuil.saesprint1.vue.VueTerrain;
-import fr.iut.montreuil.saesprint1.vue.VueVictoire;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -17,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -36,10 +32,6 @@ public class HelloController implements Initializable {
 
     @FXML
     private TilePane tilePane;
-
-    @FXML
-    private Circle testCercleEnnemi;
-
 
     @FXML
     private ImageView imageTourArthemis;
@@ -106,6 +98,12 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView pieces2;
 
+    @FXML
+    private Label nombreVagues;
+
+    @FXML
+    private Label afficheAmélioration;
+
     private Environnement evt;
 
     private VueTerrain vueTerrain;
@@ -156,6 +154,8 @@ public class HelloController implements Initializable {
         //Initialisation Joueur
         this.pv.textProperty().bind(this.evt.getJoueur().pvProperty().asString());
         this.argent.textProperty().bind(this.evt.getJoueur().argentProperty().asString());
+        this.nombreVagues.textProperty().bind(this.partie.niveauProperty().asString());
+        this.afficheAmélioration.textProperty().bind(this.evt.argentSuffisantProperty());
 
         this.boutonProchaineVague.setOnMouseClicked(e -> {
             if (this.partie.getVagueActuelle() == null && this.partie.getNiveau() != 6) {
