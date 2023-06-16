@@ -113,7 +113,7 @@ public class SpriteEnnemi {
 
         //affichage de la barre de vie au dessus du sprite de l'ennemi + bind avec les pv de l'ennemi
         barreDeVie.setId(ennemi.getIdEnnemi());
-        barreDeVie.setMaxHeight(10);
+        barreDeVie.setMaxHeight(15);
 
         barreDeVie.progressProperty().bind(ennemi.pvProperty().divide(ennemi.getPointsDeVieMax()));
         barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
