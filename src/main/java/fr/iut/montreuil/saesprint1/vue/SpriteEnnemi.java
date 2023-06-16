@@ -90,6 +90,7 @@ public class SpriteEnnemi {
     public ProgressBar getBarreDeVie() {
         return barreDeVie;
     }
+
     public ImageView getImage() {
         return image;
     }

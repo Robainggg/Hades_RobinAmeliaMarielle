@@ -2,6 +2,7 @@ package fr.iut.montreuil.saesprint1;
 
 
 import fr.iut.montreuil.saesprint1.controller.fenetres.ControllerRegles;
+import fr.iut.montreuil.saesprint1.controller.fenetres.ControllerMenu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

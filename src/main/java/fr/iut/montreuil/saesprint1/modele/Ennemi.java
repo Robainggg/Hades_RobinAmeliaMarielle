@@ -61,6 +61,7 @@ public class Ennemi {
         prochaineCase=this.environnement.getBfs().obtenirProchaineCase(prochaineCase);
     }
 
+    //On regarde dans quel sens est la prochaine case par rapport à l'ennemi pour savoir où il va se déplacer
     public void definirDirection() {
         if(this.coordX.getValue() < prochaineCase.getI()*32)
             direction.setValue("d");
@@ -83,7 +84,12 @@ public class Ennemi {
         return false;
     }
 
+    //
     public void seDeplace() {
+
+        /*Méthode permettant à l'ennemi de se déplacer ainsi qu'à gérer sa mort quand il arrive au bout du terrain,
+         chaque fois que l'ennemi se déplace on regarde si il est arrivé au centre de la case qu'il visait puis si c'est le cas,
+         on lui sélectionne une nouvelle case de destination, on le fait avancer de "vitesse" pixels vers la direction qu'il a de stockée*/
 
             if (this.estArriveAuBout()) {
                 this.estSorti = true;
@@ -117,6 +123,7 @@ public class Ennemi {
             }
     }
 
+    //Permet à l'ennemi de se déplacer sauf s'il est en train de boire
     public void agit(){
 
         if(this.toursIvres == 0 && this.toursEffetTonneau == 0){
@@ -142,28 +149,24 @@ public class Ennemi {
 
     }
      public void pertPv(int dégâts) {
-        System.out.println(this.idEnnemi + " a " + getPv() + " points de vies, et perds " + dégâts + " points de vies ");
         setPv(getPv() - dégâts);
         if (getPv() <= 0) {
             this.meurt();
         }
     }
     public boolean estMort(){return this.estMort;}
-    public boolean estRalenti(){return this.estRalenti;}
 
+    public boolean estRalenti(){return this.estRalenti;}
     public void seFaitRalentir(int ralentissement){
         this.vitesse -= ralentissement;
         this.estRalenti = true;
     }
-
     public void nestPlusRalenti(int ralentissement){
         this.vitesse += ralentissement;
         this.estRalenti = false;
     }
 
-
-    //
-    //Getters & Setters -> Etat de l'ennemi/Interaction avec le modèle
+    //Getters & Setters
     public String getIdEnnemi() {
         return idEnnemi;
     }
@@ -178,10 +181,6 @@ public class Ennemi {
         this.toursIvres = toursIvres;
     }
 
-
-
-    //
-    // Getters & Setters ->  Mouvements de l'ennemi
     public StringProperty directionProperty() {
         return direction;
     }

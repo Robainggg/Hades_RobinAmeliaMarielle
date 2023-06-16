@@ -34,7 +34,7 @@ public class VueRegles {
         imageView.setFitWidth(1160);
         imageView.setFitHeight(740);
         imageView.setImage(image);
-        String lesRegles = "Tu es Hades, grand roi qui règne en maître dans les enfers,\n Cependant les âmes qui s'y trouvent se rebellent et veulent renverser ton royaume...\n Une armée se prépare... \nAinsi pour maintenir l'ordre tu a fait appel aux dieux de l'Olympe \n Tu a su obtenir :\n les fleches d'Arthémis, \n les vagues de Poséidon,\n les moisson de Déméter,\n et l'alocol de Dionysos. \n A toi de sauver ton royaume ! ";
+        String lesRegles = "Tu es Hades, grand roi qui règne en maître dans les enfers,\n Cependant les âmes qui s'y trouvent se rebellent et veulent renverser ton royaume...\n Une armée se prépare... \nAinsi pour maintenir l'ordre tu a fait appel aux dieux de l'Olympe \n Tu a su obtenir :\n les fleches d'Arthémis, \n les vagues de Poséidon,\n les moisson de Déméter,\n et l'alcool de Dionysos. \n A toi de sauver ton royaume ! ";
         label.setText(lesRegles);
 
 
