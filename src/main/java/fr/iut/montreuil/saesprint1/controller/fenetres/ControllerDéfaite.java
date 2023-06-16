@@ -1,7 +1,7 @@
-package fr.iut.montreuil.saesprint1.controller;
+package fr.iut.montreuil.saesprint1.controller.fenetres;
 
 import fr.iut.montreuil.saesprint1.HelloApplication;
-import fr.iut.montreuil.saesprint1.vue.VueVictoire;
+import fr.iut.montreuil.saesprint1.vue.VueDéfaite;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,15 +12,15 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerVictoire implements Initializable {
+public class ControllerDéfaite implements Initializable {
 
     @FXML
-    private StackPane paneVictoire;
+    private StackPane paneDéfaite;
     @FXML
-    private Button recommencerAprèsVictoire;
+    private Button recommencerAprèsDéfaite;
     @FXML
-    private ImageView imageVictoire;
-    private Stage primaryStage;
+    private ImageView imageDéfaite;
+    private Stage primaryStage; 
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -28,9 +28,9 @@ public class ControllerVictoire implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        VueVictoire v = new VueVictoire(imageVictoire, paneVictoire);
+        VueDéfaite v = new VueDéfaite(imageDéfaite, paneDéfaite);
 
-        recommencerAprèsVictoire.setOnAction(event -> {
+        recommencerAprèsDéfaite.setOnAction(event -> {
             HelloApplication app2 = new HelloApplication();
             try {
                 app2.start(new Stage());
@@ -42,3 +42,4 @@ public class ControllerVictoire implements Initializable {
         });
     }
 }
+

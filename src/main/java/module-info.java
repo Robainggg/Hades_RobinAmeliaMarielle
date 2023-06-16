@@ -15,6 +15,10 @@ module com.example.saesprint1 {
 
     opens fr.iut.montreuil.saesprint1.vue to javafx.fxml;
     exports fr.iut.montreuil.saesprint1.vue;
+    exports fr.iut.montreuil.saesprint1.controller.fenetres;
+    opens fr.iut.montreuil.saesprint1.controller.fenetres to javafx.fxml;
+    exports fr.iut.montreuil.saesprint1.modele;
+    opens fr.iut.montreuil.saesprint1.modele to javafx.fxml;
 
 
 }

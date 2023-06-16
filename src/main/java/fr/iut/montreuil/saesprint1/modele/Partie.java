@@ -1,7 +1,8 @@
-package fr.iut.montreuil.saesprint1.controller;
+package fr.iut.montreuil.saesprint1.modele;
 
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Joueur;
+import fr.iut.montreuil.saesprint1.modele.VagueEnnemie;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

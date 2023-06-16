@@ -1,6 +1,5 @@
 package fr.iut.montreuil.saesprint1;
 
-import fr.iut.montreuil.saesprint1.controller.ControllerMenu;
 import fr.iut.montreuil.saesprint1.controller.HelloController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
