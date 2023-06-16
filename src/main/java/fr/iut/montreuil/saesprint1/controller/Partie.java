@@ -2,6 +2,8 @@ package fr.iut.montreuil.saesprint1.controller;
 
 import fr.iut.montreuil.saesprint1.modele.Environnement;
 import fr.iut.montreuil.saesprint1.modele.Joueur;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Partie {
 
@@ -9,12 +11,12 @@ public class Partie {
 
     private Environnement environnement;
 
-    private int niveau;
+    private IntegerProperty niveau;
 
     private VagueEnnemie vagueActuelle;
 
     public Partie(Joueur joueur, Environnement environnement){
-        this.niveau = 0;
+        this.niveau = new SimpleIntegerProperty(0);
         this.joueur = joueur;
         this.environnement = environnement;
         vagueActuelle = null;
@@ -23,12 +25,12 @@ public class Partie {
 
     public void lanceVague(){
         this.vagueActuelle = new VagueEnnemie(this,joueur, environnement);
-        niveau++;
+        niveau.setValue(this.getNiveau()+1);
     }
 
-
+    public IntegerProperty niveauProperty(){return this.niveau;}
     public int getNiveau() {
-        return niveau;
+        return niveau.getValue();
     }
 
     public VagueEnnemie getVagueActuelle() {
@@ -40,7 +42,7 @@ public class Partie {
     }
 
     public void resetPartie(){
-        this.niveau = 0;
+        this.niveau.setValue(0);
         this.vagueActuelle = null;
     }
 

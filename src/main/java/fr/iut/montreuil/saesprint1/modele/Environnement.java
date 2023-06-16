@@ -7,6 +7,8 @@ import fr.iut.montreuil.saesprint1.modele.Attaques.Projectile;
 import fr.iut.montreuil.saesprint1.modele.Attaques.Vegetation;
 import fr.iut.montreuil.saesprint1.modele.Tours.Déméter;
 import fr.iut.montreuil.saesprint1.modele.Tours.Tour;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,6 +23,8 @@ public class Environnement {
     private ParcoursBFS bfs;
     private Joueur joueur;
     private boolean peutPlacerUneTour;
+
+    private StringProperty argentSuffisant;
     private Partie partie;
 
     public Environnement() {
@@ -32,6 +36,7 @@ public class Environnement {
         this.temps = 0;
         this.bfs = new ParcoursBFS(terrain);
         this.joueur = new Joueur();
+        this.argentSuffisant = new SimpleStringProperty();
         peutPlacerUneTour = false;
     }
 
@@ -46,6 +51,10 @@ public class Environnement {
             }
             this.tours.add(tour);
             this.joueur.paie(tour.getCout());
+            this.argentSuffisant.setValue("");
+        }
+        else{
+            this.argentSuffisant.setValue("Pas assez d'argent pour acheter la tour");
         }
 
     }
@@ -140,5 +149,8 @@ public class Environnement {
             this.vegetations.remove(i);
         for(int i = tours.size()-1; i >= 0; i--)
             this.tours.remove(i);
+    }
+    public StringProperty argentSuffisantProperty() {
+        return argentSuffisant;
     }
 }

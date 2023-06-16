@@ -18,7 +18,7 @@ public class VueMenu {
     }
 
     public void charger(){
-        Image image = new Image(getClass().getResourceAsStream("/images/background.jpg"));
+        Image image = new Image(getClass().getResourceAsStream("/images/background.png"));
         imageView.setFitWidth(1160);
         imageView.setFitHeight(740);
         imageView.setImage(image);

@@ -20,7 +20,7 @@ public class ControllerDéfaite implements Initializable {
     private Button recommencerAprèsDéfaite;
     @FXML
     private ImageView imageDéfaite;
-    private Stage primaryStage; // Référence à la Stage principale de App1
+    private Stage primaryStage; 
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
