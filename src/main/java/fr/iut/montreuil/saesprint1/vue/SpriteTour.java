@@ -23,6 +23,7 @@ import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
 
 public class SpriteTour {
 
+    //les images des tours
     final static Image artemis = new Image(SpriteTour.class.getResource("/images/tours/artemis.png").toExternalForm());
     final static Image poseidon = new Image(SpriteTour.class.getResource("/images/tours/poseidon.png").toExternalForm());
     final static Image demeter = new Image(SpriteTour.class.getResource("/images/tours/demeter.png").toExternalForm());
@@ -54,6 +55,7 @@ public class SpriteTour {
         else
             image = new Image(getClass().getResource("/images/tours/Tower-PNG-Image.png").toExternalForm());
 
+        //création des sprites des tours quand on les pose à l'endroit cliqué
         t.setImage(image);
         t.setFitWidth(32);
         t.setFitHeight(32);
@@ -64,10 +66,13 @@ public class SpriteTour {
         InitialisationOptionsAméliorationSuppression(t);
     }
 
+    //bulle pour afficher les options d'amélioration et de suppression de la tour une fois posée
     private void InitialisationOptionsAméliorationSuppression(ImageView imageView) {
 
+        //création de la bulle
         Tooltip tooltip = new Tooltip();
 
+        //Button AMÉLIORER qui une fois cliquée appelle la méthode améliorer qui améliore les tours en terme d'attaque et/ou la portée
         Button button = new Button("Améliorer");
         button.setOnAction(event -> {
 
@@ -81,31 +86,37 @@ public class SpriteTour {
             } else if (tour instanceof Déméter) {
                 ((Déméter) tour).améliorer();
             }
-            
+
+            //augmentation de la taille quand amélioration
             if (this.tour.isAmélioré()) {
                 ameliore = true;
+                t.setFitWidth(32*1.3);
+                t.setFitHeight(32*1.3);
             }
 
         });
 
+        //Boutton supprimer qui Supprime la tour côté environnement
         Button boutonSupprimer = new Button("Supprimer");
         boutonSupprimer.setOnAction(event -> {
             evt.supprimerUneTour(tour);
         });
 
-
-
+        //les boutons sont mis dans une vbox
         VBox tooltipContent = new VBox();
         tooltipContent.getChildren().add(button);
         tooltipContent.getChildren().add(boutonSupprimer);
+        //la vbox est mise dans le tooltip
         tooltip.setGraphic(tooltipContent);
 
         final boolean[] tooltipVisible = {false};
 
+        //affichage des options de suppression et d'amélioration lorsqu'on clique sur les sprite des tours sur le pane
         imageView.setOnMousePressed(event -> {
 
             if (event.isPrimaryButtonDown()) {
                 if (!tooltipVisible[0]) {
+                    //affichage de l'id de la tour et du type de tour
                     String tourType = getTour().getClass().getSimpleName();
                     String tooltipText = tour.getId() + "\nType : ";
                     if (tourType.equals("Artémis")) {
@@ -119,14 +130,16 @@ public class SpriteTour {
                     }
                     tooltip.setText(tooltipText);
 
+                    //affichage du bouton AMELIORER uniquement si la tour n'est pas améliorée
                     if (ameliore) {
                         tooltipContent.getChildren().remove(button);
                     }
-
+                    //affichage de la bulle
                     Tooltip.install(imageView, tooltip);
                     tooltip.show(imageView, event.getScreenX(), event.getScreenY());
                     tooltipVisible[0] = true;
 
+                    //Disparition de la bulle au bout de 1s
                     PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(e -> {
                         tooltip.hide();

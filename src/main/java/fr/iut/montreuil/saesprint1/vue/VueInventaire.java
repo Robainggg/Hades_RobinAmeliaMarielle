@@ -48,11 +48,13 @@ public class VueInventaire {
     private String selectedType;
     private boolean boutonRadioSelectionne = false;
 
+    //chargement des images de l'inventaire
     final static Image artemis = new Image(VueInventaire.class.getResourceAsStream("/images/tours/artemisHD.png"));
     final static Image demeter = new Image(VueInventaire.class.getResourceAsStream("/images/tours/demeterHD.png"));
     final static Image dionysos = new Image(VueInventaire.class.getResourceAsStream("/images/tours/dionysosHD.png"));
     final static Image poseidon = new Image(VueInventaire.class.getResourceAsStream("/images/tours/poseidonHD.png"));
 
+    //récupération des éléments FXML du contrôleur de l'inventaire et de la Hbox (contenant les pv du joueur, l'argent et quelques labels pour l'affichage)
     public VueInventaire(ImageView imageTourArt, ImageView imageTourPos, ImageView imageTourDem, ImageView imageTourDio, RadioButton boutonArt, RadioButton boutonPos, RadioButton boutonDem, RadioButton boutonDio, ToggleGroup groupeRadio, Button boutonAjtTour, ImageView p1, ImageView p2, Label ai, Label ni, Pane pane, TilePane tp, VBox vboutique, ImageView boutique_bg, Environnement evt) {
         this.imageTourArthemis = imageTourArt;
         this.imageTourPoséidon = imageTourPos;
@@ -77,6 +79,7 @@ public class VueInventaire {
 
     }
 
+    //chargement des images des tours
     public void chargerImage() {
         Image tourArthemis = artemis;
         imageTourArthemis.setImage(tourArthemis);
@@ -102,11 +105,13 @@ public class VueInventaire {
 
     }
 
-
+    //méthode pour poser les tours
     public void placerDesTours() {
         selectionTour();
     }
 
+    //pose par clique en quelques étapex
+    //1) selection du type en cliquant sur le RadioButton de la tour à placer + mise a jour du label "Item selectionner" et le "prix" de l'item selectionné
     private void selectionTour() {
         boutonArthemis.setToggleGroup(groupeRadio);
         boutonArthemis.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -157,6 +162,7 @@ public class VueInventaire {
 
     }
 
+    //2) cliquer sur le bouton "AjouterTour"
     private void poserTour() {
         if (boutonRadioSelectionne) {
             boutonAjouterTour.setOnAction(event -> {
@@ -165,12 +171,15 @@ public class VueInventaire {
         }
     }
 
+    //3) clique sur l'endroit ou l'on veut positionner la tour sur le pane
     private void CréationTour() {
+
+        //si un des radioButton est selectionné
         if (boutonArthemis.isSelected() || boutonPoséidon.isSelected() || boutonDemeter.isSelected() || boutonDionysos.isSelected()) {
+            //on peut cliquer sur le pane et récupérer la position du clic
             panePrincipal.setOnMouseClicked(event -> {
                 double mouseX = event.getX();
                 double mouseY = event.getY();
-
 
                 // Convertir les coordonnées du clic de souris en position sur le TilePane
                 int tourX = (int) (mouseX / tilePane.getTileWidth());
@@ -185,11 +194,10 @@ public class VueInventaire {
                     if (evt.getTerrain().get(tourY * 30 + tourX) == 371) {
                         Tour t;
 
-
+                        //appel des constructeurs différents selon leur type + ajout dans l'environnement
                         if (selectedType.equals("Arthémis")) {
                             t = new Artémis((int) tileX, (int) tileY, evt);
                             this.evt.ajouterTour(t);
-
 
                         } else if (selectedType.equals("Poséidon")) {
                             t = new Poséidon((int) tileX, (int) tileY, evt);
@@ -204,7 +212,7 @@ public class VueInventaire {
                     }
                 }
 
-
+                //après ajout on réinitialise les label et on deselectionne tours les RadioButtons
                 nomItem.setText("___________________________");
                 argentItem.setText("___");
                 panePrincipal.setOnMouseClicked(null);

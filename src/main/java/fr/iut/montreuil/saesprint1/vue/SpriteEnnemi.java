@@ -36,30 +36,20 @@ public class SpriteEnnemi {
         this.pane.getChildren().add(barreDeVie);
 
         if (this.ennemi.getDirection().equals("d")) {
-            System.out.println("début chargement");
             image.setImage(diableDroit);
-            System.out.println("image chargée");
         } else if (this.ennemi.getDirection().equals("g")) {
-            System.out.println("début chargement");
             image.setImage(diableGauche);
-            System.out.println("image chargée");
         } else if (this.ennemi.getDirection().equals("h")) {
-            System.out.println("début chargement");
             image.setImage(diableDos);
-            System.out.println("image chargée");
         } else {
-            System.out.println("début chargement");
             image.setImage(diableFace);
-            System.out.println("image chargée");
         }
-        System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
 
 
         ChangeListener<String> listenerDirection = (((obs, old, nouv) -> {
             switch (nouv) {
                 case "d":
                     this.image.setImage(diableDroit);
-                    System.out.println("ennemi " + ennemi.getIdEnnemi() + " est en " + ennemi.getCoordX() + " " + ennemi.getCoordY());
                     break;
                 case "g":
                     this.image.setImage(diableGauche);
@@ -74,18 +64,18 @@ public class SpriteEnnemi {
         }));
 
         this.ennemi.directionProperty().addListener(listenerDirection);
-
         image.translateXProperty().bind(ennemi.coordXProperty());
         image.translateYProperty().bind(ennemi.coordYProperty());
         this.pane.getChildren().add(image);
 
-
+        //affichage de la barre de vie au dessus du sprite de l'ennemi + bind avec les pv de l'ennemi
         barreDeVie.setId(ennemi.getIdEnnemi());
         barreDeVie.progressProperty().bind(ennemi.pvProperty().divide(ennemi.getPointsDeVieMax()));
         barreDeVie.maxWidthProperty().bind(pane.widthProperty().multiply(ennemi.getPointsDeVieMax()));
         barreDeVie.translateXProperty().bind(image.translateXProperty());
         barreDeVie.translateYProperty().bind(image.translateYProperty().subtract(10));
 
+        //changement de couleur de la barre de vie : vert entre 1 et 0.75, orange entre 0.75 et 0.5 et rouge en dessous
         barreDeVie.progressProperty().addListener((obs, oldProgress, newProgress) -> {
             if (newProgress.doubleValue() <= 0.75 && newProgress.doubleValue() >= 0.5) {
                 barreDeVie.setStyle("-fx-accent: orange;");
@@ -96,10 +86,10 @@ public class SpriteEnnemi {
     }
 
 
+    //getters pour retirer les ennemis et leur barre de vie, une fois mort
     public ProgressBar getBarreDeVie() {
         return barreDeVie;
     }
-
     public ImageView getImage() {
         return image;
     }

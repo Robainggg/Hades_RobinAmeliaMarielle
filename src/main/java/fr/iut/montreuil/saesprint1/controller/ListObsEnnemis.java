@@ -25,13 +25,14 @@ public class ListObsEnnemis implements ListChangeListener<Ennemi> {
     @Override
     public void onChanged(Change<? extends Ennemi> c) {
         while (c.next()) {
+            //créer les sprite et leur barre de vie + ajout au pane.
             if (c.wasAdded()) {
-                System.out.println("a été ajouté");
                 Ennemi ennemiAjouté = c.getAddedSubList().get(0);
                 SpriteEnnemi sprite = new SpriteEnnemi(ennemiAjouté, pane);
                 spritesEnnemis.add(sprite);
             }
 
+            //retirer l'ennemi et sa barre dans le pane.
             if (c.wasRemoved()) {
                 Ennemi ennemiRetiré = c.getRemoved().get(0);
                 for (int i = 0; i < spritesEnnemis.size(); i++) {
