@@ -19,7 +19,7 @@ public class Déméter extends TourAvecPortée {
     private ArrayList<Ennemi> ennemisAportée;
 
     public Déméter(int x, int y, Environnement env) {
-        super("Déméter", coutDéméter, x, y, env, portéeDeBase, 8, coutAmélioréDéméter,8,portéeAmélioréeDéméter);
+        super("Démeter", coutDéméter, x, y, env, portéeDeBase, 8, coutAmélioréDéméter,8,portéeAmélioréeDéméter);
         this.ralentissement = 1;
         this.ennemisAportée = new ArrayList<>();
     }

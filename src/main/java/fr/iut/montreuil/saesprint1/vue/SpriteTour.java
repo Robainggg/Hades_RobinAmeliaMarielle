@@ -117,10 +117,10 @@ public class SpriteTour {
                         tooltipText += "Arthémis";
                     } else if (tourType.equals("Poséidon")) {
                         tooltipText += "Poséidon";
-                    } else if (tourType.equals("Démeter")) {
-                        tooltipText += "Démeter";
-                    } else {
+                    } else if (tourType.equals("Dionysos")) {
                         tooltipText += "Dionysos";
+                    } else {
+                        tooltipText += "Déméter";
                     }
                     tooltip.setText(tooltipText);
 
