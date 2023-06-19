@@ -62,8 +62,7 @@ public class Projectile extends AttaqueTours {
         for (int i = tourAvecPortée.getEnv().getEnnemis().size() - 1; i >= 0; i--) {
             Ennemi ennemi = tourAvecPortée.getEnv().getEnnemis().get(i);
             if (tourAvecPortée.ennemiZone(ennemi) != null) {
-                if (ennemi.getCoordX() <= this.getX() + 16 && ennemi.getCoordX() + 32 >= this.getX() + 16 &&
-                        ennemi.getCoordY() <= this.getY() + 16 && ennemi.getCoordY() + 32 >= this.getY() + 16) {
+                if (toucheUnEnnemi(ennemi)) {
                     ennemi.pertPv(this.degats);
 
                     if (this instanceof Flèche) {
@@ -80,6 +79,11 @@ public class Projectile extends AttaqueTours {
             }
         }
 
+    }
+
+    public boolean toucheUnEnnemi(Ennemi ennemi){
+        return ennemi.getCoordX() <= this.getX() + 16 && ennemi.getCoordX() + 32 >= this.getX() + 16 &&
+                ennemi.getCoordY() <= this.getY() + 16 && ennemi.getCoordY() + 32 >= this.getY() + 16;
     }
 
 
